@@ -1,2 +1,19 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+
+.container .left-col #header .profilepic img {
+  border-radius: 0;
+}
+
+#header h1 {
+  font-size: 23px;
+}
+
+article code,
+article pre {
+  background-color: #f2f2f2;
+}
+
+article .entry-content {
+  text-align: left;
+}
