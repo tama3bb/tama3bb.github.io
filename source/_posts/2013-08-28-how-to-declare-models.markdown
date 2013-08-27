@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "AngularJS ではモデルをどう宣言すればいいのか"
-date: 2013-08-28 01:17
+date: 2013-08-28 07:48
 comments: true
 categories: AngularJS
 ---
@@ -72,4 +72,4 @@ app.controller('ExampleController', function($scope, aModel) {
 
 この factory のモデルはシングルトンです、はい。
 
-`app.controller`とか`app.factory`の app ってなんなのかとか、基本的なところを飛ばしてますが、その辺はまたあらためて。
+`app.controller`とか`app.factory`の app って何なのかとか、DI って何なのかとか基本的なところを飛ばしてますが、その辺はまたあらためて。
