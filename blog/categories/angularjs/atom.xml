@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-08-27T15:59:14+09:00</updated>
+  <updated>2013-08-28T01:17:41+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,95 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS ではモデルをどう宣言するのか]]></title>
+    <link href="http://angularjsninja.com/blog/2013/08/28/how-to-declare-models/"/>
+    <updated>2013-08-28T01:17:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/08/28/how-to-declare-models</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS の ng-model、大事なのは dot があること</h2>
+
+<p>AngularJS では、モデルをどこに宣言すればいいんだってのがわかりにくい。</p>
+
+<!-- more -->
+
+
+<p>controller に $scope があって、簡単なサンプルコードでは大抵そこに直接<code>$scope.name</code>みたいに記述されているので、同じように書いてしまう。</p>
+
+<p>うまくいかないコード例は以下。</p>
+
+<p>``` html</p>
+
+<!-- うまくいかないコード -->
+
+
+<div ng-controller="ParentController">
+  <input type="text" name="parent" ng-model="name">
+  <div ng-controller="ChildController">
+    <input type="text" name="child" ng-model="name">
+  </div>
+</div>
+
+
+<p><code>
+</code> javascript
+app.controller(&lsquo;ParentController&rsquo;, function($scope) {});
+app.controller(&lsquo;ChildController&rsquo;, function($scope) {});</p>
+
+<p>```
+このコードでは、parent テキストボックスに入力した値が child テキストボックスにも同期され、一見うまくいくように思ってしまう。ところが、一度でも child テキストボックスに値を入力すると、別のスコープになってその後まったく同期されなくなる。</p>
+
+<p>うまくいくコードは以下。大事なのは dot があること。dot があることによって、参照が同じになって、両方のテキストボックスの値が同期され続ける。</p>
+
+<p>``` html</p>
+
+<!-- うまくいくコード -->
+
+
+<div ng-controller="ParentController">
+  <input type="text" name="parent" ng-model="aModel.name">
+  <div ng-controller="ChildController">
+    <input type="text" name="child" ng-model="aModel.name">
+  </div>
+</div>
+
+
+<p>```</p>
+
+<hr />
+
+<h2>AngularJS のモデルは factory で宣言</h2>
+
+<p>さて、ちゃんとモデルを宣言したい場合はどう書けばいいのか。さきほどの例で言えば、aModel はどこでどう宣言しておくことができるのか。</p>
+
+<p>答えは factory で、以下のようなコード。</p>
+
+<p>``` javascript
+app.factory(&lsquo;aModel&rsquo;, function() {
+  return {</p>
+
+<pre><code>name: ''
+</code></pre>
+
+<p>  };
+});
+```</p>
+
+<p>これで、どこにだって DI して使えるようになるので、<strong>親子の関係にない controller 間でも同期</strong>させることができるモデルとなる。</p>
+
+<p><code>javascript
+app.controller('ExampleController', function($scope, aModel) {
+  $scope.aModel = aModel;
+}
+</code></p>
+
+<p>この factory のモデルはシングルトンです、はい。</p>
+
+<p><code>app.controller</code>とか<code>app.factory</code>の app ってなんなのかとか、基本的なところを飛ばしてますが、その辺はまたあらためて。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[非表示（ng-show/ng-hide）にしてもサーバにアクセスしてる…]]></title>
