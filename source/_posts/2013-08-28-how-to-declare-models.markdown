@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "AngularJS ではモデルをどう宣言するのか"
+title: "AngularJS ではモデルをどう宣言すればいいのか"
 date: 2013-08-28 01:17
 comments: true
 categories: AngularJS
