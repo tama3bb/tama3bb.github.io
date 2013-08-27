@@ -12,9 +12,9 @@ categories: AngularJS
 
 AngularJS では、モデルをどこに宣言すればいいんだってのがわかりにくい。
 
-<!-- more -->
-
 controller に $scope があって、簡単なサンプルコードでは大抵そこに直接`$scope.name`みたいに記述されているので、同じように書いてしまう。
+
+<!-- more -->
 
 うまくいかないコード例は以下。
 
