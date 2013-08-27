@@ -17,12 +17,26 @@
   background-color: #f2f2f2;
 }
 
+body {
+  font-family: "Open Sans", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
 article code,
 article pre {
   background-color: #f2f2f2;
+  font-family: 'Source Code Pro', Consolas, Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
 }
 
 article .entry-content {
   text-align: left;
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) {
+  
+  article code,
+  article pre {
+    font-size: 0.85em;
+  }
 }
