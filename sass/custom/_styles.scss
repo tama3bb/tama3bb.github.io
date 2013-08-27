@@ -1,13 +1,22 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
+#header h1 {
+  font-size: 23px;
+}
+
+.container .left-col {
+  opacity: 0.8;
+}
+
 .container .left-col #header .profilepic img {
   border-radius: 0;
 }
 
-#header h1 {
-  font-size: 23px;
+.container .mid-col .mid-col-container #content article .entry-content blockquote {
+  background-color: #f2f2f2;
 }
+
 
 article code,
 article pre {
