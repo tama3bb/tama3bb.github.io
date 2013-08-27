@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-08-28T01:17:41+09:00</updated>
+  <updated>2013-08-28T01:21:39+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -24,10 +24,10 @@
 
 <p>AngularJS では、モデルをどこに宣言すればいいんだってのがわかりにくい。</p>
 
+<p>controller に $scope があって、簡単なサンプルコードでは大抵そこに直接<code>$scope.name</code>みたいに記述されているので、同じように書いてしまう。</p>
+
 <!-- more -->
 
-
-<p>controller に $scope があって、簡単なサンプルコードでは大抵そこに直接<code>$scope.name</code>みたいに記述されているので、同じように書いてしまう。</p>
 
 <p>うまくいかないコード例は以下。</p>
 
