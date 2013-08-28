@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-08-28T07:49:14+09:00</updated>
+  <updated>2013-08-29T08:50:14+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS で Web API を呼び出すコードをまとめる]]></title>
+    <link href="http://angularjsninja.com/blog/2013/08/29/angularjs-web-api-call/"/>
+    <updated>2013-08-29T08:42:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/08/29/angularjs-web-api-call</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS で Web API を呼び出すコードをまとめる</h2>
+
+<p>AngularJS で Web API を呼び出す $http などを利用するコードを、各 controller に散らして実装してしまわずに、どこかに集約しておきたいぞって場合の話。</p>
+
+<!-- more -->
+
+
+<p>``` javascript services.js
+app.factory(&lsquo;NinjaService&rsquo;, function($http) {
+  var search = function(params) {</p>
+
+<pre><code>return $http.get('/search', {params: params}).then(function(response) {
+  return response.data;
+});
+</code></pre>
+
+<p>  };
+  return {</p>
+
+<pre><code>search: search
+</code></pre>
+
+<p>  };
+});
+```</p>
+
+<p>``` javascript controllers.js
+app.controller(&lsquo;NinjaController&rsquo;, function($scope, NinjaService) {
+  $scope.search = function() {</p>
+
+<pre><code>NinjaService.search(params).then(function(data) {
+  $scope.results = data.results;
+});
+</code></pre>
+
+<p>  };
+});
+```</p>
+
+<p>こんな感じで、XxxService とかいう名前でサービスを factory 使って宣言しておけば、同じコードを複数の controller で利用したいときに便利だし、Web API 呼び出しのコードがまとまることで見通しやすくなる。</p>
+
+<p>このコードに出てくる params については、search メソッドのクエリパラメータとして検索条件を渡してるイメージなだけで、詳細は省略。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS ではモデルをどう宣言すればいいのか]]></title>
