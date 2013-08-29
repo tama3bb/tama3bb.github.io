@@ -1,6 +1,10 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
+body {
+  font-size: 13px;
+}
+
 #header h1 {
   font-size: 23px;
 }
@@ -31,12 +35,8 @@ article .entry-content {
   text-align: left;
 }
 
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 568px) {
-  
-  article code,
-  article pre {
-    font-size: 0.85em;
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
+  article code {
+    font-size: .6em !important;
   }
 }
