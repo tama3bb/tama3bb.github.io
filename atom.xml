@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-08-29T10:14:42+09:00</updated>
+  <updated>2013-08-30T20:06:07+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,182 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS のプロジェクト構成をどうするか]]></title>
+    <link href="http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure/"/>
+    <updated>2013-08-30T20:05:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS のプロジェクト構成ってどうするのがいいんだ？</h2>
+
+<p>AngularJS でアプリケーションを作るときに悩むのがプロジェクト構成。なんでもかんでも一つの JavaScript ファイルで実装してしまうことも可能だけれど、コード量が増えてくるとすぐにつらくなる。</p>
+
+<p>そこでどうしようかなと考えるときに参照するであろう一つが <a href="https://github.com/angular?tab=members">AngularJS チーム</a> による AngularJS Web アプリケーションのスケルトンプロジェクト <a href="https://github.com/angular/angular-seed">angular-seed</a>。</p>
+
+<!-- more -->
+
+
+<hr />
+
+<h2>Angular Seed</h2>
+
+<p>この angular-seed のプロジェクト構成はこんな感じ。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>app
+</span><span class='line'>├─ css
+</span><span class='line'>│  └─ app.css
+</span><span class='line'>├─ img
+</span><span class='line'>├─ js
+</span><span class='line'>│  ├─ app.js
+</span><span class='line'>│  ├─ controllers.js
+</span><span class='line'>│  ├─ directives.js
+</span><span class='line'>│  ├─ filters.js
+</span><span class='line'>│  └─ services.js
+</span><span class='line'>├─ lib
+</span><span class='line'>│  └─ angular
+</span><span class='line'>│     └─ angular.js
+</span><span class='line'>├─ partials
+</span><span class='line'>│  ├─ partial1.html
+</span><span class='line'>│  └─ partial2.html
+</span><span class='line'>├─ index-async.html
+</span><span class='line'>└─ index.html</span></code></pre></td></tr></table></div></figure>
+
+
+<p>簡単に言うと、AngularJS の機能である controller、directive、filter、service と機能別にファイルを分けるということ。</p>
+
+<p>前回の<a href="http://angularjsninja.com/blog/2013/08/28/how-to-declare-models/">モデル定義の記事</a>、前々回の<a href="http://angularjsninja.com/blog/2013/08/29/angularjs-web-api-call/">サービス定義の記事</a>で利用した factory は service の仲間なので services.js に書くことになる。</p>
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="c">&lt;!-- In production use:</span>
+</span><span class='line'><span class="c">  &lt;script src=&quot;//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js&quot;&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="c">  --&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;lib/angular/angular.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/app.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/services.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/controllers.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/filters.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/directives.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>まあ、これでもいいんだけれど、大規模になってくるともっとファイルを分けたくなってくる。</p>
+
+<p>特に partials の下にある HTML テンプレートは分割しているのに、それに対応するコントローラはすべて controllers.js に記述していくことに抵抗感が出てくる。</p>
+
+<p>また、services.js にモデルを記述するのではなく、モデルごとにファイルを分けてモデルの名前をファイル名に付けたくなる。</p>
+
+<p>そこで、あるべき姿、ベストプラクティスはどんな構成なんだとネットをさまよう。</p>
+
+<hr />
+
+<h2>Building Huuuuuge Apps with AngularJS</h2>
+
+<p>大規模な AngularJS についての記事では <a href="http://briantford.com/blog/huuuuuge-angular-apps.html">Building Huuuuuge Apps with AngularJS</a> が参考になる。この記事は <a href="https://twitter.com/briantford">Brian Ford</a> さんによるもの。</p>
+
+<p>ここで推奨されている構成はこんな感じ。</p>
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>root-app-folder
+</span><span class='line'>├─ index.html
+</span><span class='line'>├─ scripts
+</span><span class='line'>│  ├─ controllers
+</span><span class='line'>│  │  └─ main.js
+</span><span class='line'>│  │  └─ ...
+</span><span class='line'>│  ├─ directives
+</span><span class='line'>│  │  └─ myDirective.js
+</span><span class='line'>│  │  └─ ...
+</span><span class='line'>│  ├─ filters
+</span><span class='line'>│  │  └─ myFilter.js
+</span><span class='line'>│  │  └─ ...
+</span><span class='line'>│  ├─ services
+</span><span class='line'>│  │  └─ myService.js
+</span><span class='line'>│  │  └─ ...
+</span><span class='line'>│  ├─ vendor
+</span><span class='line'>│  │  ├─ angular.js
+</span><span class='line'>│  │  ├─ angular.min.js
+</span><span class='line'>│  │  ├─ es5-shim.min.js
+</span><span class='line'>│  │  └─ json3.min.js
+</span><span class='line'>│  └─ app.js
+</span><span class='line'>├─ styles
+</span><span class='line'>│  └─ ...
+</span><span class='line'>└─ views
+</span><span class='line'>   ├─ main.html
+</span><span class='line'>   └─ ...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で、さらにやるなら、controllers や services にサブディレクトリを、例えば、services/models みたいに作ると。</p>
+
+<p>angular-seed と大きく異なるのは各機能をフォルダにしているところで、controller や service の一つひとつを別のファイルにしやすい。</p>
+
+<p>なぜ lib &ndash;> vendor、css &ndash;> styles、js &ndash;> scripts、partials &ndash;> views に変更しているのかは不明。流儀があるのかな。</p>
+
+<hr />
+
+<h2>Yeoman</h2>
+
+<p>また、この Brian Ford さんが関わっている <a href="http://yeoman.io">Yeoman</a> という Web アプリケーションのワークフローを改善するためのツール群があって、<a href="https://github.com/yeoman/generator-angular">yeoman/generator-angular</a> という AngularJS 用の Yeoman ジェネレータがある。</p>
+
+<p>Yeoman がベストプラクティスと考えるプロジェクト構成で出力されるので、これを利用し、まず従ってみてから、自分の頭で考えるというのもいいと思う。</p>
+
+<p>この Yeoman を利用したプロジェクト構成のことや、Yeoman のページに出てくる Grunt、Bower などのツール類の話はまたあらためて。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS で Web API を呼び出すコードをまとめる]]></title>
