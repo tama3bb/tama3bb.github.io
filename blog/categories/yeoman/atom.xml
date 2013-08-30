@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Yeoman | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/yeoman/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-08-30T20:06:07+09:00</updated>
+  <updated>2013-08-31T00:22:05+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -14,9 +14,142 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Yeoman generator for AngularJS]]></title>
+    <link href="http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs/"/>
+    <updated>2013-08-31T00:25:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="https://github-camo.global.ssl.fastly.net/10c0f69d03b7ac184d77e8aaba4358a2d4791823/687474703a2f2f79656f6d616e2e696f2f6d656469612f79656f6d616e2d6d617374686561642e706e67" alt="Yeoman" /></p>
+
+<h2>AngularJS 用 Yeoman ジェネレータ</h2>
+
+<p>Yeoman チームがベストプラクティスだと言っているプロジェクト構成を、AngularJS 用の Yeoman ジェネレータで実際に生成して確認する。</p>
+
+<!-- more -->
+
+
+<hr />
+
+<h2>yo (Yeoman) と generator-angular をインストール</h2>
+
+<p>まず yo (Yeoman) をインストール。</p>
+
+<p><code>
+npm install -g yo
+</code></p>
+
+<p>次に、AngularJS 用の Yeoman ジェネレータ generator-angular をインストール。</p>
+
+<p><code>
+npm install -g generator-angular
+</code></p>
+
+<hr />
+
+<h2>AngularJS プロジェクトを生成</h2>
+
+<p>新しいディレクトリを作って、そのディレクトリに移動。</p>
+
+<p><code>
+mkdir my-new-project &amp;&amp; cd $_
+</code></p>
+
+<p><code>yo angular</code> を実行（アプリケーション名を付けれる）。</p>
+
+<p><code>
+yo angular [app-name]
+</code></p>
+
+<p>で、Twitter Bootstrap を含めるか、SCSS を使うか、angular-resource.js, angular-cookies.js, angular-sanitiaze.js のモジュールを含めるかといった質問に答える。</p>
+
+<p>すると、うお、そんなに？ってぐらいにターミナルが流れに流れて my-new-project ディレクトリに山ほどのサブディレクトリとファイルができている。</p>
+
+<hr />
+
+<h2>生成したプロジェクトの構成を確認</h2>
+
+<p>とりあえずプロジェクト構成のことだけに絞って、ここでは app ディレクトリの下を確認。</p>
+
+<p>```
+app/
+├── 404.html
+├── bower_components
+│   ├── angular
+│   ├── angular-cookies
+│   ├── angular-mocks
+│   ├── angular-resource
+│   ├── angular-sanitize
+│   ├── angular-scenario
+│   ├── bootstrap-sass
+│   ├── es5-shim
+│   ├── jquery
+│   └── json3
+├── favicon.ico
+├── index.html
+├── robots.txt
+├── scripts
+│   ├── app.js
+│   └── controllers
+│       └── main.js
+├── styles
+│   ├── bootstrap.css
+│   └── main.css
+└── views</p>
+
+<pre><code>└── main.html
+</code></pre>
+
+<p>```</p>
+
+<p>目新しいのは bower_components の存在。これは、パッケージマネジメントツール <a href="http://bower.io">Bower</a> でインストールするときにできるディレクトリの名前。Yeoman は Bower を使っている。</p>
+
+<p>肝心の scripts ディレクトリの下がスッカスカなので、先に進む。</p>
+
+<hr />
+
+<h2>サブジェネレータでいろいろ生成</h2>
+
+<p><code>
+yo angular:controller myController
+yo angular:directive myDirective
+yo angular:filter myFilter
+yo angular:service myService
+</code></p>
+
+<p>これで、scripts ディレクトリはこうなる。</p>
+
+<p>```
+app/scripts/
+├── app.js
+├── controllers
+│   ├── main.js
+│   └── myController.js
+├── directives
+│   └── myDirective.js
+├── filters
+│   └── myFilter.js
+└── services</p>
+
+<pre><code>└── myService.js
+</code></pre>
+
+<p>```</p>
+
+<hr />
+
+<h2>プロジェクト構成のまとめ</h2>
+
+<p>ということで、やっぱり controller、directive、filter、service に分けて、あとはサブディレクトリを作るなり、細かく単機能ごとにファイルを分けていくということで。</p>
+
+<p>ちなみに、どれだけファイルをバラして作ったとしても、<a href="http://gruntjs.com">Grunt</a> でビルドすれば minify された 1 つの JS ファイルになるので心配ご無用！</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[AngularJS のプロジェクト構成をどうするか]]></title>
     <link href="http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure/"/>
-    <updated>2013-08-30T20:05:00+09:00</updated>
+    <updated>2013-08-30T20:00:00+09:00</updated>
     <id>http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure</id>
     <content type="html"><![CDATA[<hr />
 

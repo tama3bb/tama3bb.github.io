@@ -1,0 +1,361 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Yeoman generator for AngularJS - AngularJS Ninja</title>
+	<meta name="author" content="Akihito Tamagawa">
+
+	
+	<meta name="description" content="Yeoman Generator for AngularJS AngularJS 用 Yeoman ジェネレータ Yeoman チームがベストプラクティスだと言っているプロジェクト構成を、AngularJS 用の Yeoman ジェネレータで実際に生成して確認する。 yo (Yeoman) と &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="AngularJS Ninja" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("tama3bb@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">AngularJS Ninja</a></h1>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+
+<section class="aboutme">
+  <p>
+    AngularJS Ninja Blog
+  </p>
+</section>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/tama3bb" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/tama3bb" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Yeoman Generator for AngularJS</h1>
+	<div class="entry-content" itemprop="articleBody"><hr />
+
+<p><img src="https://github-camo.global.ssl.fastly.net/10c0f69d03b7ac184d77e8aaba4358a2d4791823/687474703a2f2f79656f6d616e2e696f2f6d656469612f79656f6d616e2d6d617374686561642e706e67" alt="Yeoman" /></p>
+
+<h2>AngularJS 用 Yeoman ジェネレータ</h2>
+
+<p>Yeoman チームがベストプラクティスだと言っているプロジェクト構成を、AngularJS 用の Yeoman ジェネレータで実際に生成して確認する。</p>
+
+<!-- more -->
+
+
+<hr />
+
+<h2>yo (Yeoman) と generator-angular をインストール</h2>
+
+<p>まず yo (Yeoman) をインストール。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g yo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次に、AngularJS 用の Yeoman ジェネレータ generator-angular をインストール。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g generator-angular</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>AngularJS プロジェクトを生成</h2>
+
+<p>新しいディレクトリを作って、そのディレクトリに移動。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir my-new-project && cd $_</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>yo angular</code> を実行（アプリケーション名を付けれる）。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yo angular [app-name]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で、Twitter Bootstrap を含めるか、SCSS を使うか、angular-resource.js, angular-cookies.js, angular-sanitiaze.js のモジュールを含めるかといった質問に答える。</p>
+
+<p>すると、うお、そんなに？ってぐらいにターミナルが流れに流れて my-new-project ディレクトリに山ほどのサブディレクトリとファイルができている。</p>
+
+<hr />
+
+<h2>生成したプロジェクトの構成を確認</h2>
+
+<p>とりあえずプロジェクト構成のことだけに絞って、ここでは app ディレクトリの下を確認。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>app/
+</span><span class='line'>├── 404.html
+</span><span class='line'>├── bower_components
+</span><span class='line'>│   ├── angular
+</span><span class='line'>│   ├── angular-cookies
+</span><span class='line'>│   ├── angular-mocks
+</span><span class='line'>│   ├── angular-resource
+</span><span class='line'>│   ├── angular-sanitize
+</span><span class='line'>│   ├── angular-scenario
+</span><span class='line'>│   ├── bootstrap-sass
+</span><span class='line'>│   ├── es5-shim
+</span><span class='line'>│   ├── jquery
+</span><span class='line'>│   └── json3
+</span><span class='line'>├── favicon.ico
+</span><span class='line'>├── index.html
+</span><span class='line'>├── robots.txt
+</span><span class='line'>├── scripts
+</span><span class='line'>│   ├── app.js
+</span><span class='line'>│   └── controllers
+</span><span class='line'>│       └── main.js
+</span><span class='line'>├── styles
+</span><span class='line'>│   ├── bootstrap.css
+</span><span class='line'>│   └── main.css
+</span><span class='line'>└── views
+</span><span class='line'>    └── main.html</span></code></pre></td></tr></table></div></figure>
+
+
+<p>目新しいのは bower_components の存在。これは、パッケージマネジメントツール <a href="http://bower.io">Bower</a> でインストールするときにできるディレクトリの名前。Yeoman は Bower を使っている。</p>
+
+<p>肝心の scripts ディレクトリの下がスッカスカなので、先に進む。</p>
+
+<hr />
+
+<h2>サブジェネレータでいろいろ生成</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yo angular:controller myController
+</span><span class='line'>yo angular:directive myDirective
+</span><span class='line'>yo angular:filter myFilter
+</span><span class='line'>yo angular:service myService</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これで、scripts ディレクトリはこうなる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>app/scripts/
+</span><span class='line'>├── app.js
+</span><span class='line'>├── controllers
+</span><span class='line'>│   ├── main.js
+</span><span class='line'>│   └── myController.js
+</span><span class='line'>├── directives
+</span><span class='line'>│   └── myDirective.js
+</span><span class='line'>├── filters
+</span><span class='line'>│   └── myFilter.js
+</span><span class='line'>└── services
+</span><span class='line'>    └── myService.js</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>プロジェクト構成のまとめ</h2>
+
+<p>ということで、やっぱり controller、directive、filter、service に分けて、あとはサブディレクトリを作るなり、細かく単機能ごとにファイルを分けていくということで。</p>
+
+<p>ちなみに、どれだけファイルをバラして作ったとしても、<a href="http://gruntjs.com">Grunt</a> でビルドすれば minify された 1 つの JS ファイルになるので心配ご無用！</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count" style="width: 108px"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	<a href="http://b.hatena.ne.jp/entry/http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<!-- <a class="addthis_counter addthis_pill_style"></a> -->
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Akihito Tamagawa -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'angularjsninja';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs/';
+        var disqus_url = 'http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-15091936-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</body>
+</html>
