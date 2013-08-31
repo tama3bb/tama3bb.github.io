@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-08-31T00:22:05+09:00</updated>
+  <updated>2013-09-01T00:30:12+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,132 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularFire でリアルタイムアプリケーション]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/01/angularfire-realtime-chat-app/"/>
+    <updated>2013-09-01T00:29:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/01/angularfire-realtime-chat-app</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://angularfire.com/img/afire-logo.png" alt="AngularFire" /></p>
+
+<p>Firebase の AngularJS 向け API、<a href="http://angularfire.com">AngularFire のページ</a>が公開されたばかりで、ちょうどいい機会なのでリアルタイムチャットアプリケーションの実装がどれほど簡単にできるのかを見ておく。</p>
+
+<!-- more -->
+
+
+<hr />
+
+<h2>AngularFire とは</h2>
+
+<p><a href="http://angularfire.com">AngularFire</a> とは、Firebase による AngularJS のアプリケーションを高速に実装するためのサービスで、バックエンドのコードを書く必要も、サーバをセットアップする必要も無く、ただフロントエンドの実装に集中できる。</p>
+
+<p>AngularFire の API を利用することで、AngularJS のモデルが自動的に同期（保存・更新）される。AngularJS の強みの 1 つである 2-way データバインドを、サーバ側にまで拡張する 3-way データバインドと言える。</p>
+
+<hr />
+
+<h2>Firebase とは</h2>
+
+<p><a href="https://www.firebase.com">Firebase</a> とは、サーバ管理不要で、高速・スケーラブル・リアルタイムなバックエンドを提供するサービス。一定の転送量・接続数・容量まで無料で、クレジッドカード無しで始めることができる。</p>
+
+<hr />
+
+<h2>概要</h2>
+
+<p>Firebase の URL とモデルを関連付けすることで、アプリケーションを利用しているすべてのクライアント（ブラウザ）を同期させる。</p>
+
+<p>まず、<code>firebase.js</code>と<code>angularfire.js</code>を参照。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;https://cdn.firebase.com/v0/firebase.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>AngularJS の app モジュールが依存するモジュールとして、<code>firebase</code>を記述。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">myapp</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myapp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;firebase&#39;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>同期</h2>
+
+<p>Firebase とモデルを同期化させるコード。すべてのローカルでの変更が自動的に Firebase に送信され、すべてのリモートでの変更が即座にローカルのモデルに反映される。</p>
+
+<p><code>angularFire</code>を controller が依存するサービスとして記述。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myapp</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;MyCtrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="s1">&#39;angularFire&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">MyCtrl</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">angularFire</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Firebase の参照を、<code>$scope</code>のモデルにバインド。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">ref</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Firebase</span><span class="p">(</span><span class="s1">&#39;https://&lt;my-firebase&gt;.firebaseio.com/items&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">angularFire</span><span class="p">(</span><span class="nx">ref</span><span class="p">,</span> <span class="nx">$scope</span><span class="p">,</span> <span class="s1">&#39;items&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>マークアップで普通にモデルを利用。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul</span> <span class="na">ng-controller=</span><span class="s">&quot;MyCtrl&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">&quot;item in items&quot;</span><span class="nt">&gt;</span>: <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Firebase からのデータは非同期にロードされ、サーバからのデータロードの通知には promise が利用できる。ローカルで実施したモデルへの変更は、AngularFire が自動的にリモートのデータとマージする。</p>
+
+<p>モデルのデータ変更についても普通に実装。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// モデルに直接新しいアイテムを追加</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Firebase&quot;</span><span class="p">,</span> <span class="nx">desc</span><span class="o">:</span> <span class="s2">&quot;is awesome!&quot;</span><span class="p">});</span>
+</span><span class='line'><span class="c1">// $scope に function を定義し、directive からのモデル操作も可</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">removeItem</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">toRemove</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">toRemove</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>なお、同期のタイミングを制御する API も用意されている。詳しくは、AngularFire の Documentation ページで <a href="http://angularfire.com/documentation.html#explicit">Explicit Data Binding</a> を参照。</p>
+
+<hr />
+
+<h1>まとめ</h1>
+
+<p>AngularFire の<a href="http://angularfire.com">トップページ</a>にチャットアプリケーションを実装した 30 行のコードが掲載されている。また、そこでチャットアプリケーションのデモを確認できる。</p>
+
+<p>たったこれだけの簡単なコードで、AngularJS のモデルをサーバに同期させ、すべてのクライアントに即座に同期させるリアルタイムアプリケーションを実装することでできる。</p>
+
+<p>AngularJS の勉強会をするなら、ハンズオンの題材としてちょうどよさそう。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Yeoman generator for AngularJS]]></title>
