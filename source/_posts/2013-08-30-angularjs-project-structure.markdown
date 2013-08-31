@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "AngularJS のプロジェクト構成をどうするか"
-date: 2013-08-30 20:05
+date: 2013-08-30 20:0	5
 comments: true
 categories: [AngularJS, Yeoman]
 ---
