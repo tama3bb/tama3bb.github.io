@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-01T00:30:12+09:00</updated>
+  <updated>2013-09-01T00:33:40+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -22,7 +22,7 @@
 
 <p><img src="http://angularfire.com/img/afire-logo.png" alt="AngularFire" /></p>
 
-<p>Firebase の AngularJS 向け API、<a href="http://angularfire.com">AngularFire のページ</a>が公開されたばかりで、ちょうどいい機会なのでリアルタイムチャットアプリケーションの実装がどれほど簡単にできるのかを見ておく。</p>
+<p>Firebase の AngularJS 向け API、<a href="http://angularfire.com">AngularFire</a> のページが公開されたばかりで、ちょうどいい機会なのでリアルタイムチャットアプリケーションの実装がどれほど簡単にできるのかを見ておく。</p>
 
 <!-- more -->
 
