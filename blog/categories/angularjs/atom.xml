@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-02T16:39:36+09:00</updated>
+  <updated>2013-09-02T16:42:46+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -28,6 +28,19 @@
 
 <!-- more -->
 
+
+<hr />
+
+<div ng-app>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <label>Name:</label>
+  <input type="text" ng-model="yourName" placeholder="Enter a name here">
+  <hr>
+  <h1>Hello {{yourName}}!</h1>
+</div>
+
+
+<hr />
 
 <p>``` html index.html
 &lt;!doctype html>
@@ -77,19 +90,6 @@
 </li>
 </ul>
 
-
-<hr />
-
-<div ng-app>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  <label>Name:</label>
-  <input type="text" ng-model="yourName" placeholder="Enter a name here">
-  <hr>
-  <h1>Hello {{yourName}}!</h1>
-</div>
-
-
-<hr />
 
 <p>この例は、<a href="http://jsfiddle.net/api/post/library/pure/">jsFiddle</a> でコードを編集して試すことができる。</p>
 ]]></content>

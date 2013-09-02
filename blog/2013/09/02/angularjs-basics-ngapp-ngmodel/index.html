@@ -9,9 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="AngularJS 基礎の基礎 AngularJS 基礎 しばらく AngularJS の基礎的なことを中心に書いていく。 AngularJS の基礎として、まず AngularJS のページ で一番初めにあるコードから、AngularJS に関する部分を簡単に。 index.html1
-2
-3 &hellip;">
+	<meta name="description" content="AngularJS 基礎の基礎 AngularJS 基礎 しばらく AngularJS の基礎的なことを中心に書いていく。 AngularJS の基礎として、まず AngularJS のページ で一番初めにあるコードから、AngularJS に関する部分を簡単に。 Name: Hello {{ &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,7 +105,18 @@
 <!-- more -->
 
 
+<hr />
 
+<div ng-app>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <label>Name:</label>
+  <input type="text" ng-model="yourName" placeholder="Enter a name here">
+  <hr>
+  <h1>Hello {{yourName}}!</h1>
+</div>
+
+
+<hr />
 
 <figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -165,19 +174,6 @@
 </li>
 </ul>
 
-
-<hr />
-
-<div ng-app>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  <label>Name:</label>
-  <input type="text" ng-model="yourName" placeholder="Enter a name here">
-  <hr>
-  <h1>Hello {{yourName}}!</h1>
-</div>
-
-
-<hr />
 
 <p>この例は、<a href="http://jsfiddle.net/api/post/library/pure/">jsFiddle</a> でコードを編集して試すことができる。</p>
 </div>
