@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-01T00:33:40+09:00</updated>
+  <updated>2013-09-02T16:39:36+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,98 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 基礎の基礎]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel/"/>
+    <updated>2013-09-02T16:39:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS 基礎</h2>
+
+<p>しばらく AngularJS の基礎的なことを中心に書いていく。</p>
+
+<p>AngularJS の基礎として、まず <a href="http://angularjs.org/#the-basics">AngularJS のページ</a> で一番初めにあるコードから、AngularJS に関する部分を簡単に。</p>
+
+<!-- more -->
+
+
+
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">ng-app</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;label&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;yourName&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Enter a name here&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;hr&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;h1&gt;</span>Hello {{yourName}}!<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p><a href="http://docs.angularjs.org/api/ng.directive:ngApp"><code>ng-app</code></a></p>
+
+<ul>
+<li>AngularJS が動作する範囲を指定。</li>
+<li>ページ全体とする場合は<code>&lt;html ng-app&gt;</code>とし、<code>&lt;head&gt;</code>を対象外とするなら<code>&lt;body ng-app&gt;</code>とする。</li>
+<li>より限定的に、<code>&lt;div ng-app&gt;</code>でも構わない。</li>
+</ul>
+</li>
+<li><p><a href="http://docs.angularjs.org/api/ng.directive:ngModel"><code>ng-model</code></a></p>
+
+<ul>
+<li>フォームとモデルをリンクし、どちらかでの変更を他方に反映する。</li>
+<li>この例の場合はテキストボックスへの入力値が即座に yourName プロパティに反映される。</li>
+</ul>
+</li>
+<li><p><code>{{yourName}}</code></p>
+
+<ul>
+<li>yourName プロパティの値を HTML に表示するコード。</li>
+<li>yourName プロパティの変更が即座に反映される。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<div ng-app>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <label>Name:</label>
+  <input type="text" ng-model="yourName" placeholder="Enter a name here">
+  <hr>
+  <h1>Hello {{yourName}}!</h1>
+</div>
+
+
+<hr />
+
+<p>この例は、<a href="http://jsfiddle.net/api/post/library/pure/">jsFiddle</a> でコードを編集して試すことができる。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularFire でリアルタイムアプリケーション]]></title>
@@ -133,7 +225,7 @@
 
 <p>AngularFire の<a href="http://angularfire.com">トップページ</a>にチャットアプリケーションを実装した 30 行のコードが掲載されている。また、そこでチャットアプリケーションのデモを確認できる。</p>
 
-<p>たったこれだけの簡単なコードで、AngularJS のモデルをサーバに同期させ、すべてのクライアントに即座に同期させるリアルタイムアプリケーションを実装することでできる。</p>
+<p>たったこれだけの簡単なコードで、AngularJS のモデルをサーバに同期させ、すべてのクライアントに即座に同期させるリアルタイムアプリケーションを実装することができる。</p>
 
 <p>AngularJS の勉強会をするなら、ハンズオンの題材としてちょうどよさそう。</p>
 ]]></content>
