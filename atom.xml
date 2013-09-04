@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-03T18:15:41+09:00</updated>
+  <updated>2013-09-04T16:49:06+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS で HTML をエスケープさせずに出力するには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html/"/>
+    <updated>2013-09-04T16:07:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS での出力手段</h2>
+
+<p>AngularJS で単に文字列を出力するには、<code>{{expression}}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span&gt;</span>{{ninja.name}}<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">&quot;ninja.name&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<hr />
+
+<h2>{{expression}} が一瞬表示されてチラつく場合の対処方法</h2>
+
+<p><code>{{expression}}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{{expression}}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
+
+<p>この問題に対しては、<code>ng-bind</code>を利用するか、<a href="http://docs.angularjs.org/api/ng.directive:ngCloak"><code>ng-cloak</code></a>を以下のように利用することで解決できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-cloak</span><span class="nt">&gt;</span>{{ninja.name}}<span class="nt">&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>なお、<a href="http://docs.angularjs.org/api/ngRoute.directive:ngView">ng-view</a> や <a href="http://docs.angularjs.org/api/ng.directive:ngInclude">ng-include</a> で挿入される断片（partial）の HTML では、このチラつく現象は発生しないため、ng-cloak の記述は不要である。</p>
+
+<hr />
+
+<h2>HTML をエスケープさせずに出力するには</h2>
+
+<p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml">ng-bind-html</a> を利用する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-bind-html=</span><span class="s">&quot;ninja.htmlContent&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この<code>ng-bind-html</code>は、別のモジュール（ngSanitize）に分かれているため、angular-sanitize.min.js を index.html で参照し、依存するモジュールとして記述する必要がある。</p>
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;assets/lib/angular-1.1.5/angular-sanitize.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ngSanitize&#39;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>サニタイズせずに出力するには</h2>
+
+<p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
+
+<p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく ng-bind-html-unsafe を利用できる。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[なぜ AngularJS を採用したのか]]></title>
