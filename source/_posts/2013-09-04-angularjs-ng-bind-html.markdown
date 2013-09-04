@@ -36,7 +36,7 @@ AngularJS で単に文字列を出力するには、`{% raw %}{{expression}}{% e
 
 ## HTML をエスケープさせずに出力するには
 
-HTML をエスケープさせずに出力するには、[ng-bind-html](http://docs.angularjs.org/api/ng.directive:ngBindHtml) を利用する。
+HTML をエスケープさせずに出力するには、[`ng-bind-html`](http://docs.angularjs.org/api/ng.directive:ngBindHtml)を利用する。
 
 ``` html
 <span ng-bind-html="ninja.htmlContent"></span>
@@ -57,4 +57,4 @@ var app = angular.module('app', ['ngSanitize']);
 
 出力する内容が安全であるとわかっている場合には、[$sce.trustAsHtml](http://docs.angularjs.org/api/ng.$sce#trustAsHtml) を利用してまったくサニタイズせずに出力することができる。
 
-また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく ng-bind-html-unsafe を利用できる。
+また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく`ng-bind-html-unsafe`を利用できる。
