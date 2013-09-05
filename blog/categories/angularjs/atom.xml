@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-04T16:49:06+09:00</updated>
+  <updated>2013-09-05T19:49:39+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -14,9 +14,222 @@
 
   
   <entry>
+    <title type="html"><![CDATA[AngularJS アプリケーションを国際化するには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/05/angularjs-i18n/"/>
+    <updated>2013-09-05T19:49:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/05/angularjs-i18n</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://pascalprecht.github.io/angular-translate/docs/en/img/logo/angular-translate-alternative/angular-translate_alternative_medium2.png" alt="angular-translate" /></p>
+
+<p>AngularJS アプリケーションを国際化するには、<a href="http://pascalprecht.github.io/angular-translate/">angular-translate</a> を使うのがとてもいい感じなので紹介。</p>
+
+<p>簡単な特徴</p>
+
+<ul>
+<li>言語ごとにリソースファイルを分けられる</li>
+<li>表示する言語のファイルだけを非同期に読み込める</li>
+<li>選択言語を LocalStorage または Cookie に保存してくれる</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h1>angular-translate のインストール</h1>
+
+<p>Bower でモジュールをインストールし、JS ファイルを適当なとこに置いて HTML から参照させて、AngularJS の依存モジュールとして記述。
+<code>
+$ bower install angular-translate
+$ bower install angular-translate-storage-cookie
+$ bower install angular-translate-storage-local
+$ bower install angular-translate-loader-static-files
+$ bower install angular-translate-handler-log
+</code>
+``` html index.html
+<html>
+  <head></p>
+
+<pre><code>&lt;meta charset="utf-8"&gt;
+&lt;title&gt;i18n app&lt;/title&gt;
+
+&lt;script src="path/to/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="path/to/angular-translate.min.js"&gt;&lt;/script&gt;
+&lt;script src="path/to/angular-translate-storage-cookie.min.js"&gt;&lt;/script&gt;
+&lt;script src="path/to/angular-translate-storage-local.min.js"&gt;&lt;/script&gt;
+&lt;script src="path/to/angular-translate-loader-static-files.min.js"&gt;&lt;/script&gt;
+&lt;script src="path/to/angular-translate-handler-log.min.js"&gt;&lt;/script&gt;
+&lt;script src="app.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>  </head></p>
+
+<p>  <body ng-app="myApp"></p>
+
+<p>  </body>
+</html>
+<code>
+</code> javascript app.js
+var app = angular.module(&lsquo;myApp&rsquo;, [&lsquo;pascalprecht.translate&rsquo;]);
+```</p>
+
+<h1>$translateProvider の設定</h1>
+
+<p>$translateProvider を config で設定。</p>
+
+<p>``` javascript
+app.config([&lsquo;$translateProvider&rsquo;, function($translateProvider) {
+  $translateProvider.useStaticFilesLoader({</p>
+
+<pre><code>prefix: 'assets/i18n/locale-',
+suffix: '.json'
+</code></pre>
+
+<p>  });
+  $translateProvider.preferredLanguage(&lsquo;ja&rsquo;);
+  $translateProvider.fallbackLanguage(&lsquo;en&rsquo;);
+  $translateProvider.useMissingTranslationHandlerLog();
+  $translateProvider.useLocalStorage();
+}]);
+```</p>
+
+<ul>
+<li>useStaticFilesLoader でリソースファイルのファイルパスを指定</li>
+<li>preferredLanguage でデフォルトの言語キーを指定</li>
+<li>fallbackLanguage で選択言語にリソースが見つからない場合の言語を指定</li>
+<li>useMissingTranslationHandlerLog でキーに対応するリソースが見つからない場合に console 出力</li>
+<li>useLocalStorage で選択言語の保存先として localStorage を指定（非対応ブラウザでは Cookie に保存される）</li>
+</ul>
+
+
+<p><code>
+assets/i18n/
+├── locale-en.json
+└── locale-ja.json
+</code>
+リソースファイルは、en や ja などの言語キーの前（prefix）と後（suffix）を指定。</p>
+
+<h1>リソースの記述方法</h1>
+
+<p>JSON オブジェクトとして記述。ネストもできる。
+``` javascript assets/i18n/locale-en.json
+{
+  &ldquo;HEADLINE&rdquo;: &ldquo;What an awesome module!&rdquo;,
+  &ldquo;PARAGRAPH&rdquo;: &ldquo;Srsly!&rdquo;,
+  &ldquo;NAMESPACE&rdquo;: {</p>
+
+<pre><code>"PARAGRAPH": "And it comes with awesome features!"
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<h1>HTML で利用するには</h1>
+
+<p>HTML で利用する場合には、translate フィルタ、または translate ディレクティヴで。</p>
+
+<p>``` html filters</p>
+
+<h2>{{ 'HEADLINE' | translate }}</h2>
+
+
+<p>{{ 'PARAGRAPH' | translate }}</p>
+
+
+<p><code>
+</code> html directives</p>
+
+<h2 translate>HEADLINE</h2>
+
+
+<p translate="PARAGRAPH"></p>
+
+
+<p>```</p>
+
+<h1>controller で利用するには</h1>
+
+<p>controller で利用する場合には、$translate サービスで。</p>
+
+<p><code>javascript controllers.js
+app.controller('Ctrl', ['$scope', '$translate', function ($scope, $translate) {
+  $scope.headline = $translate('HEADLINE');
+  $scope.paragraph = $translate('PARAGRAPH');
+  $scope.namespaced_paragraph = $translate('NAMESPACE.PARAGRAPH');
+}]);
+</code></p>
+
+<h1>変数を使った置換</h1>
+
+<p>メッセージの一部を置き換えられる。</p>
+
+<p><code>
+{
+  "TRANSLATION_ID": "{{username}} is logged in."
+}
+</code></p>
+
+<p>``` javascript controllers.js
+angular.module(&lsquo;myApp&rsquo;).controller(&lsquo;Ctrl&rsquo;, [&lsquo;$scope&rsquo;, function ($scope) {</p>
+
+<p>  $scope.translationData = {</p>
+
+<pre><code>username: 'PascalPrecht'
+</code></pre>
+
+<p>  };
+}]);
+```</p>
+
+<p>以下のように渡す。
+<code>javascript controllers.js
+$translate('TRANSLATION_ID', $scope.translationData);
+</code>
+<code>html filters
+{{ 'TRANSLATION_ID' | translate:translationData }}
+</code>
+<code>html directive
+&lt;ANY translate="TRANSLATION_ID" translate-values=""&gt;&lt;/ANY&gt;
+</code></p>
+
+<h1>言語の切り替え</h1>
+
+<p>言語を切り替える場合は、$translate の uses で。</p>
+
+<p>``` javascript controllers.js
+angular.module(&lsquo;myApp&rsquo;).controller(&lsquo;Ctrl&rsquo;, [&lsquo;$translate&rsquo;, &lsquo;$scope&rsquo;, function ($translate, $scope) {</p>
+
+<p>  $scope.changeLanguage = function (langKey) {</p>
+
+<pre><code>$translate.uses(langKey);
+</code></pre>
+
+<p>  };</p>
+
+<p>}]);
+```
+こんな感じかな。</p>
+
+<p><code>html
+&lt;button ng-click="changeLanguage('ja')" translate="BUTTON_LANG_JA"&gt;&lt;/button&gt;
+&lt;button ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN"&gt;&lt;/button&gt;
+</code>
+<code>javascript assets/i18n/locale-ja.json
+{
+  "BUTTON_LANG_JA": "日本語",
+  "BUTTON_LANG_EN": "英語"
+}
+</code></p>
+
+<p>たいへん便利な国際化モジュール、angular-translate の紹介でした。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[AngularJS で HTML をエスケープさせずに出力するには]]></title>
     <link href="http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html/"/>
-    <updated>2013-09-04T16:07:00+09:00</updated>
+    <updated>2013-09-04T16:49:00+09:00</updated>
     <id>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html</id>
     <content type="html"><![CDATA[<hr />
 
@@ -50,7 +263,7 @@
 
 <h2>HTML をエスケープさせずに出力するには</h2>
 
-<p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml">ng-bind-html</a> を利用する。</p>
+<p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml"><code>ng-bind-html</code></a>を利用する。</p>
 
 <p><code>html
 &lt;span ng-bind-html="ninja.htmlContent"&gt;&lt;/span&gt;
@@ -74,7 +287,7 @@ var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
 
 <p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
 
-<p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく ng-bind-html-unsafe を利用できる。</p>
+<p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく<code>ng-bind-html-unsafe</code>を利用できる。</p>
 ]]></content>
   </entry>
   
@@ -347,139 +560,6 @@ $scope.removeItem = function() {
 <p>たったこれだけの簡単なコードで、AngularJS のモデルをサーバに同期させ、すべてのクライアントに即座に同期させるリアルタイムアプリケーションを実装することができる。</p>
 
 <p>AngularJS の勉強会をするなら、ハンズオンの題材としてちょうどよさそう。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Yeoman generator for AngularJS]]></title>
-    <link href="http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs/"/>
-    <updated>2013-08-31T00:25:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><img src="https://github-camo.global.ssl.fastly.net/10c0f69d03b7ac184d77e8aaba4358a2d4791823/687474703a2f2f79656f6d616e2e696f2f6d656469612f79656f6d616e2d6d617374686561642e706e67" alt="Yeoman" /></p>
-
-<h2>AngularJS 用 Yeoman ジェネレータ</h2>
-
-<p>Yeoman チームがベストプラクティスだと言っているプロジェクト構成を、AngularJS 用の Yeoman ジェネレータで実際に生成して確認する。</p>
-
-<!-- more -->
-
-
-<hr />
-
-<h2>yo (Yeoman) と generator-angular をインストール</h2>
-
-<p>まず yo (Yeoman) をインストール。</p>
-
-<p><code>
-npm install -g yo
-</code></p>
-
-<p>次に、AngularJS 用の Yeoman ジェネレータ generator-angular をインストール。</p>
-
-<p><code>
-npm install -g generator-angular
-</code></p>
-
-<hr />
-
-<h2>AngularJS プロジェクトを生成</h2>
-
-<p>新しいディレクトリを作って、そのディレクトリに移動。</p>
-
-<p><code>
-mkdir my-new-project &amp;&amp; cd $_
-</code></p>
-
-<p><code>yo angular</code> を実行（アプリケーション名を付けれる）。</p>
-
-<p><code>
-yo angular [app-name]
-</code></p>
-
-<p>で、Twitter Bootstrap を含めるか、SCSS を使うか、angular-resource.js, angular-cookies.js, angular-sanitiaze.js のモジュールを含めるかといった質問に答える。</p>
-
-<p>すると、うお、そんなに？ってぐらいにターミナルが流れに流れて my-new-project ディレクトリに山ほどのサブディレクトリとファイルができている。</p>
-
-<hr />
-
-<h2>生成したプロジェクトの構成を確認</h2>
-
-<p>とりあえずプロジェクト構成のことだけに絞って、ここでは app ディレクトリの下を確認。</p>
-
-<p>```
-app/
-├── 404.html
-├── bower_components
-│   ├── angular
-│   ├── angular-cookies
-│   ├── angular-mocks
-│   ├── angular-resource
-│   ├── angular-sanitize
-│   ├── angular-scenario
-│   ├── bootstrap-sass
-│   ├── es5-shim
-│   ├── jquery
-│   └── json3
-├── favicon.ico
-├── index.html
-├── robots.txt
-├── scripts
-│   ├── app.js
-│   └── controllers
-│       └── main.js
-├── styles
-│   ├── bootstrap.css
-│   └── main.css
-└── views</p>
-
-<pre><code>└── main.html
-</code></pre>
-
-<p>```</p>
-
-<p>目新しいのは bower_components の存在。これは、パッケージマネジメントツール <a href="http://bower.io">Bower</a> でインストールするときにできるディレクトリの名前。Yeoman は Bower を使っている。</p>
-
-<p>肝心の scripts ディレクトリの下がスッカスカなので、先に進む。</p>
-
-<hr />
-
-<h2>サブジェネレータでいろいろ生成</h2>
-
-<p><code>
-yo angular:controller myController
-yo angular:directive myDirective
-yo angular:filter myFilter
-yo angular:service myService
-</code></p>
-
-<p>これで、scripts ディレクトリはこうなる。</p>
-
-<p>```
-app/scripts/
-├── app.js
-├── controllers
-│   ├── main.js
-│   └── myController.js
-├── directives
-│   └── myDirective.js
-├── filters
-│   └── myFilter.js
-└── services</p>
-
-<pre><code>└── myService.js
-</code></pre>
-
-<p>```</p>
-
-<hr />
-
-<h2>プロジェクト構成のまとめ</h2>
-
-<p>ということで、やっぱり controller、directive、filter、service に分けて、あとはサブディレクトリを作るなり、細かく単機能ごとにファイルを分けていくということで。</p>
-
-<p>ちなみに、どれだけファイルをバラして作ったとしても、<a href="http://gruntjs.com">Grunt</a> でビルドすれば minify された 1 つの JS ファイルになるので心配ご無用！</p>
 ]]></content>
   </entry>
   

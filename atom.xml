@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-04T16:49:06+09:00</updated>
+  <updated>2013-09-05T19:49:39+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -14,9 +14,287 @@
 
   
   <entry>
+    <title type="html"><![CDATA[AngularJS アプリケーションを国際化するには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/05/angularjs-i18n/"/>
+    <updated>2013-09-05T19:49:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/05/angularjs-i18n</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://pascalprecht.github.io/angular-translate/docs/en/img/logo/angular-translate-alternative/angular-translate_alternative_medium2.png" alt="angular-translate" /></p>
+
+<p>AngularJS アプリケーションを国際化するには、<a href="http://pascalprecht.github.io/angular-translate/">angular-translate</a> を使うのがとてもいい感じなので紹介。</p>
+
+<p>簡単な特徴</p>
+
+<ul>
+<li>言語ごとにリソースファイルを分けられる</li>
+<li>表示する言語のファイルだけを非同期に読み込める</li>
+<li>選択言語を LocalStorage または Cookie に保存してくれる</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h1>angular-translate のインストール</h1>
+
+<p>Bower でモジュールをインストールし、JS ファイルを適当なとこに置いて HTML から参照させて、AngularJS の依存モジュールとして記述。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bower install angular-translate
+</span><span class='line'>$ bower install angular-translate-storage-cookie
+</span><span class='line'>$ bower install angular-translate-storage-local
+</span><span class='line'>$ bower install angular-translate-loader-static-files
+</span><span class='line'>$ bower install angular-translate-handler-log</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title&gt;</span>i18n app<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular-translate.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular-translate-storage-cookie.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular-translate-storage-local.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular-translate-loader-static-files.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular-translate-handler-log.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;app.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;body</span> <span class="na">ng-app=</span><span class="s">&quot;myApp&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;pascalprecht.translate&#39;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>$translateProvider の設定</h1>
+
+<p>$translateProvider を config で設定。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">config</span><span class="p">([</span><span class="s1">&#39;$translateProvider&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$translateProvider</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$translateProvider</span><span class="p">.</span><span class="nx">useStaticFilesLoader</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;assets/i18n/locale-&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">suffix</span><span class="o">:</span> <span class="s1">&#39;.json&#39;</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="nx">$translateProvider</span><span class="p">.</span><span class="nx">preferredLanguage</span><span class="p">(</span><span class="s1">&#39;ja&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$translateProvider</span><span class="p">.</span><span class="nx">fallbackLanguage</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$translateProvider</span><span class="p">.</span><span class="nx">useMissingTranslationHandlerLog</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">$translateProvider</span><span class="p">.</span><span class="nx">useLocalStorage</span><span class="p">();</span>
+</span><span class='line'><span class="p">}]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>useStaticFilesLoader でリソースファイルのファイルパスを指定</li>
+<li>preferredLanguage でデフォルトの言語キーを指定</li>
+<li>fallbackLanguage で選択言語にリソースが見つからない場合の言語を指定</li>
+<li>useMissingTranslationHandlerLog でキーに対応するリソースが見つからない場合に console 出力</li>
+<li>useLocalStorage で選択言語の保存先として localStorage を指定（非対応ブラウザでは Cookie に保存される）</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">assets</span><span class="o">/</span><span class="nx">i18n</span><span class="o">/</span>
+</span><span class='line'><span class="err">├──</span> <span class="nx">locale</span><span class="o">-</span><span class="nx">en</span><span class="p">.</span><span class="nx">json</span>
+</span><span class='line'><span class="err">└──</span> <span class="nx">locale</span><span class="o">-</span><span class="nx">ja</span><span class="p">.</span><span class="nx">json</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>リソースファイルは、en や ja などの言語キーの前（prefix）と後（suffix）を指定。</p>
+
+<h1>リソースの記述方法</h1>
+
+<p>JSON オブジェクトとして記述。ネストもできる。</p>
+
+<figure class='code'><figcaption><span>assets/i18n/locale-en.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;HEADLINE&quot;</span><span class="o">:</span> <span class="s2">&quot;What an awesome module!&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;PARAGRAPH&quot;</span><span class="o">:</span> <span class="s2">&quot;Srsly!&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;NAMESPACE&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;PARAGRAPH&quot;</span><span class="o">:</span> <span class="s2">&quot;And it comes with awesome features!&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>HTML で利用するには</h1>
+
+<p>HTML で利用する場合には、translate フィルタ、または translate ディレクティヴで。</p>
+
+<figure class='code'><figcaption><span>filters</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h2&gt;</span>{{ &#39;HEADLINE&#39; | translate }}<span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>{{ &#39;PARAGRAPH&#39; | translate }}<span class="nt">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>directives</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h2</span> <span class="na">translate</span><span class="nt">&gt;</span>HEADLINE<span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'><span class="nt">&lt;p</span> <span class="na">translate=</span><span class="s">&quot;PARAGRAPH&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>controller で利用するには</h1>
+
+<p>controller で利用する場合には、$translate サービスで。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;Ctrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="s1">&#39;$translate&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$translate</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">headline</span> <span class="o">=</span> <span class="nx">$translate</span><span class="p">(</span><span class="s1">&#39;HEADLINE&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">paragraph</span> <span class="o">=</span> <span class="nx">$translate</span><span class="p">(</span><span class="s1">&#39;PARAGRAPH&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">namespaced_paragraph</span> <span class="o">=</span> <span class="nx">$translate</span><span class="p">(</span><span class="s1">&#39;NAMESPACE.PARAGRAPH&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>変数を使った置換</h1>
+
+<p>メッセージの一部を置き換えられる。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;TRANSLATION_ID&quot;</span><span class="o">:</span> <span class="s2">&quot;{{username}} is logged in.&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">).</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;Ctrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">translationData</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;PascalPrecht&#39;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">}]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以下のように渡す。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$translate</span><span class="p">(</span><span class="s1">&#39;TRANSLATION_ID&#39;</span><span class="p">,</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">translationData</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>filters</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{{ &#39;TRANSLATION_ID&#39; | translate:translationData }}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>directive</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ANY</span> <span class="na">translate=</span><span class="s">&quot;TRANSLATION_ID&quot;</span> <span class="na">translate-values=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/ANY&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>言語の切り替え</h1>
+
+<p>言語を切り替える場合は、$translate の uses で。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">).</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;Ctrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$translate&#39;</span><span class="p">,</span> <span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$translate</span><span class="p">,</span> <span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">changeLanguage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">langKey</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$translate</span><span class="p">.</span><span class="nx">uses</span><span class="p">(</span><span class="nx">langKey</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じかな。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;changeLanguage(&#39;ja&#39;)&quot;</span> <span class="na">translate=</span><span class="s">&quot;BUTTON_LANG_JA&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;changeLanguage(&#39;en&#39;)&quot;</span> <span class="na">translate=</span><span class="s">&quot;BUTTON_LANG_EN&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>assets/i18n/locale-ja.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;BUTTON_LANG_JA&quot;</span><span class="o">:</span> <span class="s2">&quot;日本語&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;BUTTON_LANG_EN&quot;</span><span class="o">:</span> <span class="s2">&quot;英語&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>たいへん便利な国際化モジュール、angular-translate の紹介でした。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[AngularJS で HTML をエスケープさせずに出力するには]]></title>
     <link href="http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html/"/>
-    <updated>2013-09-04T16:07:00+09:00</updated>
+    <updated>2013-09-04T16:49:00+09:00</updated>
     <id>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html</id>
     <content type="html"><![CDATA[<hr />
 
@@ -55,7 +333,7 @@
 
 <h2>HTML をエスケープさせずに出力するには</h2>
 
-<p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml">ng-bind-html</a> を利用する。</p>
+<p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml"><code>ng-bind-html</code></a>を利用する。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-bind-html=</span><span class="s">&quot;ninja.htmlContent&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
@@ -80,7 +358,7 @@
 
 <p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
 
-<p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく ng-bind-html-unsafe を利用できる。</p>
+<p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく<code>ng-bind-html-unsafe</code>を利用できる。</p>
 ]]></content>
   </entry>
   
