@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-05T19:49:39+09:00</updated>
+  <updated>2013-09-05T20:01:47+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -298,7 +298,7 @@
     <id>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html</id>
     <content type="html"><![CDATA[<hr />
 
-<h2>AngularJS での出力手段</h2>
+<h1>AngularJS での出力手段</h1>
 
 <p>AngularJS で単に文字列を出力するには、<code>{{expression}}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
 
@@ -314,9 +314,7 @@
 <!-- more -->
 
 
-<hr />
-
-<h2>{{expression}} が一瞬表示されてチラつく場合の対処方法</h2>
+<h1>{{expression}} が一瞬表示されてチラつく場合の対処方法</h1>
 
 <p><code>{{expression}}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{{expression}}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
 
@@ -329,9 +327,7 @@
 
 <p>なお、<a href="http://docs.angularjs.org/api/ngRoute.directive:ngView">ng-view</a> や <a href="http://docs.angularjs.org/api/ng.directive:ngInclude">ng-include</a> で挿入される断片（partial）の HTML では、このチラつく現象は発生しないため、ng-cloak の記述は不要である。</p>
 
-<hr />
-
-<h2>HTML をエスケープさせずに出力するには</h2>
+<h1>HTML をエスケープさせずに出力するには</h1>
 
 <p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml"><code>ng-bind-html</code></a>を利用する。</p>
 
@@ -352,9 +348,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<hr />
-
-<h2>サニタイズせずに出力するには</h2>
+<h1>サニタイズせずに出力するには</h1>
 
 <p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
 
@@ -369,8 +363,6 @@
     <id>http://angularjsninja.com/blog/2013/09/03/why-angularjs</id>
     <content type="html"><![CDATA[<hr />
 
-<h2>なぜ AngularJS を採用したのか</h2>
-
 <p>今回は、AngularJS を採用した理由について軽くまとめておく。</p>
 
 <p>JavaScript MVC 系のフレームワーク導入を検討することにし、もっとも普及している <a href="http://backbonejs.org">Backbone.js</a> と、双方向データバインドなど高機能な <a href="http://emberjs.com">Ember.js</a> および <a href="http://angularjs.org">AngularJS</a> を検討した。</p>
@@ -380,9 +372,7 @@
 <!-- more -->
 
 
-<hr />
-
-<h2>Ember.js を採用しなかった理由</h2>
+<h1>Ember.js を採用しなかった理由</h1>
 
 <p>まず Ember.js を 3 週間ほど別のプロジェクトで実装してみたところ、なんか難しかった…。ただの知識不足か実力不足かも…。</p>
 
@@ -392,9 +382,7 @@
 
 <p>いや、Ember.js は悪くないです。相性の問題というか、ごめんなさい。</p>
 
-<hr />
-
-<h2>Backbone.js を採用しなかった理由</h2>
+<h1>Backbone.js を採用しなかった理由</h1>
 
 <p>次に、もともと本命に考えていた Backbone.js について。実際には AngularJS の後に評価したんだけれど、先に書く。</p>
 
@@ -404,9 +392,7 @@
 
 <p>Backbone.js を不採用としたのは、評価時点で、すでに AngularJS をかなり気に入っていたことが大きい。あと、自由度が高過ぎるという印象を持ったことも大きい。Ember.js や AngularJS が実現している機能を加えることは可能なもののアドオンの選択肢が多く、ベストプラクティスと言える構成がわからずにいろいろ迷いそうだなと。</p>
 
-<hr />
-
-<h2>AngularJS を採用した理由</h2>
+<h1>AngularJS を採用した理由</h1>
 
 <p>AngularJS をなぜ気に入ったのかと言えば、簡単なことが驚くほど簡単にできるというところ。そのとっつきのよさに驚いた。他のメンバーが入るときに敷居が低そうで、知識不足や考慮不足による問題を発生させにくそうだと思えた。</p>
 
@@ -414,9 +400,7 @@
 
 <p>その後すでに数か月プロトタイプで AngularJS のコードを書いてるけど、特に困難にぶち当たることもなく、AngularJS のプロジェクトへの採用は成功しそうだなと安心している。よかったよかった。</p>
 
-<hr />
-
-<h2>なぜ jQuery だけじゃダメなのか</h2>
+<h1>なぜ jQuery だけじゃダメなのか</h1>
 
 <p>ところで、jQuery だけじゃダメなのか。jQuery はクロスブラウザに対応し、コードが簡潔で可読性が高く、普及率も高い。</p>
 
@@ -424,9 +408,7 @@
 
 <p>なので、Backbone.js 使いましょうというのが主流なんだと思う。</p>
 
-<hr />
-
-<h2>もしコードを比較したいなら</h2>
+<h1>もしコードを比較したいなら</h1>
 
 <p>自分の経験からも、フレームワークの選定にはいくつかのフレームワークを試用してみたほうがいいと思う。</p>
 
@@ -443,7 +425,7 @@
     <id>http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel</id>
     <content type="html"><![CDATA[<hr />
 
-<h2>AngularJS 基礎</h2>
+<h1>AngularJS 基礎</h1>
 
 <p>しばらく AngularJS の基礎的なことを中心に書いていく。</p>
 
@@ -540,23 +522,17 @@
 <!-- more -->
 
 
-<hr />
-
-<h2>AngularFire とは</h2>
+<h1>AngularFire とは</h1>
 
 <p><a href="http://angularfire.com">AngularFire</a> とは、Firebase による AngularJS のアプリケーションを高速に実装するためのサービスで、バックエンドのコードを書く必要も、サーバをセットアップする必要も無く、ただフロントエンドの実装に集中できる。</p>
 
 <p>AngularFire の API を利用することで、AngularJS のモデルが自動的に同期（保存・更新）される。AngularJS の強みの 1 つである 2-way データバインドを、サーバ側にまで拡張する 3-way データバインドと言える。</p>
 
-<hr />
-
-<h2>Firebase とは</h2>
+<h1>Firebase とは</h1>
 
 <p><a href="https://www.firebase.com">Firebase</a> とは、サーバ管理不要で、高速・スケーラブル・リアルタイムなバックエンドを提供するサービス。一定の転送量・接続数・容量まで無料で、クレジッドカード無しで始めることができる。</p>
 
-<hr />
-
-<h2>概要</h2>
+<h1>概要</h1>
 
 <p>Firebase の URL とモデルを関連付けすることで、アプリケーションを利用しているすべてのクライアント（ブラウザ）を同期させる。</p>
 
@@ -576,9 +552,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<hr />
-
-<h2>同期</h2>
+<h1>同期</h1>
 
 <p>Firebase とモデルを同期化させるコード。すべてのローカルでの変更が自動的に Firebase に送信され、すべてのリモートでの変更が即座にローカルのモデルに反映される。</p>
 
@@ -640,8 +614,6 @@
 
 <p>なお、同期のタイミングを制御する API も用意されている。詳しくは、AngularFire の Documentation ページで <a href="http://angularfire.com/documentation.html#explicit">Explicit Data Binding</a> を参照。</p>
 
-<hr />
-
 <h1>まとめ</h1>
 
 <p>AngularFire の<a href="http://angularfire.com">トップページ</a>にチャットアプリケーションを実装した 30 行のコードが掲載されている。また、そこでチャットアプリケーションのデモを確認できる。</p>
@@ -668,9 +640,7 @@
 <!-- more -->
 
 
-<hr />
-
-<h2>yo (Yeoman) と generator-angular をインストール</h2>
+<h1>yo (Yeoman) と generator-angular をインストール</h1>
 
 <p>まず yo (Yeoman) をインストール。</p>
 
@@ -684,9 +654,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g generator-angular</span></code></pre></td></tr></table></div></figure>
 
 
-<hr />
-
-<h2>AngularJS プロジェクトを生成</h2>
+<h1>AngularJS プロジェクトを生成</h1>
 
 <p>新しいディレクトリを作って、そのディレクトリに移動。</p>
 
@@ -704,9 +672,7 @@
 
 <p>すると、うお、そんなに？ってぐらいにターミナルが流れに流れて my-new-project ディレクトリに山ほどのサブディレクトリとファイルができている。</p>
 
-<hr />
-
-<h2>生成したプロジェクトの構成を確認</h2>
+<h1>生成したプロジェクトの構成を確認</h1>
 
 <p>とりあえずプロジェクト構成のことだけに絞って、ここでは app ディレクトリの下を確認。</p>
 
@@ -766,9 +732,7 @@
 
 <p>肝心の scripts ディレクトリの下がスッカスカなので、先に進む。</p>
 
-<hr />
-
-<h2>サブジェネレータでいろいろ生成</h2>
+<h1>サブジェネレータでいろいろ生成</h1>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -806,9 +770,7 @@
 </span><span class='line'>    └── myService.js</span></code></pre></td></tr></table></div></figure>
 
 
-<hr />
-
-<h2>プロジェクト構成のまとめ</h2>
+<h1>プロジェクト構成のまとめ</h1>
 
 <p>ということで、やっぱり controller、directive、filter、service に分けて、あとはサブディレクトリを作るなり、細かく単機能ごとにファイルを分けていくということで。</p>
 
@@ -823,7 +785,7 @@
     <id>http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure</id>
     <content type="html"><![CDATA[<hr />
 
-<h2>AngularJS のプロジェクト構成ってどうするのがいいんだ？</h2>
+<h1>AngularJS のプロジェクト構成ってどうするのがいいんだ？</h1>
 
 <p>AngularJS でアプリケーションを作るときに悩むのがプロジェクト構成。なんでもかんでも一つの JavaScript ファイルで実装してしまうことも可能だけれど、コード量が増えてくるとすぐにつらくなる。</p>
 
@@ -832,9 +794,7 @@
 <!-- more -->
 
 
-<hr />
-
-<h2>Angular Seed</h2>
+<h1>Angular Seed</h1>
 
 <p>この angular-seed のプロジェクト構成はこんな感じ。</p>
 
@@ -911,9 +871,7 @@
 
 <p>そこで、あるべき姿、ベストプラクティスはどんな構成なんだとネットをさまよう。</p>
 
-<hr />
-
-<h2>Building Huuuuuge Apps with AngularJS</h2>
+<h1>Building Huuuuuge Apps with AngularJS</h1>
 
 <p>大規模な AngularJS についての記事では <a href="http://briantford.com/blog/huuuuuge-angular-apps.html">Building Huuuuuge Apps with AngularJS</a> が参考になる。この記事は <a href="https://twitter.com/briantford">Brian Ford</a> さんによるもの。</p>
 
@@ -980,9 +938,7 @@
 
 <p>なぜ lib &ndash;> vendor、css &ndash;> styles、js &ndash;> scripts、partials &ndash;> views に変更しているのかは不明。流儀があるのかな。</p>
 
-<hr />
-
-<h2>Yeoman</h2>
+<h1>Yeoman</h1>
 
 <p>また、この Brian Ford さんが関わっている <a href="http://yeoman.io">Yeoman</a> という Web アプリケーションのワークフローを改善するためのツール群があって、<a href="https://github.com/yeoman/generator-angular">yeoman/generator-angular</a> という AngularJS 用の Yeoman ジェネレータがある。</p>
 
@@ -998,8 +954,6 @@
     <updated>2013-08-29T08:42:00+09:00</updated>
     <id>http://angularjsninja.com/blog/2013/08/29/angularjs-web-api-call</id>
     <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS で Web API を呼び出すコードをまとめる</h2>
 
 <p>AngularJS で Web API を呼び出す $http などを利用するコードを、各 controller に散らして実装してしまわずに、どこかに集約しておきたいぞって場合の話。</p>
 
@@ -1063,7 +1017,7 @@
     <id>http://angularjsninja.com/blog/2013/08/28/how-to-declare-models</id>
     <content type="html"><![CDATA[<hr />
 
-<h2>AngularJS の ng-model、大事なのは dot があること</h2>
+<h1>AngularJS の ng-model、大事なのは dot があること</h1>
 
 <p>AngularJS では、モデルをどこに宣言すればいいんだってのがわかりにくい。</p>
 
@@ -1119,9 +1073,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<hr />
-
-<h2>AngularJS のモデルは factory で宣言</h2>
+<h1>AngularJS のモデルは factory で宣言</h1>
 
 <p>さて、ちゃんとモデルを宣言したい場合はどう書けばいいのか。さきほどの例で言えば、aModel はどこでどう宣言しておくことができるのか。</p>
 
@@ -1164,7 +1116,7 @@
     <id>http://angularjsninja.com/blog/2013/08/27/ngshow-nghide-ngswitch</id>
     <content type="html"><![CDATA[<hr />
 
-<h2>ng-show / ng-hide のポイント</h2>
+<h1>ng-show / ng-hide のポイント</h1>
 
 <p>ng-show / ng-hide は、HTML 要素を boolean 条件で表示・非表示を制御できる便利な directive で、ほんと使える。</p>
 
@@ -1188,9 +1140,7 @@
 
 <p>ホバーですぐに表示したいとかいう場合は、非表示のうちにバックグラウンドで画像を取得しておくメリットがあるので、そんなときにはこれでいい。だけど非表示にしたとこはムダに動いてほしくないってときはどうするか。</p>
 
-<hr />
-
-<h2>ng-switch で解決（1.2 未満）</h2>
+<h1>ng-switch で解決（1.2 未満）</h1>
 
 <p>非表示にしてるところに動作してほしくないときは、ng-show / ng-hide ではなく、ng-switch でうまくいく。ng-switch で非表示となるときは、該当の HTML 要素が DOM からいなくなるので。</p>
 
@@ -1207,9 +1157,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<hr />
-
-<h2>1.2 以降は ng-if</h2>
+<h1>1.2 以降は ng-if</h1>
 
 <p>AngularJS のバージョン 1.2（現時点では RC1）がリリースされ、今回の例のように boolean で決まるときには、新しく追加された ng-if を使うことになってるんだと思う（未検証）ので、すぐにでも必要なくなる TIPS かもしれない。</p>
 
@@ -1226,7 +1174,7 @@
 
 <p><img src="https://raw.github.com/angular/angular.js/master/images/logo/AngularJS.exports/AngularJS-medium.png" title="AngularJS" alt="AngularJS" /></p>
 
-<h2>AngularJS とは</h2>
+<h1>AngularJS とは</h1>
 
 <blockquote><p>AngularJS（アンギュラージェイエス）は、Google とコミュニティによって開発されているオープンソースの JavaScript フレームワークである。ブラウザ上で動作するウェブアプリケーションの開発に MVC アーキテクチャを取り入れることを目的としている。MIT Licenseでライセンスされたフリーソフトウェアである。<ref><a href="http://ja.wikipedia.org/wiki/AngularJS">Wikipedia</a></ref></p></blockquote>
 
@@ -1244,9 +1192,7 @@
 <!-- more -->
 
 
-<hr />
-
-<h2>誰が書くのか</h2>
+<h1>誰が書くのか</h1>
 
 <p>私ひとりで。</p>
 
@@ -1257,9 +1203,7 @@
 </ul>
 
 
-<hr />
-
-<h2>何を書くのか</h2>
+<h1>何を書くのか</h1>
 
 <ul>
 <li>AngularJS の機能紹介、TIPS、トラブルシューティング</li>
@@ -1269,18 +1213,14 @@
 </ul>
 
 
-<hr />
-
-<h2>いつ書くのか</h2>
+<h1>いつ書くのか</h1>
 
 <ul>
 <li>週に数回</li>
 </ul>
 
 
-<hr />
-
-<h2>どこで書くのか</h2>
+<h1>どこで書くのか</h1>
 
 <ul>
 <li>自宅</li>
@@ -1288,9 +1228,7 @@
 </ul>
 
 
-<hr />
-
-<h2>なぜ書くのか</h2>
+<h1>なぜ書くのか</h1>
 
 <ul>
 <li>AngularJS すごいから</li>
