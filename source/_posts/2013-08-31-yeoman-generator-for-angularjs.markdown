@@ -16,9 +16,8 @@ Yeoman チームがベストプラクティスだと言っているプロジェ�
 
 <!-- more -->
 
----
 
-## yo (Yeoman) と generator-angular をインストール
+# yo (Yeoman) と generator-angular をインストール
 
 まず yo (Yeoman) をインストール。
 
@@ -32,9 +31,8 @@ npm install -g yo
 npm install -g generator-angular
 ```
 
----
 
-## AngularJS プロジェクトを生成
+# AngularJS プロジェクトを生成
 
 新しいディレクトリを作って、そのディレクトリに移動。
 
@@ -52,9 +50,8 @@ yo angular [app-name]
 
 すると、うお、そんなに？ってぐらいにターミナルが流れに流れて my-new-project ディレクトリに山ほどのサブディレクトリとファイルができている。
 
----
 
-## 生成したプロジェクトの構成を確認
+# 生成したプロジェクトの構成を確認
 
 とりあえずプロジェクト構成のことだけに絞って、ここでは app ディレクトリの下を確認。
 
@@ -90,9 +87,8 @@ app/
 
 肝心の scripts ディレクトリの下がスッカスカなので、先に進む。
 
----
 
-## サブジェネレータでいろいろ生成
+# サブジェネレータでいろいろ生成
 
 ```
 yo angular:controller myController
@@ -117,9 +113,8 @@ app/scripts/
     └── myService.js
 ```
 
----
 
-## プロジェクト構成のまとめ
+# プロジェクト構成のまとめ
 
 ということで、やっぱり controller、directive、filter、service に分けて、あとはサブディレクトリを作るなり、細かく単機能ごとにファイルを分けていくということで。
 

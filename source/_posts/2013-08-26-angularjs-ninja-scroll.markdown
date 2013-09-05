@@ -10,7 +10,7 @@ categories: AngularJS
 
 ![AngularJS](https://raw.github.com/angular/angular.js/master/images/logo/AngularJS.exports/AngularJS-medium.png "AngularJS")
 
-## AngularJS とは
+# AngularJS とは
 
 > AngularJS（アンギュラージェイエス）は、Google とコミュニティによって開発されているオープンソースの JavaScript フレームワークである。ブラウザ上で動作するウェブアプリケーションの開発に MVC アーキテクチャを取り入れることを目的としている。MIT Licenseでライセンスされたフリーソフトウェアである。<ref>[Wikipedia](http://ja.wikipedia.org/wiki/AngularJS)</ref>
 
@@ -24,9 +24,8 @@ categories: AngularJS
 
 <!-- more -->
 
----
 
-## 誰が書くのか
+# 誰が書くのか
 
 私ひとりで。
 
@@ -34,31 +33,27 @@ categories: AngularJS
 * 英語そこそこできる
 * フリーランス
 
----
 
-## 何を書くのか
+# 何を書くのか
 
 * AngularJS の機能紹介、TIPS、トラブルシューティング
 * AngularJS と併せて利用しているライブラリの紹介
 * 海外での AngularJS ブログ等の要約
 * 質問への回答、勉強会などの告知
 
----
 
-## いつ書くのか
+# いつ書くのか
 
 * 週に数回
 
----
 
-## どこで書くのか
+# どこで書くのか
 
 * 自宅
 * [ナレッジサロン](http://kc-i.jp/facilities/salon/)
 
----
 
-## なぜ書くのか
+# なぜ書くのか
 
 * AngularJS すごいから
 * AngularJS 楽しいから

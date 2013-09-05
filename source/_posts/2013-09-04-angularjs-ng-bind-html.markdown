@@ -8,7 +8,7 @@ categories: AngularJS
 
 ---
 
-## AngularJS での出力手段
+# AngularJS での出力手段
 
 AngularJS で単に文字列を出力するには、`{% raw %}{{expression}}{% endraw %}`または[`ng-bind`](http://docs.angularjs.org/api/ng.directive:ngBind)を HTML で利用する。
 
@@ -19,8 +19,7 @@ AngularJS で単に文字列を出力するには、`{% raw %}{{expression}}{% e
 
 <!-- more -->
 
----
-## {% raw %}{{expression}}{% endraw %} が一瞬表示されてチラつく場合の対処方法
+# {% raw %}{{expression}}{% endraw %} が一瞬表示されてチラつく場合の対処方法
 
 `{% raw %}{{expression}}{% endraw %}`をエントリーポイントの index.html で利用すると、AngularJS が処理するまで`{% raw %}{{expression}}{% endraw %}`がそのままページに表示され、値が切り替わるときにチラついてしまう。
 
@@ -32,9 +31,8 @@ AngularJS で単に文字列を出力するには、`{% raw %}{{expression}}{% e
 
 なお、[ng-view](http://docs.angularjs.org/api/ngRoute.directive:ngView) や [ng-include](http://docs.angularjs.org/api/ng.directive:ngInclude) で挿入される断片（partial）の HTML では、このチラつく現象は発生しないため、ng-cloak の記述は不要である。
 
----
 
-## HTML をエスケープさせずに出力するには
+# HTML をエスケープさせずに出力するには
 
 HTML をエスケープさせずに出力するには、[`ng-bind-html`](http://docs.angularjs.org/api/ng.directive:ngBindHtml)を利用する。
 
@@ -51,9 +49,8 @@ HTML をエスケープさせずに出力するには、[`ng-bind-html`](http://
 var app = angular.module('app', ['ngSanitize']);
 ```
 
----
 
-## サニタイズせずに出力するには
+# サニタイズせずに出力するには
 
 出力する内容が安全であるとわかっている場合には、[$sce.trustAsHtml](http://docs.angularjs.org/api/ng.$sce#trustAsHtml) を利用してまったくサニタイズせずに出力することができる。
 

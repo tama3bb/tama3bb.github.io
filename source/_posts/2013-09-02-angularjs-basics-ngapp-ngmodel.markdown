@@ -8,7 +8,7 @@ categories: AngularJS
 
 ---
 
-## AngularJS 基礎
+# AngularJS 基礎
 
 しばらく AngularJS の基礎的なことを中心に書いていく。
 

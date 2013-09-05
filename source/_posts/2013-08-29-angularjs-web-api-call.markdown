@@ -8,8 +8,6 @@ categories: AngularJS
 
 ---
 
-## AngularJS で Web API を呼び出すコードをまとめる
-
 AngularJS で Web API を呼び出す $http などを利用するコードを、各 controller に散らして実装してしまわずに、どこかに集約しておきたいぞって場合の話。
 
 <!-- more -->
