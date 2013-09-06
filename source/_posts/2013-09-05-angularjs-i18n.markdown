@@ -20,7 +20,7 @@ AngularJS アプリケーションを国際化するには、[angular-translate]
 
 <!-- more -->
 
-# angular-translate のインストール
+## angular-translate のインストール
 
 Bower でモジュールをインストールし、JS ファイルを適当なとこに置いて HTML から参照させて、AngularJS の依存モジュールとして記述。
 ```
@@ -54,7 +54,7 @@ $ bower install angular-translate-handler-log
 var app = angular.module('myApp', ['pascalprecht.translate']);
 ```
 
-# $translateProvider の設定
+## $translateProvider の設定
 
 $translateProvider を config で設定。
 
@@ -84,7 +84,7 @@ assets/i18n/
 ```
 リソースファイルは、en や ja などの言語キーの前（prefix）と後（suffix）を指定。
 
-# リソースの記述方法
+## リソースの記述方法
 
 JSON オブジェクトとして記述。ネストもできる。
 ``` javascript assets/i18n/locale-en.json
@@ -97,7 +97,7 @@ JSON オブジェクトとして記述。ネストもできる。
 }
 ```
 
-# HTML で利用するには
+## HTML で利用するには
 
 HTML で利用する場合には、translate フィルタ、または translate ディレクティヴで。
 
@@ -110,7 +110,7 @@ HTML で利用する場合には、translate フィルタ、または translate 
 <p translate="PARAGRAPH"></p>
 ```
 
-# controller で利用するには
+## controller で利用するには
 
 controller で利用する場合には、$translate サービスで。
 
@@ -122,7 +122,7 @@ app.controller('Ctrl', ['$scope', '$translate', function ($scope, $translate) {
 }]);
 ```
 
-# 変数を使った置換
+## 変数を使った置換
 
 メッセージの一部を置き換えられる。
 
@@ -152,7 +152,7 @@ $translate('TRANSLATION_ID', $scope.translationData);
 <ANY translate="TRANSLATION_ID" translate-values="{{translationData}}"></ANY>
 ```
 
-# 言語の切り替え
+## 言語の切り替え
 
 言語を切り替える場合は、$translate の uses で。
 

@@ -8,7 +8,7 @@ categories: [AngularJS, Yeoman]
 
 ---
 
-# AngularJS のプロジェクト構成ってどうするのがいいんだ？
+## AngularJS のプロジェクト構成ってどうするのがいいんだ？
 
 AngularJS でアプリケーションを作るときに悩むのがプロジェクト構成。なんでもかんでも一つの JavaScript ファイルで実装してしまうことも可能だけれど、コード量が増えてくるとすぐにつらくなる。
 
@@ -17,7 +17,7 @@ AngularJS でアプリケーションを作るときに悩むのがプロジェ�
 <!-- more -->
 
 
-# Angular Seed
+## Angular Seed
 
 この angular-seed のプロジェクト構成はこんな感じ。
 
@@ -68,7 +68,7 @@ app
 そこで、あるべき姿、ベストプラクティスはどんな構成なんだとネットをさまよう。
 
 
-# Building Huuuuuge Apps with AngularJS
+## Building Huuuuuge Apps with AngularJS
 
 大規模な AngularJS についての記事では [Building Huuuuuge Apps with AngularJS](http://briantford.com/blog/huuuuuge-angular-apps.html) が参考になる。この記事は [Brian Ford](https://twitter.com/briantford) さんによるもの。
 
@@ -110,7 +110,7 @@ angular-seed と大きく異なるのは各機能をフォルダにしている�
 なぜ lib -> vendor、css -> styles、js -> scripts、partials -> views に変更しているのかは不明。流儀があるのかな。
 
 
-# Yeoman
+## Yeoman
 
 また、この Brian Ford さんが関わっている [Yeoman](http://yeoman.io) という Web アプリケーションのワークフローを改善するためのツール群があって、[yeoman/generator-angular](https://github.com/yeoman/generator-angular) という AngularJS 用の Yeoman ジェネレータがある。
 

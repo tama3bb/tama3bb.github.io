@@ -8,7 +8,7 @@ categories: AngularJS
 
 ---
 
-# AngularJS の ng-model、大事なのは dot があること
+## AngularJS の ng-model、大事なのは dot があること
 
 AngularJS では、モデルをどこに宣言すればいいんだってのがわかりにくい。
 
@@ -47,7 +47,7 @@ app.controller('ChildController', function($scope) {});
 ```
 
 
-# AngularJS のモデルは factory で宣言
+## AngularJS のモデルは factory で宣言
 
 さて、ちゃんとモデルを宣言したい場合はどう書けばいいのか。さきほどの例で言えば、aModel はどこでどう宣言しておくことができるのか。
 
