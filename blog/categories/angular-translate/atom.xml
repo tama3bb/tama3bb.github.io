@@ -4,7 +4,7 @@
   <title><![CDATA[Category: angular-translate | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angular-translate/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-06T18:54:20+09:00</updated>
+  <updated>2013-09-06T23:38:20+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -36,7 +36,7 @@
 <!-- more -->
 
 
-<h1>angular-translate のインストール</h1>
+<h2>angular-translate のインストール</h2>
 
 <p>Bower でモジュールをインストールし、JS ファイルを適当なとこに置いて HTML から参照させて、AngularJS の依存モジュールとして記述。
 <code>
@@ -73,7 +73,7 @@ $ bower install angular-translate-handler-log
 var app = angular.module(&lsquo;myApp&rsquo;, [&lsquo;pascalprecht.translate&rsquo;]);
 ```</p>
 
-<h1>$translateProvider の設定</h1>
+<h2>$translateProvider の設定</h2>
 
 <p>$translateProvider を config で設定。</p>
 
@@ -109,7 +109,7 @@ assets/i18n/
 </code>
 リソースファイルは、en や ja などの言語キーの前（prefix）と後（suffix）を指定。</p>
 
-<h1>リソースの記述方法</h1>
+<h2>リソースの記述方法</h2>
 
 <p>JSON オブジェクトとして記述。ネストもできる。
 ``` javascript assets/i18n/locale-en.json
@@ -125,7 +125,7 @@ assets/i18n/
 }
 ```</p>
 
-<h1>HTML で利用するには</h1>
+<h2>HTML で利用するには</h2>
 
 <p>HTML で利用する場合には、translate フィルタ、または translate ディレクティヴで。</p>
 
@@ -148,7 +148,7 @@ assets/i18n/
 
 <p>```</p>
 
-<h1>controller で利用するには</h1>
+<h2>controller で利用するには</h2>
 
 <p>controller で利用する場合には、$translate サービスで。</p>
 
@@ -160,7 +160,7 @@ app.controller('Ctrl', ['$scope', '$translate', function ($scope, $translate) {
 }]);
 </code></p>
 
-<h1>変数を使った置換</h1>
+<h2>変数を使った置換</h2>
 
 <p>メッセージの一部を置き換えられる。</p>
 
@@ -193,7 +193,7 @@ $translate('TRANSLATION_ID', $scope.translationData);
 &lt;ANY translate="TRANSLATION_ID" translate-values=""&gt;&lt;/ANY&gt;
 </code></p>
 
-<h1>言語の切り替え</h1>
+<h2>言語の切り替え</h2>
 
 <p>言語を切り替える場合は、$translate の uses で。</p>
 

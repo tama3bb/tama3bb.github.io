@@ -2,15 +2,15 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://angularjsninja.com/blog/2013/08/26/angularjs-ninja-scroll/</loc>
-        <lastmod>2013-09-05T19:57:04+09:00</lastmod>
+        <lastmod>2013-09-06T23:37:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/08/27/ngshow-nghide-ngswitch/</loc>
-        <lastmod>2013-09-05T19:56:40+09:00</lastmod>
+        <lastmod>2013-09-06T23:37:38+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/08/28/how-to-declare-models/</loc>
-        <lastmod>2013-09-05T19:56:27+09:00</lastmod>
+        <lastmod>2013-09-06T23:37:27+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/08/29/angularjs-web-api-call/</loc>
@@ -18,31 +18,31 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure/</loc>
-        <lastmod>2013-09-05T19:56:07+09:00</lastmod>
+        <lastmod>2013-09-06T23:37:16+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs/</loc>
-        <lastmod>2013-09-05T19:55:46+09:00</lastmod>
+        <lastmod>2013-09-06T23:37:06+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/01/angularfire-realtime-chat-app/</loc>
-        <lastmod>2013-09-05T19:55:24+09:00</lastmod>
+        <lastmod>2013-09-06T23:36:38+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel/</loc>
-        <lastmod>2013-09-05T19:54:58+09:00</lastmod>
+        <lastmod>2013-09-06T23:36:25+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/03/why-angularjs/</loc>
-        <lastmod>2013-09-05T19:58:02+09:00</lastmod>
+        <lastmod>2013-09-06T23:38:03+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html/</loc>
-        <lastmod>2013-09-05T19:54:10+09:00</lastmod>
+        <lastmod>2013-09-06T23:36:15+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/05/angularjs-i18n/</loc>
-        <lastmod>2013-09-05T19:49:38+09:00</lastmod>
+        <lastmod>2013-09-06T23:36:02+09:00</lastmod>
     </url>
     <url>
         <loc>
@@ -52,7 +52,7 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/archives/</loc>
-        <lastmod>2013-09-06T18:54:20+09:00</lastmod>
+        <lastmod>2013-09-06T23:38:03+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/categories/</loc>
@@ -60,7 +60,7 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/</loc>
-        <lastmod>2013-09-06T18:54:20+09:00</lastmod>
+        <lastmod>2013-09-06T23:38:03+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/robots.txt</loc>

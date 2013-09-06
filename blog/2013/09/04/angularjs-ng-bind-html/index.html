@@ -98,7 +98,7 @@
 	<h1 class="title" itemprop="name">AngularJS で HTML をエスケープさせずに出力するには</h1>
 	<div class="entry-content" itemprop="articleBody"><hr />
 
-<h1>AngularJS での出力手段</h1>
+<h2>AngularJS での出力手段</h2>
 
 <p>AngularJS で単に文字列を出力するには、<code>{{expression}}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
 
@@ -114,7 +114,7 @@
 <!-- more -->
 
 
-<h1>{{expression}} が一瞬表示されてチラつく場合の対処方法</h1>
+<h2>{{expression}} が一瞬表示されてチラつく場合の対処方法</h2>
 
 <p><code>{{expression}}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{{expression}}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
 
@@ -127,7 +127,7 @@
 
 <p>なお、<a href="http://docs.angularjs.org/api/ngRoute.directive:ngView">ng-view</a> や <a href="http://docs.angularjs.org/api/ng.directive:ngInclude">ng-include</a> で挿入される断片（partial）の HTML では、このチラつく現象は発生しないため、ng-cloak の記述は不要である。</p>
 
-<h1>HTML をエスケープさせずに出力するには</h1>
+<h2>HTML をエスケープさせずに出力するには</h2>
 
 <p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml"><code>ng-bind-html</code></a>を利用する。</p>
 
@@ -148,7 +148,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h1>サニタイズせずに出力するには</h1>
+<h2>サニタイズせずに出力するには</h2>
 
 <p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
 

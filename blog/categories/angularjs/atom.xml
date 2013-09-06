@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-06T18:54:20+09:00</updated>
+  <updated>2013-09-06T23:38:20+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -62,7 +62,7 @@ myApp.run(['$route', function($route)  {
 <!-- more -->
 
 
-<h1>angular-translate のインストール</h1>
+<h2>angular-translate のインストール</h2>
 
 <p>Bower でモジュールをインストールし、JS ファイルを適当なとこに置いて HTML から参照させて、AngularJS の依存モジュールとして記述。
 <code>
@@ -99,7 +99,7 @@ $ bower install angular-translate-handler-log
 var app = angular.module(&lsquo;myApp&rsquo;, [&lsquo;pascalprecht.translate&rsquo;]);
 ```</p>
 
-<h1>$translateProvider の設定</h1>
+<h2>$translateProvider の設定</h2>
 
 <p>$translateProvider を config で設定。</p>
 
@@ -135,7 +135,7 @@ assets/i18n/
 </code>
 リソースファイルは、en や ja などの言語キーの前（prefix）と後（suffix）を指定。</p>
 
-<h1>リソースの記述方法</h1>
+<h2>リソースの記述方法</h2>
 
 <p>JSON オブジェクトとして記述。ネストもできる。
 ``` javascript assets/i18n/locale-en.json
@@ -151,7 +151,7 @@ assets/i18n/
 }
 ```</p>
 
-<h1>HTML で利用するには</h1>
+<h2>HTML で利用するには</h2>
 
 <p>HTML で利用する場合には、translate フィルタ、または translate ディレクティヴで。</p>
 
@@ -174,7 +174,7 @@ assets/i18n/
 
 <p>```</p>
 
-<h1>controller で利用するには</h1>
+<h2>controller で利用するには</h2>
 
 <p>controller で利用する場合には、$translate サービスで。</p>
 
@@ -186,7 +186,7 @@ app.controller('Ctrl', ['$scope', '$translate', function ($scope, $translate) {
 }]);
 </code></p>
 
-<h1>変数を使った置換</h1>
+<h2>変数を使った置換</h2>
 
 <p>メッセージの一部を置き換えられる。</p>
 
@@ -219,7 +219,7 @@ $translate('TRANSLATION_ID', $scope.translationData);
 &lt;ANY translate="TRANSLATION_ID" translate-values=""&gt;&lt;/ANY&gt;
 </code></p>
 
-<h1>言語の切り替え</h1>
+<h2>言語の切り替え</h2>
 
 <p>言語を切り替える場合は、$translate の uses で。</p>
 
@@ -259,7 +259,7 @@ angular.module(&lsquo;myApp&rsquo;).controller(&lsquo;Ctrl&rsquo;, [&lsquo;$tran
     <id>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html</id>
     <content type="html"><![CDATA[<hr />
 
-<h1>AngularJS での出力手段</h1>
+<h2>AngularJS での出力手段</h2>
 
 <p>AngularJS で単に文字列を出力するには、<code>{{expression}}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
 
@@ -271,7 +271,7 @@ angular.module(&lsquo;myApp&rsquo;).controller(&lsquo;Ctrl&rsquo;, [&lsquo;$tran
 <!-- more -->
 
 
-<h1>{{expression}} が一瞬表示されてチラつく場合の対処方法</h1>
+<h2>{{expression}} が一瞬表示されてチラつく場合の対処方法</h2>
 
 <p><code>{{expression}}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{{expression}}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
 
@@ -283,7 +283,7 @@ angular.module(&lsquo;myApp&rsquo;).controller(&lsquo;Ctrl&rsquo;, [&lsquo;$tran
 
 <p>なお、<a href="http://docs.angularjs.org/api/ngRoute.directive:ngView">ng-view</a> や <a href="http://docs.angularjs.org/api/ng.directive:ngInclude">ng-include</a> で挿入される断片（partial）の HTML では、このチラつく現象は発生しないため、ng-cloak の記述は不要である。</p>
 
-<h1>HTML をエスケープさせずに出力するには</h1>
+<h2>HTML をエスケープさせずに出力するには</h2>
 
 <p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml"><code>ng-bind-html</code></a>を利用する。</p>
 
@@ -303,7 +303,7 @@ angular.module(&lsquo;myApp&rsquo;).controller(&lsquo;Ctrl&rsquo;, [&lsquo;$tran
 var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
 ```</p>
 
-<h1>サニタイズせずに出力するには</h1>
+<h2>サニタイズせずに出力するには</h2>
 
 <p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
 
@@ -327,7 +327,7 @@ var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
 <!-- more -->
 
 
-<h1>Ember.js を採用しなかった理由</h1>
+<h2>Ember.js を採用しなかった理由</h2>
 
 <p>まず Ember.js を 3 週間ほど別のプロジェクトで実装してみたところ、なんか難しかった…。ただの知識不足か実力不足かも…。</p>
 
@@ -337,7 +337,7 @@ var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
 
 <p>いや、Ember.js は悪くないです。相性の問題というか、ごめんなさい。</p>
 
-<h1>Backbone.js を採用しなかった理由</h1>
+<h2>Backbone.js を採用しなかった理由</h2>
 
 <p>次に、もともと本命に考えていた Backbone.js について。実際には AngularJS の後に評価したんだけれど、先に書く。</p>
 
@@ -347,7 +347,7 @@ var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
 
 <p>Backbone.js を不採用としたのは、評価時点で、すでに AngularJS をかなり気に入っていたことが大きい。あと、自由度が高過ぎるという印象を持ったことも大きい。Ember.js や AngularJS が実現している機能を加えることは可能なもののアドオンの選択肢が多く、ベストプラクティスと言える構成がわからずにいろいろ迷いそうだなと。</p>
 
-<h1>AngularJS を採用した理由</h1>
+<h2>AngularJS を採用した理由</h2>
 
 <p>AngularJS をなぜ気に入ったのかと言えば、簡単なことが驚くほど簡単にできるというところ。そのとっつきのよさに驚いた。他のメンバーが入るときに敷居が低そうで、知識不足や考慮不足による問題を発生させにくそうだと思えた。</p>
 
@@ -355,7 +355,7 @@ var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
 
 <p>その後すでに数か月プロトタイプで AngularJS のコードを書いてるけど、特に困難にぶち当たることもなく、AngularJS のプロジェクトへの採用は成功しそうだなと安心している。よかったよかった。</p>
 
-<h1>なぜ jQuery だけじゃダメなのか</h1>
+<h2>なぜ jQuery だけじゃダメなのか</h2>
 
 <p>ところで、jQuery だけじゃダメなのか。jQuery はクロスブラウザに対応し、コードが簡潔で可読性が高く、普及率も高い。</p>
 
@@ -363,7 +363,7 @@ var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
 
 <p>なので、Backbone.js 使いましょうというのが主流なんだと思う。</p>
 
-<h1>もしコードを比較したいなら</h1>
+<h2>もしコードを比較したいなら</h2>
 
 <p>自分の経験からも、フレームワークの選定にはいくつかのフレームワークを試用してみたほうがいいと思う。</p>
 
@@ -380,7 +380,7 @@ var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
     <id>http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel</id>
     <content type="html"><![CDATA[<hr />
 
-<h1>AngularJS 基礎</h1>
+<h2>AngularJS 基礎</h2>
 
 <p>しばらく AngularJS の基礎的なことを中心に書いていく。</p>
 

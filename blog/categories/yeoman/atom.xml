@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Yeoman | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/yeoman/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-06T18:54:20+09:00</updated>
+  <updated>2013-09-06T23:38:20+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -29,7 +29,7 @@
 <!-- more -->
 
 
-<h1>yo (Yeoman) と generator-angular をインストール</h1>
+<h2>yo (Yeoman) と generator-angular をインストール</h2>
 
 <p>まず yo (Yeoman) をインストール。</p>
 
@@ -43,7 +43,7 @@ npm install -g yo
 npm install -g generator-angular
 </code></p>
 
-<h1>AngularJS プロジェクトを生成</h1>
+<h2>AngularJS プロジェクトを生成</h2>
 
 <p>新しいディレクトリを作って、そのディレクトリに移動。</p>
 
@@ -61,7 +61,7 @@ yo angular [app-name]
 
 <p>すると、うお、そんなに？ってぐらいにターミナルが流れに流れて my-new-project ディレクトリに山ほどのサブディレクトリとファイルができている。</p>
 
-<h1>生成したプロジェクトの構成を確認</h1>
+<h2>生成したプロジェクトの構成を確認</h2>
 
 <p>とりあえずプロジェクト構成のことだけに絞って、ここでは app ディレクトリの下を確認。</p>
 
@@ -100,7 +100,7 @@ app/
 
 <p>肝心の scripts ディレクトリの下がスッカスカなので、先に進む。</p>
 
-<h1>サブジェネレータでいろいろ生成</h1>
+<h2>サブジェネレータでいろいろ生成</h2>
 
 <p><code>
 yo angular:controller myController
@@ -128,7 +128,7 @@ app/scripts/
 
 <p>```</p>
 
-<h1>プロジェクト構成のまとめ</h1>
+<h2>プロジェクト構成のまとめ</h2>
 
 <p>ということで、やっぱり controller、directive、filter、service に分けて、あとはサブディレクトリを作るなり、細かく単機能ごとにファイルを分けていくということで。</p>
 
@@ -143,7 +143,7 @@ app/scripts/
     <id>http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure</id>
     <content type="html"><![CDATA[<hr />
 
-<h1>AngularJS のプロジェクト構成ってどうするのがいいんだ？</h1>
+<h2>AngularJS のプロジェクト構成ってどうするのがいいんだ？</h2>
 
 <p>AngularJS でアプリケーションを作るときに悩むのがプロジェクト構成。なんでもかんでも一つの JavaScript ファイルで実装してしまうことも可能だけれど、コード量が増えてくるとすぐにつらくなる。</p>
 
@@ -152,7 +152,7 @@ app/scripts/
 <!-- more -->
 
 
-<h1>Angular Seed</h1>
+<h2>Angular Seed</h2>
 
 <p>この angular-seed のプロジェクト構成はこんな感じ。</p>
 
@@ -202,7 +202,7 @@ app
 
 <p>そこで、あるべき姿、ベストプラクティスはどんな構成なんだとネットをさまよう。</p>
 
-<h1>Building Huuuuuge Apps with AngularJS</h1>
+<h2>Building Huuuuuge Apps with AngularJS</h2>
 
 <p>大規模な AngularJS についての記事では <a href="http://briantford.com/blog/huuuuuge-angular-apps.html">Building Huuuuuge Apps with AngularJS</a> が参考になる。この記事は <a href="https://twitter.com/briantford">Brian Ford</a> さんによるもの。</p>
 
@@ -243,7 +243,7 @@ root-app-folder
 
 <p>なぜ lib &ndash;> vendor、css &ndash;> styles、js &ndash;> scripts、partials &ndash;> views に変更しているのかは不明。流儀があるのかな。</p>
 
-<h1>Yeoman</h1>
+<h2>Yeoman</h2>
 
 <p>また、この Brian Ford さんが関わっている <a href="http://yeoman.io">Yeoman</a> という Web アプリケーションのワークフローを改善するためのツール群があって、<a href="https://github.com/yeoman/generator-angular">yeoman/generator-angular</a> という AngularJS 用の Yeoman ジェネレータがある。</p>
 
