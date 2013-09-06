@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-05T20:01:47+09:00</updated>
+  <updated>2013-09-06T18:54:20+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[初回アクセス時やリロード時だけng-viewの部分が表示されない場合の解決方法]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/06/ngview-does-not-work-at-initial-route/"/>
+    <updated>2013-09-06T18:53:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/06/ngview-does-not-work-at-initial-route</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>ng-view で表示する部分が、初回アクセス時やリロード時だけ表示されない場合の解決方法について。</p>
+
+<p>この現象は、ng-view が ng-include の中に入っている場合に発生してしまうようで、このページの情報のおかげで解決できた。</p>
+
+<p><a href="https://github.com/angular/angular.js/issues/1213">Initial route update doesn&rsquo;t happen if ngView in a template loaded by ngInclude</a></p>
+
+<!-- more -->
+
+
+<p>コードはこれだけ。</p>
+
+<figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myApp</span><span class="p">.</span><span class="nx">run</span><span class="p">([</span><span class="s1">&#39;$route&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$route</span><span class="p">)</span>  <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$route</span><span class="p">.</span><span class="nx">reload</span><span class="p">();</span>
+</span><span class='line'><span class="p">}]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS アプリケーションを国際化するには]]></title>

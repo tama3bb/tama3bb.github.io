@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/08/26 AngularJS AngularJS Ninja の巻物 AngularJS とは AngularJS（アンギュラージェイエス）は、Google とコミュニティによって開発されているオープンソースの JavaScript フレームワークである。 &hellip;">
+	<meta name="description" content="2013/08/27 AngularJS 非表示（ng-show/ng-hide）にしてもサーバにアクセスしてる… ng-show / ng-hide のポイント ng-show / ng-hide は、HTML 要素を boolean 条件で表示・非表示を制御できる便利な directive &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,61 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-27T10:33:00+09:00" data-updated="true" itemprop="datePublished">2013/08/27</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/08/27/ngshow-nghide-ngswitch/" itemprop="url">非表示（ng-show/ng-hide）にしてもサーバにアクセスしてる…</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h1>ng-show / ng-hide のポイント</h1>
+
+<p>ng-show / ng-hide は、HTML 要素を boolean 条件で表示・非表示を制御できる便利な directive で、ほんと使える。</p>
+
+<p>例えば、サムネイルを非表示にしたいときは、ng-show（または ng-hide）に boolean 値を渡すこんなコードを書くだけ。<code>settings.imageVisible=false</code>ということ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-show=</span><span class="s">&quot;settings.imageVisible&quot;</span> <span class="na">class=</span><span class="s">&quot;img-polaroid&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;img</span> <span class="na">ng-src=</span><span class="s">&quot;assets/img/anImage.png&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでページに表示されなくなって Okay !</p>
+
+<p>なんだけど、表示されてなくても画像ファイルにはアクセスしてるようす…。これは、ng-show / ng-hide の表示制御は、CSS の<code>display: none;</code>を要素に適用しているだけだから。jQuery の<code>hide()</code>とか、Bootstrap の<code>class="hide"</code>と同じ。</p>
+
+
+		
+		<a href="/blog/2013/08/27/ngshow-nghide-ngswitch/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
