@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-06T23:38:20+09:00</updated>
+  <updated>2013-09-07T23:57:28+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,116 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS の学習リソースまとめ]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/07/learning-angularjs/"/>
+    <updated>2013-09-07T22:26:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/07/learning-angularjs</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS の学習リソースまとめ。</p>
+
+<hr />
+
+<h2><img src="http://dotinstall.com/img/topbar_logo.png" alt="ドットインストール" /></h2>
+
+<p>なにはともあれドットインストール。最強の動画学習サイト。</p>
+
+<p><a href="http://dotinstall.com/lessons/basic_angularjs">AngularJS入門 (全12回) &ndash; プログラミングならドットインストール</a></p>
+
+<p>動画学習でオススメなのは、動画の再生速度を 1.5 倍速か 2 倍速にすること。時は金なり。</p>
+
+<p>ドットインストールは初心者向けの内容なので、今後は中級者向けの動画も提供されていくことを期待！</p>
+
+<!-- more -->
+
+
+<hr />
+
+<h2>Qiita</h2>
+
+<p><a href="http://qiita.com/tags/angularjs/items">AngularJS&rsquo;s new posts &ndash; Qiita</a></p>
+
+<p>情報たくさんあって活気ある Qiita。私も Qiita で情報発信したほうがたくさんの人に見てもらえただろうな…。</p>
+
+<hr />
+
+<h2><img src="https://raw.github.com/angular/angular.js/master/images/logo/AngularJS.exports/AngularJS-small.png" alt="AngularJS 公式サイト" /></h2>
+
+<p><a href="http://angularjs.org/">AngularJS — Superheroic JavaScript MVW Framework</a></p>
+
+<p>AngularJS 公式サイト。トップページだけでなく、Tutorial、Developer Guide、API Reference と見どころ満載。API Reference は頻繁に訪れることに。</p>
+
+<hr />
+
+<h2><img src="http://www.youtube.com/yt/brand/media/image/yt-brand-standard-logo-95x40.png" alt="Youtube" /></h2>
+
+<p><a href="http://www.youtube.com/user/angularjs">AngularJS &ndash; YouTube</a></p>
+
+<p>AngularJS の YouTube チャンネル。プログラミング系の学習は動画とホント相性がいい。最初のうちはとにかく動画から吸収しよう。</p>
+
+<hr />
+
+<h2><img src="http://d3gqmx6sr7od7s.cloudfront.net/assets/logo-1f7bbe07d5a965bf3720a02869dc7e95.svg" alt="egghead.io" /></h2>
+
+<p><a href="http://www.egghead.io/">AngularJS: Awesome Tutorial Videos, Workshops, and Training &ndash; @eggheadio</a></p>
+
+<p>AngularJS の動画学習サイトで、質が高い。AngularJS のキモと言える Directive について詳しく説明している。</p>
+
+<hr />
+
+<h2><img src="http://upload.wikimedia.org/wikipedia/en/9/95/Stack_Overflow_website_logo.png" alt="Stack Overflow" /></h2>
+
+<p><a href="http://stackoverflow.com/questions/tagged/angularjs">Highest Voted &lsquo;angularjs&rsquo; Questions &ndash; Stack Overflow</a></p>
+
+<p>Stack Overflow はホントすごいサイト。このサイトのお陰で自分の仕事が成立していると言っても過言ではないと思う。</p>
+
+<hr />
+
+<h2>洋書</h2>
+
+<p>『<a href="http://shop.oreilly.com/product/0636920028055.do">AngularJS</a>』by Brad Green, Shyam Seshadri &ndash; April 2013</p>
+
+<p>『<a href="http://www.packtpub.com/angularjs-web-application-development/book">Mastering Web Application Development with AngularJS</a>』by Peter Bacon Darwin, Pawel Kozlowski &ndash; August 2013</p>
+
+<p>『<a href="http://www.manning.com/bford/">AngularJS in Action</a>』by Brian Ford, Lukas Ruebbelke &ndash; January 2014</p>
+
+<p>とりあえずこの 3 冊。後発だけあって、後の 2 冊のほうが内容充実。AngularJS in Action は未完の書籍で、Early Access Edition で全 13 章のうち 5 章まで読める（2013年9月7日現在）。</p>
+
+<hr />
+
+<h2>AngularJS-Learning</h2>
+
+<p><a href="https://github.com/jmcunningham/AngularJS-Learning">jmcunningham/AngularJS-Learning</a></p>
+
+<p>AngularJS 学習系リソースまとめページ。リンク多過ぎて始めにここ見るとしんどくなるけど、きちんと分類されてる。</p>
+
+<hr />
+
+<h2><img src="https://f.cloud.github.com/assets/72919/381606/fffdd290-a5e2-11e2-8099-e1b5d8286da3.jpg" alt="GitHub" /></h2>
+
+<p><a href="https://github.com/search?q=angular">Search · angular</a></p>
+
+<p>GitHub で実践的に。ここで angular で検索し、Star がたくさん付いてるもののコードを眺めていく。</p>
+
+<hr />
+
+<h2>Twitter</h2>
+
+<p><a href="https://twitter.com/angularjs">@angularjs</a></p>
+
+<p>AngularJS の情報がリツイートされてくるので、AngularJS 情報を日常的に取りたいときにはフォロー。</p>
+
+<hr />
+
+<h2>AngularJS Ninja</h2>
+
+<p><a href="http://angularjsninja.com/">AngularJS Ninja</a></p>
+
+<p>地道にコツコツと AngularJS の情報を発信していくでござる。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[初回アクセス時やリロード時だけng-viewの部分が表示されない場合の解決方法]]></title>
@@ -370,88 +480,6 @@ var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
 <p>そのとっかかりとして、同じ機能をそれぞれのフレームワークで実装している例 <a href="http://todomvc.com">TodoMVC</a> がある。ここで各フレームワークのコードを見れるので、雰囲気をつかんでみるといいかも。</p>
 
 <p>私のオススメはもちろん、AngularJS ということで。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS 基礎の基礎]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel/"/>
-    <updated>2013-09-02T16:39:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS 基礎</h2>
-
-<p>しばらく AngularJS の基礎的なことを中心に書いていく。</p>
-
-<p>AngularJS の基礎として、まず <a href="http://angularjs.org/#the-basics">AngularJS のページ</a> で一番初めにあるコードから、AngularJS に関する部分を簡単に。</p>
-
-<!-- more -->
-
-
-<hr />
-
-<div ng-app>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  <label>Name:</label>
-  <input type="text" ng-model="yourName" placeholder="Enter a name here">
-  <hr>
-  <h1>Hello {{yourName}}!</h1>
-</div>
-
-
-<hr />
-
-<p>``` html index.html
-&lt;!doctype html>
-<html ng-app>
-  <head></p>
-
-<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>  </head>
-  <body></p>
-
-<pre><code>&lt;div&gt;
-  &lt;label&gt;Name:&lt;/label&gt;
-  &lt;input type="text" ng-model="yourName" placeholder="Enter a name here"&gt;
-  &lt;hr&gt;
-  &lt;h1&gt;Hello {{yourName}}!&lt;/h1&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p>  </body>
-</html>
-```</p>
-
-<ul>
-<li><p><a href="http://docs.angularjs.org/api/ng.directive:ngApp"><code>ng-app</code></a></p>
-
-<ul>
-<li>AngularJS が動作する範囲を指定。</li>
-<li>ページ全体とする場合は<code>&lt;html ng-app&gt;</code>とし、<code>&lt;head&gt;</code>を対象外とするなら<code>&lt;body ng-app&gt;</code>とする。</li>
-<li>より限定的に、<code>&lt;div ng-app&gt;</code>でも構わない。</li>
-</ul>
-</li>
-<li><p><a href="http://docs.angularjs.org/api/ng.directive:ngModel"><code>ng-model</code></a></p>
-
-<ul>
-<li>フォームとモデルをリンクし、どちらかでの変更を他方に反映する。</li>
-<li>この例の場合はテキストボックスへの入力値が即座に yourName プロパティに反映される。</li>
-</ul>
-</li>
-<li><p><code>{{yourName}}</code></p>
-
-<ul>
-<li>yourName プロパティの値を HTML に表示するコード。</li>
-<li>yourName プロパティの変更が即座に反映される。</li>
-</ul>
-</li>
-</ul>
-
-
-<p>この例は、<a href="http://jsfiddle.net/api/post/library/pure/">jsFiddle</a> でコードを編集して試すことができる。</p>
 ]]></content>
   </entry>
   
