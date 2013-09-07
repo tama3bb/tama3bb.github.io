@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-07T23:57:28+09:00</updated>
+  <updated>2013-09-08T00:01:58+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -16,13 +16,9 @@
   <entry>
     <title type="html"><![CDATA[AngularJS の学習リソースまとめ]]></title>
     <link href="http://angularjsninja.com/blog/2013/09/07/learning-angularjs/"/>
-    <updated>2013-09-07T22:26:00+09:00</updated>
+    <updated>2013-09-07T23:58:00+09:00</updated>
     <id>http://angularjsninja.com/blog/2013/09/07/learning-angularjs</id>
     <content type="html"><![CDATA[<hr />
-
-<p>AngularJS の学習リソースまとめ。</p>
-
-<hr />
 
 <h2><img src="http://dotinstall.com/img/topbar_logo.png" alt="ドットインストール" /></h2>
 
@@ -99,7 +95,7 @@
 
 <hr />
 
-<h2><img src="https://f.cloud.github.com/assets/72919/381606/fffdd290-a5e2-11e2-8099-e1b5d8286da3.jpg" alt="GitHub" /></h2>
+<h2>GitHub</h2>
 
 <p><a href="https://github.com/search?q=angular">Search · angular</a></p>
 
