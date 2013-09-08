@@ -1,0 +1,58 @@
+---
+layout: post
+title: "AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end"
+date: 2013-09-08 20:33
+comments: true
+categories: AngularJS
+---
+
+---
+
+AngularJS 1.2 で追加された新しい directive の`ng-repeat-start`と`ng-repeat-end`を紹介。
+
+通常の[`ng-repeat`](http://docs.angularjs.org/api/ng.directive:ngRepeat)では実現しにくかった複数の要素にまたがった繰り返しが可能になる。
+
+<!-- more -->
+
+## ul / ol
+
+コードを見るほうがわかりやすいので、まずは通常の`ng-repeat`で`<li>`を繰り返すコード例から。
+
+``` html
+<ul>
+  <li ng-repeat="user in users">user.name</li>
+</ul>
+```
+
+## dl
+
+次は`<dl>`の例。このケースでは`ng-repeat-start`と`ng-repeat-end`を使う。
+
+``` html
+<dl>
+  <dt ng-repeat-start="user in users">user.name</li>
+  <dd ng-repeat-end>user.description</li>
+</dl>
+```
+
+`<dl>`は特殊で、`<dt>`と`<dd>`が交互に並び`<dl>`で囲まれない。そのため、ng-repeat ではうまく指定できなかった。`<dl>`に対して ng-repeat を指定すると`<dl>`ごと繰り返されてしまう。
+
+`ng-repeat-start`と`ng-repeat-end`を利用すると、`<dt><dd><dt><dd>`のように、`<dt>`と`<dd>`がセットで繰り返される。
+
+## table
+
+また、以下のテーブルのコード例のように、2 行分を繰り返すような場合にも`ng-repeat-start`と`ng-repeat-end`を利用するとうまくいく。
+
+``` html
+<table>
+  <tbody>
+    <tr ng-repeat-start="user in users">
+      <td>user.name</td>
+      <td>user.sex</td>
+    </tr>
+    <tr ng-repeat-end>
+      <td colspan="2">user.description</td>
+    </tr>
+  </tbody>
+</table>
+```
