@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-08T00:02:29+09:00</updated>
+  <updated>2013-09-08T21:14:53+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/"/>
+    <updated>2013-09-08T20:33:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS 1.2 で追加された新しい directive の<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を紹介。</p>
+
+<p>通常の<a href="http://docs.angularjs.org/api/ng.directive:ngRepeat"><code>ng-repeat</code></a>では実現しにくかった複数の要素にまたがった繰り返しが可能になる。</p>
+
+<!-- more -->
+
+
+<h2>ul / ol</h2>
+
+<p>コードを見るほうがわかりやすいので、まずは通常の<code>ng-repeat</code>で<code>&lt;li&gt;</code>を繰り返すコード例から。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">&quot;user in users&quot;</span><span class="nt">&gt;</span>user.name<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>dl</h2>
+
+<p>次は<code>&lt;dl&gt;</code>の例。このケースでは<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を使う。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;dl&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;dt</span> <span class="na">ng-repeat-start=</span><span class="s">&quot;user in users&quot;</span><span class="nt">&gt;</span>user.name<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;dd</span> <span class="na">ng-repeat-end</span><span class="nt">&gt;</span>user.description<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dl&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>&lt;dl&gt;</code>は特殊で、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>が交互に並び<code>&lt;dl&gt;</code>で囲まれない。そのため、ng-repeat ではうまく指定できなかった。<code>&lt;dl&gt;</code>に対して ng-repeat を指定すると<code>&lt;dl&gt;</code>ごと繰り返されてしまう。</p>
+
+<p><code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用すると、<code>&lt;dt&gt;&lt;dd&gt;&lt;dt&gt;&lt;dd&gt;</code>のように、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>がセットで繰り返される。</p>
+
+<h2>table</h2>
+
+<p>また、以下のテーブルのコード例のように、2 行分を繰り返すような場合にも<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用するとうまくいく。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;table&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;tbody&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;tr</span> <span class="na">ng-repeat-start=</span><span class="s">&quot;user in users&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>user.name<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>user.sex<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;tr</span> <span class="na">ng-repeat-end</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>user.description<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/tbody&gt;</span>
+</span><span class='line'><span class="nt">&lt;/table&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS の学習リソースまとめ]]></title>

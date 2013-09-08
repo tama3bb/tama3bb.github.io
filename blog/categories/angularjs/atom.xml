@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-08T00:02:29+09:00</updated>
+  <updated>2013-09-08T21:14:53+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/"/>
+    <updated>2013-09-08T20:33:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS 1.2 で追加された新しい directive の<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を紹介。</p>
+
+<p>通常の<a href="http://docs.angularjs.org/api/ng.directive:ngRepeat"><code>ng-repeat</code></a>では実現しにくかった複数の要素にまたがった繰り返しが可能になる。</p>
+
+<!-- more -->
+
+
+<h2>ul / ol</h2>
+
+<p>コードを見るほうがわかりやすいので、まずは通常の<code>ng-repeat</code>で<code>&lt;li&gt;</code>を繰り返すコード例から。</p>
+
+<p>``` html</p>
+
+<ul>
+  <li ng-repeat="user in users">user.name</li>
+</ul>
+
+
+<p>```</p>
+
+<h2>dl</h2>
+
+<p>次は<code>&lt;dl&gt;</code>の例。このケースでは<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を使う。</p>
+
+<p>``` html</p>
+
+<dl>
+  <dt ng-repeat-start="user in users">user.name</li>
+  <dd ng-repeat-end>user.description</li>
+</dl>
+
+
+<p>```</p>
+
+<p><code>&lt;dl&gt;</code>は特殊で、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>が交互に並び<code>&lt;dl&gt;</code>で囲まれない。そのため、ng-repeat ではうまく指定できなかった。<code>&lt;dl&gt;</code>に対して ng-repeat を指定すると<code>&lt;dl&gt;</code>ごと繰り返されてしまう。</p>
+
+<p><code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用すると、<code>&lt;dt&gt;&lt;dd&gt;&lt;dt&gt;&lt;dd&gt;</code>のように、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>がセットで繰り返される。</p>
+
+<h2>table</h2>
+
+<p>また、以下のテーブルのコード例のように、2 行分を繰り返すような場合にも<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用するとうまくいく。</p>
+
+<p>``` html</p>
+
+<table>
+  <tbody>
+    <tr ng-repeat-start="user in users">
+      <td>user.name</td>
+      <td>user.sex</td>
+    </tr>
+    <tr ng-repeat-end>
+      <td colspan="2">user.description</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS の学習リソースまとめ]]></title>
@@ -414,68 +482,6 @@ var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
 <p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
 
 <p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく<code>ng-bind-html-unsafe</code>を利用できる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[なぜ AngularJS を採用したのか]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/03/why-angularjs/"/>
-    <updated>2013-09-03T18:15:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/03/why-angularjs</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>今回は、AngularJS を採用した理由について軽くまとめておく。</p>
-
-<p>JavaScript MVC 系のフレームワーク導入を検討することにし、もっとも普及している <a href="http://backbonejs.org">Backbone.js</a> と、双方向データバインドなど高機能な <a href="http://emberjs.com">Ember.js</a> および <a href="http://angularjs.org">AngularJS</a> を検討した。</p>
-
-<p>それぞれのフレームワークを順に 3 週間ほどずつ学習・実装してみた結果、AngularJS を採用した。</p>
-
-<!-- more -->
-
-
-<h2>Ember.js を採用しなかった理由</h2>
-
-<p>まず Ember.js を 3 週間ほど別のプロジェクトで実装してみたところ、なんか難しかった…。ただの知識不足か実力不足かも…。</p>
-
-<p>Ember.js の GUIDES ページや API ページをひととおり目を通し、Ember.js の書籍・動画・ブログなどでざっと学習したものの、簡単なところはともかく、ちょっと複雑なことをしようとすると、どう実装したらいいのかわからない…。jQuery でならとっくに終わってるぞ、と…。</p>
-
-<p>そして挫折…。</p>
-
-<p>いや、Ember.js は悪くないです。相性の問題というか、ごめんなさい。</p>
-
-<h2>Backbone.js を採用しなかった理由</h2>
-
-<p>次に、もともと本命に考えていた Backbone.js について。実際には AngularJS の後に評価したんだけれど、先に書く。</p>
-
-<p>本命と考えていた理由は、普及度と、jQuery を使い慣れていた自分が最もすんなり入れるかなと考えていたから。MVC を明確に分離して記述することになってコードの見通しがよくなる。ただ、コード量は減るというより少し増える印象。</p>
-
-<p>Backbone.js については、<a href="http://underscorejs.org">Underscore.js</a> と併せて公式ページ・書籍・動画・ブログなどでざっと学習。ついでに <a href="http://marionettejs.com">Marionette.js</a> についても軽く学習。</p>
-
-<p>Backbone.js を不採用としたのは、評価時点で、すでに AngularJS をかなり気に入っていたことが大きい。あと、自由度が高過ぎるという印象を持ったことも大きい。Ember.js や AngularJS が実現している機能を加えることは可能なもののアドオンの選択肢が多く、ベストプラクティスと言える構成がわからずにいろいろ迷いそうだなと。</p>
-
-<h2>AngularJS を採用した理由</h2>
-
-<p>AngularJS をなぜ気に入ったのかと言えば、簡単なことが驚くほど簡単にできるというところ。そのとっつきのよさに驚いた。他のメンバーが入るときに敷居が低そうで、知識不足や考慮不足による問題を発生させにくそうだと思えた。</p>
-
-<p>もちろん独自の directive を書くのは簡単ではないし、初めのころはモデルをどう宣言するのかや、HTML テンプレートをどう記述すればいいのかさえわからない始末だった。けれど、難しいところは一部のメンバーがわかってればいいので、ちょうどいいなと。</p>
-
-<p>その後すでに数か月プロトタイプで AngularJS のコードを書いてるけど、特に困難にぶち当たることもなく、AngularJS のプロジェクトへの採用は成功しそうだなと安心している。よかったよかった。</p>
-
-<h2>なぜ jQuery だけじゃダメなのか</h2>
-
-<p>ところで、jQuery だけじゃダメなのか。jQuery はクロスブラウザに対応し、コードが簡潔で可読性が高く、普及率も高い。</p>
-
-<p>ただし、DOM（HTML の構造ツリー）操作が主用途で、ある程度の規模でシングルページアプリケーションを制作する場合には、コード量が多くなり、どのタグにどんなイベントが付いているのか複雑でわかりにくくなりやすい。</p>
-
-<p>なので、Backbone.js 使いましょうというのが主流なんだと思う。</p>
-
-<h2>もしコードを比較したいなら</h2>
-
-<p>自分の経験からも、フレームワークの選定にはいくつかのフレームワークを試用してみたほうがいいと思う。</p>
-
-<p>そのとっかかりとして、同じ機能をそれぞれのフレームワークで実装している例 <a href="http://todomvc.com">TodoMVC</a> がある。ここで各フレームワークのコードを見れるので、雰囲気をつかんでみるといいかも。</p>
-
-<p>私のオススメはもちろん、AngularJS ということで。</p>
 ]]></content>
   </entry>
   
