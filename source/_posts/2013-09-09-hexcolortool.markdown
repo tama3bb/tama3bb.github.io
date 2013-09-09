@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Hex Color Tool"
+title: "Hex Color Tool で明度だけを変えたヘックスコードを取得する"
 date: 2013-09-09 23:34
 comments: true
 categories: UI
@@ -14,8 +14,10 @@ categories: UI
 
 <!-- more -->
 
-なお、#ffffff（白色）を 5% ずつ暗くすると、#f2f2f2, #e6e6e6, #d9d9d9, #cccccc となり、[Twitter Bootstrap](http://getbootstrap.com/) の CSS でも頻繁に指定されている薄いグレー色の値となる。
+白色の #ffffff を 5% ずつ暗くすると、#f2f2f2, #e6e6e6, #d9d9d9, #cccccc となり、[Twitter Bootstrap](http://getbootstrap.com/) の CSS でも頻繁に指定されている薄いグレー色の値となる。
 
 このツールを使って得たヘックスコードをグラデーションなどに利用して、統一感の取れたカラーデザインのページを実現しよう。
 
-AngularJS と直接関係しない内容だけれど、今後は UI デザインのことも書いていこ。
+え？ LESS や Sass を使えばいいって？ 実はあんまり好きじゃないんですよね…。
+
+てことで、今回は AngularJS と直接関係ない内容。UI デザインに関したこともちょくちょく書いてくということで。
