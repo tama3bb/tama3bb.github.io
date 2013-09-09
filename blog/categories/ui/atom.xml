@@ -4,7 +4,7 @@
   <title><![CDATA[Category: UI | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/ui/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-09T23:34:24+09:00</updated>
+  <updated>2013-09-09T23:37:24+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hex Color Tool]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/09/angularjs-context-path/"/>
-    <updated>2013-09-09T23:04:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/09/angularjs-context-path</id>
+    <link href="http://angularjsninja.com/blog/2013/09/09/hexcolortool/"/>
+    <updated>2013-09-09T23:34:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/09/hexcolortool</id>
     <content type="html"><![CDATA[<hr />
 
 <p><img src="http://hexcolortool.com/images/logo.svg" alt="Hex Color Tool" /></p>
