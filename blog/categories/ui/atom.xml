@@ -4,7 +4,7 @@
   <title><![CDATA[Category: UI | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/ui/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-09T23:37:24+09:00</updated>
+  <updated>2013-09-09T23:47:52+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Hex Color Tool]]></title>
+    <title type="html"><![CDATA[Hex Color Tool で明度だけを変えたヘックスコードを取得する]]></title>
     <link href="http://angularjsninja.com/blog/2013/09/09/hexcolortool/"/>
     <updated>2013-09-09T23:34:00+09:00</updated>
     <id>http://angularjsninja.com/blog/2013/09/09/hexcolortool</id>
@@ -27,11 +27,13 @@
 <!-- more -->
 
 
-<p>なお、#ffffff（白色）を 5% ずつ暗くすると、#f2f2f2, #e6e6e6, #d9d9d9, #cccccc となり、<a href="http://getbootstrap.com/">Twitter Bootstrap</a> の CSS でも頻繁に指定されている薄いグレー色の値となる。</p>
+<p>白色の #ffffff を 5% ずつ暗くすると、#f2f2f2, #e6e6e6, #d9d9d9, #cccccc となり、<a href="http://getbootstrap.com/">Twitter Bootstrap</a> の CSS でも頻繁に指定されている薄いグレー色の値となる。</p>
 
 <p>このツールを使って得たヘックスコードをグラデーションなどに利用して、統一感の取れたカラーデザインのページを実現しよう。</p>
 
-<p>AngularJS と直接関係しない内容だけれど、今後は UI デザインのことも書いていこ。</p>
+<p>え？ LESS や Sass を使えばいいって？ 実はあんまり好きじゃないんですよね…。</p>
+
+<p>てことで、今回は AngularJS と直接関係ない内容。UI デザインに関したこともちょくちょく書いてくということで。</p>
 ]]></content>
   </entry>
   
