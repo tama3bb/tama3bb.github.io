@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-08T21:14:53+09:00</updated>
+  <updated>2013-09-09T23:34:24+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Hex Color Tool]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/09/angularjs-context-path/"/>
+    <updated>2013-09-09T23:04:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/09/angularjs-context-path</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://hexcolortool.com/images/logo.svg" alt="Hex Color Tool" /></p>
+
+<p>ベースカラーを少し明るくした色や、少し暗くした色が欲しくても、ヘックスコードがわかんないってときには、<a href="http://hexcolortool.com/">Hex Color Tool</a> を使おう。ベースカラーを 5% 刻みで明るく、または暗くした値を表示させることができる。</p>
+
+<!-- more -->
+
+
+<p>なお、#ffffff（白色）を 5% ずつ暗くすると、#f2f2f2, #e6e6e6, #d9d9d9, #cccccc となり、<a href="http://getbootstrap.com/">Twitter Bootstrap</a> の CSS でも頻繁に指定されている薄いグレー色の値となる。</p>
+
+<p>このツールを使って得たヘックスコードをグラデーションなどに利用して、統一感の取れたカラーデザインのページを実現しよう。</p>
+
+<p>AngularJS と直接関係しない内容だけれど、今後は UI デザインのことも書いていこ。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end]]></title>
