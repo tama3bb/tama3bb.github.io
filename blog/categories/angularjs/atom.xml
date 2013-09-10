@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-09T23:47:52+09:00</updated>
+  <updated>2013-09-10T14:14:07+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS のステッカーをゲットするには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/10/angularjs-stickers/"/>
+    <updated>2013-09-10T13:52:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/10/angularjs-stickers</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://ih0.redbubble.net/image.13710650.1031/sticker,375x360.u8.png" alt="AngularJS ×2 by csyz ★ $1.49 stickers" /></p>
+
+<p>AngularJS が好きで好きでしょうがない？</p>
+
+<p>ステッカーを MacBook Air に貼って、AngularJS Ninja っぷりをアピールしたい？</p>
+
+<p>よくイベントとかで配ってたりするけど、AngularJS のイベントなんてやってない？</p>
+
+<p>そんなときは買っちゃおう！</p>
+
+<!-- more -->
+
+
+<h2>Redbubble</h2>
+
+<p><a href="http://www.redbubble.com/people/csyz/portfolio">csyz ★ $1.49 stickers: Art, Design &amp; Photography | Redbubble</a></p>
+
+<p>ステッカーだけでなくＴシャツもあるし、AngularJS だけでなく Node.js や Backbone.js など他にもいろいろある！</p>
+
+<p>ちなみに私の MacBook Air には、白いリンゴマークしか付けてませんけどね。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end]]></title>
@@ -423,65 +453,6 @@ angular.module(&lsquo;myApp&rsquo;).controller(&lsquo;Ctrl&rsquo;, [&lsquo;$tran
 </code></p>
 
 <p>たいへん便利な国際化モジュール、angular-translate の紹介でした。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS で HTML をエスケープさせずに出力するには]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html/"/>
-    <updated>2013-09-04T16:49:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS での出力手段</h2>
-
-<p>AngularJS で単に文字列を出力するには、<code>{{expression}}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
-
-<p><code>html
-&lt;span&gt;{{ninja.name}}&lt;/span&gt;
-&lt;span ng-bind="ninja.name"&gt;&lt;/span&gt;
-</code></p>
-
-<!-- more -->
-
-
-<h2>{{expression}} が一瞬表示されてチラつく場合の対処方法</h2>
-
-<p><code>{{expression}}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{{expression}}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
-
-<p>この問題に対しては、<code>ng-bind</code>を利用するか、<a href="http://docs.angularjs.org/api/ng.directive:ngCloak"><code>ng-cloak</code></a>を以下のように利用することで解決できる。</p>
-
-<p><code>html
-&lt;span ng-cloak&gt;{{ninja.name}}&lt;/span&gt;
-</code></p>
-
-<p>なお、<a href="http://docs.angularjs.org/api/ngRoute.directive:ngView">ng-view</a> や <a href="http://docs.angularjs.org/api/ng.directive:ngInclude">ng-include</a> で挿入される断片（partial）の HTML では、このチラつく現象は発生しないため、ng-cloak の記述は不要である。</p>
-
-<h2>HTML をエスケープさせずに出力するには</h2>
-
-<p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml"><code>ng-bind-html</code></a>を利用する。</p>
-
-<p><code>html
-&lt;span ng-bind-html="ninja.htmlContent"&gt;&lt;/span&gt;
-</code></p>
-
-<p>この<code>ng-bind-html</code>は、別のモジュール（ngSanitize）に分かれているため、angular-sanitize.min.js を index.html で参照し、依存するモジュールとして記述する必要がある。</p>
-
-<p>``` html index.html</p>
-
-<script src="assets/lib/angular-1.1.5/angular-sanitize.min.js"></script>
-
-
-<p><code>
-</code> javascript app.js
-var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
-```</p>
-
-<h2>サニタイズせずに出力するには</h2>
-
-<p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
-
-<p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく<code>ng-bind-html-unsafe</code>を利用できる。</p>
 ]]></content>
   </entry>
   

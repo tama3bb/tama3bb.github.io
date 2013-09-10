@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-09T23:47:52+09:00</updated>
+  <updated>2013-09-10T14:14:07+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS のステッカーをゲットするには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/10/angularjs-stickers/"/>
+    <updated>2013-09-10T13:52:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/10/angularjs-stickers</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://ih0.redbubble.net/image.13710650.1031/sticker,375x360.u8.png" alt="AngularJS ×2 by csyz ★ $1.49 stickers" /></p>
+
+<p>AngularJS が好きで好きでしょうがない？</p>
+
+<p>ステッカーを MacBook Air に貼って、AngularJS Ninja っぷりをアピールしたい？</p>
+
+<p>よくイベントとかで配ってたりするけど、AngularJS のイベントなんてやってない？</p>
+
+<p>そんなときは買っちゃおう！</p>
+
+<!-- more -->
+
+
+<h2>Redbubble</h2>
+
+<p><a href="http://www.redbubble.com/people/csyz/portfolio">csyz ★ $1.49 stickers: Art, Design &amp; Photography | Redbubble</a></p>
+
+<p>ステッカーだけでなくＴシャツもあるし、AngularJS だけでなく Node.js や Backbone.js など他にもいろいろある！</p>
+
+<p>ちなみに私の MacBook Air には、白いリンゴマークしか付けてませんけどね。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hex Color Tool で明度だけを変えたヘックスコードを取得する]]></title>
