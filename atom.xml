@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-10T14:14:07+09:00</updated>
+  <updated>2013-09-11T23:58:12+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -14,9 +14,121 @@
 
   
   <entry>
+    <title type="html"><![CDATA[AngularJS を古い IE に対応させるには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/11/angularjs-ie-compatibility/"/>
+    <updated>2013-09-11T23:58:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/11/angularjs-ie-compatibility</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS を IE 8 以前の Internet Explorer に対応させるには、<a href="http://docs.angularjs.org/guide/ie">AngularJS: Internet Explorer Compatibility</a> のページに記載されている手順を実施する必要がある。</p>
+
+<!-- more -->
+
+
+<p>まず json2.js または json3.js。</p>
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">xmlns:ng=</span><span class="s">&quot;http://angularjs.org&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!--[if lte IE 8]&gt;</span>
+</span><span class='line'><span class="c">      &lt;script src=&quot;/path/to/json2.js&quot;&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="c">    &lt;![endif]--&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    ...
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次に &ldquo;ng-app&rdquo; という値の id 属性を、ng-app 属性を記述する要素に追加。</p>
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">xmlns:ng=</span><span class="s">&quot;http://angularjs.org&quot;</span> <span class="na">id=</span><span class="s">&quot;ng-app&quot;</span> <span class="na">ng-app=</span><span class="s">&quot;optionalModuleName&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  ...
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後に、カスタムタグを使わないようにする。</p>
+
+<p>または、&lt;ng-view> や 独自のカスタムタグ（例えば <alert> や <tabset> など）を使うのであれば、そのためのコード（document.createElement）を追加。</p>
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">xmlns:ng=</span><span class="s">&quot;http://angularjs.org&quot;</span> <span class="na">id=</span><span class="s">&quot;ng-app&quot;</span> <span class="na">ng-app=</span><span class="s">&quot;optionalModuleName&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!--[if lte IE 8]&gt;</span>
+</span><span class='line'><span class="c">      &lt;script&gt;</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng-include&#39;);</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng-pluralize&#39;);</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng-view&#39;);</span>
+</span><span class='line'><span class="c"> </span>
+</span><span class='line'><span class="c">        // Optionally these for CSS</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng:include&#39;);</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng:pluralize&#39;);</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng:view&#39;);</span>
+</span><span class='line'><span class="c">      &lt;/script&gt;</span>
+</span><span class='line'><span class="c">    &lt;![endif]--&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    ...
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>それだけで済まない場合も</h2>
+
+<p>最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かない。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$http</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="err">…</span><span class="p">)</span> <span class="c1">// エラー</span>
+</span><span class='line'><span class="nx">$http</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">]</span> <span class="c1">// これで OK</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[AngularJS のステッカーをゲットするには]]></title>
     <link href="http://angularjsninja.com/blog/2013/09/10/angularjs-stickers/"/>
-    <updated>2013-09-10T13:52:00+09:00</updated>
+    <updated>2013-09-10T14:14:00+09:00</updated>
     <id>http://angularjsninja.com/blog/2013/09/10/angularjs-stickers</id>
     <content type="html"><![CDATA[<hr />
 
