@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-11T23:58:12+09:00</updated>
+  <updated>2013-09-12T10:37:56+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -91,11 +91,11 @@
 
 <h2>それだけで済まない場合も</h2>
 
-<p>最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かない。</p>
+<p>最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かないので、delete メソッドを以下のように変更。</p>
 
 <p><code>javascript
 $http.delete(…) // エラー
-$http['delete'] // これで OK
+$http['delete'](…) // これで OK
 </code></p>
 ]]></content>
   </entry>
