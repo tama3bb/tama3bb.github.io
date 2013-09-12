@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-12T23:58:13+09:00</updated>
+  <updated>2013-09-13T00:02:00+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -25,17 +25,17 @@
 <!-- more -->
 
 
+<h2>公式ページ</h2>
 
+<p><a href="http://www.ng-conf.org/">ng-conf 2014 &ndash; The World&rsquo;s First Angular Conference in Salt Lake City, Utah</a></p>
 
-<dl>
-<dt>公式ページ</dt>
-<dd>[ng-conf 2014 - The World&#8217;s First Angular Conference in Salt Lake City, Utah](http://www.ng-conf.org/)</dd>
-<dt>Eventbrite</dt>
-<dd>[ng-conf 2014 Tickets, Salt Lake City - Eventbrite](http://ng-conf-slc-2014.eventbrite.com)</dd>
-<dt>Google+</dt>
-<dd>[ng-conf - Google+](https://plus.google.com/101125427377197999853/posts)</dd>
-</dl>
+<h2>Eventbrite</h2>
 
+<p><a href="http://ng-conf-slc-2014.eventbrite.com">ng-conf 2014 Tickets, Salt Lake City &ndash; Eventbrite</a></p>
+
+<h4>Google+</h4>
+
+<p><a href="https://plus.google.com/101125427377197999853/posts">ng-conf &ndash; Google+</a></p>
 
 <p>Eventbrite の情報では、開催前日の 1 月 15 日に Jon Lindquist さんにより、6 時間のトレーニングを受けられるみたい。Jon Lindquist さんは、AngularJS の学習動画で有名な <a href="http://egghead.io">Egghead.io</a> の人。</p>
 
