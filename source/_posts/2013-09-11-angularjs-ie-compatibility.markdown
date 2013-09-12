@@ -69,5 +69,5 @@ AngularJS を IE 8 以前の Internet Explorer に対応させるには、[Angul
 
 ``` javascript
 $http.delete(…) // エラー
-$http['delete'](...) // これで OK
+$http['delete'](…) // これで OK
 ```
