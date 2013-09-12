@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-12T10:37:56+09:00</updated>
+  <updated>2013-09-12T23:58:13+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS カンファレンス『ng-conf』が年始に開催]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/"/>
+    <updated>2013-09-12T23:31:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/12/ng-conf-2014</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。</p>
+
+<!-- more -->
+
+
+
+
+<dl>
+<dt>公式ページ</dt>
+<dd>[ng-conf 2014 - The World's First Angular Conference in Salt Lake City, Utah](http://www.ng-conf.org/)</dd>
+<dt>Eventbrite</dt>
+<dd>[ng-conf 2014 Tickets, Salt Lake City - Eventbrite](http://ng-conf-slc-2014.eventbrite.com)</dd>
+<dt>Google+</dt>
+<dd>[ng-conf - Google+](https://plus.google.com/101125427377197999853/posts)</dd>
+</dl>
+
+
+<p>Eventbrite の情報では、開催前日の 1 月 15 日に Jon Lindquist さんにより、6 時間のトレーニングを受けられるみたい。Jon Lindquist さんは、AngularJS の学習動画で有名な <a href="http://egghead.io">Egghead.io</a> の人。</p>
+
+<p>2 日間で $600.00 + $27.95、トレーニングを含む 3 日間で $1,000.00 + $39.95。いつもながら、アメリカのカンファレンスってほんと高い。まあ、AngularJS のおかげで稼がせてもらってるようなもんですから、こういうときにお返ししましょうね。</p>
+
+<p>Google+ での情報によると、$600 ドルは Early Bird Ticket Sales、つまり早割で安くなっていて、正規の金額は 2 日間で $800 の様子。</p>
+
+<p>さあ、みんなで行こうじゃありませんかー！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS を古い IE に対応させるには]]></title>
@@ -301,32 +335,6 @@ $http['delete'](…) // これで OK
 <p><a href="http://angularjsninja.com/">AngularJS Ninja</a></p>
 
 <p>地道にコツコツと AngularJS の情報を発信していくでござる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[初回アクセス時やリロード時だけng-viewの部分が表示されない場合の解決方法]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/06/ngview-does-not-work-at-initial-route/"/>
-    <updated>2013-09-06T18:53:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/06/ngview-does-not-work-at-initial-route</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>ng-view で表示する部分が、初回アクセス時やリロード時だけ表示されない場合の解決方法について。</p>
-
-<p>この現象は、ng-view が ng-include の中に入っている場合に発生してしまうようで、このページの情報のおかげで解決できた。</p>
-
-<p><a href="https://github.com/angular/angular.js/issues/1213">Initial route update doesn&rsquo;t happen if ngView in a template loaded by ngInclude</a></p>
-
-<!-- more -->
-
-
-<p>コードはこれだけ。</p>
-
-<p><code>javascript app.js
-myApp.run(['$route', function($route)  {
-  $route.reload();
-}]);
-</code></p>
 ]]></content>
   </entry>
   

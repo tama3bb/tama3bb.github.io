@@ -190,12 +190,12 @@
 
 <h2>それだけで済まない場合も</h2>
 
-<p>最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かない。</p>
+<p>最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かないので、delete メソッドを以下のように変更。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$http</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="err">…</span><span class="p">)</span> <span class="c1">// エラー</span>
-</span><span class='line'><span class="nx">$http</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">]</span> <span class="c1">// これで OK</span>
+</span><span class='line'><span class="nx">$http</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">](</span><span class="err">…</span><span class="p">)</span> <span class="c1">// これで OK</span>
 </span></code></pre></td></tr></table></div></figure>
 
 </div>

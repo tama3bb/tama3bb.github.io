@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-11T23:58:12+09:00</updated>
+  <updated>2013-09-12T23:58:13+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS カンファレンス『ng-conf』が年始に開催]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/"/>
+    <updated>2013-09-12T23:31:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/12/ng-conf-2014</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。</p>
+
+<!-- more -->
+
+
+
+
+<dl>
+<dt>公式ページ</dt>
+<dd>[ng-conf 2014 - The World&#8217;s First Angular Conference in Salt Lake City, Utah](http://www.ng-conf.org/)</dd>
+<dt>Eventbrite</dt>
+<dd>[ng-conf 2014 Tickets, Salt Lake City - Eventbrite](http://ng-conf-slc-2014.eventbrite.com)</dd>
+<dt>Google+</dt>
+<dd>[ng-conf - Google+](https://plus.google.com/101125427377197999853/posts)</dd>
+</dl>
+
+
+<p>Eventbrite の情報では、開催前日の 1 月 15 日に Jon Lindquist さんにより、6 時間のトレーニングを受けられるみたい。Jon Lindquist さんは、AngularJS の学習動画で有名な <a href="http://egghead.io">Egghead.io</a> の人。</p>
+
+<p>2 日間で $600.00 + $27.95、トレーニングを含む 3 日間で $1,000.00 + $39.95。いつもながら、アメリカのカンファレンスってほんと高い。まあ、AngularJS のおかげで稼がせてもらってるようなもんですから、こういうときにお返ししましょうね。</p>
+
+<p>Google+ での情報によると、$600 ドルは Early Bird Ticket Sales、つまり早割で安くなっていて、正規の金額は 2 日間で $800 の様子。</p>
+
+<p>さあ、みんなで行こうじゃありませんかー！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS を古い IE に対応させるには]]></title>
@@ -114,12 +148,12 @@
 
 <h2>それだけで済まない場合も</h2>
 
-<p>最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かない。</p>
+<p>最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かないので、delete メソッドを以下のように変更。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$http</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="err">…</span><span class="p">)</span> <span class="c1">// エラー</span>
-</span><span class='line'><span class="nx">$http</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">]</span> <span class="c1">// これで OK</span>
+</span><span class='line'><span class="nx">$http</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">](</span><span class="err">…</span><span class="p">)</span> <span class="c1">// これで OK</span>
 </span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
