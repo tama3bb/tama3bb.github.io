@@ -1,0 +1,32 @@
+---
+layout: post
+title: "AngularJS カンファレンス『ng-conf』が年始に開催"
+date: 2013-09-12 23:31
+comments: true
+categories: AngularJS
+---
+
+---
+
+![ng-conf](http://www.ng-conf.org/images/ng-conf.svg)
+
+AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。
+
+<!-- more -->
+
+#### 公式ページ
+[ng-conf 2014 - The World's First Angular Conference in Salt Lake City, Utah](http://www.ng-conf.org/)
+
+#### Eventbrite
+[ng-conf 2014 Tickets, Salt Lake City - Eventbrite](http://ng-conf-slc-2014.eventbrite.com)
+
+#### Google+
+[ng-conf - Google+](https://plus.google.com/101125427377197999853/posts)
+
+Eventbrite の情報では、開催前日の 1 月 15 日に Jon Lindquist さんにより、6 時間のトレーニングを受けられるみたい。Jon Lindquist さんは、AngularJS の学習動画で有名な [Egghead.io](http://egghead.io) の人。
+
+2 日間で $600.00 + $27.95、トレーニングを含む 3 日間で $1,000.00 + $39.95。いつもながら、アメリカのカンファレンスってほんと高い。まあ、AngularJS のおかげで稼がせてもらってるようなもんですから、こういうときにお返ししましょうね。
+
+Google+ での情報によると、$600 ドルは Early Bird Ticket Sales、つまり早割で安くなっていて、正規の金額は 2 日間で $800 の様子。
+
+さあ、みんなで行こうじゃありませんかー！
