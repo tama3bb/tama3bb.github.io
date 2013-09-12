@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2013-09-13T00:05:50+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS カンファレンス『ng-conf』が年始に開催]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/"/>
+    <updated>2013-09-12T23:31:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/12/ng-conf-2014</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。</p>
+
+<!-- more -->
+
+
+<h4>公式ページ</h4>
+
+<p><a href="http://www.ng-conf.org/">ng-conf 2014 &ndash; The World&rsquo;s First Angular Conference in Salt Lake City, Utah</a></p>
+
+<h4>Eventbrite</h4>
+
+<p><a href="http://ng-conf-slc-2014.eventbrite.com">ng-conf 2014 Tickets, Salt Lake City &ndash; Eventbrite</a></p>
+
+<h4>Google+</h4>
+
+<p><a href="https://plus.google.com/101125427377197999853/posts">ng-conf &ndash; Google+</a></p>
+
+<p>Eventbrite の情報では、開催前日の 1 月 15 日に Jon Lindquist さんにより、6 時間のトレーニングを受けられるみたい。Jon Lindquist さんは、AngularJS の学習動画で有名な <a href="http://egghead.io">Egghead.io</a> の人。</p>
+
+<p>2 日間で $600.00 + $27.95、トレーニングを含む 3 日間で $1,000.00 + $39.95。いつもながら、アメリカのカンファレンスってほんと高い。まあ、AngularJS のおかげで稼がせてもらってるようなもんですから、こういうときにお返ししましょうね。</p>
+
+<p>Google+ での情報によると、$600 ドルは Early Bird Ticket Sales、つまり早割で安くなっていて、正規の金額は 2 日間で $800 の様子。</p>
+
+<p>さあ、みんなで行こうじゃありませんかー！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS を古い IE に対応させるには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/11/angularjs-ie-compatibility/"/>
+    <updated>2013-09-11T23:58:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/11/angularjs-ie-compatibility</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS を IE 8 以前の Internet Explorer に対応させるには、<a href="http://docs.angularjs.org/guide/ie">AngularJS: Internet Explorer Compatibility</a> のページに記載されている手順を実施する必要がある。</p>
+
+<!-- more -->
+
+
+<p>まず json2.js または json3.js。</p>
+
+<p>``` html index.html
+&lt;!doctype html>
+<html xmlns:ng="http://angularjs.org">
+  <head></p>
+
+<pre><code>&lt;!--[if lte IE 8]&gt;
+  &lt;script src="http://angularjsninja.com/path/to/json2.js"&gt;&lt;/script&gt;
+&lt;![endif]--&gt;
+</code></pre>
+
+<p>  </head>
+  <body></p>
+
+<pre><code>...
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>次に &ldquo;ng-app&rdquo; という値の id 属性を、ng-app 属性を記述する要素に追加。</p>
+
+<p><code>html index.html
+&lt;!doctype html&gt;
+&lt;html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="optionalModuleName"&gt;
+  ...
+&lt;/html&gt;
+</code></p>
+
+<p>最後に、カスタムタグを使わないようにする。</p>
+
+<p>または、&lt;ng-view> や 独自のカスタムタグ（例えば <alert> や <tabset> など）を使うのであれば、そのためのコード（document.createElement）を追加。</p>
+
+<p>``` html index.html
+&lt;!doctype html>
+<html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="optionalModuleName">
+  <head></p>
+
+<pre><code>&lt;!--[if lte IE 8]&gt;
+  &lt;script&gt;
+    document.createElement('ng-include');
+    document.createElement('ng-pluralize');
+    document.createElement('ng-view');
+
+    // Optionally these for CSS
+    document.createElement('ng:include');
+    document.createElement('ng:pluralize');
+    document.createElement('ng:view');
+  &lt;/script&gt;
+&lt;![endif]--&gt;
+</code></pre>
+
+<p>  </head>
+  <body></p>
+
+<pre><code>...
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<h2>それだけで済まない場合も</h2>
+
+<p>最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かないので、delete メソッドを以下のように変更。</p>
+
+<p><code>javascript
+$http.delete(…) // エラー
+$http['delete'](…) // これで OK
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS のステッカーをゲットするには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/10/angularjs-stickers/"/>
+    <updated>2013-09-10T14:14:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/10/angularjs-stickers</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://ih0.redbubble.net/image.13710650.1031/sticker,375x360.u8.png" alt="AngularJS ×2 by csyz ★ $1.49 stickers" /></p>
+
+<p>AngularJS が好きで好きでしょうがない？</p>
+
+<p>ステッカーを MacBook Air に貼って、AngularJS Ninja っぷりをアピールしたい？</p>
+
+<p>よくイベントとかで配ってたりするけど、AngularJS のイベントなんてやってない？</p>
+
+<p>そんなときは買っちゃおう！</p>
+
+<!-- more -->
+
+
+<h2>Redbubble</h2>
+
+<p><a href="http://www.redbubble.com/people/csyz/portfolio">csyz ★ $1.49 stickers: Art, Design &amp; Photography | Redbubble</a></p>
+
+<p>ステッカーだけでなくＴシャツもあるし、AngularJS だけでなく Node.js や Backbone.js など他にもいろいろある！</p>
+
+<p>ちなみに私の MacBook Air には、白いリンゴマークしか付けてませんけどね。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/"/>
+    <updated>2013-09-08T20:33:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS 1.2 で追加された新しい directive の<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を紹介。</p>
+
+<p>通常の<a href="http://docs.angularjs.org/api/ng.directive:ngRepeat"><code>ng-repeat</code></a>では実現しにくかった複数の要素にまたがった繰り返しが可能になる。</p>
+
+<!-- more -->
+
+
+<h2>ul / ol</h2>
+
+<p>コードを見るほうがわかりやすいので、まずは通常の<code>ng-repeat</code>で<code>&lt;li&gt;</code>を繰り返すコード例から。</p>
+
+<p>``` html</p>
+
+<ul>
+  <li ng-repeat="user in users">user.name</li>
+</ul>
+
+
+<p>```</p>
+
+<h2>dl</h2>
+
+<p>次は<code>&lt;dl&gt;</code>の例。このケースでは<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を使う。</p>
+
+<p>``` html</p>
+
+<dl>
+  <dt ng-repeat-start="user in users">user.name</li>
+  <dd ng-repeat-end>user.description</li>
+</dl>
+
+
+<p>```</p>
+
+<p><code>&lt;dl&gt;</code>は特殊で、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>が交互に並び<code>&lt;dl&gt;</code>で囲まれない。そのため、ng-repeat ではうまく指定できなかった。<code>&lt;dl&gt;</code>に対して ng-repeat を指定すると<code>&lt;dl&gt;</code>ごと繰り返されてしまう。</p>
+
+<p><code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用すると、<code>&lt;dt&gt;&lt;dd&gt;&lt;dt&gt;&lt;dd&gt;</code>のように、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>がセットで繰り返される。</p>
+
+<h2>table</h2>
+
+<p>また、以下のテーブルのコード例のように、2 行分を繰り返すような場合にも<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用するとうまくいく。</p>
+
+<p>``` html</p>
+
+<table>
+  <tbody>
+    <tr ng-repeat-start="user in users">
+      <td>user.name</td>
+      <td>user.sex</td>
+    </tr>
+    <tr ng-repeat-end>
+      <td colspan="2">user.description</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS の学習リソースまとめ]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/07/learning-angularjs/"/>
+    <updated>2013-09-07T23:58:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/07/learning-angularjs</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2><img src="http://dotinstall.com/img/topbar_logo.png" alt="ドットインストール" /></h2>
+
+<p>なにはともあれドットインストール。最強の動画学習サイト。</p>
+
+<p><a href="http://dotinstall.com/lessons/basic_angularjs">AngularJS入門 (全12回) &ndash; プログラミングならドットインストール</a></p>
+
+<p>動画学習でオススメなのは、動画の再生速度を 1.5 倍速か 2 倍速にすること。時は金なり。</p>
+
+<p>ドットインストールは初心者向けの内容なので、今後は中級者向けの動画も提供されていくことを期待！</p>
+
+<!-- more -->
+
+
+<hr />
+
+<h2>Qiita</h2>
+
+<p><a href="http://qiita.com/tags/angularjs/items">AngularJS&rsquo;s new posts &ndash; Qiita</a></p>
+
+<p>情報たくさんあって活気ある Qiita。私も Qiita で情報発信したほうがたくさんの人に見てもらえただろうな…。</p>
+
+<hr />
+
+<h2><img src="https://raw.github.com/angular/angular.js/master/images/logo/AngularJS.exports/AngularJS-small.png" alt="AngularJS 公式サイト" /></h2>
+
+<p><a href="http://angularjs.org/">AngularJS — Superheroic JavaScript MVW Framework</a></p>
+
+<p>AngularJS 公式サイト。トップページだけでなく、Tutorial、Developer Guide、API Reference と見どころ満載。API Reference は頻繁に訪れることに。</p>
+
+<hr />
+
+<h2><img src="http://www.youtube.com/yt/brand/media/image/yt-brand-standard-logo-95x40.png" alt="Youtube" /></h2>
+
+<p><a href="http://www.youtube.com/user/angularjs">AngularJS &ndash; YouTube</a></p>
+
+<p>AngularJS の YouTube チャンネル。プログラミング系の学習は動画とホント相性がいい。最初のうちはとにかく動画から吸収しよう。</p>
+
+<hr />
+
+<h2><img src="http://d3gqmx6sr7od7s.cloudfront.net/assets/logo-1f7bbe07d5a965bf3720a02869dc7e95.svg" alt="egghead.io" /></h2>
+
+<p><a href="http://www.egghead.io/">AngularJS: Awesome Tutorial Videos, Workshops, and Training &ndash; @eggheadio</a></p>
+
+<p>AngularJS の動画学習サイトで、質が高い。AngularJS のキモと言える Directive について詳しく説明している。</p>
+
+<hr />
+
+<h2><img src="http://upload.wikimedia.org/wikipedia/en/9/95/Stack_Overflow_website_logo.png" alt="Stack Overflow" /></h2>
+
+<p><a href="http://stackoverflow.com/questions/tagged/angularjs">Highest Voted &lsquo;angularjs&rsquo; Questions &ndash; Stack Overflow</a></p>
+
+<p>Stack Overflow はホントすごいサイト。このサイトのお陰で自分の仕事が成立していると言っても過言ではないと思う。</p>
+
+<hr />
+
+<h2>洋書</h2>
+
+<p>『<a href="http://shop.oreilly.com/product/0636920028055.do">AngularJS</a>』by Brad Green, Shyam Seshadri &ndash; April 2013</p>
+
+<p>『<a href="http://www.packtpub.com/angularjs-web-application-development/book">Mastering Web Application Development with AngularJS</a>』by Peter Bacon Darwin, Pawel Kozlowski &ndash; August 2013</p>
+
+<p>『<a href="http://www.manning.com/bford/">AngularJS in Action</a>』by Brian Ford, Lukas Ruebbelke &ndash; January 2014</p>
+
+<p>とりあえずこの 3 冊。後発だけあって、後の 2 冊のほうが内容充実。AngularJS in Action は未完の書籍で、Early Access Edition で全 13 章のうち 5 章まで読める（2013年9月7日現在）。</p>
+
+<hr />
+
+<h2>AngularJS-Learning</h2>
+
+<p><a href="https://github.com/jmcunningham/AngularJS-Learning">jmcunningham/AngularJS-Learning</a></p>
+
+<p>AngularJS 学習系リソースまとめページ。リンク多過ぎて始めにここ見るとしんどくなるけど、きちんと分類されてる。</p>
+
+<hr />
+
+<h2>GitHub</h2>
+
+<p><a href="https://github.com/search?q=angular">Search · angular</a></p>
+
+<p>GitHub で実践的に。ここで angular で検索し、Star がたくさん付いてるもののコードを眺めていく。</p>
+
+<hr />
+
+<h2>Twitter</h2>
+
+<p><a href="https://twitter.com/angularjs">@angularjs</a></p>
+
+<p>AngularJS の情報がリツイートされてくるので、AngularJS 情報を日常的に取りたいときにはフォロー。</p>
+
+<hr />
+
+<h2>AngularJS Ninja</h2>
+
+<p><a href="http://angularjsninja.com/">AngularJS Ninja</a></p>
+
+<p>地道にコツコツと AngularJS の情報を発信していくでござる。</p>
+]]></content>
+  </entry>
+  
+</feed>

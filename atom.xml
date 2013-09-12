@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-13T00:02:00+09:00</updated>
+  <updated>2013-09-13T00:05:50+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -25,11 +25,11 @@
 <!-- more -->
 
 
-<h2>公式ページ</h2>
+<h4>公式ページ</h4>
 
 <p><a href="http://www.ng-conf.org/">ng-conf 2014 &ndash; The World&rsquo;s First Angular Conference in Salt Lake City, Utah</a></p>
 
-<h2>Eventbrite</h2>
+<h4>Eventbrite</h4>
 
 <p><a href="http://ng-conf-slc-2014.eventbrite.com">ng-conf 2014 Tickets, Salt Lake City &ndash; Eventbrite</a></p>
 
