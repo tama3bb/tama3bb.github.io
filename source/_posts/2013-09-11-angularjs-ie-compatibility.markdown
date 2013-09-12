@@ -65,7 +65,7 @@ AngularJS を IE 8 以前の Internet Explorer に対応させるには、[Angul
 ```
 ## それだけで済まない場合も
 
-最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かない。
+最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かないので、delete メソッドを以下のように変更。
 
 ``` javascript
 $http.delete(…) // エラー
