@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-18T20:01:32+09:00</updated>
+  <updated>2013-09-18T20:06:51+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -52,7 +52,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>$store</code>を使う。デフォルト値やキーを変更可能。</p>
+<p><code>storage</code>を使う。デフォルト値やキーを変更可能。</p>
 
 <figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

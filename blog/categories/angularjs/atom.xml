@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-18T20:01:32+09:00</updated>
+  <updated>2013-09-18T20:06:51+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -50,7 +50,7 @@ var yourApp = angular.module('yourApp', [..., 'angularLocalStorage']
 yourApp.controller('yourController', function($scope, storage) {
 </code></p>
 
-<p><code>$store</code>を使う。デフォルト値やキーを変更可能。</p>
+<p><code>storage</code>を使う。デフォルト値やキーを変更可能。</p>
 
 <p>``` javascript controllers.js
 // storage.variable にバインド
