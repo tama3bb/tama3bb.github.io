@@ -10,7 +10,7 @@ categories: AngularJS
 
 AngularJS アプリケーションで localStorage を使うときに便利なモジュールの紹介。
 
-[agrublev/Angular-localStorage](https://github.com/agrublev/Angular-localStorage)
+[agrublev/angularLocalStorage](https://github.com/agrublev/angularLocalStorage)
 
 <!-- more -->
 
@@ -25,24 +25,24 @@ AngularJS アプリケーションで localStorage を使うときに便利な�
 依存モジュールとして`localStorage`を追加。
 
 ``` javascript app.js
-var yourApp = angular.module('yourApp', [..., 'localStorage']
+var yourApp = angular.module('yourApp', [..., 'angularLocalStorage']
 ```
 
-controller に`$store`を記述。
+controller に`storage`を記述。
 
 ``` javascript controllers.js
-yourApp.controller('yourController', function($scope, $store) {
+yourApp.controller('yourController', function($scope, storage) {
 ```
 
-`$store`を使う。
+`$store`を使う。デフォルト値やキーを変更可能。
 
 ``` javascript controllers.js
-// $scope.variable にバインド
-$store.bind($scope,'varName');
+// storage.variable にバインド
+storage.bind($scope,'varName');
 
 // * defaultValue: デフォルト値
 // * storeName: 変数名と異なる localStorage への保存 key を指定
-$store.bind($scope, 'varName', {defaultValue: 'randomValue123', storeName: 'customStoreKey'});
+storage.bind($scope, 'varName', {defaultValue: 'randomValue123', storeName: 'customStoreKey'});
 ```
 
-とにかく便利。
+これだけ。とにかく便利。
