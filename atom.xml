@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-13T23:56:08+09:00</updated>
+  <updated>2013-09-18T20:01:32+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[AngularJS の localStorage モジュール Angular-localStorage]]></title>
+    <title type="html"><![CDATA[AngularJS の localStorage モジュール angularLocalStorage]]></title>
     <link href="http://angularjsninja.com/blog/2013/09/13/angular-localstorage/"/>
     <updated>2013-09-13T23:38:00+09:00</updated>
     <id>http://angularjsninja.com/blog/2013/09/13/angular-localstorage</id>
@@ -22,7 +22,7 @@
 
 <p>AngularJS アプリケーションで localStorage を使うときに便利なモジュールの紹介。</p>
 
-<p><a href="https://github.com/agrublev/Angular-localStorage">agrublev/Angular-localStorage</a></p>
+<p><a href="https://github.com/agrublev/angularLocalStorage">agrublev/angularLocalStorage</a></p>
 
 <!-- more -->
 
@@ -41,18 +41,18 @@
 <p>依存モジュールとして<code>localStorage</code>を追加。</p>
 
 <figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">yourApp</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;yourApp&#39;</span><span class="p">,</span> <span class="p">[...,</span> <span class="s1">&#39;localStorage&#39;</span><span class="p">]</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">yourApp</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;yourApp&#39;</span><span class="p">,</span> <span class="p">[...,</span> <span class="s1">&#39;angularLocalStorage&#39;</span><span class="p">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>controller に<code>$store</code>を記述。</p>
+<p>controller に<code>storage</code>を記述。</p>
 
 <figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">yourApp</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;yourController&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$store</span><span class="p">)</span> <span class="p">{</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">yourApp</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;yourController&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">storage</span><span class="p">)</span> <span class="p">{</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>$store</code>を使う。</p>
+<p><code>$store</code>を使う。デフォルト値やキーを変更可能。</p>
 
 <figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -60,16 +60,16 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// $scope.variable にバインド</span>
-</span><span class='line'><span class="nx">$store</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span><span class="s1">&#39;varName&#39;</span><span class="p">);</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// storage.variable にバインド</span>
+</span><span class='line'><span class="nx">storage</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span><span class="s1">&#39;varName&#39;</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// * defaultValue: デフォルト値</span>
 </span><span class='line'><span class="c1">// * storeName: 変数名と異なる localStorage への保存 key を指定</span>
-</span><span class='line'><span class="nx">$store</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="s1">&#39;varName&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">defaultValue</span><span class="o">:</span> <span class="s1">&#39;randomValue123&#39;</span><span class="p">,</span> <span class="nx">storeName</span><span class="o">:</span> <span class="s1">&#39;customStoreKey&#39;</span><span class="p">});</span>
+</span><span class='line'><span class="nx">storage</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="s1">&#39;varName&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">defaultValue</span><span class="o">:</span> <span class="s1">&#39;randomValue123&#39;</span><span class="p">,</span> <span class="nx">storeName</span><span class="o">:</span> <span class="s1">&#39;customStoreKey&#39;</span><span class="p">});</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>とにかく便利。</p>
+<p>これだけ。とにかく便利。</p>
 ]]></content>
   </entry>
   
