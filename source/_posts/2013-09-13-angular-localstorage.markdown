@@ -34,7 +34,7 @@ controller に`storage`を記述。
 yourApp.controller('yourController', function($scope, storage) {
 ```
 
-`$store`を使う。デフォルト値やキーを変更可能。
+`storage`を使う。デフォルト値やキーを変更可能。
 
 ``` javascript controllers.js
 // storage.variable にバインド
