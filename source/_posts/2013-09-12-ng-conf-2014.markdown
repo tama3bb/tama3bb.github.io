@@ -8,7 +8,7 @@ categories: AngularJS
 
 ---
 
-![ng-conf](http://www.ng-conf.org/images/ng-conf.svg)
+![ng-conf](http://lh5.googleusercontent.com/proxy/wsYUaddAvIcNhXYf0kt63gkDYp_VzQ2-JwB-jUlPzAazYg53ibQF8JdCn2SNwI9ZucozuoJDrhvT54sOHfX44Jiq_v0FvlzDIsQc-4s-q-mnJdx_y6nDHx-VmA=w120-h120)
 
 AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。
 
