@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-18T20:06:51+09:00</updated>
+  <updated>2013-09-25T23:07:41+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -72,7 +72,7 @@ storage.bind($scope, &lsquo;varName&rsquo;, {defaultValue: &lsquo;randomValue123
     <id>http://angularjsninja.com/blog/2013/09/12/ng-conf-2014</id>
     <content type="html"><![CDATA[<hr />
 
-<p><img src="http://www.ng-conf.org/images/ng-conf.svg" alt="ng-conf" /></p>
+<p><img src="http://lh5.googleusercontent.com/proxy/wsYUaddAvIcNhXYf0kt63gkDYp_VzQ2-JwB-jUlPzAazYg53ibQF8JdCn2SNwI9ZucozuoJDrhvT54sOHfX44Jiq_v0FvlzDIsQc-4s-q-mnJdx_y6nDHx-VmA=w120-h120" alt="ng-conf" /></p>
 
 <p>AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。</p>
 

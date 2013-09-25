@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-18T20:06:51+09:00</updated>
+  <updated>2013-09-25T23:07:41+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Twitter Bootstrap のモーダルをドラッグで動かしたいときは]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/"/>
+    <updated>2013-09-25T21:57:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>みんな大好き <a href="http://getbootstrap.com/2.3.2/">Twitter Bootstrap</a> の話。CSS フレームワークの枠を超え、フロントエンド開発のキングというか、デファクトですね。</p>
+
+<p>数年前のプロジェクトで <a href="http://www.blueprintcss.org">Blueprint</a> をチョイスした自分がバカみたいに、その後の Bootstrap の大流行。<a href="http://getbootstrap.com">Bootstrap 3</a> も引き続き人気を博するだろうか。</p>
+
+<p>そんな Bootstrap なんだけど、不満があるとすれば、モーダル（<a href="http://getbootstrap.com/2.3.2/javascript.html#modals">Modals</a>）を動かせないこと！ モーダルダイアログがなんでドラッグで動かないんだ！</p>
+
+<!-- more -->
+
+
+<h2>困ったときはググるでしょ</h2>
+
+<p>てことで、<code>bootstrap modal drag</code>とかでググればアッサリ答えにありつける。いつもながら Stack Overflow はすごいなあ、助かるなあと感謝しながらおもむろにページを開く。</p>
+
+<p><a href="http://stackoverflow.com/questions/12591597/twitter-bootstrap-modal-form-how-to-drag-and-drop">Twitter Bootstrap Modal Form: How to drag and drop? &ndash; Stack Overflow</a></p>
+
+<p>答えとしては、<a href="http://jqueryui.com/">jQuery UI</a> の <a href="http://jqueryui.com/draggable/">Draggable</a> を使えということ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#myModal&quot;</span><span class="p">).</span><span class="nx">draggable</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">handle</span><span class="o">:</span> <span class="s2">&quot;.modal-header&quot;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そんだけー。</p>
+
+<p>jQuery UI 全体のコードはいらないだろうから、そんなときは Draggable だけ選択してダウンロードしましょう。</p>
+
+<h2>UI Bootstrap と AngularStrap</h2>
+
+<p>ちょっと脱線して、AngularJS のことも。</p>
+
+<p>AngularJS と Bootstrap を併用するときは <a href="http://angular-ui.github.io/bootstrap/">UI Bootstrap</a> か、<a href="http://mgcrea.github.io/angular-strap/">AngularStrap</a> を使うと、Bootstrap のコンポーネントが AngularJS の directive として定義されているのでとてもラク。自分で記述するコードがすごく少なくなって快適。</p>
+
+<p>ただ、この UI Bootstrap と AngularStrap は、それぞれいいとこも微妙なとこもあるので両方を使いたいと欲張っちゃうこともある。すると今回のメインである Modal でエラーが…。</p>
+
+<p>Modal に限れば UI Bootstrap のほうが優れてるので、AngularStrap の $modal directive コードを削除しちゃいましょう。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS の localStorage モジュール angularLocalStorage]]></title>
@@ -80,7 +129,7 @@
     <id>http://angularjsninja.com/blog/2013/09/12/ng-conf-2014</id>
     <content type="html"><![CDATA[<hr />
 
-<p><img src="http://www.ng-conf.org/images/ng-conf.svg" alt="ng-conf" /></p>
+<p><img src="http://lh5.googleusercontent.com/proxy/wsYUaddAvIcNhXYf0kt63gkDYp_VzQ2-JwB-jUlPzAazYg53ibQF8JdCn2SNwI9ZucozuoJDrhvT54sOHfX44Jiq_v0FvlzDIsQc-4s-q-mnJdx_y6nDHx-VmA=w120-h120" alt="ng-conf" /></p>
 
 <p>AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。</p>
 

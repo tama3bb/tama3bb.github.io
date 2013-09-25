@@ -5,11 +5,11 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>AngularJS カンファレンス『ng-conf』が年始に開催 - AngularJS Ninja</title>
+	<title>Twitter Bootstrap のモーダルをドラッグで動かしたいときは - AngularJS Ninja</title>
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="AngularJS カンファレンス『ng-conf』が年始に開催 AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。 公式ページ ng-conf 2014 &ndash; The World&rsquo;s &hellip;">
+	<meta name="description" content="Twitter Bootstrap のモーダルをドラッグで動かしたいときは みんな大好き Twitter Bootstrap の話。CSS フレームワークの枠を超え、フロントエンド開発のキングというか、デファクトですね。 数年前のプロジェクトで Blueprint &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
 
 	<link href="/atom.xml" rel="alternate" title="AngularJS Ninja" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/">
+	<link rel="canonical" href="http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -93,35 +93,48 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">AngularJS カンファレンス『ng-conf』が年始に開催</h1>
+	<h1 class="title" itemprop="name">Twitter Bootstrap のモーダルをドラッグで動かしたいときは</h1>
 	<div class="entry-content" itemprop="articleBody"><hr />
 
-<p><img src="http://lh5.googleusercontent.com/proxy/wsYUaddAvIcNhXYf0kt63gkDYp_VzQ2-JwB-jUlPzAazYg53ibQF8JdCn2SNwI9ZucozuoJDrhvT54sOHfX44Jiq_v0FvlzDIsQc-4s-q-mnJdx_y6nDHx-VmA=w120-h120" alt="ng-conf" /></p>
+<p>みんな大好き <a href="http://getbootstrap.com/2.3.2/">Twitter Bootstrap</a> の話。CSS フレームワークの枠を超え、フロントエンド開発のキングというか、デファクトですね。</p>
 
-<p>AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。</p>
+<p>数年前のプロジェクトで <a href="http://www.blueprintcss.org">Blueprint</a> をチョイスした自分がバカみたいに、その後の Bootstrap の大流行。<a href="http://getbootstrap.com">Bootstrap 3</a> も引き続き人気を博するだろうか。</p>
+
+<p>そんな Bootstrap なんだけど、不満があるとすれば、モーダル（<a href="http://getbootstrap.com/2.3.2/javascript.html#modals">Modals</a>）を動かせないこと！ モーダルダイアログがなんでドラッグで動かないんだ！</p>
 
 <!-- more -->
 
 
-<h4>公式ページ</h4>
+<h2>困ったときはググるでしょ</h2>
 
-<p><a href="http://www.ng-conf.org/">ng-conf 2014 &ndash; The World&rsquo;s First Angular Conference in Salt Lake City, Utah</a></p>
+<p>てことで、<code>bootstrap modal drag</code>とかでググればアッサリ答えにありつける。いつもながら Stack Overflow はすごいなあ、助かるなあと感謝しながらおもむろにページを開く。</p>
 
-<h4>Eventbrite</h4>
+<p><a href="http://stackoverflow.com/questions/12591597/twitter-bootstrap-modal-form-how-to-drag-and-drop">Twitter Bootstrap Modal Form: How to drag and drop? &ndash; Stack Overflow</a></p>
 
-<p><a href="http://ng-conf-slc-2014.eventbrite.com">ng-conf 2014 Tickets, Salt Lake City &ndash; Eventbrite</a></p>
+<p>答えとしては、<a href="http://jqueryui.com/">jQuery UI</a> の <a href="http://jqueryui.com/draggable/">Draggable</a> を使えということ。</p>
 
-<h4>Google+</h4>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#myModal&quot;</span><span class="p">).</span><span class="nx">draggable</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">handle</span><span class="o">:</span> <span class="s2">&quot;.modal-header&quot;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p><a href="https://plus.google.com/101125427377197999853/posts">ng-conf &ndash; Google+</a></p>
 
-<p>Eventbrite の情報では、開催前日の 1 月 15 日に Jon Lindquist さんにより、6 時間のトレーニングを受けられるみたい。Jon Lindquist さんは、AngularJS の学習動画で有名な <a href="http://egghead.io">Egghead.io</a> の人。</p>
+<p>そんだけー。</p>
 
-<p>2 日間で $600.00 + $27.95、トレーニングを含む 3 日間で $1,000.00 + $39.95。いつもながら、アメリカのカンファレンスってほんと高い。まあ、AngularJS のおかげで稼がせてもらってるようなもんですから、こういうときにお返ししましょうね。</p>
+<p>jQuery UI 全体のコードはいらないだろうから、そんなときは Draggable だけ選択してダウンロードしましょう。</p>
 
-<p>Google+ での情報によると、$600 ドルは Early Bird Ticket Sales、つまり早割で安くなっていて、正規の金額は 2 日間で $800 の様子。</p>
+<h2>UI Bootstrap と AngularStrap</h2>
 
-<p>さあ、みんなで行こうじゃありませんかー！</p>
+<p>ちょっと脱線して、AngularJS のことも。</p>
+
+<p>AngularJS と Bootstrap を併用するときは <a href="http://angular-ui.github.io/bootstrap/">UI Bootstrap</a> か、<a href="http://mgcrea.github.io/angular-strap/">AngularStrap</a> を使うと、Bootstrap のコンポーネントが AngularJS の directive として定義されているのでとてもラク。自分で記述するコードがすごく少なくなって快適。</p>
+
+<p>ただ、この UI Bootstrap と AngularStrap は、それぞれいいとこも微妙なとこもあるので両方を使いたいと欲張っちゃうこともある。すると今回のメインである Modal でエラーが…。</p>
+
+<p>Modal に限れば UI Bootstrap のほうが優れてるので、AngularStrap の $modal directive コードを削除しちゃいましょう。</p>
 </div>
 
 </article>
@@ -134,7 +147,7 @@
 	
 	<a class="addthis_button_tweet"></a>
 	
-	<a href="http://b.hatena.ne.jp/entry/http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+	<a href="http://b.hatena.ne.jp/entry/http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 	
 	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
 	
@@ -165,8 +178,8 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/';
-        var disqus_url = 'http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/';
+        var disqus_identifier = 'http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/';
+        var disqus_url = 'http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -74,15 +74,19 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/</loc>
-        <lastmod>2013-09-13T00:10:21+09:00</lastmod>
+        <lastmod>2013-09-25T22:09:25+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/13/angular-localstorage/</loc>
         <lastmod>2013-09-18T20:06:43+09:00</lastmod>
     </url>
     <url>
+        <loc>http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/</loc>
+        <lastmod>2013-09-25T23:06:59+09:00</lastmod>
+    </url>
+    <url>
         <loc>http://angularjsninja.com/blog/archives/</loc>
-        <lastmod>2013-09-18T20:06:43+09:00</lastmod>
+        <lastmod>2013-09-25T23:06:59+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/categories/</loc>
@@ -90,7 +94,7 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/</loc>
-        <lastmod>2013-09-18T20:06:43+09:00</lastmod>
+        <lastmod>2013-09-25T23:06:59+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/robots.txt</loc>
