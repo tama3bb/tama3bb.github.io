@@ -124,7 +124,11 @@
 
 <p>そんだけー。</p>
 
-<p>jQuery UI 全体のコードはいらないだろうから、そんなときは Draggable だけ選択してダウンロードしましょう。</p>
+<p>じゃなかった…。そう言えば、このままだとセレクタ<code>.modal.fade</code>と<code>.modal.fade.in</code>に定義されている<code>top</code>と<code>transition</code>のプロパティ（モーダルが上から滑り降りてくるトランジション）による影響で、縦方向のドラッグがの〜んびりした動きになって違和感が残る。</p>
+
+<p>なので、上から滑り降りてくるトランジションはあきらめて、class 属性から<code>fade</code>を消してしまうのがいいと思う。</p>
+
+<p>jQuery UI については、すべての機能はいらないだろうから、Draggable だけとか、必要な機能だけ選択してダウンロードしましょう。</p>
 
 <h2>UI Bootstrap と AngularStrap</h2>
 

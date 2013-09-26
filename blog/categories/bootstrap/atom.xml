@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bootstrap | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/bootstrap/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-09-25T23:35:12+09:00</updated>
+  <updated>2013-09-26T09:11:17+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -48,7 +48,11 @@ $(&ldquo;#myModal&rdquo;).draggable({</p>
 
 <p>そんだけー。</p>
 
-<p>jQuery UI 全体のコードはいらないだろうから、そんなときは Draggable だけ選択してダウンロードしましょう。</p>
+<p>じゃなかった…。そう言えば、このままだとセレクタ<code>.modal.fade</code>と<code>.modal.fade.in</code>に定義されている<code>top</code>と<code>transition</code>のプロパティ（モーダルが上から滑り降りてくるトランジション）による影響で、縦方向のドラッグがの〜んびりした動きになって違和感が残る。</p>
+
+<p>なので、上から滑り降りてくるトランジションはあきらめて、class 属性から<code>fade</code>を消してしまうのがいいと思う。</p>
+
+<p>jQuery UI については、すべての機能はいらないだろうから、Draggable だけとか、必要な機能だけ選択してダウンロードしましょう。</p>
 
 <h2>UI Bootstrap と AngularStrap</h2>
 
