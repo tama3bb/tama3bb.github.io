@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-10-05T21:28:34+09:00</updated>
+  <updated>2013-10-19T18:04:28+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -14,16 +14,35 @@
 
   
   <entry>
-    <title type="html"><![CDATA[AngularJS と jQuery]]></title>
-    <link href="http://angularjsninja.com/blog/2013/10/05/angularjs-to-jquery/"/>
-    <updated>2013-10-05T20:32:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/10/05/angularjs-to-jquery</id>
+    <title type="html"><![CDATA[AngularJS 1.2.0-rc2 で Typeahead が動かない]]></title>
+    <link href="http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/"/>
+    <updated>2013-10-19T17:42:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead</id>
     <content type="html"><![CDATA[<hr />
 
-<p>AngularJS と jQuery は併用できるのか？</p>
+<h2>AngularJS で UI Bootstrap の Typeahead が動かない</h2>
+
+<p>AngularJS 1.2.0 の rc2 にした途端、UI Bootstrap (0.6.0) の Typeahead (Autocomplete みたいなやつ) が動かなくなった。</p>
+
+<p>仕様変更なのかバグなのかわからず、とりあえず<code>ui-bootstrap-tpls-0.6.0.js</code>のコードを見たりしながらも AngularJS か UI Bootstrap のほうでバグ修正してくんないかなーと期待＆様子見していたところ、AngularJS 1.2.0 の rc3 では正常に動作するようになったので一件落着。</p>
+
+<p>ちなみに、rc2 でのエラーは、<code>matches is undefined</code>というもの。</p>
+
+<p>Stack Overflow で関連する記事は、<a href="http://stackoverflow.com/questions/18764023/angularjs-1-2-0-bootstrap-ui-0-6-0-bootstrap3-bis2-typeahead/19377002#19377002">AngularJS 1.2.0 Bootstrap UI 0.6.0 (bootstrap3_bis2) Typeahead</a> かな。rc2 では、<code>promise</code>絡みの実装に問題があったみたいだ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery と AngularJS]]></title>
+    <link href="http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs/"/>
+    <updated>2013-10-05T20:32:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>jQuery と AngularJS は併用できるのか？</h2>
 
 <ul>
-<li>AngularJS と jQuery は併用可能</li>
+<li>jQuery と AngularJS は併用可能</li>
 <li>jQuery メインのサイトで AngularJS を部分的に使用可能</li>
 </ul>
 
@@ -223,36 +242,6 @@ storage.bind($scope, &lsquo;varName&rsquo;, {defaultValue: &lsquo;randomValue123
 $http.delete(…) // エラー
 $http['delete'](…) // これで OK
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS のステッカーをゲットするには]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/10/angularjs-stickers/"/>
-    <updated>2013-09-10T14:14:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/10/angularjs-stickers</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><img src="http://ih0.redbubble.net/image.13710650.1031/sticker,375x360.u8.png" alt="AngularJS ×2 by csyz ★ $1.49 stickers" /></p>
-
-<p>AngularJS が好きで好きでしょうがない？</p>
-
-<p>ステッカーを MacBook Air に貼って、AngularJS Ninja っぷりをアピールしたい？</p>
-
-<p>よくイベントとかで配ってたりするけど、AngularJS のイベントなんてやってない？</p>
-
-<p>そんなときは買っちゃおう！</p>
-
-<!-- more -->
-
-
-<h2>Redbubble</h2>
-
-<p><a href="http://www.redbubble.com/people/csyz/portfolio">csyz ★ $1.49 stickers: Art, Design &amp; Photography | Redbubble</a></p>
-
-<p>ステッカーだけでなくＴシャツもあるし、AngularJS だけでなく Node.js や Backbone.js など他にもいろいろある！</p>
-
-<p>ちなみに私の MacBook Air には、白いリンゴマークしか付けてませんけどね。</p>
 ]]></content>
   </entry>
   

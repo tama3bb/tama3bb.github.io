@@ -85,12 +85,16 @@
         <lastmod>2013-09-26T09:10:50+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/10/05/angularjs-to-jquery/</loc>
-        <lastmod>2013-10-05T21:28:33+09:00</lastmod>
+        <loc>http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs/</loc>
+        <lastmod>2013-10-19T17:45:00+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/</loc>
+        <lastmod>2013-10-19T18:04:27+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/archives/</loc>
-        <lastmod>2013-10-05T21:28:33+09:00</lastmod>
+        <lastmod>2013-10-19T18:04:27+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/categories/</loc>
@@ -98,7 +102,7 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/</loc>
-        <lastmod>2013-10-05T21:28:33+09:00</lastmod>
+        <lastmod>2013-10-19T18:04:27+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/robots.txt</loc>
