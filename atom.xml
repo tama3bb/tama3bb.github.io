@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-10-19T18:04:28+09:00</updated>
+  <updated>2013-10-26T14:39:13+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2.0-rc3 以降の Promise]]></title>
+    <link href="http://angularjsninja.com/blog/2013/10/26/angularjs-1.2.0-rc3-promises/"/>
+    <updated>2013-10-26T14:15:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/10/26/angularjs-1.2.0-rc3-promises</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS 1.2.0-rc3 以降、Promise の扱いに注意</h2>
+
+<p>rc2 までと異なり、promise の自動アンラップ（auto unwrapping）がデフォルトで無効となり、promise を直接 $scope の変数に突っ込んでたりするとうまく動かなくなる。</p>
+
+<p>rc2 までは、promise がリターンされるとき、こんなふうに書けた。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">values</span> <span class="o">=</span> <span class="nx">NinjaService</span><span class="p">.</span><span class="nx">getValues</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rc3 からは、こう書かないと動かない。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">NinjaService</span><span class="p">.</span><span class="nx">getValues</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">values</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">values</span> <span class="o">=</span> <span class="nx">values</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>自動アンラップを採用しなくした理由は、この Issue でのやり取りに詳しく書かれている。</p>
+
+<p><a href="https://github.com/angular/angular.js/issues/4158">Automatic unwrapping of promises by $parse severely limits its usefulness · Issue #4158 · angular/angular.js</a></p>
+
+<p>この変更によって、前回のエントリーで書いた Angular UI の Typeahead も動作するようになったということ。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS 1.2.0-rc2 で Typeahead が動かない]]></title>
@@ -1591,105 +1628,6 @@
 <p>こんな感じで、XxxService とかいう名前でサービスを factory 使って宣言しておけば、同じコードを複数の controller で利用したいときに便利だし、Web API 呼び出しのコードがまとまることで見通しやすくなる。</p>
 
 <p>このコードに出てくる params については、search メソッドのクエリパラメータとして検索条件を渡してるイメージなだけで、詳細は省略。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS ではモデルをどう宣言すればいいのか]]></title>
-    <link href="http://angularjsninja.com/blog/2013/08/28/how-to-declare-models/"/>
-    <updated>2013-08-28T07:48:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/08/28/how-to-declare-models</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS の ng-model、大事なのは dot があること</h2>
-
-<p>AngularJS では、モデルをどこに宣言すればいいんだってのがわかりにくい。</p>
-
-<p>controller に $scope があって、簡単なサンプルコードでは大抵そこに直接<code>$scope.name</code>みたいに記述されているので、同じように書いてしまう。</p>
-
-<!-- more -->
-
-
-<p>うまくいかないコード例は以下。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- うまくいかないコード --&gt;</span>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">&quot;ParentController&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;parent&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">&quot;ChildController&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;child&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;ParentController&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{});</span>
-</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;ChildController&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>このコードでは、parent テキストボックスに入力した値が child テキストボックスにも同期され、一見うまくいくように思ってしまう。ところが、一度でも child テキストボックスに値を入力すると、別のスコープになってその後まったく同期されなくなる。</p>
-
-<p>うまくいくコードは以下。大事なのは dot があること。dot があることによって、参照が同じになって、両方のテキストボックスの値が同期され続ける。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- うまくいくコード --&gt;</span>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">&quot;ParentController&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;parent&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;aModel.name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">&quot;ChildController&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;child&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;aModel.name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>AngularJS のモデルは factory で宣言</h2>
-
-<p>さて、ちゃんとモデルを宣言したい場合はどう書けばいいのか。さきほどの例で言えば、aModel はどこでどう宣言しておくことができるのか。</p>
-
-<p>答えは factory で、以下のようなコード。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;aModel&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
-</span><span class='line'>  <span class="p">};</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これで、どこにだって DI して使えるようになるので、<strong>親子の関係にない controller 間でも同期</strong>させることができるモデルとなる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;ExampleController&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">aModel</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">aModel</span> <span class="o">=</span> <span class="nx">aModel</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>この factory のモデルはシングルトンです、はい。</p>
-
-<p><code>app.controller</code>とか<code>app.factory</code>の app って何なのかとか、DI って何なのかとか基本的なところを飛ばしてますが、その辺はまたあらためて。</p>
 ]]></content>
   </entry>
   

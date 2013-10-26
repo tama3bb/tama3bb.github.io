@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/10/19 AngularJS AngularJS 1.2.0-rc2 で Typeahead が動かない AngularJS で UI Bootstrap の Typeahead が動かない AngularJS 1.2.0 の rc2 にした途端、UI Bootstrap (0.6. &hellip;">
+	<meta name="description" content="2013/10/26 AngularJS AngularJS 1.2.0-rc3 以降の Promise AngularJS 1.2.0-rc3 以降、Promise の扱いに注意 rc2 までと異なり、promise の自動アンラップ（auto unwrapping）がデフォルトで無効となり、 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,69 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-26T14:15:00+09:00" data-updated="true" itemprop="datePublished">2013/10/26</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/10/26/angularjs-1.2.0-rc3-promises/" itemprop="url">AngularJS 1.2.0-rc3 以降の Promise</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>AngularJS 1.2.0-rc3 以降、Promise の扱いに注意</h2>
+
+<p>rc2 までと異なり、promise の自動アンラップ（auto unwrapping）がデフォルトで無効となり、promise を直接 $scope の変数に突っ込んでたりするとうまく動かなくなる。</p>
+
+<p>rc2 までは、promise がリターンされるとき、こんなふうに書けた。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">values</span> <span class="o">=</span> <span class="nx">NinjaService</span><span class="p">.</span><span class="nx">getValues</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rc3 からは、こう書かないと動かない。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">NinjaService</span><span class="p">.</span><span class="nx">getValues</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">values</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">values</span> <span class="o">=</span> <span class="nx">values</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>自動アンラップを採用しなくした理由は、この Issue でのやり取りに詳しく書かれている。</p>
+
+<p><a href="https://github.com/angular/angular.js/issues/4158">Automatic unwrapping of promises by $parse severely limits its usefulness · Issue #4158 · angular/angular.js</a></p>
+
+<p>この変更によって、前回のエントリーで書いた Angular UI の Typeahead も動作するようになったということ。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -466,52 +529,6 @@
 
 		
 		<a href="/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-07T23:58:00+09:00" data-updated="true" itemprop="datePublished">2013/09/07</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/09/07/learning-angularjs/" itemprop="url">AngularJS の学習リソースまとめ</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2><img src="http://dotinstall.com/img/topbar_logo.png" alt="ドットインストール" /></h2>
-
-<p>なにはともあれドットインストール。最強の動画学習サイト。</p>
-
-<p><a href="http://dotinstall.com/lessons/basic_angularjs">AngularJS入門 (全12回) &ndash; プログラミングならドットインストール</a></p>
-
-<p>動画学習でオススメなのは、動画の再生速度を 1.5 倍速か 2 倍速にすること。時は金なり。</p>
-
-<p>ドットインストールは初心者向けの内容なので、今後は中級者向けの動画も提供されていくことを期待！</p>
-
-
-		
-		<a href="/blog/2013/09/07/learning-angularjs/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
