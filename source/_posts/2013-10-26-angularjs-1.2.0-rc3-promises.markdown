@@ -1,0 +1,29 @@
+---
+layout: post
+title: "AngularJS 1.2.0-rc3 以降の Promise"
+date: 2013-10-26 14:15
+comments: true
+categories: AngularJS
+---
+---
+## AngularJS 1.2.0-rc3 以降、Promise の扱いに注意
+
+rc2 までと異なり、promise の自動アンラップ（auto unwrapping）がデフォルトで無効となり、promise を直接 $scope の変数に突っ込んでたりするとうまく動かなくなる。
+
+rc2 までは、promise がリターンされるとき、こんなふうに書けた。
+``` javascript controllers.js
+$scope.values = NinjaService.getValues();
+```
+
+rc3 からは、こう書かないと動かない。
+``` javascript controllers.js
+NinjaService.getValues().then(function(values) {
+  $scope.values = values;
+});
+```
+
+自動アンラップを採用しなくした理由は、この Issue でのやり取りに詳しく書かれている。
+
+[Automatic unwrapping of promises by $parse severely limits its usefulness · Issue #4158 · angular/angular.js](https://github.com/angular/angular.js/issues/4158)
+
+この変更によって、前回のエントリーで書いた Angular UI の Typeahead も動作するようになったということ。
