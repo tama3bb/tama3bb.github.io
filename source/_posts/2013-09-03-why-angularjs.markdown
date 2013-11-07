@@ -3,7 +3,7 @@ layout: post
 title: "なぜ AngularJS を採用したのか"
 date: 2013-09-03 18:15
 comments: true
-categories: AngularJS
+categories: [AngularJS, jQuery]
 ---
 
 ---

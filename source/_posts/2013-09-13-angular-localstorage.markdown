@@ -3,7 +3,7 @@ layout: post
 title: "AngularJS の localStorage モジュール angularLocalStorage"
 date: 2013-09-13 23:38
 comments: true
-categories: AngularJS
+categories: [AngularJS, localStorage]
 ---
 
 ---

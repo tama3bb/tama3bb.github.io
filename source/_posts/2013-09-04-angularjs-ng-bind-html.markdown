@@ -3,7 +3,7 @@ layout: post
 title: "AngularJS で HTML をエスケープさせずに出力するには"
 date: 2013-09-04 16:49
 comments: true
-categories: AngularJS
+categories: [AngularJS, directive]
 ---
 
 ---

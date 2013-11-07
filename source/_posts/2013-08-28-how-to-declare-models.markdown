@@ -3,7 +3,7 @@ layout: post
 title: "AngularJS ではモデルをどう宣言すればいいのか"
 date: 2013-08-28 07:48
 comments: true
-categories: AngularJS
+categories: [AngularJS, service]
 ---
 
 ---

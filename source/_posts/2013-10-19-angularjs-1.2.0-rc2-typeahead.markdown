@@ -3,7 +3,7 @@ layout: post
 title: "AngularJS 1.2.0-rc2 で Typeahead が動かない"
 date: 2013-10-19 17:42
 comments: true
-categories: AngularJS
+categories: [AngularJS, Bootstrap]
 ---
 ---
 ## AngularJS で UI Bootstrap の Typeahead が動かない

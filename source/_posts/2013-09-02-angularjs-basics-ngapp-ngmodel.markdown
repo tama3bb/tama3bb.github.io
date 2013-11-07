@@ -3,7 +3,7 @@ layout: post
 title: "AngularJS 基礎の基礎"
 date: 2013-09-02 16:39
 comments: true
-categories: AngularJS
+categories: [AngularJS, directive]
 ---
 
 ---

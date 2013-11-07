@@ -3,7 +3,7 @@ layout: post
 title: "初回アクセス時やリロード時だけng-viewの部分が表示されない場合の解決方法"
 date: 2013-09-06 18:53
 comments: true
-categories: AngularJS
+categories: [AngularJS, directive]
 ---
 
 ---

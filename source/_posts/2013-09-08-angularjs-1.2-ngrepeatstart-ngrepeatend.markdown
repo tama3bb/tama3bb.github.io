@@ -3,7 +3,7 @@ layout: post
 title: "AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end"
 date: 2013-09-08 20:33
 comments: true
-categories: AngularJS
+categories: [AngularJS, directive]
 ---
 
 ---

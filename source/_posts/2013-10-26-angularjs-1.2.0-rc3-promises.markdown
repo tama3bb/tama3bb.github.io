@@ -3,7 +3,7 @@ layout: post
 title: "AngularJS 1.2.0-rc3 以降の Promise"
 date: 2013-10-26 14:15
 comments: true
-categories: AngularJS
+categories: [AngularJS, service]
 ---
 ---
 ## AngularJS 1.2.0-rc3 以降、Promise の扱いに注意

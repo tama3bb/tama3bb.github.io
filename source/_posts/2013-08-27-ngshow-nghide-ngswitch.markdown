@@ -3,7 +3,7 @@ layout: post
 title: "非表示（ng-show/ng-hide）にしてもサーバにアクセスしてる…"
 date: 2013-08-27 10:33
 comments: true
-categories: AngularJS
+categories: [AngularJS, directive]
 ---
 
 ---

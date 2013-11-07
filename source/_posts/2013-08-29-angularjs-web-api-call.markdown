@@ -3,7 +3,7 @@ layout: post
 title: "AngularJS で Web API を呼び出すコードをまとめる"
 date: 2013-08-29 08:42
 comments: true
-categories: AngularJS
+categories: [AngularJS, service, controller]
 ---
 
 ---
