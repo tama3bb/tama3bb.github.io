@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: localStorage | AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/blog/categories/localstorage/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2013-11-08T01:16:21+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS の localStorage モジュール angularLocalStorage]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/13/angular-localstorage/"/>
+    <updated>2013-09-13T23:38:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/13/angular-localstorage</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS アプリケーションで localStorage を使うときに便利なモジュールの紹介。</p>
+
+<p><a href="https://github.com/agrublev/angularLocalStorage">agrublev/angularLocalStorage</a></p>
+
+<!-- more -->
+
+
+<h2>機能</h2>
+
+<ul>
+<li>AngularJS の model と localStorage を双方向にバインド</li>
+<li>オブジェクト、配列も変換不要</li>
+<li>localStorage 非対応のブラウザでは $cookies にフォールバック（angular-cookies.min.js を参照し、<code>ngCookies</code>を依存モジュールとして記述）</li>
+</ul>
+
+
+<h2>使い方</h2>
+
+<p>依存モジュールとして<code>localStorage</code>を追加。</p>
+
+<p><code>javascript app.js
+var yourApp = angular.module('yourApp', [..., 'angularLocalStorage']
+</code></p>
+
+<p>controller に<code>storage</code>を記述。</p>
+
+<p><code>javascript controllers.js
+yourApp.controller('yourController', function($scope, storage) {
+</code></p>
+
+<p><code>storage</code>を使う。デフォルト値やキーを変更可能。</p>
+
+<p>``` javascript controllers.js
+// storage.variable にバインド
+storage.bind($scope,&lsquo;varName&rsquo;);</p>
+
+<p>// * defaultValue: デフォルト値
+// * storeName: 変数名と異なる localStorage への保存 key を指定
+storage.bind($scope, &lsquo;varName&rsquo;, {defaultValue: &lsquo;randomValue123&rsquo;, storeName: &lsquo;customStoreKey&rsquo;});
+```</p>
+
+<p>これだけ。とにかく便利。</p>
+]]></content>
+  </entry>
+  
+</feed>

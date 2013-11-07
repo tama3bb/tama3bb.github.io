@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: directive | AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/blog/categories/directive/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2013-11-08T01:16:21+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのng-listが便利なようで便利でなく、でもやっぱり便利]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/08/angularjs-nglist/"/>
+    <updated>2013-11-08T01:16:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/08/angularjs-nglist</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>ngList とは</h2>
+
+<p><a href="http://docs.angularjs.org/api/ng.directive:ngList">ngList</a> は、テキストボックスに入力された区切り文字列と、文字列配列のモデルとを相互に変換してくれる directive です。</p>
+
+<p>区切り文字（delimiter）のデフォルトはカンマですが、別の文字列や、正規表現も使えます。</p>
+
+<p>うん、なんだか便利な感じ！</p>
+
+<!-- more -->
+
+
+<h2>さっそく使ってみたけど、便利じゃない…</h2>
+
+<ul>
+<li>配列に文字列を追加・削除してもテキストボックスの表示変わらんやん…</li>
+<li>正規表現はおろか、何を指定してもカンマとして動いてくれちゃうやん…</li>
+</ul>
+
+
+<p>なんだろう、あきらかに不具合だよ、これは。</p>
+
+<p>てことで、いつものように Stack Overflow に頼る。</p>
+
+<p><a href="http://stackoverflow.com/questions/15590140/ng-list-input-not-updating-when-adding-items-to-array">javascript &ndash; ng-list input not updating when adding items to array &ndash; Stack Overflow</a></p>
+
+<p><blockquote><p>Formatters are only invoked if the value is strictly not equal to the previous value, but since it is the same array instance in your first example, that statement evaluates to false, and hence the text field isn&rsquo;t updated.</p></blockquote></p>
+
+<p>配列の中身が変わっても知らんしって実装になってるから更新されへんねんでってことね。</p>
+
+<h2>でもやっぱり便利だから使えるようにしたい</h2>
+
+<p>AngularJS 本体のコードを修正して Pull Req&hellip;。いやいや、敷居が高い。</p>
+
+<p>とりあえずの対応としては、配列に文字列を追加・削除するたびに配列を新しくしちゃえば動く。</p>
+
+<h2>デモとサンプルコード</h2>
+
+<hr />
+
+<div ng-app>
+  <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>  
+  <script>
+    function TagCtrl($scope) {
+      $scope.tags = [];
+      $scope.select = function(tag) {
+        if ($scope.contains(tag, $scope.tags)) {
+          var tags = [];
+          angular.forEach($scope.tags, function(t) {
+            if (tag != t) {
+              tags.push(t);
+            }
+          });
+          $scope.tags = tags;
+        } else {
+          $scope.tags = angular.copy($scope.tags);
+          $scope.tags.push(tag);
+        }
+      };
+      $scope.contains = function(value, array) {
+        return 0 <= $.inArray(value, array);
+      };
+    }
+  </script>
+  <div ng-controller="TagCtrl">
+    <input type="text" ng-model="tags" ng-list><br>
+    <a href="" ng-click="select('Red')">Red</a>    
+    <a href="" ng-click="select('Orange')">Orange</a>
+    <a href="" ng-click="select('Yellow')">Yellow</a>
+    <a href="" ng-click="select('Green')">Green</a>
+    <a href="" ng-click="select('Blue')">Blue</a>
+    <a href="" ng-click="select('Purple')">Purple</a>
+    <a href="" ng-click="select('Gray')">Gray</a>
+  </div>
+</div>
+
+
+<hr />
+
+<p>``` html</p>
+
+<div ng-app>
+  <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>  
+  <script>
+    function TagCtrl($scope) {
+      $scope.tags = [];
+      $scope.select = function(tag) {
+        if ($scope.contains(tag, $scope.tags)) {
+          var tags = [];
+          angular.forEach($scope.tags, function(t) {
+            if (tag != t) {
+              tags.push(t);
+            }
+          });
+          $scope.tags = tags;
+        } else {
+          $scope.tags = angular.copy($scope.tags);
+          $scope.tags.push(tag);
+        }
+      };
+      $scope.contains = function(value, array) {
+        return 0 <= $.inArray(value, array);
+      };
+    }
+  </script>
+  <div ng-controller="TagCtrl">
+    <input type="text" ng-model="tags" ng-list><br>
+    <a href="" ng-click="select('Red')">Red</a>    
+    <a href="" ng-click="select('Orange')">Orange</a>
+    <a href="" ng-click="select('Yellow')">Yellow</a>
+    <a href="" ng-click="select('Green')">Green</a>
+    <a href="" ng-click="select('Blue')">Blue</a>
+    <a href="" ng-click="select('Purple')">Purple</a>
+    <a href="" ng-click="select('Gray')">Gray</a>
+  </div>
+</div>
+
+
+<p>```</p>
+
+<h2>区切り文字の変更は？</h2>
+
+<p>まあ、とりあえずカンマ区切りでヨシということで。ここの <a href="https://github.com/angular/angular.js/blob/v1.2.0-rc.3/src/ng/directive/input.js#L1381">value.join(&lsquo;, &rsquo;)</a> がおかしいんだろうと思いつつも、必要になるまで置いとこう。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/"/>
+    <updated>2013-09-08T20:33:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS 1.2 で追加された新しい directive の<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を紹介。</p>
+
+<p>通常の<a href="http://docs.angularjs.org/api/ng.directive:ngRepeat"><code>ng-repeat</code></a>では実現しにくかった複数の要素にまたがった繰り返しが可能になる。</p>
+
+<!-- more -->
+
+
+<h2>ul / ol</h2>
+
+<p>コードを見るほうがわかりやすいので、まずは通常の<code>ng-repeat</code>で<code>&lt;li&gt;</code>を繰り返すコード例から。</p>
+
+<p>``` html</p>
+
+<ul>
+  <li ng-repeat="user in users">user.name</li>
+</ul>
+
+
+<p>```</p>
+
+<h2>dl</h2>
+
+<p>次は<code>&lt;dl&gt;</code>の例。このケースでは<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を使う。</p>
+
+<p>``` html</p>
+
+<dl>
+  <dt ng-repeat-start="user in users">user.name</li>
+  <dd ng-repeat-end>user.description</li>
+</dl>
+
+
+<p>```</p>
+
+<p><code>&lt;dl&gt;</code>は特殊で、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>が交互に並び<code>&lt;dl&gt;</code>で囲まれない。そのため、ng-repeat ではうまく指定できなかった。<code>&lt;dl&gt;</code>に対して ng-repeat を指定すると<code>&lt;dl&gt;</code>ごと繰り返されてしまう。</p>
+
+<p><code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用すると、<code>&lt;dt&gt;&lt;dd&gt;&lt;dt&gt;&lt;dd&gt;</code>のように、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>がセットで繰り返される。</p>
+
+<h2>table</h2>
+
+<p>また、以下のテーブルのコード例のように、2 行分を繰り返すような場合にも<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用するとうまくいく。</p>
+
+<p>``` html</p>
+
+<table>
+  <tbody>
+    <tr ng-repeat-start="user in users">
+      <td>user.name</td>
+      <td>user.sex</td>
+    </tr>
+    <tr ng-repeat-end>
+      <td colspan="2">user.description</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[初回アクセス時やリロード時だけng-viewの部分が表示されない場合の解決方法]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/06/ngview-does-not-work-at-initial-route/"/>
+    <updated>2013-09-06T18:53:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/06/ngview-does-not-work-at-initial-route</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>ng-view で表示する部分が、初回アクセス時やリロード時だけ表示されない場合の解決方法について。</p>
+
+<p>この現象は、ng-view が ng-include の中に入っている場合に発生してしまうようで、このページの情報のおかげで解決できた。</p>
+
+<p><a href="https://github.com/angular/angular.js/issues/1213">Initial route update doesn&rsquo;t happen if ngView in a template loaded by ngInclude</a></p>
+
+<!-- more -->
+
+
+<p>コードはこれだけ。</p>
+
+<p><code>javascript app.js
+myApp.run(['$route', function($route)  {
+  $route.reload();
+}]);
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS で HTML をエスケープさせずに出力するには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html/"/>
+    <updated>2013-09-04T16:49:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS での出力手段</h2>
+
+<p>AngularJS で単に文字列を出力するには、<code>{{expression}}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
+
+<p><code>html
+&lt;span&gt;{{ninja.name}}&lt;/span&gt;
+&lt;span ng-bind="ninja.name"&gt;&lt;/span&gt;
+</code></p>
+
+<!-- more -->
+
+
+<h2>{{expression}} が一瞬表示されてチラつく場合の対処方法</h2>
+
+<p><code>{{expression}}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{{expression}}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
+
+<p>この問題に対しては、<code>ng-bind</code>を利用するか、<a href="http://docs.angularjs.org/api/ng.directive:ngCloak"><code>ng-cloak</code></a>を以下のように利用することで解決できる。</p>
+
+<p><code>html
+&lt;span ng-cloak&gt;{{ninja.name}}&lt;/span&gt;
+</code></p>
+
+<p>なお、<a href="http://docs.angularjs.org/api/ngRoute.directive:ngView">ng-view</a> や <a href="http://docs.angularjs.org/api/ng.directive:ngInclude">ng-include</a> で挿入される断片（partial）の HTML では、このチラつく現象は発生しないため、ng-cloak の記述は不要である。</p>
+
+<h2>HTML をエスケープさせずに出力するには</h2>
+
+<p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml"><code>ng-bind-html</code></a>を利用する。</p>
+
+<p><code>html
+&lt;span ng-bind-html="ninja.htmlContent"&gt;&lt;/span&gt;
+</code></p>
+
+<p>この<code>ng-bind-html</code>は、別のモジュール（ngSanitize）に分かれているため、angular-sanitize.min.js を index.html で参照し、依存するモジュールとして記述する必要がある。</p>
+
+<p>``` html index.html</p>
+
+<script src="assets/lib/angular-1.1.5/angular-sanitize.min.js"></script>
+
+
+<p><code>
+</code> javascript app.js
+var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
+```</p>
+
+<h2>サニタイズせずに出力するには</h2>
+
+<p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
+
+<p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく<code>ng-bind-html-unsafe</code>を利用できる。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 基礎の基礎]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel/"/>
+    <updated>2013-09-02T16:39:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS 基礎</h2>
+
+<p>しばらく AngularJS の基礎的なことを中心に書いていく。</p>
+
+<p>AngularJS の基礎として、まず <a href="http://angularjs.org/#the-basics">AngularJS のページ</a> で一番初めにあるコードから、AngularJS に関する部分を簡単に。</p>
+
+<!-- more -->
+
+
+<hr />
+
+<div ng-app>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <label>Name:</label>
+  <input type="text" ng-model="yourName" placeholder="Enter a name here">
+  <hr>
+  <h1>Hello {{yourName}}!</h1>
+</div>
+
+
+<hr />
+
+<p>``` html index.html
+&lt;!doctype html>
+<html ng-app>
+  <head></p>
+
+<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>  </head>
+  <body></p>
+
+<pre><code>&lt;div&gt;
+  &lt;label&gt;Name:&lt;/label&gt;
+  &lt;input type="text" ng-model="yourName" placeholder="Enter a name here"&gt;
+  &lt;hr&gt;
+  &lt;h1&gt;Hello {{yourName}}!&lt;/h1&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<ul>
+<li><p><a href="http://docs.angularjs.org/api/ng.directive:ngApp"><code>ng-app</code></a></p>
+
+<ul>
+<li>AngularJS が動作する範囲を指定。</li>
+<li>ページ全体とする場合は<code>&lt;html ng-app&gt;</code>とし、<code>&lt;head&gt;</code>を対象外とするなら<code>&lt;body ng-app&gt;</code>とする。</li>
+<li>より限定的に、<code>&lt;div ng-app&gt;</code>でも構わない。</li>
+</ul>
+</li>
+<li><p><a href="http://docs.angularjs.org/api/ng.directive:ngModel"><code>ng-model</code></a></p>
+
+<ul>
+<li>フォームとモデルをリンクし、どちらかでの変更を他方に反映する。</li>
+<li>この例の場合はテキストボックスへの入力値が即座に yourName プロパティに反映される。</li>
+</ul>
+</li>
+<li><p><code>{{yourName}}</code></p>
+
+<ul>
+<li>yourName プロパティの値を HTML に表示するコード。</li>
+<li>yourName プロパティの変更が即座に反映される。</li>
+</ul>
+</li>
+</ul>
+
+
+<p>この例は、<a href="http://jsfiddle.net/api/post/library/pure/">jsFiddle</a> でコードを編集して試すことができる。</p>
+]]></content>
+  </entry>
+  
+</feed>

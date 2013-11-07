@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-10-26T14:39:13+09:00</updated>
+  <updated>2013-11-08T01:16:21+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,140 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのng-listが便利なようで便利でなく、でもやっぱり便利]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/08/angularjs-nglist/"/>
+    <updated>2013-11-08T01:16:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/08/angularjs-nglist</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>ngList とは</h2>
+
+<p><a href="http://docs.angularjs.org/api/ng.directive:ngList">ngList</a> は、テキストボックスに入力された区切り文字列と、文字列配列のモデルとを相互に変換してくれる directive です。</p>
+
+<p>区切り文字（delimiter）のデフォルトはカンマですが、別の文字列や、正規表現も使えます。</p>
+
+<p>うん、なんだか便利な感じ！</p>
+
+<!-- more -->
+
+
+<h2>さっそく使ってみたけど、便利じゃない…</h2>
+
+<ul>
+<li>配列に文字列を追加・削除してもテキストボックスの表示変わらんやん…</li>
+<li>正規表現はおろか、何を指定してもカンマとして動いてくれちゃうやん…</li>
+</ul>
+
+
+<p>なんだろう、あきらかに不具合だよ、これは。</p>
+
+<p>てことで、いつものように Stack Overflow に頼る。</p>
+
+<p><a href="http://stackoverflow.com/questions/15590140/ng-list-input-not-updating-when-adding-items-to-array">javascript &ndash; ng-list input not updating when adding items to array &ndash; Stack Overflow</a></p>
+
+<p><blockquote><p>Formatters are only invoked if the value is strictly not equal to the previous value, but since it is the same array instance in your first example, that statement evaluates to false, and hence the text field isn&rsquo;t updated.</p></blockquote></p>
+
+<p>配列の中身が変わっても知らんしって実装になってるから更新されへんねんでってことね。</p>
+
+<h2>でもやっぱり便利だから使えるようにしたい</h2>
+
+<p>AngularJS 本体のコードを修正して Pull Req&hellip;。いやいや、敷居が高い。</p>
+
+<p>とりあえずの対応としては、配列に文字列を追加・削除するたびに配列を新しくしちゃえば動く。</p>
+
+<h2>デモとサンプルコード</h2>
+
+<hr />
+
+<div ng-app>
+  <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>  
+  <script>
+    function TagCtrl($scope) {
+      $scope.tags = [];
+      $scope.select = function(tag) {
+        if ($scope.contains(tag, $scope.tags)) {
+          var tags = [];
+          angular.forEach($scope.tags, function(t) {
+            if (tag != t) {
+              tags.push(t);
+            }
+          });
+          $scope.tags = tags;
+        } else {
+          $scope.tags = angular.copy($scope.tags);
+          $scope.tags.push(tag);
+        }
+      };
+      $scope.contains = function(value, array) {
+        return 0 <= $.inArray(value, array);
+      };
+    }
+  </script>
+  <div ng-controller="TagCtrl">
+    <input type="text" ng-model="tags" ng-list><br>
+    <a href="" ng-click="select('Red')">Red</a>    
+    <a href="" ng-click="select('Orange')">Orange</a>
+    <a href="" ng-click="select('Yellow')">Yellow</a>
+    <a href="" ng-click="select('Green')">Green</a>
+    <a href="" ng-click="select('Blue')">Blue</a>
+    <a href="" ng-click="select('Purple')">Purple</a>
+    <a href="" ng-click="select('Gray')">Gray</a>
+  </div>
+</div>
+
+
+<hr />
+
+<p>``` html</p>
+
+<div ng-app>
+  <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>  
+  <script>
+    function TagCtrl($scope) {
+      $scope.tags = [];
+      $scope.select = function(tag) {
+        if ($scope.contains(tag, $scope.tags)) {
+          var tags = [];
+          angular.forEach($scope.tags, function(t) {
+            if (tag != t) {
+              tags.push(t);
+            }
+          });
+          $scope.tags = tags;
+        } else {
+          $scope.tags = angular.copy($scope.tags);
+          $scope.tags.push(tag);
+        }
+      };
+      $scope.contains = function(value, array) {
+        return 0 <= $.inArray(value, array);
+      };
+    }
+  </script>
+  <div ng-controller="TagCtrl">
+    <input type="text" ng-model="tags" ng-list><br>
+    <a href="" ng-click="select('Red')">Red</a>    
+    <a href="" ng-click="select('Orange')">Orange</a>
+    <a href="" ng-click="select('Yellow')">Yellow</a>
+    <a href="" ng-click="select('Green')">Green</a>
+    <a href="" ng-click="select('Blue')">Blue</a>
+    <a href="" ng-click="select('Purple')">Purple</a>
+    <a href="" ng-click="select('Gray')">Gray</a>
+  </div>
+</div>
+
+
+<p>```</p>
+
+<h2>区切り文字の変更は？</h2>
+
+<p>まあ、とりあえずカンマ区切りでヨシということで。ここの <a href="https://github.com/angular/angular.js/blob/v1.2.0-rc.3/src/ng/directive/input.js#L1381">value.join(&lsquo;, &rsquo;)</a> がおかしいんだろうと思いつつも、必要になるまで置いとこう。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS 1.2.0-rc3 以降の Promise]]></title>
@@ -150,42 +284,6 @@ storage.bind($scope, &lsquo;varName&rsquo;, {defaultValue: &lsquo;randomValue123
 ```</p>
 
 <p>これだけ。とにかく便利。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS カンファレンス『ng-conf』が年始に開催]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/"/>
-    <updated>2013-09-12T23:31:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/12/ng-conf-2014</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><img src="http://lh5.googleusercontent.com/proxy/wsYUaddAvIcNhXYf0kt63gkDYp_VzQ2-JwB-jUlPzAazYg53ibQF8JdCn2SNwI9ZucozuoJDrhvT54sOHfX44Jiq_v0FvlzDIsQc-4s-q-mnJdx_y6nDHx-VmA=w120-h120" alt="ng-conf" /></p>
-
-<p>AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。</p>
-
-<!-- more -->
-
-
-<h4>公式ページ</h4>
-
-<p><a href="http://www.ng-conf.org/">ng-conf 2014 &ndash; The World&rsquo;s First Angular Conference in Salt Lake City, Utah</a></p>
-
-<h4>Eventbrite</h4>
-
-<p><a href="http://ng-conf-slc-2014.eventbrite.com">ng-conf 2014 Tickets, Salt Lake City &ndash; Eventbrite</a></p>
-
-<h4>Google+</h4>
-
-<p><a href="https://plus.google.com/101125427377197999853/posts">ng-conf &ndash; Google+</a></p>
-
-<p>Eventbrite の情報では、開催前日の 1 月 15 日に Jon Lindquist さんにより、6 時間のトレーニングを受けられるみたい。Jon Lindquist さんは、AngularJS の学習動画で有名な <a href="http://egghead.io">Egghead.io</a> の人。</p>
-
-<p>2 日間で $600.00 + $27.95、トレーニングを含む 3 日間で $1,000.00 + $39.95。いつもながら、アメリカのカンファレンスってほんと高い。まあ、AngularJS のおかげで稼がせてもらってるようなもんですから、こういうときにお返ししましょうね。</p>
-
-<p>Google+ での情報によると、$600 ドルは Early Bird Ticket Sales、つまり早割で安くなっていて、正規の金額は 2 日間で $800 の様子。</p>
-
-<p>さあ、みんなで行こうじゃありませんかー！</p>
 ]]></content>
   </entry>
   

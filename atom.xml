@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-10-26T14:39:13+09:00</updated>
+  <updated>2013-11-08T01:16:21+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,174 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのng-listが便利なようで便利でなく、でもやっぱり便利]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/08/angularjs-nglist/"/>
+    <updated>2013-11-08T01:16:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/08/angularjs-nglist</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>ngList とは</h2>
+
+<p><a href="http://docs.angularjs.org/api/ng.directive:ngList">ngList</a> は、テキストボックスに入力された区切り文字列と、文字列配列のモデルとを相互に変換してくれる directive です。</p>
+
+<p>区切り文字（delimiter）のデフォルトはカンマですが、別の文字列や、正規表現も使えます。</p>
+
+<p>うん、なんだか便利な感じ！</p>
+
+<!-- more -->
+
+
+<h2>さっそく使ってみたけど、便利じゃない…</h2>
+
+<ul>
+<li>配列に文字列を追加・削除してもテキストボックスの表示変わらんやん…</li>
+<li>正規表現はおろか、何を指定してもカンマとして動いてくれちゃうやん…</li>
+</ul>
+
+
+<p>なんだろう、あきらかに不具合だよ、これは。</p>
+
+<p>てことで、いつものように Stack Overflow に頼る。</p>
+
+<p><a href="http://stackoverflow.com/questions/15590140/ng-list-input-not-updating-when-adding-items-to-array">javascript &ndash; ng-list input not updating when adding items to array &ndash; Stack Overflow</a></p>
+
+<blockquote><p>Formatters are only invoked if the value is strictly not equal to the previous value, but since it is the same array instance in your first example, that statement evaluates to false, and hence the text field isn&#8217;t updated.</p></blockquote>
+
+
+<p>配列の中身が変わっても知らんしって実装になってるから更新されへんねんでってことね。</p>
+
+<h2>でもやっぱり便利だから使えるようにしたい</h2>
+
+<p>AngularJS 本体のコードを修正して Pull Req&hellip;。いやいや、敷居が高い。</p>
+
+<p>とりあえずの対応としては、配列に文字列を追加・削除するたびに配列を新しくしちゃえば動く。</p>
+
+<h2>デモとサンプルコード</h2>
+
+<hr />
+
+<div ng-app>
+  <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>  
+  <script>
+    function TagCtrl($scope) {
+      $scope.tags = [];
+      $scope.select = function(tag) {
+        if ($scope.contains(tag, $scope.tags)) {
+          var tags = [];
+          angular.forEach($scope.tags, function(t) {
+            if (tag != t) {
+              tags.push(t);
+            }
+          });
+          $scope.tags = tags;
+        } else {
+          $scope.tags = angular.copy($scope.tags);
+          $scope.tags.push(tag);
+        }
+      };
+      $scope.contains = function(value, array) {
+        return 0 <= $.inArray(value, array);
+      };
+    }
+  </script>
+  <div ng-controller="TagCtrl">
+    <input type="text" ng-model="tags" ng-list><br>
+    <a href="" ng-click="select('Red')">Red</a>    
+    <a href="" ng-click="select('Orange')">Orange</a>
+    <a href="" ng-click="select('Yellow')">Yellow</a>
+    <a href="" ng-click="select('Green')">Green</a>
+    <a href="" ng-click="select('Blue')">Blue</a>
+    <a href="" ng-click="select('Purple')">Purple</a>
+    <a href="" ng-click="select('Gray')">Gray</a>
+  </div>
+</div>
+
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-app</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://codeorigin.jquery.com/jquery-2.0.3.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://code.angularjs.org/1.2.0-rc.3/angular.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="kd">function</span> <span class="nx">TagCtrl</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">select</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tag</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">tags</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>          <span class="nx">angular</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">tag</span> <span class="o">!=</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">tags</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>          <span class="p">});</span>
+</span><span class='line'>          <span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span> <span class="o">=</span> <span class="nx">tags</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">copy</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">tag</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">contains</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">inArray</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">array</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">&quot;TagCtrl&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;tags&quot;</span> <span class="na">ng-list</span><span class="nt">&gt;&lt;br&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Red&#39;)&quot;</span><span class="nt">&gt;</span>Red<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Orange&#39;)&quot;</span><span class="nt">&gt;</span>Orange<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Yellow&#39;)&quot;</span><span class="nt">&gt;</span>Yellow<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Green&#39;)&quot;</span><span class="nt">&gt;</span>Green<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Blue&#39;)&quot;</span><span class="nt">&gt;</span>Blue<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Purple&#39;)&quot;</span><span class="nt">&gt;</span>Purple<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Gray&#39;)&quot;</span><span class="nt">&gt;</span>Gray<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>区切り文字の変更は？</h2>
+
+<p>まあ、とりあえずカンマ区切りでヨシということで。ここの <a href="https://github.com/angular/angular.js/blob/v1.2.0-rc.3/src/ng/directive/input.js#L1381">value.join(&lsquo;, &rsquo;)</a> がおかしいんだろうと思いつつも、必要になるまで置いとこう。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS 1.2.0-rc3 以降の Promise]]></title>
@@ -1566,68 +1734,6 @@
 <p>Yeoman がベストプラクティスと考えるプロジェクト構成で出力されるので、これを利用し、まず従ってみてから、自分の頭で考えるというのもいいと思う。</p>
 
 <p>この Yeoman を利用したプロジェクト構成のことや、Yeoman のページに出てくる Grunt、Bower などのツール類の話はまたあらためて。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS で Web API を呼び出すコードをまとめる]]></title>
-    <link href="http://angularjsninja.com/blog/2013/08/29/angularjs-web-api-call/"/>
-    <updated>2013-08-29T08:42:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/08/29/angularjs-web-api-call</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>AngularJS で Web API を呼び出す $http などを利用するコードを、各 controller に散らして実装してしまわずに、どこかに集約しておきたいぞって場合の話。</p>
-
-<!-- more -->
-
-
-
-
-<figure class='code'><figcaption><span>services.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;NinjaService&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nx">$http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/search&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">params</span><span class="o">:</span> <span class="nx">params</span><span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>  <span class="p">};</span>
-</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">search</span><span class="o">:</span> <span class="nx">search</span>
-</span><span class='line'>  <span class="p">};</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;NinjaController&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">NinjaService</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">NinjaService</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">params</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">results</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>  <span class="p">};</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こんな感じで、XxxService とかいう名前でサービスを factory 使って宣言しておけば、同じコードを複数の controller で利用したいときに便利だし、Web API 呼び出しのコードがまとまることで見通しやすくなる。</p>
-
-<p>このコードに出てくる params については、search メソッドのクエリパラメータとして検索条件を渡してるイメージなだけで、詳細は省略。</p>
 ]]></content>
   </entry>
   

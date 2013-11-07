@@ -6,15 +6,15 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/08/27/ngshow-nghide-ngswitch/</loc>
-        <lastmod>2013-09-06T23:37:38+09:00</lastmod>
+        <lastmod>2013-11-08T01:09:27+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/08/28/how-to-declare-models/</loc>
-        <lastmod>2013-09-06T23:37:27+09:00</lastmod>
+        <lastmod>2013-11-08T01:09:44+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/08/29/angularjs-web-api-call/</loc>
-        <lastmod>2013-09-05T19:57:40+09:00</lastmod>
+        <lastmod>2013-11-08T01:11:08+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure/</loc>
@@ -30,15 +30,15 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel/</loc>
-        <lastmod>2013-09-06T23:36:25+09:00</lastmod>
+        <lastmod>2013-11-08T01:11:40+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/03/why-angularjs/</loc>
-        <lastmod>2013-09-06T23:38:03+09:00</lastmod>
+        <lastmod>2013-11-08T01:12:13+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html/</loc>
-        <lastmod>2013-09-06T23:36:15+09:00</lastmod>
+        <lastmod>2013-11-08T01:12:45+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/05/angularjs-i18n/</loc>
@@ -48,7 +48,7 @@
         <loc>
             http://angularjsninja.com/blog/2013/09/06/ngview-does-not-work-at-initial-route/
         </loc>
-        <lastmod>2013-09-06T18:54:20+09:00</lastmod>
+        <lastmod>2013-11-08T01:13:24+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/07/learning-angularjs/</loc>
@@ -58,7 +58,7 @@
         <loc>
             http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/
         </loc>
-        <lastmod>2013-09-08T21:14:52+09:00</lastmod>
+        <lastmod>2013-11-08T01:13:37+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/09/hexcolortool/</loc>
@@ -78,7 +78,7 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/13/angular-localstorage/</loc>
-        <lastmod>2013-09-18T20:06:43+09:00</lastmod>
+        <lastmod>2013-11-08T01:14:19+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/</loc>
@@ -90,15 +90,19 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/</loc>
-        <lastmod>2013-10-19T18:04:27+09:00</lastmod>
+        <lastmod>2013-11-08T01:15:10+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/10/26/angularjs-1.2.0-rc3-promises/</loc>
-        <lastmod>2013-10-26T14:37:52+09:00</lastmod>
+        <lastmod>2013-11-08T01:15:39+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com/blog/2013/11/08/angularjs-nglist/</loc>
+        <lastmod>2013-11-08T01:16:04+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/archives/</loc>
-        <lastmod>2013-10-26T14:37:52+09:00</lastmod>
+        <lastmod>2013-11-08T01:16:04+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/categories/</loc>
@@ -106,7 +110,7 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/</loc>
-        <lastmod>2013-10-26T14:37:52+09:00</lastmod>
+        <lastmod>2013-11-08T01:16:04+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/robots.txt</loc>
