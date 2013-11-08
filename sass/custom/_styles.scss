@@ -12,7 +12,6 @@ article .entry-content h4,
 article .entry-content h5,
 article .entry-content h6 {
   margin-top: 30px;
-  margin-bottom: 20px;
 }
 
 .container .left-col {
@@ -32,8 +31,8 @@ body {
 }
 
 article code,
-article pre {
-  background-color: #f2f2f2;
+article pre,
+figure.code .line-numbers {
   font-family: 'Source Code Pro', Consolas, Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
 }
 
