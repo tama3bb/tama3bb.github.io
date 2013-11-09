@@ -13,9 +13,9 @@ categories: AngularJS
 ---
 ## AngularJS 1.2.0: timely-delivery
 
-1.2.0-rc3 で見つかった多くの問題を修正しているのと、前回の安定版リリースからいくつもの新しい機能を導入しているとのこと。
+1.2.0-rc3 で見つかった多くの問題を修正し、前回の安定版リリースからいくつもの新しい機能を導入している。
 
-前回の安定版リリースからの注目すべき変更点としては：
+前回の安定版リリースからの注目すべき変更点：
 
 * [アニメーションとトランジション](http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html)
 * [エラーメッセージ](http://kensheedlo.com/2013/08/15/error-message-minification-with-minerr.html)（error minification を含む）
