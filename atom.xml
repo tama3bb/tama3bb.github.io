@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-09T10:14:32+09:00</updated>
+  <updated>2013-11-09T10:21:37+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -28,9 +28,9 @@
 
 <h2>AngularJS 1.2.0: timely-delivery</h2>
 
-<p>1.2.0-rc3 で見つかった多くの問題を修正しているのと、前回の安定版リリースからいくつもの新しい機能を導入しているとのこと。</p>
+<p>1.2.0-rc3 で見つかった多くの問題を修正し、前回の安定版リリースからいくつもの新しい機能を導入している。</p>
 
-<p>前回の安定版リリースからの注目すべき変更点としては：</p>
+<p>前回の安定版リリースからの注目すべき変更点：</p>
 
 <ul>
 <li><a href="http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html">アニメーションとトランジション</a></li>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-09T10:14:32+09:00</updated>
+  <updated>2013-11-09T10:21:47+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -28,9 +28,9 @@
 
 <h2>AngularJS 1.2.0: timely-delivery</h2>
 
-<p>1.2.0-rc3 で見つかった多くの問題を修正しているのと、前回の安定版リリースからいくつもの新しい機能を導入しているとのこと。</p>
+<p>1.2.0-rc3 で見つかった多くの問題を修正し、前回の安定版リリースからいくつもの新しい機能を導入している。</p>
 
-<p>前回の安定版リリースからの注目すべき変更点としては：</p>
+<p>前回の安定版リリースからの注目すべき変更点：</p>
 
 <ul>
 <li><a href="http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html">アニメーションとトランジション</a></li>
@@ -69,15 +69,15 @@
 
 <p>こんなふうに、パイプ記号を使う構文で記述。
 <code>
-{{ expression | filter }}
+{% raw %}{{ expression | filter }}{% endraw %}
 </code>
 チェーン（chaining）することもできるし、
 <code>
-{{ expression | filter1 | filter2 }}
+{% raw %}{{ expression | filter1 | filter2 }}{% endraw %}
 </code>
 引数を取ることもできる。
 <code>
-{{ expression | filter:arg1:arg2 }}
+{% raw %}{{ expression | filter:arg1:arg2 }}{% endraw %}
 </code></p>
 
 <h2>filter の利用例</h2>
@@ -85,7 +85,7 @@
 <p>たとえば数値をカンマ区切りで表示したければ、AngularJS 標準の <a href="http://docs.angularjs.org/api/ng.filter:number">number</a> filter を使うだけでラクチン。</p>
 
 <p><code>
-{{ 123456789 | number }}
+{% raw %}{{ 123456789 | number }}{% endraw %}
 </code>
 123,456,789</p>
 
@@ -95,7 +95,7 @@
 
 <p>例として、全角英数字が混じってて見苦しいデータがあったとして、せめて表示の段階ででもスッキリと半角英数字に揃えて表示したいなーということを実現する filter のサンプルコードを。</p>
 
-<p>
+<p>{% raw %}
 ``` javascript</p>
 
 <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
@@ -120,7 +120,7 @@ angular.module('Ninja', [])
 
 
 <p>```
-</p>
+{% endraw %}</p>
 
 <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
 
@@ -138,7 +138,7 @@ angular.module('Ninja', [])
 
 
 <div ng-app="Ninja">
-  {{ val | oneByte }}<br>
+  {% raw %}{{ val | oneByte }}{% endraw %}<br>
   <input type="text" ng-model="val" ng-init="val='Ａｎｇｕｌａｒｊｓ Ninja'">
 </div>
 
@@ -179,7 +179,9 @@ angular.module('Ninja', [])
 
 <p><a href="http://stackoverflow.com/questions/15590140/ng-list-input-not-updating-when-adding-items-to-array">javascript &ndash; ng-list input not updating when adding items to array &ndash; Stack Overflow</a></p>
 
-<p><blockquote><p>Formatters are only invoked if the value is strictly not equal to the previous value, but since it is the same array instance in your first example, that statement evaluates to false, and hence the text field isn&rsquo;t updated.</p></blockquote></p>
+<p>{% blockquote %}
+Formatters are only invoked if the value is strictly not equal to the previous value, but since it is the same array instance in your first example, that statement evaluates to false, and hence the text field isn&rsquo;t updated.
+{% endblockquote %}</p>
 
 <p>配列の中身が変わっても知らんしって実装になってるから更新されへんねんでってことね。</p>
 
