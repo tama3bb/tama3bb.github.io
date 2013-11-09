@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-08T23:58:59+09:00</updated>
+  <updated>2013-11-09T10:14:32+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2.0 リリース！]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/09/angularjs-1.2.0-timely-delivery/"/>
+    <updated>2013-11-09T10:14:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/09/angularjs-1.2.0-timely-delivery</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>待望の AngularJS 1.2.0 リリースがキター！！</p>
+
+<p>まだ把握してない内容もあるんだけど、取り急ぎ公式ブログの<a href="http://blog.angularjs.org/2013/11/angularjs-120-timely-delivery.html">内容</a>を（一部省略して）日本語に訳しときます。</p>
+
+<hr />
+
+<h2>AngularJS 1.2.0: timely-delivery</h2>
+
+<p>1.2.0-rc3 で見つかった多くの問題を修正しているのと、前回の安定版リリースからいくつもの新しい機能を導入しているとのこと。</p>
+
+<p>前回の安定版リリースからの注目すべき変更点としては：</p>
+
+<ul>
+<li><a href="http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html">アニメーションとトランジション</a></li>
+<li><a href="http://kensheedlo.com/2013/08/15/error-message-minification-with-minerr.html">エラーメッセージ</a>（error minification を含む）</li>
+<li><a href="http://docs.angularjs.org/api/ng.$sce">厳密なコンテキストのエスケーピング</a></li>
+<li><a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ng-repeat で重複を防ぐトラッキング機能</a></li>
+<li><a href="http://egghead.io/lessons/angularjs-experimental-controller-as-syntax">テンプレート内で controller インスタンスにアクセスするための構文</a></li>
+<li><a href="https://github.com/angular/angular.js/pull/3699">Promise A+ に準拠</a></li>
+<li><a href="http://docs.angularjs.org/api/ngRoute">ngRoute を独自モジュールに分離</a></li>
+</ul>
+
+
+<p>リリースの詳細は、<a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md">changelog</a> を参照。</p>
+
+<p>移行ガイドは <a href="http://docs.angularjs.org/guide/migration">our guides</a> を参照。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSでカスタムfilterを書いてみよう]]></title>
@@ -1522,160 +1558,6 @@ angular.module('Ninja', [])
 <p>たったこれだけの簡単なコードで、AngularJS のモデルをサーバに同期させ、すべてのクライアントに即座に同期させるリアルタイムアプリケーションを実装することができる。</p>
 
 <p>AngularJS の勉強会をするなら、ハンズオンの題材としてちょうどよさそう。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Yeoman generator for AngularJS]]></title>
-    <link href="http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs/"/>
-    <updated>2013-08-31T00:25:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><img src="https://github-camo.global.ssl.fastly.net/10c0f69d03b7ac184d77e8aaba4358a2d4791823/687474703a2f2f79656f6d616e2e696f2f6d656469612f79656f6d616e2d6d617374686561642e706e67" alt="Yeoman" /></p>
-
-<h2>AngularJS 用 Yeoman ジェネレータ</h2>
-
-<p>Yeoman チームがベストプラクティスだと言っているプロジェクト構成を、AngularJS 用の Yeoman ジェネレータで実際に生成して確認する。</p>
-
-<!-- more -->
-
-
-<h2>yo (Yeoman) と generator-angular をインストール</h2>
-
-<p>まず yo (Yeoman) をインストール。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g yo</span></code></pre></td></tr></table></div></figure>
-
-
-<p>次に、AngularJS 用の Yeoman ジェネレータ generator-angular をインストール。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g generator-angular</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>AngularJS プロジェクトを生成</h2>
-
-<p>新しいディレクトリを作って、そのディレクトリに移動。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir my-new-project && cd $_</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>yo angular</code> を実行（アプリケーション名を付けれる）。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>yo angular [app-name]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で、Twitter Bootstrap を含めるか、SCSS を使うか、angular-resource.js, angular-cookies.js, angular-sanitiaze.js のモジュールを含めるかといった質問に答える。</p>
-
-<p>すると、うお、そんなに？ってぐらいにターミナルが流れに流れて my-new-project ディレクトリに山ほどのサブディレクトリとファイルができている。</p>
-
-<h2>生成したプロジェクトの構成を確認</h2>
-
-<p>とりあえずプロジェクト構成のことだけに絞って、ここでは app ディレクトリの下を確認。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>app/
-</span><span class='line'>├── 404.html
-</span><span class='line'>├── bower_components
-</span><span class='line'>│   ├── angular
-</span><span class='line'>│   ├── angular-cookies
-</span><span class='line'>│   ├── angular-mocks
-</span><span class='line'>│   ├── angular-resource
-</span><span class='line'>│   ├── angular-sanitize
-</span><span class='line'>│   ├── angular-scenario
-</span><span class='line'>│   ├── bootstrap-sass
-</span><span class='line'>│   ├── es5-shim
-</span><span class='line'>│   ├── jquery
-</span><span class='line'>│   └── json3
-</span><span class='line'>├── favicon.ico
-</span><span class='line'>├── index.html
-</span><span class='line'>├── robots.txt
-</span><span class='line'>├── scripts
-</span><span class='line'>│   ├── app.js
-</span><span class='line'>│   └── controllers
-</span><span class='line'>│       └── main.js
-</span><span class='line'>├── styles
-</span><span class='line'>│   ├── bootstrap.css
-</span><span class='line'>│   └── main.css
-</span><span class='line'>└── views
-</span><span class='line'>    └── main.html</span></code></pre></td></tr></table></div></figure>
-
-
-<p>目新しいのは bower_components の存在。これは、パッケージマネジメントツール <a href="http://bower.io">Bower</a> でインストールするときにできるディレクトリの名前。Yeoman は Bower を使っている。</p>
-
-<p>肝心の scripts ディレクトリの下がスッカスカなので、先に進む。</p>
-
-<h2>サブジェネレータでいろいろ生成</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>yo angular:controller myController
-</span><span class='line'>yo angular:directive myDirective
-</span><span class='line'>yo angular:filter myFilter
-</span><span class='line'>yo angular:service myService</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これで、scripts ディレクトリはこうなる。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>app/scripts/
-</span><span class='line'>├── app.js
-</span><span class='line'>├── controllers
-</span><span class='line'>│   ├── main.js
-</span><span class='line'>│   └── myController.js
-</span><span class='line'>├── directives
-</span><span class='line'>│   └── myDirective.js
-</span><span class='line'>├── filters
-</span><span class='line'>│   └── myFilter.js
-</span><span class='line'>└── services
-</span><span class='line'>    └── myService.js</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>プロジェクト構成のまとめ</h2>
-
-<p>ということで、やっぱり controller、directive、filter、service に分けて、あとはサブディレクトリを作るなり、細かく単機能ごとにファイルを分けていくということで。</p>
-
-<p>ちなみに、どれだけファイルをバラして作ったとしても、<a href="http://gruntjs.com">Grunt</a> でビルドすれば minify された 1 つの JS ファイルになるので心配ご無用！</p>
 ]]></content>
   </entry>
   
