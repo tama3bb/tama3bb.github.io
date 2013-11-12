@@ -4,7 +4,7 @@
   <title><![CDATA[Category: directive | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/directive/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-09T10:21:47+09:00</updated>
+  <updated>2013-11-12T19:22:34+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,178 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのng-classを使いこなそう]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/12/angularjs-ngclass/"/>
+    <updated>2013-11-12T16:16:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/12/angularjs-ngclass</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>ng-class とは</h2>
+
+<p><a href="http://docs.angularjs.org/api/ng.directive:ngClass">ng-class</a> は、HTML 要素に CSS class 属性値を動的にセットできる directive で、ほんとよく使う。</p>
+
+<p>すでに同じ class 属性値が要素にセットされてるときは、重複しないようになっているあたりもいい感じ。</p>
+
+<p>ng-class の使い方は、スペース区切りの class 文字列<code>'active disabled'</code>を保持する変数や、class 属性値文字列の配列<code>['active', 'disabled']</code>を保持する変数を指定する。</p>
+
+<p>けれど一番良く使うのは、class 属性値と boolean 値をマッピングした object で、これを ng-class に指定する使い方について紹介。</p>
+
+<!-- more -->
+
+
+<h2>ng-class の利用例</h2>
+
+<p><code>javascript link
+scope.isActive = function (matchIdx) {
+  return scope.active == matchIdx;
+};
+scope.selectActive = function (matchIdx) {
+  return scope.active = matchIdx;
+};
+</code></p>
+
+<p>
+<code>html template
+&lt;li ng-repeat="match in matches" ng-class="{active: isActive($index)}" ng-mouseenter="selectActive($index)"&gt;
+</code>
+</p>
+
+<p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/typeahead">Typeahead</a> から抜き出したコードで、マウスホバーされた行のインデックスを active で保持し、ng-class では<code>isActive</code>で boolean を返す isActive を指定していて、ホバー行では<code>class="ng-scope active"</code>となり、その他の行では<code>class="ng-scope"</code>となるような指定になっている。</p>
+
+<p>ちなみに、<code>$index</code>は ng-repeat で利用できるインデックス（0..length-1）で、<code>ng-scope</code>は scope ができる要素に AngularJS が自動的に付けてる class。</p>
+
+<h2>ng-class を controller で実装してみる</h2>
+
+<p>たくさんの class 属性値を制御したい場合、ng-class の指定がすごく長くなって微妙な気分になってくるので、そんなときは controller のほうに移すといい。</p>
+
+<p>ソート列のアイコンを変える UI を実現するサンプルコードはこんな感じに。</p>
+
+<p>
+``` html
+<link href="http://angularjsninja.com//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"></p>
+
+<script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
+
+
+<script>
+angular.module('Ninja', [])
+.controller('SortCtrl', function($scope) {
+  $scope.sortField = undefined;
+  $scope.ascending = true;
+  $scope.sort = function(fieldName) {
+    if ($scope.sortField == fieldName) {
+      $scope.ascending = !$scope.ascending;
+    } else {
+      $scope.sortField = fieldName;
+      $scope.ascending = true;
+    }
+  };
+  var isSortedBy = function(fieldName) {
+    return $scope.sortField === fieldName;
+  };
+  var isSortedAscending = function(fieldName) {
+    return isSortedBy(fieldName) && $scope.ascending;
+  };
+  var isSortedDescending = function(fieldName) {
+    return isSortedBy(fieldName) && !$scope.ascending;
+  };
+  $scope.iconSort = function(fieldName) {
+    return {
+      'icon-sort': !isSortedBy(fieldName),
+      'icon-sort-up': isSortedAscending(fieldName),
+      'icon-sort-down': isSortedDescending(fieldName)
+    };
+  };
+});
+</script>
+
+
+<table ng-app="Ninja" class="demo">
+  <thead ng-controller="SortCtrl">
+    <tr>
+      <th ng-click="sort('name')">
+        Name <i ng-class="iconSort('name')"></i>
+      </th>
+      <th ng-click="sort('modified')">
+        Date Modified <i ng-class="iconSort('modified')"></i>
+      </th>
+      <th ng-click="sort('size')">
+        Size <i ng-class="iconSort('size')"></i>
+      </th>
+      <th ng-click="sort('kind')">
+        Kind <i ng-class="iconSort('kind')"></i>
+      </th>
+    </tr>
+  </thead>
+</table>
+
+
+<p>```
+</p>
+
+<p><link href="http://angularjsninja.com//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"></p>
+
+<script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
+
+
+<script>
+angular.module('Ninja', [])
+.controller('SortCtrl', function($scope) {
+  $scope.sortField = undefined;
+  $scope.ascending = true;
+  $scope.sort = function(fieldName) {
+    if ($scope.sortField == fieldName) {
+      $scope.ascending = !$scope.ascending;
+    } else {
+      $scope.sortField = fieldName;
+      $scope.ascending = true;
+    }
+  };
+  var isSortedBy = function(fieldName) {
+    return $scope.sortField === fieldName;
+  };
+  var isSortedAscending = function(fieldName) {
+    return isSortedBy(fieldName) && $scope.ascending;
+  };
+  var isSortedDescending = function(fieldName) {
+    return isSortedBy(fieldName) && !$scope.ascending;
+  };
+  $scope.iconSort = function(fieldName) {
+    return {
+      'icon-sort': !isSortedBy(fieldName),
+      'icon-sort-up': isSortedAscending(fieldName),
+      'icon-sort-down': isSortedDescending(fieldName)
+    };
+  };
+});
+</script>
+
+
+<table ng-app="Ninja" class="demo">
+  <thead ng-controller="SortCtrl">
+    <tr>
+      <th ng-click="sort('name')">
+        Name <i ng-class="iconSort('name')"></i>
+      </th>
+      <th ng-click="sort('modified')">
+        Date Modified <i ng-class="iconSort('modified')"></i>
+      </th>
+      <th ng-click="sort('size')">
+        Size <i ng-class="iconSort('size')"></i>
+      </th>
+      <th ng-click="sort('kind')">
+        Kind <i ng-class="iconSort('kind')"></i>
+      </th>
+    </tr>
+  </thead>
+</table>
+
+
+<p>見どころは 25 行目の<code>$scope.iconSort</code>function で return している object で、この<code>iconSort</code>を ng-class で使ってソートのアイコン表示を切り替えている。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSのng-listが便利なようで便利でなく、でもやっぱり便利]]></title>
@@ -45,9 +217,7 @@
 
 <p><a href="http://stackoverflow.com/questions/15590140/ng-list-input-not-updating-when-adding-items-to-array">javascript &ndash; ng-list input not updating when adding items to array &ndash; Stack Overflow</a></p>
 
-<p>{% blockquote %}
-Formatters are only invoked if the value is strictly not equal to the previous value, but since it is the same array instance in your first example, that statement evaluates to false, and hence the text field isn&rsquo;t updated.
-{% endblockquote %}</p>
+<p><blockquote><p>Formatters are only invoked if the value is strictly not equal to the previous value, but since it is the same array instance in your first example, that statement evaluates to false, and hence the text field isn&rsquo;t updated.</p></blockquote></p>
 
 <p>配列の中身が変わっても知らんしって実装になってるから更新されへんねんでってことね。</p>
 
@@ -252,24 +422,24 @@ myApp.run(['$route', function($route)  {
 
 <h2>AngularJS での出力手段</h2>
 
-<p>AngularJS で単に文字列を出力するには、<code>{% raw %}{{expression}}{% endraw %}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
+<p>AngularJS で単に文字列を出力するには、<code>{{expression}}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
 
 <p><code>html
-&lt;span&gt;{% raw %}{{ninja.name}}{% endraw %}&lt;/span&gt;
+&lt;span&gt;{{ninja.name}}&lt;/span&gt;
 &lt;span ng-bind="ninja.name"&gt;&lt;/span&gt;
 </code></p>
 
 <!-- more -->
 
 
-<h2>{% raw %}{{expression}}{% endraw %} が一瞬表示されてチラつく場合の対処方法</h2>
+<h2>{{expression}} が一瞬表示されてチラつく場合の対処方法</h2>
 
-<p><code>{% raw %}{{expression}}{% endraw %}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{% raw %}{{expression}}{% endraw %}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
+<p><code>{{expression}}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{{expression}}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
 
 <p>この問題に対しては、<code>ng-bind</code>を利用するか、<a href="http://docs.angularjs.org/api/ng.directive:ngCloak"><code>ng-cloak</code></a>を以下のように利用することで解決できる。</p>
 
 <p><code>html
-&lt;span ng-cloak&gt;{% raw %}{{ninja.name}}{% endraw %}&lt;/span&gt;
+&lt;span ng-cloak&gt;{{ninja.name}}&lt;/span&gt;
 </code></p>
 
 <p>なお、<a href="http://docs.angularjs.org/api/ngRoute.directive:ngView">ng-view</a> や <a href="http://docs.angularjs.org/api/ng.directive:ngInclude">ng-include</a> で挿入される断片（partial）の HTML では、このチラつく現象は発生しないため、ng-cloak の記述は不要である。</p>
@@ -299,88 +469,6 @@ var app = angular.module(&lsquo;app&rsquo;, [&lsquo;ngSanitize&rsquo;]);
 <p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
 
 <p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく<code>ng-bind-html-unsafe</code>を利用できる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS 基礎の基礎]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel/"/>
-    <updated>2013-09-02T16:39:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS 基礎</h2>
-
-<p>しばらく AngularJS の基礎的なことを中心に書いていく。</p>
-
-<p>AngularJS の基礎として、まず <a href="http://angularjs.org/#the-basics">AngularJS のページ</a> で一番初めにあるコードから、AngularJS に関する部分を簡単に。</p>
-
-<!-- more -->
-
-
-<hr />
-
-<div ng-app>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  <label>Name:</label>
-  <input type="text" ng-model="yourName" placeholder="Enter a name here">
-  <hr>
-  <h1>Hello {% raw %}{{yourName}}{% endraw %}!</h1>
-</div>
-
-
-<hr />
-
-<p>``` html index.html
-&lt;!doctype html>
-<html ng-app>
-  <head></p>
-
-<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>  </head>
-  <body></p>
-
-<pre><code>&lt;div&gt;
-  &lt;label&gt;Name:&lt;/label&gt;
-  &lt;input type="text" ng-model="yourName" placeholder="Enter a name here"&gt;
-  &lt;hr&gt;
-  &lt;h1&gt;Hello {% raw %}{{yourName}}{% endraw %}!&lt;/h1&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p>  </body>
-</html>
-```</p>
-
-<ul>
-<li><p><a href="http://docs.angularjs.org/api/ng.directive:ngApp"><code>ng-app</code></a></p>
-
-<ul>
-<li>AngularJS が動作する範囲を指定。</li>
-<li>ページ全体とする場合は<code>&lt;html ng-app&gt;</code>とし、<code>&lt;head&gt;</code>を対象外とするなら<code>&lt;body ng-app&gt;</code>とする。</li>
-<li>より限定的に、<code>&lt;div ng-app&gt;</code>でも構わない。</li>
-</ul>
-</li>
-<li><p><a href="http://docs.angularjs.org/api/ng.directive:ngModel"><code>ng-model</code></a></p>
-
-<ul>
-<li>フォームとモデルをリンクし、どちらかでの変更を他方に反映する。</li>
-<li>この例の場合はテキストボックスへの入力値が即座に yourName プロパティに反映される。</li>
-</ul>
-</li>
-<li><p><code>{% raw %}{{yourName}}{% endraw %}</code></p>
-
-<ul>
-<li>yourName プロパティの値を HTML に表示するコード。</li>
-<li>yourName プロパティの変更が即座に反映される。</li>
-</ul>
-</li>
-</ul>
-
-
-<p>この例は、<a href="http://jsfiddle.net/api/post/library/pure/">jsFiddle</a> でコードを編集して試すことができる。</p>
 ]]></content>
   </entry>
   
