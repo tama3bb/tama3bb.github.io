@@ -4,7 +4,7 @@
   <title><![CDATA[Category: directive | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/directive/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-12T19:22:34+09:00</updated>
+  <updated>2013-11-13T12:44:19+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -44,11 +44,11 @@ scope.selectActive = function (matchIdx) {
 };
 </code></p>
 
-<p>
+<p>{% raw %}
 <code>html template
 &lt;li ng-repeat="match in matches" ng-class="{active: isActive($index)}" ng-mouseenter="selectActive($index)"&gt;
 </code>
-</p>
+{% endraw %}</p>
 
 <p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/typeahead">Typeahead</a> から抜き出したコードで、マウスホバーされた行のインデックスを active で保持し、ng-class では<code>isActive</code>で boolean を返す isActive を指定していて、ホバー行では<code>class="ng-scope active"</code>となり、その他の行では<code>class="ng-scope"</code>となるような指定になっている。</p>
 
@@ -56,11 +56,11 @@ scope.selectActive = function (matchIdx) {
 
 <h2>ng-class を controller で実装してみる</h2>
 
-<p>たくさんの class 属性値を制御したい場合、ng-class の指定がすごく長くなって微妙な気分になってくるので、そんなときは controller のほうに移すといい。</p>
+<p>たくさんの class 属性値を制御したい場合、ng-class の指定がすごく長くなって微妙な気分になってくるので、そんなときは controller のほうに移すのもいいかもしれない（CSS の class が JavaScript 側に行ってしまうのもまた微妙だけれど）。</p>
 
 <p>ソート列のアイコンを変える UI を実現するサンプルコードはこんな感じに。</p>
 
-<p>
+<p>{% raw %}
 ``` html
 <link href="http://angularjsninja.com//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"></p>
 
@@ -121,7 +121,7 @@ angular.module('Ninja', [])
 
 
 <p>```
-</p>
+{% endraw %}</p>
 
 <p><link href="http://angularjsninja.com//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"></p>
 
@@ -217,7 +217,9 @@ angular.module('Ninja', [])
 
 <p><a href="http://stackoverflow.com/questions/15590140/ng-list-input-not-updating-when-adding-items-to-array">javascript &ndash; ng-list input not updating when adding items to array &ndash; Stack Overflow</a></p>
 
-<p><blockquote><p>Formatters are only invoked if the value is strictly not equal to the previous value, but since it is the same array instance in your first example, that statement evaluates to false, and hence the text field isn&rsquo;t updated.</p></blockquote></p>
+<p>{% blockquote %}
+Formatters are only invoked if the value is strictly not equal to the previous value, but since it is the same array instance in your first example, that statement evaluates to false, and hence the text field isn&rsquo;t updated.
+{% endblockquote %}</p>
 
 <p>配列の中身が変わっても知らんしって実装になってるから更新されへんねんでってことね。</p>
 
@@ -422,24 +424,24 @@ myApp.run(['$route', function($route)  {
 
 <h2>AngularJS での出力手段</h2>
 
-<p>AngularJS で単に文字列を出力するには、<code>{{expression}}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
+<p>AngularJS で単に文字列を出力するには、<code>{% raw %}{{expression}}{% endraw %}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
 
 <p><code>html
-&lt;span&gt;{{ninja.name}}&lt;/span&gt;
+&lt;span&gt;{% raw %}{{ninja.name}}{% endraw %}&lt;/span&gt;
 &lt;span ng-bind="ninja.name"&gt;&lt;/span&gt;
 </code></p>
 
 <!-- more -->
 
 
-<h2>{{expression}} が一瞬表示されてチラつく場合の対処方法</h2>
+<h2>{% raw %}{{expression}}{% endraw %} が一瞬表示されてチラつく場合の対処方法</h2>
 
-<p><code>{{expression}}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{{expression}}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
+<p><code>{% raw %}{{expression}}{% endraw %}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{% raw %}{{expression}}{% endraw %}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
 
 <p>この問題に対しては、<code>ng-bind</code>を利用するか、<a href="http://docs.angularjs.org/api/ng.directive:ngCloak"><code>ng-cloak</code></a>を以下のように利用することで解決できる。</p>
 
 <p><code>html
-&lt;span ng-cloak&gt;{{ninja.name}}&lt;/span&gt;
+&lt;span ng-cloak&gt;{% raw %}{{ninja.name}}{% endraw %}&lt;/span&gt;
 </code></p>
 
 <p>なお、<a href="http://docs.angularjs.org/api/ngRoute.directive:ngView">ng-view</a> や <a href="http://docs.angularjs.org/api/ng.directive:ngInclude">ng-include</a> で挿入される断片（partial）の HTML では、このチラつく現象は発生しないため、ng-cloak の記述は不要である。</p>
