@@ -39,7 +39,7 @@ UI Bootstrap の [Typeahead](http://angular-ui.github.io/bootstrap/#/typeahead) 
 ちなみに、`$index`は ng-repeat で利用できるインデックス（0..length-1）で、`ng-scope`は scope ができる要素に AngularJS が自動的に付けてる class。
 
 ## ng-class を controller で実装してみる
-たくさんの class 属性値を制御したい場合、ng-class の指定がすごく長くなって微妙な気分になってくるので、そんなときは controller のほうに移すといい。
+たくさんの class 属性値を制御したい場合、ng-class の指定がすごく長くなって微妙な気分になってくるので、そんなときは controller のほうに移すのもいいかもしれない（CSS の class が JavaScript 側に行ってしまうのもまた微妙だけれど）。
 
 ソート列のアイコンを変える UI を実現するサンプルコードはこんな感じに。
 
