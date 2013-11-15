@@ -8,8 +8,9 @@ categories: [AngularJS, directive]
 ---
 ## 増殖現象にビビる
 
-UI Bootstrap の alert と、angular-app あたりを参考にしながらメッセージ表示機能を実装していたら、どんどんメッセージが増殖してくのでビビった。１件メッセージを追加するたびに、メッセージ配列ごと増えるという…。
+UI Bootstrap の [alert](http://angular-ui.github.io/bootstrap/#/alert) と、[angular-app](https://github.com/angular-app/angular-app) あたりを参考にしながらメッセージ表示機能を実装していたら、どんどんメッセージが増殖してくのでビビった。１件メッセージを追加するたびに、メッセージ配列ごと増えるという…。
 
+---
 {% raw %}
 <script src="//code.angularjs.org/1.2.0/angular.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap.min.js"></script>
