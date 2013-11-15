@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-13T12:44:04+09:00</updated>
+  <updated>2013-11-16T02:11:38+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,128 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSで増殖現象に出会ったらng-ifを疑おう]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/16/angularjs-ngif-proliferation/"/>
+    <updated>2013-11-16T02:11:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/16/angularjs-ngif-proliferation</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>増殖現象にビビる</h2>
+
+<p>UI Bootstrap の alert と、angular-app あたりを参考にしながらメッセージ表示機能を実装していたら、どんどんメッセージが増殖してくのでビビった。１件メッセージを追加するたびに、メッセージ配列ごと増えるという…。</p>
+
+<script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
+
+
+<script src="http://angularjsninja.com//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap.min.js"></script>
+
+
+<script src="http://angularjsninja.com//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
+
+
+<script>
+angular.module('Ninja', ['ui.bootstrap'])
+  .controller('NotificationsCtrl', function($scope) {
+    $scope.i = 0;
+    $scope.notifications = [];
+    $scope.addMessage = function(message, type) {
+      $scope.notifications.push({
+        message: message + $scope.i++,
+        type: type || 'error'
+      });
+    };
+  });
+</script>
+
+
+<div ng-app="Ninja" ng-controller="NotificationsCtrl" ng-cloak>
+  <a href="" ng-click="addMessage('message:')">Add a message: {{i}}</a>　← 何回かクリック！
+  <div ng-if="notifications.length">
+    <alert type="notification.type" ng-repeat="notification in notifications">
+      {{notification.message}}
+    </alert>
+  </div>
+</div>
+
+
+
+
+<!-- more -->
+
+
+<h2>サンプルコード</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//code.angularjs.org/1.2.0/angular.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;Ninja&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ui.bootstrap&#39;</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;NotificationsCtrl&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">notifications</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">addMessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">notifications</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">message</span><span class="o">:</span> <span class="nx">message</span> <span class="o">+</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">i</span><span class="o">++</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">type</span><span class="o">:</span> <span class="nx">type</span> <span class="o">||</span> <span class="s1">&#39;error&#39;</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">&quot;Ninja&quot;</span> <span class="na">ng-controller=</span><span class="s">&quot;NotificationsCtrl&quot;</span> <span class="na">ng-cloak</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;addMessage(&#39;message:&#39;)&quot;</span><span class="nt">&gt;</span>Add a message: {{i}}<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">ng-if=</span><span class="s">&quot;notifications.length&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;alert</span> <span class="na">type=</span><span class="s">&quot;notification.type&quot;</span> <span class="na">ng-repeat=</span><span class="s">&quot;notification in notifications&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      {{notification.message}}
+</span><span class='line'>    <span class="nt">&lt;/alert&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ng-if には truthy じゃなく、true / false をちゃんと渡そう</h2>
+
+<p>はじめは ng-repeat のバグなのかなと思っていたら、その外側の要素ごと増殖していってることに気付いた。つまり ng-if が怪しい。</p>
+
+<p>上記のコードでの ng-if は、notifications 配列が空っぽだったら要素ごと消しとこうってことで付けている。その ng-if に truthy な（別の）値を渡すと増殖現象になってしまうようだ。</p>
+
+<p>そんなわけで、ちゃんと true / false にして渡しましょう。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>NG: <span class="nt">&lt;div</span> <span class="na">ng-if=</span><span class="s">&quot;notifications.length&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>OK: <span class="nt">&lt;div</span> <span class="na">ng-if=</span><span class="s">&quot;!!notifications.length&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>てことで、増殖現象に出会ったら、この記事のことを思い出してくださーい。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSのng-classを使いこなそう]]></title>
@@ -1573,96 +1695,6 @@ angular.module('Ninja', [])
 <p>そのとっかかりとして、同じ機能をそれぞれのフレームワークで実装している例 <a href="http://todomvc.com">TodoMVC</a> がある。ここで各フレームワークのコードを見れるので、雰囲気をつかんでみるといいかも。</p>
 
 <p>私のオススメはもちろん、AngularJS ということで。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS 基礎の基礎]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel/"/>
-    <updated>2013-09-02T16:39:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS 基礎</h2>
-
-<p>しばらく AngularJS の基礎的なことを中心に書いていく。</p>
-
-<p>AngularJS の基礎として、まず <a href="http://angularjs.org/#the-basics">AngularJS のページ</a> で一番初めにあるコードから、AngularJS に関する部分を簡単に。</p>
-
-<!-- more -->
-
-
-<hr />
-
-<div ng-app>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  <label>Name:</label>
-  <input type="text" ng-model="yourName" placeholder="Enter a name here">
-  <hr>
-  <h1>Hello {{yourName}}!</h1>
-</div>
-
-
-<hr />
-
-<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html</span> <span class="na">ng-app</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;label&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;yourName&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Enter a name here&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;hr&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;h1&gt;</span>Hello {{yourName}}!<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><p><a href="http://docs.angularjs.org/api/ng.directive:ngApp"><code>ng-app</code></a></p>
-
-<ul>
-<li>AngularJS が動作する範囲を指定。</li>
-<li>ページ全体とする場合は<code>&lt;html ng-app&gt;</code>とし、<code>&lt;head&gt;</code>を対象外とするなら<code>&lt;body ng-app&gt;</code>とする。</li>
-<li>より限定的に、<code>&lt;div ng-app&gt;</code>でも構わない。</li>
-</ul>
-</li>
-<li><p><a href="http://docs.angularjs.org/api/ng.directive:ngModel"><code>ng-model</code></a></p>
-
-<ul>
-<li>フォームとモデルをリンクし、どちらかでの変更を他方に反映する。</li>
-<li>この例の場合はテキストボックスへの入力値が即座に yourName プロパティに反映される。</li>
-</ul>
-</li>
-<li><p><code>{{yourName}}</code></p>
-
-<ul>
-<li>yourName プロパティの値を HTML に表示するコード。</li>
-<li>yourName プロパティの変更が即座に反映される。</li>
-</ul>
-</li>
-</ul>
-
-
-<p>この例は、<a href="http://jsfiddle.net/api/post/library/pure/">jsFiddle</a> でコードを編集して試すことができる。</p>
 ]]></content>
   </entry>
   
