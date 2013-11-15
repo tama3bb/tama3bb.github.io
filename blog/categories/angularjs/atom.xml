@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-16T02:11:38+09:00</updated>
+  <updated>2013-11-16T02:16:20+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -22,7 +22,9 @@
 
 <h2>増殖現象にビビる</h2>
 
-<p>UI Bootstrap の alert と、angular-app あたりを参考にしながらメッセージ表示機能を実装していたら、どんどんメッセージが増殖してくのでビビった。１件メッセージを追加するたびに、メッセージ配列ごと増えるという…。</p>
+<p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/alert">alert</a> と、<a href="https://github.com/angular-app/angular-app">angular-app</a> あたりを参考にしながらメッセージ表示機能を実装していたら、どんどんメッセージが増殖してくのでビビった。１件メッセージを追加するたびに、メッセージ配列ごと増えるという…。</p>
+
+<hr />
 
 <p></p>
 
