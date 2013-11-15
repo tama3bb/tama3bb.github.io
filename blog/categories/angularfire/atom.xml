@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularFire | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularfire/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-16T02:18:58+09:00</updated>
+  <updated>2013-11-16T02:19:34+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -88,7 +88,7 @@ angularFire(ref, $scope, 'items');
 <p>``` html</p>
 
 <ul ng-controller="MyCtrl">
-  <li ng-repeat="item in items">{{item.name}}: {{item.desc}}</li>
+  <li ng-repeat="item in items">: </li>
 </ul>
 
 

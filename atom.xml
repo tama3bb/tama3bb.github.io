@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-16T02:16:20+09:00</updated>
+  <updated>2013-11-16T02:19:34+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -24,7 +24,7 @@
 
 <p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/alert">alert</a> と、<a href="https://github.com/angular-app/angular-app">angular-app</a> あたりを参考にしながらメッセージ表示機能を実装していたら、どんどんメッセージが増殖してくのでビビった。１件メッセージを追加するたびに、メッセージ配列ごと増えるという…。</p>
 
-<hr />
+<h2>増殖現象デモ</h2>
 
 <script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
 
