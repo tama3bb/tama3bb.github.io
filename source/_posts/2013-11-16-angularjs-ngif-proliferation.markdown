@@ -86,3 +86,5 @@ NG: <div ng-if="notifications.length">
 OK: <div ng-if="!!notifications.length">
 ```
 てことで、増殖現象に出会ったら、この記事のことを思い出してくださーい。
+
+追記：AngularJS [1.2.1 underscore-empathy](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#121-underscore-empathy-2013-11-14) で、早速バグフィックスされましたね。
