@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-16T02:19:34+09:00</updated>
+  <updated>2013-11-17T21:44:05+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -122,6 +122,8 @@ NG: &lt;div ng-if="notifications.length"&gt;
 OK: &lt;div ng-if="!!notifications.length"&gt;
 </code>
 てことで、増殖現象に出会ったら、この記事のことを思い出してくださーい。</p>
+
+<p>追記：AngularJS <a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md#121-underscore-empathy-2013-11-14">1.2.1 underscore-empathy</a> で、早速バグフィックスされましたね。</p>
 ]]></content>
   </entry>
   
