@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-17T21:44:05+09:00</updated>
+  <updated>2013-11-19T09:52:43+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSでHTMLを分割するのにお手軽なng-include]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude/"/>
+    <updated>2013-11-19T09:17:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS で HTML を分割するのにお手軽な ng-include</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ng</span><span class="na">-include</span> <span class="na">src=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>/ng-include&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ポイントとしては、属性値に文字列を渡す必要があって、ダブルクオートの内側にシングルクオートを記述すること。</p>
+
+<p>変数を渡して、可変にもできる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">sidebarUrl</span> <span class="o">=</span> <span class="s1">&#39;partials/sidebar.html&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;sidebarUrl&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ng-include で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、ng-controller も指定できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span> <span class="na">ng-controller=</span><span class="s">&quot;SidebarCtrl&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!-- more -->
+
+
+<h2>分割した HTML は $templateCache でキャッシュしてくれる</h2>
+
+<p>分割した HTML は、通信して取得した時点で AngularJS が $templateCache で（メモリに）保持するため、分割されている部分を表示するたびに取得する通信が発生するわけではない。</p>
+
+<p>かつ、必要となった時点で取得しにいくレイジーローディングなので、ユーザがまったく表示しない部分であれば、１度も取得しにいかないので効率的でもある。</p>
+
+<p>一方で、Grunt などでビルドする時に、この HTML フラグメントを一つのファイルにしてしまい、一括してロードさせることでネットワークでのロスを下げるという方向で工夫もできる。</p>
+
+<p>スクリプトとして HTML テンプレートを記述する場合は、script 要素に type と id を指定する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;scipt</span> <span class="na">type=</span><span class="s">&quot;text/ng-template&quot;</span> <span class="na">id=</span><span class="s">&quot;templateId.html&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  This is the content of the template
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>初期処理でテンプレートを $templateCache に put するようにしておけば、その分だけ操作性の向上も期待できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">myApp</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;Ninja&#39;</span><span class="p">,</span> <span class="p">[]);</span>
+</span><span class='line'><span class="nx">myApp</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$templateCache</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$templateCache</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;templateId.html&#39;</span><span class="p">,</span> <span class="s1">&#39;This is the content of the template&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>お手軽に断片化できる ng-include の紹介でしたが、HTML を分割する手段としては他にも ng-view の routing で templateUrl を指定することや、custom directive を作成することもできるので、次回以降でその辺も触れる（たぶん）。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSで増殖現象に出会ったらng-ifを疑おう]]></title>
@@ -1637,68 +1716,6 @@ angular.module('Ninja', [])
 <p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
 
 <p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく<code>ng-bind-html-unsafe</code>を利用できる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[なぜ AngularJS を採用したのか]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/03/why-angularjs/"/>
-    <updated>2013-09-03T18:15:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/03/why-angularjs</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>今回は、AngularJS を採用した理由について軽くまとめておく。</p>
-
-<p>JavaScript MVC 系のフレームワーク導入を検討することにし、もっとも普及している <a href="http://backbonejs.org">Backbone.js</a> と、双方向データバインドなど高機能な <a href="http://emberjs.com">Ember.js</a> および <a href="http://angularjs.org">AngularJS</a> を検討した。</p>
-
-<p>それぞれのフレームワークを順に 3 週間ほどずつ学習・実装してみた結果、AngularJS を採用した。</p>
-
-<!-- more -->
-
-
-<h2>Ember.js を採用しなかった理由</h2>
-
-<p>まず Ember.js を 3 週間ほど別のプロジェクトで実装してみたところ、なんか難しかった…。ただの知識不足か実力不足かも…。</p>
-
-<p>Ember.js の GUIDES ページや API ページをひととおり目を通し、Ember.js の書籍・動画・ブログなどでざっと学習したものの、簡単なところはともかく、ちょっと複雑なことをしようとすると、どう実装したらいいのかわからない…。jQuery でならとっくに終わってるぞ、と…。</p>
-
-<p>そして挫折…。</p>
-
-<p>いや、Ember.js は悪くないです。相性の問題というか、ごめんなさい。</p>
-
-<h2>Backbone.js を採用しなかった理由</h2>
-
-<p>次に、もともと本命に考えていた Backbone.js について。実際には AngularJS の後に評価したんだけれど、先に書く。</p>
-
-<p>本命と考えていた理由は、普及度と、jQuery を使い慣れていた自分が最もすんなり入れるかなと考えていたから。MVC を明確に分離して記述することになってコードの見通しがよくなる。ただ、コード量は減るというより少し増える印象。</p>
-
-<p>Backbone.js については、<a href="http://underscorejs.org">Underscore.js</a> と併せて公式ページ・書籍・動画・ブログなどでざっと学習。ついでに <a href="http://marionettejs.com">Marionette.js</a> についても軽く学習。</p>
-
-<p>Backbone.js を不採用としたのは、評価時点で、すでに AngularJS をかなり気に入っていたことが大きい。あと、自由度が高過ぎるという印象を持ったことも大きい。Ember.js や AngularJS が実現している機能を加えることは可能なもののアドオンの選択肢が多く、ベストプラクティスと言える構成がわからずにいろいろ迷いそうだなと。</p>
-
-<h2>AngularJS を採用した理由</h2>
-
-<p>AngularJS をなぜ気に入ったのかと言えば、簡単なことが驚くほど簡単にできるというところ。そのとっつきのよさに驚いた。他のメンバーが入るときに敷居が低そうで、知識不足や考慮不足による問題を発生させにくそうだと思えた。</p>
-
-<p>もちろん独自の directive を書くのは簡単ではないし、初めのころはモデルをどう宣言するのかや、HTML テンプレートをどう記述すればいいのかさえわからない始末だった。けれど、難しいところは一部のメンバーがわかってればいいので、ちょうどいいなと。</p>
-
-<p>その後すでに数か月プロトタイプで AngularJS のコードを書いてるけど、特に困難にぶち当たることもなく、AngularJS のプロジェクトへの採用は成功しそうだなと安心している。よかったよかった。</p>
-
-<h2>なぜ jQuery だけじゃダメなのか</h2>
-
-<p>ところで、jQuery だけじゃダメなのか。jQuery はクロスブラウザに対応し、コードが簡潔で可読性が高く、普及率も高い。</p>
-
-<p>ただし、DOM（HTML の構造ツリー）操作が主用途で、ある程度の規模でシングルページアプリケーションを制作する場合には、コード量が多くなり、どのタグにどんなイベントが付いているのか複雑でわかりにくくなりやすい。</p>
-
-<p>なので、Backbone.js 使いましょうというのが主流なんだと思う。</p>
-
-<h2>もしコードを比較したいなら</h2>
-
-<p>自分の経験からも、フレームワークの選定にはいくつかのフレームワークを試用してみたほうがいいと思う。</p>
-
-<p>そのとっかかりとして、同じ機能をそれぞれのフレームワークで実装している例 <a href="http://todomvc.com">TodoMVC</a> がある。ここで各フレームワークのコードを見れるので、雰囲気をつかんでみるといいかも。</p>
-
-<p>私のオススメはもちろん、AngularJS ということで。</p>
 ]]></content>
   </entry>
   

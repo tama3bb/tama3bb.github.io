@@ -9,7 +9,8 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/11/16 AngularJS, directive AngularJSで増殖現象に出会ったらng-ifを疑おう 増殖現象にビビる UI Bootstrap の alert と、angular-app あたりを参考にしながらメッセージ表示機能を実装していたら、 &hellip;">
+	<meta name="description" content="2013/11/19 AngularJS, directive AngularJSでHTMLを分割するのにお手軽なng-include AngularJS で HTML を分割するのにお手軽な ng-include 1
+&lt;div ng-include=&quot;&#39;partials &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +95,75 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-19T09:17:00+09:00" data-updated="true" itemprop="datePublished">2013/11/19</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/11/19/angularjs-nginclude/" itemprop="url">AngularJSでHTMLを分割するのにお手軽なng-include</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>AngularJS で HTML を分割するのにお手軽な ng-include</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ng</span><span class="na">-include</span> <span class="na">src=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>/ng-include&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ポイントとしては、属性値に文字列を渡す必要があって、ダブルクオートの内側にシングルクオートを記述すること。</p>
+
+<p>変数を渡して、可変にもできる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">sidebarUrl</span> <span class="o">=</span> <span class="s1">&#39;partials/sidebar.html&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;sidebarUrl&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ng-include で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、ng-controller も指定できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span> <span class="na">ng-controller=</span><span class="s">&quot;SidebarCtrl&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+		
+		<a href="/blog/2013/11/19/angularjs-nginclude/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -557,46 +627,6 @@ angular.module('Ninja', ['ui.bootstrap'])
 
 		
 		<a href="/blog/2013/09/25/twitter-bootstrap-modal-draggable/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-13T23:38:00+09:00" data-updated="true" itemprop="datePublished">2013/09/13</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/localstorage/'>localStorage</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/09/13/angular-localstorage/" itemprop="url">AngularJS の localStorage モジュール angularLocalStorage</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<p>AngularJS アプリケーションで localStorage を使うときに便利なモジュールの紹介。</p>
-
-<p><a href="https://github.com/agrublev/angularLocalStorage">agrublev/angularLocalStorage</a></p>
-
-
-		
-		<a href="/blog/2013/09/13/angular-localstorage/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
