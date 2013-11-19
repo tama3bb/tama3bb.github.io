@@ -1,0 +1,1722 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2013-11-19T13:39:12+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSでHTMLを分割するのにお手軽なng-include]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude/"/>
+    <updated>2013-11-19T09:17:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS で HTML を分割するのにお手軽な ng-include</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ng</span><span class="na">-include</span> <span class="na">src=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>/ng-include&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ポイントとしては、属性値に文字列を渡す必要があって、ダブルクオートの内側にシングルクオートを記述すること。</p>
+
+<p>変数を渡して、可変にもできる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">sidebarUrl</span> <span class="o">=</span> <span class="s1">&#39;partials/sidebar.html&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;sidebarUrl&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>ng-include</code>で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、<code>ng-controller</code>も指定できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span> <span class="na">ng-controller=</span><span class="s">&quot;SidebarCtrl&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!-- more -->
+
+
+<h2>分割した HTML は $templateCache でキャッシュしてくれる</h2>
+
+<p>分割した HTML は、通信して取得した時点で AngularJS が $templateCache で（メモリに）保持するため、分割されている部分を表示するたびに取得する通信が発生するわけではない。</p>
+
+<p>かつ、必要となった時点で取得しにいくレイジーローディングなので、ユーザがまったく表示しない部分であれば、１度も取得しにいかないので効率的でもある。</p>
+
+<p>一方で、Grunt などでビルドする時に、この HTML フラグメントを一つのファイルにしてしまい、一括してロードさせることでネットワークでのロスを下げるという方向で工夫もできる。</p>
+
+<p>スクリプトとして HTML テンプレートを記述する場合は、script 要素に<code>type</code>と<code>id</code>を指定する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;scipt</span> <span class="na">type=</span><span class="s">&quot;text/ng-template&quot;</span> <span class="na">id=</span><span class="s">&quot;templateId.html&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  This is the content of the template
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>初期処理でテンプレートを<code>$templateCache</code>に<code>put</code>するようにしておけば、その分だけ操作性の向上も期待できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">myApp</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;Ninja&#39;</span><span class="p">,</span> <span class="p">[]);</span>
+</span><span class='line'><span class="nx">myApp</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$templateCache</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$templateCache</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;templateId.html&#39;</span><span class="p">,</span> <span class="s1">&#39;This is the content of the template&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>お手軽に断片化できる ng-include の紹介でしたが、HTML を分割する手段としては他にも ng-view の routing で templateUrl を指定することや、custom directive を作成することもできるので、次回以降でその辺も触れる（たぶん）。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSで増殖現象に出会ったらng-ifを疑おう]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/16/angularjs-ngif-proliferation/"/>
+    <updated>2013-11-16T02:11:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/16/angularjs-ngif-proliferation</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>増殖現象にビビる</h2>
+
+<p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/alert">alert</a> と、<a href="https://github.com/angular-app/angular-app">angular-app</a> あたりを参考にしながらメッセージ表示機能を実装していたら、どんどんメッセージが増殖してくのでビビった。１件メッセージを追加するたびに、メッセージ配列ごと増えるという…。</p>
+
+<h2>増殖現象デモ</h2>
+
+<script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
+
+
+<script src="http://angularjsninja.com//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap.min.js"></script>
+
+
+<script src="http://angularjsninja.com//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
+
+
+<script>
+angular.module('Ninja', ['ui.bootstrap'])
+  .controller('NotificationsCtrl', function($scope) {
+    $scope.i = 0;
+    $scope.notifications = [];
+    $scope.addMessage = function(message, type) {
+      $scope.notifications.push({
+        message: message + $scope.i++,
+        type: type || 'error'
+      });
+    };
+  });
+</script>
+
+
+<div ng-app="Ninja" ng-controller="NotificationsCtrl" ng-cloak>
+  <a href="" ng-click="addMessage('message:')">Add a message: {{i}}</a>　← 何回かクリック！
+  <div ng-if="notifications.length">
+    <alert type="notification.type" ng-repeat="notification in notifications">
+      {{notification.message}}
+    </alert>
+  </div>
+</div>
+
+
+
+
+<!-- more -->
+
+
+<h2>サンプルコード</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//code.angularjs.org/1.2.0/angular.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;Ninja&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ui.bootstrap&#39;</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;NotificationsCtrl&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">notifications</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">addMessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">notifications</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">message</span><span class="o">:</span> <span class="nx">message</span> <span class="o">+</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">i</span><span class="o">++</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">type</span><span class="o">:</span> <span class="nx">type</span> <span class="o">||</span> <span class="s1">&#39;error&#39;</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">&quot;Ninja&quot;</span> <span class="na">ng-controller=</span><span class="s">&quot;NotificationsCtrl&quot;</span> <span class="na">ng-cloak</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;addMessage(&#39;message:&#39;)&quot;</span><span class="nt">&gt;</span>Add a message: {{i}}<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">ng-if=</span><span class="s">&quot;notifications.length&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;alert</span> <span class="na">type=</span><span class="s">&quot;notification.type&quot;</span> <span class="na">ng-repeat=</span><span class="s">&quot;notification in notifications&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      {{notification.message}}
+</span><span class='line'>    <span class="nt">&lt;/alert&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ng-if には truthy じゃなく、true / false をちゃんと渡そう</h2>
+
+<p>はじめは ng-repeat のバグなのかなと思っていたら、その外側の要素ごと増殖していってることに気付いた。つまり ng-if が怪しい。</p>
+
+<p>上記のコードでの ng-if は、notifications 配列が空っぽだったら要素ごと消しとこうってことで付けている。その ng-if に truthy な（別の）値を渡すと増殖現象になってしまうようだ。</p>
+
+<p>そんなわけで、ちゃんと true / false にして渡しましょう。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>NG: <span class="nt">&lt;div</span> <span class="na">ng-if=</span><span class="s">&quot;notifications.length&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>OK: <span class="nt">&lt;div</span> <span class="na">ng-if=</span><span class="s">&quot;!!notifications.length&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>てことで、増殖現象に出会ったら、この記事のことを思い出してくださーい。</p>
+
+<p>追記：AngularJS <a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md#121-underscore-empathy-2013-11-14">1.2.1 underscore-empathy</a> で、早速バグフィックスされましたね。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのng-classを使いこなそう]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/12/angularjs-ngclass/"/>
+    <updated>2013-11-12T16:16:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/12/angularjs-ngclass</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>ng-class とは</h2>
+
+<p><a href="http://docs.angularjs.org/api/ng.directive:ngClass">ng-class</a> は、HTML 要素に CSS class 属性値を動的にセットできる directive で、ほんとよく使う。</p>
+
+<p>すでに同じ class 属性値が要素にセットされてるときは、重複しないようになっているあたりもいい感じ。</p>
+
+<p>ng-class の使い方は、スペース区切りの class 文字列<code>'active disabled'</code>を保持する変数や、class 属性値文字列の配列<code>['active', 'disabled']</code>を保持する変数を指定する。</p>
+
+<p>けれど一番良く使うのは、class 属性値と boolean 値をマッピングした object で、これを ng-class に指定する使い方について紹介。</p>
+
+<!-- more -->
+
+
+<h2>ng-class の利用例</h2>
+
+<figure class='code'><figcaption><span>link</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">scope</span><span class="p">.</span><span class="nx">isActive</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">matchIdx</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">active</span> <span class="o">==</span> <span class="nx">matchIdx</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">scope</span><span class="p">.</span><span class="nx">selectActive</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">matchIdx</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="nx">matchIdx</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>template</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">&quot;match in matches&quot;</span> <span class="na">ng-class=</span><span class="s">&quot;{active: isActive($index)}&quot;</span> <span class="na">ng-mouseenter=</span><span class="s">&quot;selectActive($index)&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/typeahead">Typeahead</a> から抜き出したコードで、マウスホバーされた行のインデックスを active で保持し、ng-class では<code>isActive</code>で boolean を返す isActive を指定していて、ホバー行では<code>class="ng-scope active"</code>となり、その他の行では<code>class="ng-scope"</code>となるような指定になっている。</p>
+
+<p>ちなみに、<code>$index</code>は ng-repeat で利用できるインデックス（0..length-1）で、<code>ng-scope</code>は scope ができる要素に AngularJS が自動的に付けてる class。</p>
+
+<h2>ng-class を controller で実装してみる</h2>
+
+<p>たくさんの class 属性値を制御したい場合、ng-class の指定がすごく長くなって微妙な気分になってくるので、そんなときは controller のほうに移すのもいいかもしれない（CSS の class が JavaScript 側に行ってしまうのもまた微妙だけれど）。</p>
+
+<p>ソート列のアイコンを変える UI を実現するサンプルコードはこんな感じに。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//code.angularjs.org/1.2.0/angular.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;Ninja&#39;</span><span class="p">,</span> <span class="p">[])</span>
+</span><span class='line'><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;SortCtrl&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">sortField</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">ascending</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">sort</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">sortField</span> <span class="o">==</span> <span class="nx">fieldName</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">ascending</span> <span class="o">=</span> <span class="o">!</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">ascending</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">sortField</span> <span class="o">=</span> <span class="nx">fieldName</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">ascending</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">isSortedBy</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">sortField</span> <span class="o">===</span> <span class="nx">fieldName</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">isSortedAscending</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">isSortedBy</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">ascending</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">isSortedDescending</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">isSortedBy</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">ascending</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">iconSort</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>      <span class="s1">&#39;icon-sort&#39;</span><span class="o">:</span> <span class="o">!</span><span class="nx">isSortedBy</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">),</span>
+</span><span class='line'>      <span class="s1">&#39;icon-sort-up&#39;</span><span class="o">:</span> <span class="nx">isSortedAscending</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">),</span>
+</span><span class='line'>      <span class="s1">&#39;icon-sort-down&#39;</span><span class="o">:</span> <span class="nx">isSortedDescending</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;table</span> <span class="na">ng-app=</span><span class="s">&quot;Ninja&quot;</span> <span class="na">class=</span><span class="s">&quot;demo&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;thead</span> <span class="na">ng-controller=</span><span class="s">&quot;SortCtrl&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;th</span> <span class="na">ng-click=</span><span class="s">&quot;sort(&#39;name&#39;)&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        Name <span class="nt">&lt;i</span> <span class="na">ng-class=</span><span class="s">&quot;iconSort(&#39;name&#39;)&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;th</span> <span class="na">ng-click=</span><span class="s">&quot;sort(&#39;modified&#39;)&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        Date Modified <span class="nt">&lt;i</span> <span class="na">ng-class=</span><span class="s">&quot;iconSort(&#39;modified&#39;)&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;th</span> <span class="na">ng-click=</span><span class="s">&quot;sort(&#39;size&#39;)&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        Size <span class="nt">&lt;i</span> <span class="na">ng-class=</span><span class="s">&quot;iconSort(&#39;size&#39;)&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;th</span> <span class="na">ng-click=</span><span class="s">&quot;sort(&#39;kind&#39;)&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        Kind <span class="nt">&lt;i</span> <span class="na">ng-class=</span><span class="s">&quot;iconSort(&#39;kind&#39;)&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/thead&gt;</span>
+</span><span class='line'><span class="nt">&lt;/table&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><link href="http://angularjsninja.com//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"></p>
+
+<script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
+
+
+<script>
+angular.module('Ninja', [])
+.controller('SortCtrl', function($scope) {
+  $scope.sortField = undefined;
+  $scope.ascending = true;
+  $scope.sort = function(fieldName) {
+    if ($scope.sortField == fieldName) {
+      $scope.ascending = !$scope.ascending;
+    } else {
+      $scope.sortField = fieldName;
+      $scope.ascending = true;
+    }
+  };
+  var isSortedBy = function(fieldName) {
+    return $scope.sortField === fieldName;
+  };
+  var isSortedAscending = function(fieldName) {
+    return isSortedBy(fieldName) && $scope.ascending;
+  };
+  var isSortedDescending = function(fieldName) {
+    return isSortedBy(fieldName) && !$scope.ascending;
+  };
+  $scope.iconSort = function(fieldName) {
+    return {
+      'icon-sort': !isSortedBy(fieldName),
+      'icon-sort-up': isSortedAscending(fieldName),
+      'icon-sort-down': isSortedDescending(fieldName)
+    };
+  };
+});
+</script>
+
+
+<table ng-app="Ninja" class="demo">
+  <thead ng-controller="SortCtrl">
+    <tr>
+      <th ng-click="sort('name')">
+        Name <i ng-class="iconSort('name')"></i>
+      </th>
+      <th ng-click="sort('modified')">
+        Date Modified <i ng-class="iconSort('modified')"></i>
+      </th>
+      <th ng-click="sort('size')">
+        Size <i ng-class="iconSort('size')"></i>
+      </th>
+      <th ng-click="sort('kind')">
+        Kind <i ng-class="iconSort('kind')"></i>
+      </th>
+    </tr>
+  </thead>
+</table>
+
+
+<p>見どころは 25 行目の<code>$scope.iconSort</code>function で return している object で、この<code>iconSort</code>を ng-class で使ってソートのアイコン表示を切り替えている。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2.0 リリース！]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/09/angularjs-1.2.0-timely-delivery/"/>
+    <updated>2013-11-09T10:14:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/09/angularjs-1.2.0-timely-delivery</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>待望の AngularJS 1.2.0 リリースがキター！！</p>
+
+<p>まだ把握してない内容もあるんだけど、取り急ぎ公式ブログの<a href="http://blog.angularjs.org/2013/11/angularjs-120-timely-delivery.html">内容</a>を（一部省略して）日本語に訳しときます。</p>
+
+<hr />
+
+<h2>AngularJS 1.2.0: timely-delivery</h2>
+
+<p>1.2.0-rc3 で見つかった多くの問題を修正し、前回の安定版リリースからいくつもの新しい機能を導入している。</p>
+
+<p>前回の安定版リリースからの注目すべき変更点：</p>
+
+<ul>
+<li><a href="http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html">アニメーションとトランジション</a></li>
+<li><a href="http://kensheedlo.com/2013/08/15/error-message-minification-with-minerr.html">エラーメッセージ</a>（error minification を含む）</li>
+<li><a href="http://docs.angularjs.org/api/ng.$sce">厳密なコンテキストのエスケーピング</a></li>
+<li><a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ng-repeat で重複を防ぐトラッキング機能</a></li>
+<li><a href="http://egghead.io/lessons/angularjs-experimental-controller-as-syntax">テンプレート内で controller インスタンスにアクセスするための構文</a></li>
+<li><a href="https://github.com/angular/angular.js/pull/3699">Promise A+ に準拠</a></li>
+<li><a href="http://docs.angularjs.org/api/ngRoute">ngRoute を独自モジュールに分離</a></li>
+</ul>
+
+
+<p>リリースの詳細は、<a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md">changelog</a> を参照。</p>
+
+<p>移行ガイドは <a href="http://docs.angularjs.org/guide/migration">our guides</a> を参照。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSでカスタムfilterを書いてみよう]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/09/angularjs-filter/"/>
+    <updated>2013-11-09T00:01:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/09/angularjs-filter</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>filter とは</h2>
+
+<p>filter は、表示用に値を加工してくれる機能。HTML テンプレートだけでなく、controller や service でも利用できる。また、独自の filter を簡単に定義することもできる。</p>
+
+<p>構文から利用例、そしてカスタム filter のサンプルコードを紹介！</p>
+
+<!-- more -->
+
+
+<h2>filter の構文</h2>
+
+<p>こんなふうに、パイプ記号を使う構文で記述。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{{ expression | filter }}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>チェーン（chaining）することもできるし、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{{ expression | filter1 | filter2 }}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>引数を取ることもできる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{{ expression | filter:arg1:arg2 }}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>filter の利用例</h2>
+
+<p>たとえば数値をカンマ区切りで表示したければ、AngularJS 標準の <a href="http://docs.angularjs.org/api/ng.filter:number">number</a> filter を使うだけでラクチン。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{{ 123456789 | number }}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>123,456,789</p>
+
+<p>標準の filter については、AngularJS <a href="http://docs.angularjs.org/api/ng#filter">公式サイト</a>のほうで。<a href="http://docs.angularjs.org/api/ng.filter:filter">filter</a> filter はかなり使えるので要チェック！</p>
+
+<h2>カスタム filter を実装してみる</h2>
+
+<p>例として、全角英数字が混じってて見苦しいデータがあったとして、せめて表示の段階ででもスッキリと半角英数字に揃えて表示したいなーということを実現する filter のサンプルコードを。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://code.angularjs.org/1.2.0-rc.3/angular.min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;Ninja&#39;</span><span class="p">,</span> <span class="p">[])</span>
+</span><span class='line'><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="s1">&#39;oneByte&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">input</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[Ａ-Ｚａ-ｚ０-９]/g</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0xFEE0</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">app</span><span class="o">=</span><span class="s2">&quot;Ninja&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="p">{{</span> <span class="nx">val</span> <span class="o">|</span> <span class="nx">oneByte</span> <span class="p">}}</span><span class="o">&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">model</span><span class="o">=</span><span class="s2">&quot;val&quot;</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">init</span><span class="o">=</span><span class="s2">&quot;val=&#39;Ａｎｇｕｌａｒｊｓ Ninja&#39;&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
+
+
+<script>
+angular.module('Ninja', [])
+.filter('oneByte', function() {
+  return function(input) {
+    return input.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    });
+  };
+});
+</script>
+
+
+<div ng-app="Ninja">
+  {{ val | oneByte }}<br>
+  <input type="text" ng-model="val" ng-init="val='Ａｎｇｕｌａｒｊｓ Ninja'">
+</div>
+
+
+<p>いやー、filter 楽しい。でも filter はパフォーマンス的にアレなので、使いすぎにご注意を。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのng-listが便利なようで便利でなく、でもやっぱり便利]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/08/angularjs-nglist/"/>
+    <updated>2013-11-08T01:16:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/08/angularjs-nglist</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>ngList とは</h2>
+
+<p><a href="http://docs.angularjs.org/api/ng.directive:ngList">ngList</a> は、テキストボックスに入力された区切り文字列と、文字列配列のモデルとを相互に変換してくれる directive です。</p>
+
+<p>区切り文字（delimiter）のデフォルトはカンマですが、別の文字列や、正規表現も使えます。</p>
+
+<p>うん、なんだか便利な感じ！</p>
+
+<!-- more -->
+
+
+<h2>さっそく使ってみたけど、便利じゃない…</h2>
+
+<ul>
+<li>配列に文字列を追加・削除してもテキストボックスの表示変わらんやん…</li>
+<li>正規表現はおろか、何を指定してもカンマとして動いてくれちゃうやん…</li>
+</ul>
+
+
+<p>なんだろう、あきらかに不具合だよ、これは。</p>
+
+<p>てことで、いつものように Stack Overflow に頼る。</p>
+
+<p><a href="http://stackoverflow.com/questions/15590140/ng-list-input-not-updating-when-adding-items-to-array">javascript &ndash; ng-list input not updating when adding items to array &ndash; Stack Overflow</a></p>
+
+<blockquote><p>Formatters are only invoked if the value is strictly not equal to the previous value, but since it is the same array instance in your first example, that statement evaluates to false, and hence the text field isn&#8217;t updated.</p></blockquote>
+
+
+<p>配列の中身が変わっても知らんしって実装になってるから更新されへんねんでってことね。</p>
+
+<h2>でもやっぱり便利だから使えるようにしたい</h2>
+
+<p>AngularJS 本体のコードを修正して Pull Req&hellip;。いやいや、敷居が高い。</p>
+
+<p>とりあえずの対応としては、配列に文字列を追加・削除するたびに配列を新しくしちゃえば動く。</p>
+
+<h2>デモとサンプルコード</h2>
+
+<hr />
+
+<div ng-app>
+  <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>  
+  <script>
+    function TagCtrl($scope) {
+      $scope.tags = [];
+      $scope.select = function(tag) {
+        if ($scope.contains(tag, $scope.tags)) {
+          var tags = [];
+          angular.forEach($scope.tags, function(t) {
+            if (tag != t) {
+              tags.push(t);
+            }
+          });
+          $scope.tags = tags;
+        } else {
+          $scope.tags = angular.copy($scope.tags);
+          $scope.tags.push(tag);
+        }
+      };
+      $scope.contains = function(value, array) {
+        return 0 <= $.inArray(value, array);
+      };
+    }
+  </script>
+  <div ng-controller="TagCtrl">
+    <input type="text" ng-model="tags" ng-list><br>
+    <a href="" ng-click="select('Red')">Red</a>    
+    <a href="" ng-click="select('Orange')">Orange</a>
+    <a href="" ng-click="select('Yellow')">Yellow</a>
+    <a href="" ng-click="select('Green')">Green</a>
+    <a href="" ng-click="select('Blue')">Blue</a>
+    <a href="" ng-click="select('Purple')">Purple</a>
+    <a href="" ng-click="select('Gray')">Gray</a>
+  </div>
+</div>
+
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-app</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://codeorigin.jquery.com/jquery-2.0.3.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://code.angularjs.org/1.2.0-rc.3/angular.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="kd">function</span> <span class="nx">TagCtrl</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">select</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tag</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">tags</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>          <span class="nx">angular</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">tag</span> <span class="o">!=</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">tags</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>          <span class="p">});</span>
+</span><span class='line'>          <span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span> <span class="o">=</span> <span class="nx">tags</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">copy</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">$scope</span><span class="p">.</span><span class="nx">tags</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">tag</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">contains</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">inArray</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">array</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">&quot;TagCtrl&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;tags&quot;</span> <span class="na">ng-list</span><span class="nt">&gt;&lt;br&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Red&#39;)&quot;</span><span class="nt">&gt;</span>Red<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Orange&#39;)&quot;</span><span class="nt">&gt;</span>Orange<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Yellow&#39;)&quot;</span><span class="nt">&gt;</span>Yellow<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Green&#39;)&quot;</span><span class="nt">&gt;</span>Green<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Blue&#39;)&quot;</span><span class="nt">&gt;</span>Blue<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Purple&#39;)&quot;</span><span class="nt">&gt;</span>Purple<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(&#39;Gray&#39;)&quot;</span><span class="nt">&gt;</span>Gray<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>区切り文字の変更は？</h2>
+
+<p>まあ、とりあえずカンマ区切りでヨシということで。ここの <a href="https://github.com/angular/angular.js/blob/v1.2.0-rc.3/src/ng/directive/input.js#L1381">value.join(&lsquo;, &rsquo;)</a> がおかしいんだろうと思いつつも、必要になるまで置いとこう。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2.0-rc3 以降の Promise]]></title>
+    <link href="http://angularjsninja.com/blog/2013/10/26/angularjs-1.2.0-rc3-promises/"/>
+    <updated>2013-10-26T14:15:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/10/26/angularjs-1.2.0-rc3-promises</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS 1.2.0-rc3 以降、Promise の扱いに注意</h2>
+
+<p>rc2 までと異なり、promise の自動アンラップ（auto unwrapping）がデフォルトで無効となり、promise を直接 $scope の変数に突っ込んでたりするとうまく動かなくなる。</p>
+
+<p>rc2 までは、promise がリターンされるとき、こんなふうに書けた。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">values</span> <span class="o">=</span> <span class="nx">NinjaService</span><span class="p">.</span><span class="nx">getValues</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rc3 からは、こう書かないと動かない。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">NinjaService</span><span class="p">.</span><span class="nx">getValues</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">values</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">values</span> <span class="o">=</span> <span class="nx">values</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>自動アンラップを採用しなくした理由は、この Issue でのやり取りに詳しく書かれている。</p>
+
+<p><a href="https://github.com/angular/angular.js/issues/4158">Automatic unwrapping of promises by $parse severely limits its usefulness · Issue #4158 · angular/angular.js</a></p>
+
+<p>この変更によって、前回のエントリーで書いた Angular UI の Typeahead も動作するようになったということ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2.0-rc2 で Typeahead が動かない]]></title>
+    <link href="http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/"/>
+    <updated>2013-10-19T17:42:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS で UI Bootstrap の Typeahead が動かない</h2>
+
+<p>AngularJS 1.2.0 の rc2 にした途端、UI Bootstrap (0.6.0) の Typeahead (Autocomplete みたいなやつ) が動かなくなった。</p>
+
+<p>仕様変更なのかバグなのかわからず、とりあえず<code>ui-bootstrap-tpls-0.6.0.js</code>のコードを見たりしながらも AngularJS か UI Bootstrap のほうでバグ修正してくんないかなーと期待＆様子見していたところ、AngularJS 1.2.0 の rc3 では正常に動作するようになったので一件落着。</p>
+
+<p>ちなみに、rc2 でのエラーは、<code>matches is undefined</code>というもの。</p>
+
+<p>Stack Overflow で関連する記事は、<a href="http://stackoverflow.com/questions/18764023/angularjs-1-2-0-bootstrap-ui-0-6-0-bootstrap3-bis2-typeahead/19377002#19377002">AngularJS 1.2.0 Bootstrap UI 0.6.0 (bootstrap3_bis2) Typeahead</a> かな。rc2 では、<code>promise</code>絡みの実装に問題があったみたいだ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery と AngularJS]]></title>
+    <link href="http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs/"/>
+    <updated>2013-10-05T20:32:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>jQuery と AngularJS は併用できるのか？</h2>
+
+<ul>
+<li>jQuery と AngularJS は併用可能</li>
+<li>jQuery メインのサイトで AngularJS を部分的に使用可能</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>AngularJS と jQuery は併用可能</h2>
+
+<p>AngularJS より先に jQuery を読み込ませていればその jQuery が利用される。jQuery を読み込ませていなければ AngularJS が内蔵している jqLite（jQuery の API 互換サブセット）の実装が利用される。</p>
+
+<p>jqLite が実装している jQuery 互換の DOM 操作関連の API は、<a href="http://docs.angularjs.org/api/angular.element">AngularJS: element</a> で確認できるが、DOM 操作系の主要なメソッドは実装されている。</p>
+
+<p>AngularJS 1.2 では、<code>bind()</code>/<code>unbind()</code>でなく<code>on()</code>/<code>off()</code>が利用されるため、jQuery のバージョンは 1.7.1 以降とする必要がある。</p>
+
+<p>AngularJS で jQuery の DOM 操作を実装する場合、controller では要素の追加・削除や表示・非表示などの DOM 操作を実装せずに、AngularJS にビルトイン（標準）の directive を利用するか、自作の directive で DOM 操作を実装しよう。</p>
+
+<p><code>ng-repeat</code>、<code>ng-show</code>、<code>ng-class</code>など、jQuery で実装していた処理を代替できる directive が多数存在するので、積極的に利用してコード量を減らそう。</p>
+
+<h2>jQuery メインのサイトで AngularJS を部分的に使用可能</h2>
+
+<p>jQuery メインに実装してきたサイトで AngularJS を部分的に使うということも可能で、そういう場合には AngularJS の適用範囲（scope）を決めるルート的な directive の<code>ng-app</code>を<code>html</code>や<code>body</code>要素ではなく、必要最小限の範囲を囲う要素に対して記述する。</p>
+
+<p>jQuery で大半を実装しているようなサイトやアプリケーションで、全面的に AngularJS に書き変える決断がすぐにできない場合には、少しずつ部分的に導入して攻めていこう。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Twitter Bootstrap のモーダルをドラッグで動かしたいときは]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/"/>
+    <updated>2013-09-25T21:57:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>みんな大好き <a href="http://getbootstrap.com/2.3.2/">Twitter Bootstrap</a> の話。CSS フレームワークの枠を超え、フロントエンド開発のキングというか、デファクトですね。</p>
+
+<p>数年前のプロジェクトで <a href="http://www.blueprintcss.org">Blueprint</a> をチョイスした自分がバカみたいに、その後の Bootstrap の大流行。<a href="http://getbootstrap.com">Bootstrap 3</a> も引き続き人気を博するだろうか。</p>
+
+<p>そんな Bootstrap なんだけど、不満があるとすれば、モーダル（<a href="http://getbootstrap.com/2.3.2/javascript.html#modals">Modals</a>）を動かせないこと！ モーダルダイアログがなんでドラッグで動かないんだ！</p>
+
+<!-- more -->
+
+
+<h2>困ったときはググるでしょ</h2>
+
+<p>てことで、<code>bootstrap modal drag</code>とかでググればアッサリ答えにありつける。いつもながら Stack Overflow はすごいなあ、助かるなあと感謝しながらおもむろにページを開く。</p>
+
+<p><a href="http://stackoverflow.com/questions/12591597/twitter-bootstrap-modal-form-how-to-drag-and-drop">Twitter Bootstrap Modal Form: How to drag and drop? &ndash; Stack Overflow</a></p>
+
+<p>答えとしては、<a href="http://jqueryui.com/">jQuery UI</a> の <a href="http://jqueryui.com/draggable/">Draggable</a> を使えということ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#myModal&quot;</span><span class="p">).</span><span class="nx">draggable</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">handle</span><span class="o">:</span> <span class="s2">&quot;.modal-header&quot;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そんだけー。</p>
+
+<p>じゃなかった…。そう言えば、このままだとセレクタ<code>.modal.fade</code>と<code>.modal.fade.in</code>に定義されている<code>top</code>と<code>transition</code>のプロパティ（モーダルが上から滑り降りてくるトランジション）による影響で、縦方向のドラッグがの〜んびりした動きになって違和感が残る。</p>
+
+<p>なので、上から滑り降りてくるトランジションはあきらめて、class 属性から<code>fade</code>を消してしまうのがいいと思う。</p>
+
+<p>jQuery UI については、すべての機能はいらないだろうから、Draggable だけとか、必要な機能だけ選択してダウンロードしましょう。</p>
+
+<h2>UI Bootstrap と AngularStrap</h2>
+
+<p>ちょっと脱線して、AngularJS のことも。</p>
+
+<p>AngularJS と Bootstrap を併用するときは <a href="http://angular-ui.github.io/bootstrap/">UI Bootstrap</a> か、<a href="http://mgcrea.github.io/angular-strap/">AngularStrap</a> を使うと、Bootstrap のコンポーネントが AngularJS の directive として定義されているのでとてもラク。自分で記述するコードがすごく少なくなって快適。</p>
+
+<p>ただ、この UI Bootstrap と AngularStrap は、それぞれいいとこも微妙なとこもあるので両方を使いたいと欲張っちゃうこともある。すると今回のメインである Modal でエラーが…。</p>
+
+<p>Modal に限れば UI Bootstrap のほうが優れてるので、AngularStrap の $modal directive コードを削除しちゃいましょう。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS の localStorage モジュール angularLocalStorage]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/13/angular-localstorage/"/>
+    <updated>2013-09-13T23:38:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/13/angular-localstorage</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS アプリケーションで localStorage を使うときに便利なモジュールの紹介。</p>
+
+<p><a href="https://github.com/agrublev/angularLocalStorage">agrublev/angularLocalStorage</a></p>
+
+<!-- more -->
+
+
+<h2>機能</h2>
+
+<ul>
+<li>AngularJS の model と localStorage を双方向にバインド</li>
+<li>オブジェクト、配列も変換不要</li>
+<li>localStorage 非対応のブラウザでは $cookies にフォールバック（angular-cookies.min.js を参照し、<code>ngCookies</code>を依存モジュールとして記述）</li>
+</ul>
+
+
+<h2>使い方</h2>
+
+<p>依存モジュールとして<code>localStorage</code>を追加。</p>
+
+<figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">yourApp</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;yourApp&#39;</span><span class="p">,</span> <span class="p">[...,</span> <span class="s1">&#39;angularLocalStorage&#39;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>controller に<code>storage</code>を記述。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">yourApp</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;yourController&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">storage</span><span class="p">)</span> <span class="p">{</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>storage</code>を使う。デフォルト値やキーを変更可能。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// storage.variable にバインド</span>
+</span><span class='line'><span class="nx">storage</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span><span class="s1">&#39;varName&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// * defaultValue: デフォルト値</span>
+</span><span class='line'><span class="c1">// * storeName: 変数名と異なる localStorage への保存 key を指定</span>
+</span><span class='line'><span class="nx">storage</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="s1">&#39;varName&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">defaultValue</span><span class="o">:</span> <span class="s1">&#39;randomValue123&#39;</span><span class="p">,</span> <span class="nx">storeName</span><span class="o">:</span> <span class="s1">&#39;customStoreKey&#39;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これだけ。とにかく便利。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS カンファレンス『ng-conf』が年始に開催]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/"/>
+    <updated>2013-09-12T23:31:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/12/ng-conf-2014</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://lh5.googleusercontent.com/proxy/wsYUaddAvIcNhXYf0kt63gkDYp_VzQ2-JwB-jUlPzAazYg53ibQF8JdCn2SNwI9ZucozuoJDrhvT54sOHfX44Jiq_v0FvlzDIsQc-4s-q-mnJdx_y6nDHx-VmA=w120-h120" alt="ng-conf" /></p>
+
+<p>AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。</p>
+
+<!-- more -->
+
+
+<h4>公式ページ</h4>
+
+<p><a href="http://www.ng-conf.org/">ng-conf 2014 &ndash; The World&rsquo;s First Angular Conference in Salt Lake City, Utah</a></p>
+
+<h4>Eventbrite</h4>
+
+<p><a href="http://ng-conf-slc-2014.eventbrite.com">ng-conf 2014 Tickets, Salt Lake City &ndash; Eventbrite</a></p>
+
+<h4>Google+</h4>
+
+<p><a href="https://plus.google.com/101125427377197999853/posts">ng-conf &ndash; Google+</a></p>
+
+<p>Eventbrite の情報では、開催前日の 1 月 15 日に Jon Lindquist さんにより、6 時間のトレーニングを受けられるみたい。Jon Lindquist さんは、AngularJS の学習動画で有名な <a href="http://egghead.io">Egghead.io</a> の人。</p>
+
+<p>2 日間で $600.00 + $27.95、トレーニングを含む 3 日間で $1,000.00 + $39.95。いつもながら、アメリカのカンファレンスってほんと高い。まあ、AngularJS のおかげで稼がせてもらってるようなもんですから、こういうときにお返ししましょうね。</p>
+
+<p>Google+ での情報によると、$600 ドルは Early Bird Ticket Sales、つまり早割で安くなっていて、正規の金額は 2 日間で $800 の様子。</p>
+
+<p>さあ、みんなで行こうじゃありませんかー！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS を古い IE に対応させるには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/11/angularjs-ie-compatibility/"/>
+    <updated>2013-09-11T23:58:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/11/angularjs-ie-compatibility</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS を IE 8 以前の Internet Explorer に対応させるには、<a href="http://docs.angularjs.org/guide/ie">AngularJS: Internet Explorer Compatibility</a> のページに記載されている手順を実施する必要がある。</p>
+
+<!-- more -->
+
+
+<p>まず json2.js または json3.js。</p>
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">xmlns:ng=</span><span class="s">&quot;http://angularjs.org&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!--[if lte IE 8]&gt;</span>
+</span><span class='line'><span class="c">      &lt;script src=&quot;/path/to/json2.js&quot;&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="c">    &lt;![endif]--&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    ...
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次に &ldquo;ng-app&rdquo; という値の id 属性を、ng-app 属性を記述する要素に追加。</p>
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">xmlns:ng=</span><span class="s">&quot;http://angularjs.org&quot;</span> <span class="na">id=</span><span class="s">&quot;ng-app&quot;</span> <span class="na">ng-app=</span><span class="s">&quot;optionalModuleName&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  ...
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後に、カスタムタグを使わないようにする。</p>
+
+<p>または、&lt;ng-view> や 独自のカスタムタグ（例えば <alert> や <tabset> など）を使うのであれば、そのためのコード（document.createElement）を追加。</p>
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">xmlns:ng=</span><span class="s">&quot;http://angularjs.org&quot;</span> <span class="na">id=</span><span class="s">&quot;ng-app&quot;</span> <span class="na">ng-app=</span><span class="s">&quot;optionalModuleName&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!--[if lte IE 8]&gt;</span>
+</span><span class='line'><span class="c">      &lt;script&gt;</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng-include&#39;);</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng-pluralize&#39;);</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng-view&#39;);</span>
+</span><span class='line'><span class="c"> </span>
+</span><span class='line'><span class="c">        // Optionally these for CSS</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng:include&#39;);</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng:pluralize&#39;);</span>
+</span><span class='line'><span class="c">        document.createElement(&#39;ng:view&#39;);</span>
+</span><span class='line'><span class="c">      &lt;/script&gt;</span>
+</span><span class='line'><span class="c">    &lt;![endif]--&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    ...
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>それだけで済まない場合も</h2>
+
+<p>最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かないので、delete メソッドを以下のように変更。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$http</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="err">…</span><span class="p">)</span> <span class="c1">// エラー</span>
+</span><span class='line'><span class="nx">$http</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">](</span><span class="err">…</span><span class="p">)</span> <span class="c1">// これで OK</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS のステッカーをゲットするには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/10/angularjs-stickers/"/>
+    <updated>2013-09-10T14:14:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/10/angularjs-stickers</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://ih0.redbubble.net/image.13710650.1031/sticker,375x360.u8.png" alt="AngularJS ×2 by csyz ★ $1.49 stickers" /></p>
+
+<p>AngularJS が好きで好きでしょうがない？</p>
+
+<p>ステッカーを MacBook Air に貼って、AngularJS Ninja っぷりをアピールしたい？</p>
+
+<p>よくイベントとかで配ってたりするけど、AngularJS のイベントなんてやってない？</p>
+
+<p>そんなときは買っちゃおう！</p>
+
+<!-- more -->
+
+
+<h2>Redbubble</h2>
+
+<p><a href="http://www.redbubble.com/people/csyz/portfolio">csyz ★ $1.49 stickers: Art, Design &amp; Photography | Redbubble</a></p>
+
+<p>ステッカーだけでなくＴシャツもあるし、AngularJS だけでなく Node.js や Backbone.js など他にもいろいろある！</p>
+
+<p>ちなみに私の MacBook Air には、白いリンゴマークしか付けてませんけどね。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hex Color Tool で明度だけを変えたヘックスコードを取得する]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/09/hexcolortool/"/>
+    <updated>2013-09-09T23:34:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/09/hexcolortool</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://hexcolortool.com/images/logo.svg" alt="Hex Color Tool" /></p>
+
+<p>ベースカラーを少し明るくした色や、少し暗くした色が欲しくても、ヘックスコードがわかんないってときには、<a href="http://hexcolortool.com/">Hex Color Tool</a> を使おう。ベースカラーを 5% 刻みで明るく、または暗くした値を表示させることができる。</p>
+
+<!-- more -->
+
+
+<p>白色の #ffffff を 5% ずつ暗くすると、#f2f2f2, #e6e6e6, #d9d9d9, #cccccc となり、<a href="http://getbootstrap.com/">Twitter Bootstrap</a> の CSS でも頻繁に指定されている薄いグレー色の値となる。</p>
+
+<p>このツールを使って得たヘックスコードをグラデーションなどに利用して、統一感の取れたカラーデザインのページを実現しよう。</p>
+
+<p>え？ LESS や Sass を使えばいいって？ 実はあんまり好きじゃないんですよね…。</p>
+
+<p>てことで、今回は AngularJS と直接関係ない内容。UI デザインに関したこともちょくちょく書いてくということで。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/"/>
+    <updated>2013-09-08T20:33:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS 1.2 で追加された新しい directive の<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を紹介。</p>
+
+<p>通常の<a href="http://docs.angularjs.org/api/ng.directive:ngRepeat"><code>ng-repeat</code></a>では実現しにくかった複数の要素にまたがった繰り返しが可能になる。</p>
+
+<!-- more -->
+
+
+<h2>ul / ol</h2>
+
+<p>コードを見るほうがわかりやすいので、まずは通常の<code>ng-repeat</code>で<code>&lt;li&gt;</code>を繰り返すコード例から。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">&quot;user in users&quot;</span><span class="nt">&gt;</span>user.name<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>dl</h2>
+
+<p>次は<code>&lt;dl&gt;</code>の例。このケースでは<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を使う。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;dl&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;dt</span> <span class="na">ng-repeat-start=</span><span class="s">&quot;user in users&quot;</span><span class="nt">&gt;</span>user.name<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;dd</span> <span class="na">ng-repeat-end</span><span class="nt">&gt;</span>user.description<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dl&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>&lt;dl&gt;</code>は特殊で、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>が交互に並び<code>&lt;dl&gt;</code>で囲まれない。そのため、ng-repeat ではうまく指定できなかった。<code>&lt;dl&gt;</code>に対して ng-repeat を指定すると<code>&lt;dl&gt;</code>ごと繰り返されてしまう。</p>
+
+<p><code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用すると、<code>&lt;dt&gt;&lt;dd&gt;&lt;dt&gt;&lt;dd&gt;</code>のように、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>がセットで繰り返される。</p>
+
+<h2>table</h2>
+
+<p>また、以下のテーブルのコード例のように、2 行分を繰り返すような場合にも<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用するとうまくいく。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;table&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;tbody&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;tr</span> <span class="na">ng-repeat-start=</span><span class="s">&quot;user in users&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>user.name<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>user.sex<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;tr</span> <span class="na">ng-repeat-end</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>user.description<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/tbody&gt;</span>
+</span><span class='line'><span class="nt">&lt;/table&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS の学習リソースまとめ]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/07/learning-angularjs/"/>
+    <updated>2013-09-07T23:58:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/07/learning-angularjs</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2><img src="http://dotinstall.com/img/topbar_logo.png" alt="ドットインストール" /></h2>
+
+<p>なにはともあれドットインストール。最強の動画学習サイト。</p>
+
+<p><a href="http://dotinstall.com/lessons/basic_angularjs">AngularJS入門 (全12回) &ndash; プログラミングならドットインストール</a></p>
+
+<p>動画学習でオススメなのは、動画の再生速度を 1.5 倍速か 2 倍速にすること。時は金なり。</p>
+
+<p>ドットインストールは初心者向けの内容なので、今後は中級者向けの動画も提供されていくことを期待！</p>
+
+<!-- more -->
+
+
+<hr />
+
+<h2>Qiita</h2>
+
+<p><a href="http://qiita.com/tags/angularjs/items">AngularJS&rsquo;s new posts &ndash; Qiita</a></p>
+
+<p>情報たくさんあって活気ある Qiita。私も Qiita で情報発信したほうがたくさんの人に見てもらえただろうな…。</p>
+
+<hr />
+
+<h2><img src="https://raw.github.com/angular/angular.js/master/images/logo/AngularJS.exports/AngularJS-small.png" alt="AngularJS 公式サイト" /></h2>
+
+<p><a href="http://angularjs.org/">AngularJS — Superheroic JavaScript MVW Framework</a></p>
+
+<p>AngularJS 公式サイト。トップページだけでなく、Tutorial、Developer Guide、API Reference と見どころ満載。API Reference は頻繁に訪れることに。</p>
+
+<hr />
+
+<h2><img src="http://www.youtube.com/yt/brand/media/image/yt-brand-standard-logo-95x40.png" alt="Youtube" /></h2>
+
+<p><a href="http://www.youtube.com/user/angularjs">AngularJS &ndash; YouTube</a></p>
+
+<p>AngularJS の YouTube チャンネル。プログラミング系の学習は動画とホント相性がいい。最初のうちはとにかく動画から吸収しよう。</p>
+
+<hr />
+
+<h2><img src="http://d3gqmx6sr7od7s.cloudfront.net/assets/logo-1f7bbe07d5a965bf3720a02869dc7e95.svg" alt="egghead.io" /></h2>
+
+<p><a href="http://www.egghead.io/">AngularJS: Awesome Tutorial Videos, Workshops, and Training &ndash; @eggheadio</a></p>
+
+<p>AngularJS の動画学習サイトで、質が高い。AngularJS のキモと言える Directive について詳しく説明している。</p>
+
+<hr />
+
+<h2><img src="http://upload.wikimedia.org/wikipedia/en/9/95/Stack_Overflow_website_logo.png" alt="Stack Overflow" /></h2>
+
+<p><a href="http://stackoverflow.com/questions/tagged/angularjs">Highest Voted &lsquo;angularjs&rsquo; Questions &ndash; Stack Overflow</a></p>
+
+<p>Stack Overflow はホントすごいサイト。このサイトのお陰で自分の仕事が成立していると言っても過言ではないと思う。</p>
+
+<hr />
+
+<h2>洋書</h2>
+
+<p>『<a href="http://shop.oreilly.com/product/0636920028055.do">AngularJS</a>』by Brad Green, Shyam Seshadri &ndash; April 2013</p>
+
+<p>『<a href="http://www.packtpub.com/angularjs-web-application-development/book">Mastering Web Application Development with AngularJS</a>』by Peter Bacon Darwin, Pawel Kozlowski &ndash; August 2013</p>
+
+<p>『<a href="http://www.manning.com/bford/">AngularJS in Action</a>』by Brian Ford, Lukas Ruebbelke &ndash; January 2014</p>
+
+<p>とりあえずこの 3 冊。後発だけあって、後の 2 冊のほうが内容充実。AngularJS in Action は未完の書籍で、Early Access Edition で全 13 章のうち 5 章まで読める（2013年9月7日現在）。</p>
+
+<hr />
+
+<h2>AngularJS-Learning</h2>
+
+<p><a href="https://github.com/jmcunningham/AngularJS-Learning">jmcunningham/AngularJS-Learning</a></p>
+
+<p>AngularJS 学習系リソースまとめページ。リンク多過ぎて始めにここ見るとしんどくなるけど、きちんと分類されてる。</p>
+
+<hr />
+
+<h2>GitHub</h2>
+
+<p><a href="https://github.com/search?q=angular">Search · angular</a></p>
+
+<p>GitHub で実践的に。ここで angular で検索し、Star がたくさん付いてるもののコードを眺めていく。</p>
+
+<hr />
+
+<h2>Twitter</h2>
+
+<p><a href="https://twitter.com/angularjs">@angularjs</a></p>
+
+<p>AngularJS の情報がリツイートされてくるので、AngularJS 情報を日常的に取りたいときにはフォロー。</p>
+
+<hr />
+
+<h2>AngularJS Ninja</h2>
+
+<p><a href="http://angularjsninja.com/">AngularJS Ninja</a></p>
+
+<p>地道にコツコツと AngularJS の情報を発信していくでござる。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[初回アクセス時やリロード時だけng-viewの部分が表示されない場合の解決方法]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/06/ngview-does-not-work-at-initial-route/"/>
+    <updated>2013-09-06T18:53:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/06/ngview-does-not-work-at-initial-route</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>ng-view で表示する部分が、初回アクセス時やリロード時だけ表示されない場合の解決方法について。</p>
+
+<p>この現象は、ng-view が ng-include の中に入っている場合に発生してしまうようで、このページの情報のおかげで解決できた。</p>
+
+<p><a href="https://github.com/angular/angular.js/issues/1213">Initial route update doesn&rsquo;t happen if ngView in a template loaded by ngInclude</a></p>
+
+<!-- more -->
+
+
+<p>コードはこれだけ。</p>
+
+<figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myApp</span><span class="p">.</span><span class="nx">run</span><span class="p">([</span><span class="s1">&#39;$route&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$route</span><span class="p">)</span>  <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$route</span><span class="p">.</span><span class="nx">reload</span><span class="p">();</span>
+</span><span class='line'><span class="p">}]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS アプリケーションを国際化するには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/05/angularjs-i18n/"/>
+    <updated>2013-09-05T19:49:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/05/angularjs-i18n</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://pascalprecht.github.io/angular-translate/docs/en/img/logo/angular-translate-alternative/angular-translate_alternative_medium2.png" alt="angular-translate" /></p>
+
+<p>AngularJS アプリケーションを国際化するには、<a href="http://pascalprecht.github.io/angular-translate/">angular-translate</a> を使うのがとてもいい感じなので紹介。</p>
+
+<p>簡単な特徴</p>
+
+<ul>
+<li>言語ごとにリソースファイルを分けられる</li>
+<li>表示する言語のファイルだけを非同期に読み込める</li>
+<li>選択言語を LocalStorage または Cookie に保存してくれる</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>angular-translate のインストール</h2>
+
+<p>Bower でモジュールをインストールし、JS ファイルを適当なとこに置いて HTML から参照させて、AngularJS の依存モジュールとして記述。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bower install angular-translate
+</span><span class='line'>$ bower install angular-translate-storage-cookie
+</span><span class='line'>$ bower install angular-translate-storage-local
+</span><span class='line'>$ bower install angular-translate-loader-static-files
+</span><span class='line'>$ bower install angular-translate-handler-log</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title&gt;</span>i18n app<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular-translate.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular-translate-storage-cookie.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular-translate-storage-local.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular-translate-loader-static-files.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;path/to/angular-translate-handler-log.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;app.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;body</span> <span class="na">ng-app=</span><span class="s">&quot;myApp&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;pascalprecht.translate&#39;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>$translateProvider の設定</h2>
+
+<p>$translateProvider を config で設定。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">config</span><span class="p">([</span><span class="s1">&#39;$translateProvider&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$translateProvider</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$translateProvider</span><span class="p">.</span><span class="nx">useStaticFilesLoader</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;assets/i18n/locale-&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">suffix</span><span class="o">:</span> <span class="s1">&#39;.json&#39;</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="nx">$translateProvider</span><span class="p">.</span><span class="nx">preferredLanguage</span><span class="p">(</span><span class="s1">&#39;ja&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$translateProvider</span><span class="p">.</span><span class="nx">fallbackLanguage</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$translateProvider</span><span class="p">.</span><span class="nx">useMissingTranslationHandlerLog</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">$translateProvider</span><span class="p">.</span><span class="nx">useLocalStorage</span><span class="p">();</span>
+</span><span class='line'><span class="p">}]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>useStaticFilesLoader でリソースファイルのファイルパスを指定</li>
+<li>preferredLanguage でデフォルトの言語キーを指定</li>
+<li>fallbackLanguage で選択言語にリソースが見つからない場合の言語を指定</li>
+<li>useMissingTranslationHandlerLog でキーに対応するリソースが見つからない場合に console 出力</li>
+<li>useLocalStorage で選択言語の保存先として localStorage を指定（非対応ブラウザでは Cookie に保存される）</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">assets</span><span class="o">/</span><span class="nx">i18n</span><span class="o">/</span>
+</span><span class='line'><span class="err">├──</span> <span class="nx">locale</span><span class="o">-</span><span class="nx">en</span><span class="p">.</span><span class="nx">json</span>
+</span><span class='line'><span class="err">└──</span> <span class="nx">locale</span><span class="o">-</span><span class="nx">ja</span><span class="p">.</span><span class="nx">json</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>リソースファイルは、en や ja などの言語キーの前（prefix）と後（suffix）を指定。</p>
+
+<h2>リソースの記述方法</h2>
+
+<p>JSON オブジェクトとして記述。ネストもできる。</p>
+
+<figure class='code'><figcaption><span>assets/i18n/locale-en.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;HEADLINE&quot;</span><span class="o">:</span> <span class="s2">&quot;What an awesome module!&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;PARAGRAPH&quot;</span><span class="o">:</span> <span class="s2">&quot;Srsly!&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;NAMESPACE&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;PARAGRAPH&quot;</span><span class="o">:</span> <span class="s2">&quot;And it comes with awesome features!&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>HTML で利用するには</h2>
+
+<p>HTML で利用する場合には、translate フィルタ、または translate ディレクティヴで。</p>
+
+<figure class='code'><figcaption><span>filters</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h2&gt;</span>{{ &#39;HEADLINE&#39; | translate }}<span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>{{ &#39;PARAGRAPH&#39; | translate }}<span class="nt">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>directives</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h2</span> <span class="na">translate</span><span class="nt">&gt;</span>HEADLINE<span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'><span class="nt">&lt;p</span> <span class="na">translate=</span><span class="s">&quot;PARAGRAPH&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>controller で利用するには</h2>
+
+<p>controller で利用する場合には、$translate サービスで。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;Ctrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="s1">&#39;$translate&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$translate</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">headline</span> <span class="o">=</span> <span class="nx">$translate</span><span class="p">(</span><span class="s1">&#39;HEADLINE&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">paragraph</span> <span class="o">=</span> <span class="nx">$translate</span><span class="p">(</span><span class="s1">&#39;PARAGRAPH&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">namespaced_paragraph</span> <span class="o">=</span> <span class="nx">$translate</span><span class="p">(</span><span class="s1">&#39;NAMESPACE.PARAGRAPH&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>変数を使った置換</h2>
+
+<p>メッセージの一部を置き換えられる。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;TRANSLATION_ID&quot;</span><span class="o">:</span> <span class="s2">&quot;{{username}} is logged in.&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">).</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;Ctrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">translationData</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;PascalPrecht&#39;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">}]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以下のように渡す。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$translate</span><span class="p">(</span><span class="s1">&#39;TRANSLATION_ID&#39;</span><span class="p">,</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">translationData</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>filters</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{{ &#39;TRANSLATION_ID&#39; | translate:translationData }}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>directive</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ANY</span> <span class="na">translate=</span><span class="s">&quot;TRANSLATION_ID&quot;</span> <span class="na">translate-values=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/ANY&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>言語の切り替え</h2>
+
+<p>言語を切り替える場合は、$translate の uses で。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">).</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;Ctrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$translate&#39;</span><span class="p">,</span> <span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$translate</span><span class="p">,</span> <span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">changeLanguage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">langKey</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$translate</span><span class="p">.</span><span class="nx">uses</span><span class="p">(</span><span class="nx">langKey</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じかな。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;changeLanguage(&#39;ja&#39;)&quot;</span> <span class="na">translate=</span><span class="s">&quot;BUTTON_LANG_JA&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;changeLanguage(&#39;en&#39;)&quot;</span> <span class="na">translate=</span><span class="s">&quot;BUTTON_LANG_EN&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>assets/i18n/locale-ja.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;BUTTON_LANG_JA&quot;</span><span class="o">:</span> <span class="s2">&quot;日本語&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;BUTTON_LANG_EN&quot;</span><span class="o">:</span> <span class="s2">&quot;英語&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>たいへん便利な国際化モジュール、angular-translate の紹介でした。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS で HTML をエスケープさせずに出力するには]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html/"/>
+    <updated>2013-09-04T16:49:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS での出力手段</h2>
+
+<p>AngularJS で単に文字列を出力するには、<code>{{expression}}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span&gt;</span>{{ninja.name}}<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">&quot;ninja.name&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<h2>{{expression}} が一瞬表示されてチラつく場合の対処方法</h2>
+
+<p><code>{{expression}}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{{expression}}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
+
+<p>この問題に対しては、<code>ng-bind</code>を利用するか、<a href="http://docs.angularjs.org/api/ng.directive:ngCloak"><code>ng-cloak</code></a>を以下のように利用することで解決できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-cloak</span><span class="nt">&gt;</span>{{ninja.name}}<span class="nt">&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>なお、<a href="http://docs.angularjs.org/api/ngRoute.directive:ngView">ng-view</a> や <a href="http://docs.angularjs.org/api/ng.directive:ngInclude">ng-include</a> で挿入される断片（partial）の HTML では、このチラつく現象は発生しないため、ng-cloak の記述は不要である。</p>
+
+<h2>HTML をエスケープさせずに出力するには</h2>
+
+<p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml"><code>ng-bind-html</code></a>を利用する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-bind-html=</span><span class="s">&quot;ninja.htmlContent&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この<code>ng-bind-html</code>は、別のモジュール（ngSanitize）に分かれているため、angular-sanitize.min.js を index.html で参照し、依存するモジュールとして記述する必要がある。</p>
+
+<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;assets/lib/angular-1.1.5/angular-sanitize.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ngSanitize&#39;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>サニタイズせずに出力するには</h2>
+
+<p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
+
+<p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく<code>ng-bind-html-unsafe</code>を利用できる。</p>
+]]></content>
+  </entry>
+  
+</feed>

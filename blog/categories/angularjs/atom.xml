@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2013-11-19T13:39:12+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSでHTMLを分割するのにお手軽なng-include]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude/"/>
+    <updated>2013-11-19T09:17:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS で HTML を分割するのにお手軽な ng-include</h2>
+
+<p>``` html</p>
+
+<div ng-include="'partials/sidebar.html'"></div>
+
+
+<p><code>
+</code> html
+&lt;ng-include src=&ldquo;&lsquo;partials/sidebar.html&rsquo;&rdquo;>&lt;/ng-include>
+```</p>
+
+<p>ポイントとしては、属性値に文字列を渡す必要があって、ダブルクオートの内側にシングルクオートを記述すること。</p>
+
+<p>変数を渡して、可変にもできる。</p>
+
+<p><code>javascript
+$scope.sidebarUrl = 'partials/sidebar.html';
+</code>
+``` html</p>
+
+<div ng-include="sidebarUrl"></div>
+
+
+<p>```</p>
+
+<p><code>ng-include</code>で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、<code>ng-controller</code>も指定できる。</p>
+
+<p>``` html</p>
+
+<div ng-include="'partials/sidebar.html'" ng-controller="SidebarCtrl"></div>
+
+
+<p>```</p>
+
+<!-- more -->
+
+
+<h2>分割した HTML は $templateCache でキャッシュしてくれる</h2>
+
+<p>分割した HTML は、通信して取得した時点で AngularJS が $templateCache で（メモリに）保持するため、分割されている部分を表示するたびに取得する通信が発生するわけではない。</p>
+
+<p>かつ、必要となった時点で取得しにいくレイジーローディングなので、ユーザがまったく表示しない部分であれば、１度も取得しにいかないので効率的でもある。</p>
+
+<p>一方で、Grunt などでビルドする時に、この HTML フラグメントを一つのファイルにしてしまい、一括してロードさせることでネットワークでのロスを下げるという方向で工夫もできる。</p>
+
+<p>スクリプトとして HTML テンプレートを記述する場合は、script 要素に<code>type</code>と<code>id</code>を指定する。</p>
+
+<p><code>html
+&lt;scipt type="text/ng-template" id="templateId.html"&gt;
+  This is the content of the template
+&lt;/script&gt;
+</code></p>
+
+<p>初期処理でテンプレートを<code>$templateCache</code>に<code>put</code>するようにしておけば、その分だけ操作性の向上も期待できる。</p>
+
+<p><code>javascript
+var myApp = angular.module('Ninja', []);
+myApp.run(function($templateCache) {
+  $templateCache.put('templateId.html', 'This is the content of the template');
+});
+</code></p>
+
+<p>お手軽に断片化できる ng-include の紹介でしたが、HTML を分割する手段としては他にも ng-view の routing で templateUrl を指定することや、custom directive を作成することもできるので、次回以降でその辺も触れる（たぶん）。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSで増殖現象に出会ったらng-ifを疑おう]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/16/angularjs-ngif-proliferation/"/>
+    <updated>2013-11-16T02:11:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/16/angularjs-ngif-proliferation</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>増殖現象にビビる</h2>
+
+<p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/alert">alert</a> と、<a href="https://github.com/angular-app/angular-app">angular-app</a> あたりを参考にしながらメッセージ表示機能を実装していたら、どんどんメッセージが増殖してくのでビビった。１件メッセージを追加するたびに、メッセージ配列ごと増えるという…。</p>
+
+<h2>増殖現象デモ</h2>
+
+<p></p>
+
+<script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
+
+
+<script src="http://angularjsninja.com//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap.min.js"></script>
+
+
+<script src="http://angularjsninja.com//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
+
+
+<script>
+angular.module('Ninja', ['ui.bootstrap'])
+  .controller('NotificationsCtrl', function($scope) {
+    $scope.i = 0;
+    $scope.notifications = [];
+    $scope.addMessage = function(message, type) {
+      $scope.notifications.push({
+        message: message + $scope.i++,
+        type: type || 'error'
+      });
+    };
+  });
+</script>
+
+
+<div ng-app="Ninja" ng-controller="NotificationsCtrl" ng-cloak>
+  <a href="" ng-click="addMessage('message:')">Add a message: {{i}}</a>　← 何回かクリック！
+  <div ng-if="notifications.length">
+    <alert type="notification.type" ng-repeat="notification in notifications">
+      {{notification.message}}
+    </alert>
+  </div>
+</div>
+
+
+<p></p>
+
+<!-- more -->
+
+
+<h2>サンプルコード</h2>
+
+<p>
+``` html</p>
+
+<script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
+
+
+<script src="http://angularjsninja.com//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap.min.js"></script>
+
+
+<script src="http://angularjsninja.com//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
+
+
+<script>
+angular.module('Ninja', ['ui.bootstrap'])
+  .controller('NotificationsCtrl', function($scope) {
+    $scope.i = 0;
+    $scope.notifications = [];
+    $scope.addMessage = function(message, type) {
+      $scope.notifications.push({
+        message: message + $scope.i++,
+        type: type || 'error'
+      });
+    };
+  });
+</script>
+
+
+<div ng-app="Ninja" ng-controller="NotificationsCtrl" ng-cloak>
+  <a href="" ng-click="addMessage('message:')">Add a message: {{i}}</a>
+  <div ng-if="notifications.length">
+    <alert type="notification.type" ng-repeat="notification in notifications">
+      {{notification.message}}
+    </alert>
+  </div>
+</div>
+
+
+<p>```
+</p>
+
+<h2>ng-if には truthy じゃなく、true / false をちゃんと渡そう</h2>
+
+<p>はじめは ng-repeat のバグなのかなと思っていたら、その外側の要素ごと増殖していってることに気付いた。つまり ng-if が怪しい。</p>
+
+<p>上記のコードでの ng-if は、notifications 配列が空っぽだったら要素ごと消しとこうってことで付けている。その ng-if に truthy な（別の）値を渡すと増殖現象になってしまうようだ。</p>
+
+<p>そんなわけで、ちゃんと true / false にして渡しましょう。</p>
+
+<p><code>html
+NG: &lt;div ng-if="notifications.length"&gt;
+OK: &lt;div ng-if="!!notifications.length"&gt;
+</code>
+てことで、増殖現象に出会ったら、この記事のことを思い出してくださーい。</p>
+
+<p>追記：AngularJS <a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md#121-underscore-empathy-2013-11-14">1.2.1 underscore-empathy</a> で、早速バグフィックスされましたね。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのng-classを使いこなそう]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/12/angularjs-ngclass/"/>
+    <updated>2013-11-12T16:16:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/12/angularjs-ngclass</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>ng-class とは</h2>
+
+<p><a href="http://docs.angularjs.org/api/ng.directive:ngClass">ng-class</a> は、HTML 要素に CSS class 属性値を動的にセットできる directive で、ほんとよく使う。</p>
+
+<p>すでに同じ class 属性値が要素にセットされてるときは、重複しないようになっているあたりもいい感じ。</p>
+
+<p>ng-class の使い方は、スペース区切りの class 文字列<code>'active disabled'</code>を保持する変数や、class 属性値文字列の配列<code>['active', 'disabled']</code>を保持する変数を指定する。</p>
+
+<p>けれど一番良く使うのは、class 属性値と boolean 値をマッピングした object で、これを ng-class に指定する使い方について紹介。</p>
+
+<!-- more -->
+
+
+<h2>ng-class の利用例</h2>
+
+<p><code>javascript link
+scope.isActive = function (matchIdx) {
+  return scope.active == matchIdx;
+};
+scope.selectActive = function (matchIdx) {
+  return scope.active = matchIdx;
+};
+</code></p>
+
+<p>
+<code>html template
+&lt;li ng-repeat="match in matches" ng-class="{active: isActive($index)}" ng-mouseenter="selectActive($index)"&gt;
+</code>
+</p>
+
+<p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/typeahead">Typeahead</a> から抜き出したコードで、マウスホバーされた行のインデックスを active で保持し、ng-class では<code>isActive</code>で boolean を返す isActive を指定していて、ホバー行では<code>class="ng-scope active"</code>となり、その他の行では<code>class="ng-scope"</code>となるような指定になっている。</p>
+
+<p>ちなみに、<code>$index</code>は ng-repeat で利用できるインデックス（0..length-1）で、<code>ng-scope</code>は scope ができる要素に AngularJS が自動的に付けてる class。</p>
+
+<h2>ng-class を controller で実装してみる</h2>
+
+<p>たくさんの class 属性値を制御したい場合、ng-class の指定がすごく長くなって微妙な気分になってくるので、そんなときは controller のほうに移すのもいいかもしれない（CSS の class が JavaScript 側に行ってしまうのもまた微妙だけれど）。</p>
+
+<p>ソート列のアイコンを変える UI を実現するサンプルコードはこんな感じに。</p>
+
+<p>
+``` html
+<link href="http://angularjsninja.com//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"></p>
+
+<script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
+
+
+<script>
+angular.module('Ninja', [])
+.controller('SortCtrl', function($scope) {
+  $scope.sortField = undefined;
+  $scope.ascending = true;
+  $scope.sort = function(fieldName) {
+    if ($scope.sortField == fieldName) {
+      $scope.ascending = !$scope.ascending;
+    } else {
+      $scope.sortField = fieldName;
+      $scope.ascending = true;
+    }
+  };
+  var isSortedBy = function(fieldName) {
+    return $scope.sortField === fieldName;
+  };
+  var isSortedAscending = function(fieldName) {
+    return isSortedBy(fieldName) && $scope.ascending;
+  };
+  var isSortedDescending = function(fieldName) {
+    return isSortedBy(fieldName) && !$scope.ascending;
+  };
+  $scope.iconSort = function(fieldName) {
+    return {
+      'icon-sort': !isSortedBy(fieldName),
+      'icon-sort-up': isSortedAscending(fieldName),
+      'icon-sort-down': isSortedDescending(fieldName)
+    };
+  };
+});
+</script>
+
+
+<table ng-app="Ninja" class="demo">
+  <thead ng-controller="SortCtrl">
+    <tr>
+      <th ng-click="sort('name')">
+        Name <i ng-class="iconSort('name')"></i>
+      </th>
+      <th ng-click="sort('modified')">
+        Date Modified <i ng-class="iconSort('modified')"></i>
+      </th>
+      <th ng-click="sort('size')">
+        Size <i ng-class="iconSort('size')"></i>
+      </th>
+      <th ng-click="sort('kind')">
+        Kind <i ng-class="iconSort('kind')"></i>
+      </th>
+    </tr>
+  </thead>
+</table>
+
+
+<p>```
+</p>
+
+<p><link href="http://angularjsninja.com//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"></p>
+
+<script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
+
+
+<script>
+angular.module('Ninja', [])
+.controller('SortCtrl', function($scope) {
+  $scope.sortField = undefined;
+  $scope.ascending = true;
+  $scope.sort = function(fieldName) {
+    if ($scope.sortField == fieldName) {
+      $scope.ascending = !$scope.ascending;
+    } else {
+      $scope.sortField = fieldName;
+      $scope.ascending = true;
+    }
+  };
+  var isSortedBy = function(fieldName) {
+    return $scope.sortField === fieldName;
+  };
+  var isSortedAscending = function(fieldName) {
+    return isSortedBy(fieldName) && $scope.ascending;
+  };
+  var isSortedDescending = function(fieldName) {
+    return isSortedBy(fieldName) && !$scope.ascending;
+  };
+  $scope.iconSort = function(fieldName) {
+    return {
+      'icon-sort': !isSortedBy(fieldName),
+      'icon-sort-up': isSortedAscending(fieldName),
+      'icon-sort-down': isSortedDescending(fieldName)
+    };
+  };
+});
+</script>
+
+
+<table ng-app="Ninja" class="demo">
+  <thead ng-controller="SortCtrl">
+    <tr>
+      <th ng-click="sort('name')">
+        Name <i ng-class="iconSort('name')"></i>
+      </th>
+      <th ng-click="sort('modified')">
+        Date Modified <i ng-class="iconSort('modified')"></i>
+      </th>
+      <th ng-click="sort('size')">
+        Size <i ng-class="iconSort('size')"></i>
+      </th>
+      <th ng-click="sort('kind')">
+        Kind <i ng-class="iconSort('kind')"></i>
+      </th>
+    </tr>
+  </thead>
+</table>
+
+
+<p>見どころは 25 行目の<code>$scope.iconSort</code>function で return している object で、この<code>iconSort</code>を ng-class で使ってソートのアイコン表示を切り替えている。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2.0 リリース！]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/09/angularjs-1.2.0-timely-delivery/"/>
+    <updated>2013-11-09T10:14:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/09/angularjs-1.2.0-timely-delivery</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>待望の AngularJS 1.2.0 リリースがキター！！</p>
+
+<p>まだ把握してない内容もあるんだけど、取り急ぎ公式ブログの<a href="http://blog.angularjs.org/2013/11/angularjs-120-timely-delivery.html">内容</a>を（一部省略して）日本語に訳しときます。</p>
+
+<hr />
+
+<h2>AngularJS 1.2.0: timely-delivery</h2>
+
+<p>1.2.0-rc3 で見つかった多くの問題を修正し、前回の安定版リリースからいくつもの新しい機能を導入している。</p>
+
+<p>前回の安定版リリースからの注目すべき変更点：</p>
+
+<ul>
+<li><a href="http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html">アニメーションとトランジション</a></li>
+<li><a href="http://kensheedlo.com/2013/08/15/error-message-minification-with-minerr.html">エラーメッセージ</a>（error minification を含む）</li>
+<li><a href="http://docs.angularjs.org/api/ng.$sce">厳密なコンテキストのエスケーピング</a></li>
+<li><a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ng-repeat で重複を防ぐトラッキング機能</a></li>
+<li><a href="http://egghead.io/lessons/angularjs-experimental-controller-as-syntax">テンプレート内で controller インスタンスにアクセスするための構文</a></li>
+<li><a href="https://github.com/angular/angular.js/pull/3699">Promise A+ に準拠</a></li>
+<li><a href="http://docs.angularjs.org/api/ngRoute">ngRoute を独自モジュールに分離</a></li>
+</ul>
+
+
+<p>リリースの詳細は、<a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md">changelog</a> を参照。</p>
+
+<p>移行ガイドは <a href="http://docs.angularjs.org/guide/migration">our guides</a> を参照。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSでカスタムfilterを書いてみよう]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/09/angularjs-filter/"/>
+    <updated>2013-11-09T00:01:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/09/angularjs-filter</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>filter とは</h2>
+
+<p>filter は、表示用に値を加工してくれる機能。HTML テンプレートだけでなく、controller や service でも利用できる。また、独自の filter を簡単に定義することもできる。</p>
+
+<p>構文から利用例、そしてカスタム filter のサンプルコードを紹介！</p>
+
+<!-- more -->
+
+
+<h2>filter の構文</h2>
+
+<p>こんなふうに、パイプ記号を使う構文で記述。
+<code>
+{{ expression | filter }}
+</code>
+チェーン（chaining）することもできるし、
+<code>
+{{ expression | filter1 | filter2 }}
+</code>
+引数を取ることもできる。
+<code>
+{{ expression | filter:arg1:arg2 }}
+</code></p>
+
+<h2>filter の利用例</h2>
+
+<p>たとえば数値をカンマ区切りで表示したければ、AngularJS 標準の <a href="http://docs.angularjs.org/api/ng.filter:number">number</a> filter を使うだけでラクチン。</p>
+
+<p><code>
+{{ 123456789 | number }}
+</code>
+123,456,789</p>
+
+<p>標準の filter については、AngularJS <a href="http://docs.angularjs.org/api/ng#filter">公式サイト</a>のほうで。<a href="http://docs.angularjs.org/api/ng.filter:filter">filter</a> filter はかなり使えるので要チェック！</p>
+
+<h2>カスタム filter を実装してみる</h2>
+
+<p>例として、全角英数字が混じってて見苦しいデータがあったとして、せめて表示の段階ででもスッキリと半角英数字に揃えて表示したいなーということを実現する filter のサンプルコードを。</p>
+
+<p>
+``` javascript</p>
+
+<script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
+
+
+<script>
+angular.module('Ninja', [])
+.filter('oneByte', function() {
+  return function(input) {
+    return input.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    });
+  };
+});
+</script>
+
+
+<div ng-app="Ninja">
+  {{ val | oneByte }}<br>
+  <input type="text" ng-model="val" ng-init="val='Ａｎｇｕｌａｒｊｓ Ninja'">  
+</div>
+
+
+<p>```
+</p>
+
+<script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
+
+
+<script>
+angular.module('Ninja', [])
+.filter('oneByte', function() {
+  return function(input) {
+    return input.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    });
+  };
+});
+</script>
+
+
+<div ng-app="Ninja">
+  {{ val | oneByte }}<br>
+  <input type="text" ng-model="val" ng-init="val='Ａｎｇｕｌａｒｊｓ Ninja'">
+</div>
+
+
+<p>いやー、filter 楽しい。でも filter はパフォーマンス的にアレなので、使いすぎにご注意を。</p>
+]]></content>
+  </entry>
+  
+</feed>
