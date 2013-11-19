@@ -26,7 +26,7 @@ $scope.sidebarUrl = 'partials/sidebar.html';
 <div ng-include="sidebarUrl"></div>
 ```
 
-ng-include で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、ng-controller も指定できる。
+`ng-include`で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、`ng-controller`も指定できる。
 
 ``` html
 <div ng-include="'partials/sidebar.html'" ng-controller="SidebarCtrl"></div>
@@ -41,7 +41,7 @@ ng-include で表示する HTML 部分でも、もちろん普通に AngularJS �
 
 一方で、Grunt などでビルドする時に、この HTML フラグメントを一つのファイルにしてしまい、一括してロードさせることでネットワークでのロスを下げるという方向で工夫もできる。
 
-スクリプトとして HTML テンプレートを記述する場合は、script 要素に type と id を指定する。
+スクリプトとして HTML テンプレートを記述する場合は、script 要素に`type`と`id`を指定する。
 
 ``` html
 <scipt type="text/ng-template" id="templateId.html">
@@ -49,7 +49,7 @@ ng-include で表示する HTML 部分でも、もちろん普通に AngularJS �
 </script>
 ```
 
-初期処理でテンプレートを $templateCache に put するようにしておけば、その分だけ操作性の向上も期待できる。
+初期処理でテンプレートを`$templateCache`に`put`するようにしておけば、その分だけ操作性の向上も期待できる。
 
 ``` javascript
 var myApp = angular.module('Ninja', []);
