@@ -151,7 +151,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>ng-include で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、ng-controller も指定できる。</p>
+<p><code>ng-include</code>で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、<code>ng-controller</code>も指定できる。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span> <span class="na">ng-controller=</span><span class="s">&quot;SidebarCtrl&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>

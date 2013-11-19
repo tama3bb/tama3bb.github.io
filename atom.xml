@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-19T09:52:43+09:00</updated>
+  <updated>2013-11-19T10:05:25+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -46,7 +46,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>ng-include で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、ng-controller も指定できる。</p>
+<p><code>ng-include</code>で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、<code>ng-controller</code>も指定できる。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span> <span class="na">ng-controller=</span><span class="s">&quot;SidebarCtrl&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
@@ -64,7 +64,7 @@
 
 <p>一方で、Grunt などでビルドする時に、この HTML フラグメントを一つのファイルにしてしまい、一括してロードさせることでネットワークでのロスを下げるという方向で工夫もできる。</p>
 
-<p>スクリプトとして HTML テンプレートを記述する場合は、script 要素に type と id を指定する。</p>
+<p>スクリプトとして HTML テンプレートを記述する場合は、script 要素に<code>type</code>と<code>id</code>を指定する。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -75,7 +75,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>初期処理でテンプレートを $templateCache に put するようにしておけば、その分だけ操作性の向上も期待できる。</p>
+<p>初期処理でテンプレートを<code>$templateCache</code>に<code>put</code>するようにしておけば、その分だけ操作性の向上も期待できる。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
