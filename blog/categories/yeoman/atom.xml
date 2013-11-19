@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Yeoman | AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/blog/categories/yeoman/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2013-11-19T10:05:47+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Yeoman generator for AngularJS]]></title>
+    <link href="http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs/"/>
+    <updated>2013-08-31T00:25:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="https://github-camo.global.ssl.fastly.net/10c0f69d03b7ac184d77e8aaba4358a2d4791823/687474703a2f2f79656f6d616e2e696f2f6d656469612f79656f6d616e2d6d617374686561642e706e67" alt="Yeoman" /></p>
+
+<h2>AngularJS 用 Yeoman ジェネレータ</h2>
+
+<p>Yeoman チームがベストプラクティスだと言っているプロジェクト構成を、AngularJS 用の Yeoman ジェネレータで実際に生成して確認する。</p>
+
+<!-- more -->
+
+
+<h2>yo (Yeoman) と generator-angular をインストール</h2>
+
+<p>まず yo (Yeoman) をインストール。</p>
+
+<p><code>
+npm install -g yo
+</code></p>
+
+<p>次に、AngularJS 用の Yeoman ジェネレータ generator-angular をインストール。</p>
+
+<p><code>
+npm install -g generator-angular
+</code></p>
+
+<h2>AngularJS プロジェクトを生成</h2>
+
+<p>新しいディレクトリを作って、そのディレクトリに移動。</p>
+
+<p><code>
+mkdir my-new-project &amp;&amp; cd $_
+</code></p>
+
+<p><code>yo angular</code> を実行（アプリケーション名を付けれる）。</p>
+
+<p><code>
+yo angular [app-name]
+</code></p>
+
+<p>で、Twitter Bootstrap を含めるか、SCSS を使うか、angular-resource.js, angular-cookies.js, angular-sanitiaze.js のモジュールを含めるかといった質問に答える。</p>
+
+<p>すると、うお、そんなに？ってぐらいにターミナルが流れに流れて my-new-project ディレクトリに山ほどのサブディレクトリとファイルができている。</p>
+
+<h2>生成したプロジェクトの構成を確認</h2>
+
+<p>とりあえずプロジェクト構成のことだけに絞って、ここでは app ディレクトリの下を確認。</p>
+
+<p>```
+app/
+├── 404.html
+├── bower_components
+│   ├── angular
+│   ├── angular-cookies
+│   ├── angular-mocks
+│   ├── angular-resource
+│   ├── angular-sanitize
+│   ├── angular-scenario
+│   ├── bootstrap-sass
+│   ├── es5-shim
+│   ├── jquery
+│   └── json3
+├── favicon.ico
+├── index.html
+├── robots.txt
+├── scripts
+│   ├── app.js
+│   └── controllers
+│       └── main.js
+├── styles
+│   ├── bootstrap.css
+│   └── main.css
+└── views</p>
+
+<pre><code>└── main.html
+</code></pre>
+
+<p>```</p>
+
+<p>目新しいのは bower_components の存在。これは、パッケージマネジメントツール <a href="http://bower.io">Bower</a> でインストールするときにできるディレクトリの名前。Yeoman は Bower を使っている。</p>
+
+<p>肝心の scripts ディレクトリの下がスッカスカなので、先に進む。</p>
+
+<h2>サブジェネレータでいろいろ生成</h2>
+
+<p><code>
+yo angular:controller myController
+yo angular:directive myDirective
+yo angular:filter myFilter
+yo angular:service myService
+</code></p>
+
+<p>これで、scripts ディレクトリはこうなる。</p>
+
+<p>```
+app/scripts/
+├── app.js
+├── controllers
+│   ├── main.js
+│   └── myController.js
+├── directives
+│   └── myDirective.js
+├── filters
+│   └── myFilter.js
+└── services</p>
+
+<pre><code>└── myService.js
+</code></pre>
+
+<p>```</p>
+
+<h2>プロジェクト構成のまとめ</h2>
+
+<p>ということで、やっぱり controller、directive、filter、service に分けて、あとはサブディレクトリを作るなり、細かく単機能ごとにファイルを分けていくということで。</p>
+
+<p>ちなみに、どれだけファイルをバラして作ったとしても、<a href="http://gruntjs.com">Grunt</a> でビルドすれば minify された 1 つの JS ファイルになるので心配ご無用！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS のプロジェクト構成をどうするか]]></title>
+    <link href="http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure/"/>
+    <updated>2013-08-30T20:00:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS のプロジェクト構成ってどうするのがいいんだ？</h2>
+
+<p>AngularJS でアプリケーションを作るときに悩むのがプロジェクト構成。なんでもかんでも一つの JavaScript ファイルで実装してしまうことも可能だけれど、コード量が増えてくるとすぐにつらくなる。</p>
+
+<p>そこでどうしようかなと考えるときに参照するであろう一つが <a href="https://github.com/angular?tab=members">AngularJS チーム</a> による AngularJS Web アプリケーションのスケルトンプロジェクト <a href="https://github.com/angular/angular-seed">angular-seed</a>。</p>
+
+<!-- more -->
+
+
+<h2>Angular Seed</h2>
+
+<p>この angular-seed のプロジェクト構成はこんな感じ。</p>
+
+<p><code>
+app
+├─ css
+│  └─ app.css
+├─ img
+├─ js
+│  ├─ app.js
+│  ├─ controllers.js
+│  ├─ directives.js
+│  ├─ filters.js
+│  └─ services.js
+├─ lib
+│  └─ angular
+│     └─ angular.js
+├─ partials
+│  ├─ partial1.html
+│  └─ partial2.html
+├─ index-async.html
+└─ index.html
+</code></p>
+
+<p>簡単に言うと、AngularJS の機能である controller、directive、filter、service と機能別にファイルを分けるということ。</p>
+
+<p>前回の<a href="/blog/2013/08/28/how-to-declare-models/">モデル定義の記事</a>、前々回の<a href="/blog/2013/08/29/angularjs-web-api-call/">サービス定義の記事</a>で利用した factory は service の仲間なので services.js に書くことになる。</p>
+
+<p><code>html index.html
+  &lt;!-- In production use:
+  &lt;script src="http://angularjsninja.com//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"&gt;&lt;/script&gt;
+  --&gt;
+  &lt;script src="lib/angular/angular.js"&gt;&lt;/script&gt;
+  &lt;script src="js/app.js"&gt;&lt;/script&gt;
+  &lt;script src="js/services.js"&gt;&lt;/script&gt;
+  &lt;script src="js/controllers.js"&gt;&lt;/script&gt;
+  &lt;script src="js/filters.js"&gt;&lt;/script&gt;
+  &lt;script src="js/directives.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+</code></p>
+
+<p>まあ、これでもいいんだけれど、大規模になってくるともっとファイルを分けたくなってくる。</p>
+
+<p>特に partials の下にある HTML テンプレートは分割しているのに、それに対応するコントローラはすべて controllers.js に記述していくことに抵抗感が出てくる。</p>
+
+<p>また、services.js にモデルを記述するのではなく、モデルごとにファイルを分けてモデルの名前をファイル名に付けたくなる。</p>
+
+<p>そこで、あるべき姿、ベストプラクティスはどんな構成なんだとネットをさまよう。</p>
+
+<h2>Building Huuuuuge Apps with AngularJS</h2>
+
+<p>大規模な AngularJS についての記事では <a href="http://briantford.com/blog/huuuuuge-angular-apps.html">Building Huuuuuge Apps with AngularJS</a> が参考になる。この記事は <a href="https://twitter.com/briantford">Brian Ford</a> さんによるもの。</p>
+
+<p>ここで推奨されている構成はこんな感じ。</p>
+
+<p><code>
+root-app-folder
+├─ index.html
+├─ scripts
+│  ├─ controllers
+│  │  └─ main.js
+│  │  └─ ...
+│  ├─ directives
+│  │  └─ myDirective.js
+│  │  └─ ...
+│  ├─ filters
+│  │  └─ myFilter.js
+│  │  └─ ...
+│  ├─ services
+│  │  └─ myService.js
+│  │  └─ ...
+│  ├─ vendor
+│  │  ├─ angular.js
+│  │  ├─ angular.min.js
+│  │  ├─ es5-shim.min.js
+│  │  └─ json3.min.js
+│  └─ app.js
+├─ styles
+│  └─ ...
+└─ views
+   ├─ main.html
+   └─ ...
+</code></p>
+
+<p>で、さらにやるなら、controllers や services にサブディレクトリを、例えば、services/models みたいに作ると。</p>
+
+<p>angular-seed と大きく異なるのは各機能をフォルダにしているところで、controller や service の一つひとつを別のファイルにしやすい。</p>
+
+<p>なぜ lib &ndash;> vendor、css &ndash;> styles、js &ndash;> scripts、partials &ndash;> views に変更しているのかは不明。流儀があるのかな。</p>
+
+<h2>Yeoman</h2>
+
+<p>また、この Brian Ford さんが関わっている <a href="http://yeoman.io">Yeoman</a> という Web アプリケーションのワークフローを改善するためのツール群があって、<a href="https://github.com/yeoman/generator-angular">yeoman/generator-angular</a> という AngularJS 用の Yeoman ジェネレータがある。</p>
+
+<p>Yeoman がベストプラクティスと考えるプロジェクト構成で出力されるので、これを利用し、まず従ってみてから、自分の頭で考えるというのもいいと思う。</p>
+
+<p>この Yeoman を利用したプロジェクト構成のことや、Yeoman のページに出てくる Grunt、Bower などのツール類の話はまたあらためて。</p>
+]]></content>
+  </entry>
+  
+</feed>

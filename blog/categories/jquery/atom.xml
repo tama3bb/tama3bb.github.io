@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jQuery | AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/blog/categories/jquery/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2013-11-19T10:05:47+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery と AngularJS]]></title>
+    <link href="http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs/"/>
+    <updated>2013-10-05T20:32:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>jQuery と AngularJS は併用できるのか？</h2>
+
+<ul>
+<li>jQuery と AngularJS は併用可能</li>
+<li>jQuery メインのサイトで AngularJS を部分的に使用可能</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>AngularJS と jQuery は併用可能</h2>
+
+<p>AngularJS より先に jQuery を読み込ませていればその jQuery が利用される。jQuery を読み込ませていなければ AngularJS が内蔵している jqLite（jQuery の API 互換サブセット）の実装が利用される。</p>
+
+<p>jqLite が実装している jQuery 互換の DOM 操作関連の API は、<a href="http://docs.angularjs.org/api/angular.element">AngularJS: element</a> で確認できるが、DOM 操作系の主要なメソッドは実装されている。</p>
+
+<p>AngularJS 1.2 では、<code>bind()</code>/<code>unbind()</code>でなく<code>on()</code>/<code>off()</code>が利用されるため、jQuery のバージョンは 1.7.1 以降とする必要がある。</p>
+
+<p>AngularJS で jQuery の DOM 操作を実装する場合、controller では要素の追加・削除や表示・非表示などの DOM 操作を実装せずに、AngularJS にビルトイン（標準）の directive を利用するか、自作の directive で DOM 操作を実装しよう。</p>
+
+<p><code>ng-repeat</code>、<code>ng-show</code>、<code>ng-class</code>など、jQuery で実装していた処理を代替できる directive が多数存在するので、積極的に利用してコード量を減らそう。</p>
+
+<h2>jQuery メインのサイトで AngularJS を部分的に使用可能</h2>
+
+<p>jQuery メインに実装してきたサイトで AngularJS を部分的に使うということも可能で、そういう場合には AngularJS の適用範囲（scope）を決めるルート的な directive の<code>ng-app</code>を<code>html</code>や<code>body</code>要素ではなく、必要最小限の範囲を囲う要素に対して記述する。</p>
+
+<p>jQuery で大半を実装しているようなサイトやアプリケーションで、全面的に AngularJS に書き変える決断がすぐにできない場合には、少しずつ部分的に導入して攻めていこう。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[なぜ AngularJS を採用したのか]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/03/why-angularjs/"/>
+    <updated>2013-09-03T18:15:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/03/why-angularjs</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>今回は、AngularJS を採用した理由について軽くまとめておく。</p>
+
+<p>JavaScript MVC 系のフレームワーク導入を検討することにし、もっとも普及している <a href="http://backbonejs.org">Backbone.js</a> と、双方向データバインドなど高機能な <a href="http://emberjs.com">Ember.js</a> および <a href="http://angularjs.org">AngularJS</a> を検討した。</p>
+
+<p>それぞれのフレームワークを順に 3 週間ほどずつ学習・実装してみた結果、AngularJS を採用した。</p>
+
+<!-- more -->
+
+
+<h2>Ember.js を採用しなかった理由</h2>
+
+<p>まず Ember.js を 3 週間ほど別のプロジェクトで実装してみたところ、なんか難しかった…。ただの知識不足か実力不足かも…。</p>
+
+<p>Ember.js の GUIDES ページや API ページをひととおり目を通し、Ember.js の書籍・動画・ブログなどでざっと学習したものの、簡単なところはともかく、ちょっと複雑なことをしようとすると、どう実装したらいいのかわからない…。jQuery でならとっくに終わってるぞ、と…。</p>
+
+<p>そして挫折…。</p>
+
+<p>いや、Ember.js は悪くないです。相性の問題というか、ごめんなさい。</p>
+
+<h2>Backbone.js を採用しなかった理由</h2>
+
+<p>次に、もともと本命に考えていた Backbone.js について。実際には AngularJS の後に評価したんだけれど、先に書く。</p>
+
+<p>本命と考えていた理由は、普及度と、jQuery を使い慣れていた自分が最もすんなり入れるかなと考えていたから。MVC を明確に分離して記述することになってコードの見通しがよくなる。ただ、コード量は減るというより少し増える印象。</p>
+
+<p>Backbone.js については、<a href="http://underscorejs.org">Underscore.js</a> と併せて公式ページ・書籍・動画・ブログなどでざっと学習。ついでに <a href="http://marionettejs.com">Marionette.js</a> についても軽く学習。</p>
+
+<p>Backbone.js を不採用としたのは、評価時点で、すでに AngularJS をかなり気に入っていたことが大きい。あと、自由度が高過ぎるという印象を持ったことも大きい。Ember.js や AngularJS が実現している機能を加えることは可能なもののアドオンの選択肢が多く、ベストプラクティスと言える構成がわからずにいろいろ迷いそうだなと。</p>
+
+<h2>AngularJS を採用した理由</h2>
+
+<p>AngularJS をなぜ気に入ったのかと言えば、簡単なことが驚くほど簡単にできるというところ。そのとっつきのよさに驚いた。他のメンバーが入るときに敷居が低そうで、知識不足や考慮不足による問題を発生させにくそうだと思えた。</p>
+
+<p>もちろん独自の directive を書くのは簡単ではないし、初めのころはモデルをどう宣言するのかや、HTML テンプレートをどう記述すればいいのかさえわからない始末だった。けれど、難しいところは一部のメンバーがわかってればいいので、ちょうどいいなと。</p>
+
+<p>その後すでに数か月プロトタイプで AngularJS のコードを書いてるけど、特に困難にぶち当たることもなく、AngularJS のプロジェクトへの採用は成功しそうだなと安心している。よかったよかった。</p>
+
+<h2>なぜ jQuery だけじゃダメなのか</h2>
+
+<p>ところで、jQuery だけじゃダメなのか。jQuery はクロスブラウザに対応し、コードが簡潔で可読性が高く、普及率も高い。</p>
+
+<p>ただし、DOM（HTML の構造ツリー）操作が主用途で、ある程度の規模でシングルページアプリケーションを制作する場合には、コード量が多くなり、どのタグにどんなイベントが付いているのか複雑でわかりにくくなりやすい。</p>
+
+<p>なので、Backbone.js 使いましょうというのが主流なんだと思う。</p>
+
+<h2>もしコードを比較したいなら</h2>
+
+<p>自分の経験からも、フレームワークの選定にはいくつかのフレームワークを試用してみたほうがいいと思う。</p>
+
+<p>そのとっかかりとして、同じ機能をそれぞれのフレームワークで実装している例 <a href="http://todomvc.com">TodoMVC</a> がある。ここで各フレームワークのコードを見れるので、雰囲気をつかんでみるといいかも。</p>
+
+<p>私のオススメはもちろん、AngularJS ということで。</p>
+]]></content>
+  </entry>
+  
+</feed>

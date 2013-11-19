@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bootstrap | AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/blog/categories/bootstrap/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2013-11-19T10:05:47+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.2.0-rc2 で Typeahead が動かない]]></title>
+    <link href="http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/"/>
+    <updated>2013-10-19T17:42:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS で UI Bootstrap の Typeahead が動かない</h2>
+
+<p>AngularJS 1.2.0 の rc2 にした途端、UI Bootstrap (0.6.0) の Typeahead (Autocomplete みたいなやつ) が動かなくなった。</p>
+
+<p>仕様変更なのかバグなのかわからず、とりあえず<code>ui-bootstrap-tpls-0.6.0.js</code>のコードを見たりしながらも AngularJS か UI Bootstrap のほうでバグ修正してくんないかなーと期待＆様子見していたところ、AngularJS 1.2.0 の rc3 では正常に動作するようになったので一件落着。</p>
+
+<p>ちなみに、rc2 でのエラーは、<code>matches is undefined</code>というもの。</p>
+
+<p>Stack Overflow で関連する記事は、<a href="http://stackoverflow.com/questions/18764023/angularjs-1-2-0-bootstrap-ui-0-6-0-bootstrap3-bis2-typeahead/19377002#19377002">AngularJS 1.2.0 Bootstrap UI 0.6.0 (bootstrap3_bis2) Typeahead</a> かな。rc2 では、<code>promise</code>絡みの実装に問題があったみたいだ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Twitter Bootstrap のモーダルをドラッグで動かしたいときは]]></title>
+    <link href="http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/"/>
+    <updated>2013-09-25T21:57:00+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>みんな大好き <a href="http://getbootstrap.com/2.3.2/">Twitter Bootstrap</a> の話。CSS フレームワークの枠を超え、フロントエンド開発のキングというか、デファクトですね。</p>
+
+<p>数年前のプロジェクトで <a href="http://www.blueprintcss.org">Blueprint</a> をチョイスした自分がバカみたいに、その後の Bootstrap の大流行。<a href="http://getbootstrap.com">Bootstrap 3</a> も引き続き人気を博するだろうか。</p>
+
+<p>そんな Bootstrap なんだけど、不満があるとすれば、モーダル（<a href="http://getbootstrap.com/2.3.2/javascript.html#modals">Modals</a>）を動かせないこと！ モーダルダイアログがなんでドラッグで動かないんだ！</p>
+
+<!-- more -->
+
+
+<h2>困ったときはググるでしょ</h2>
+
+<p>てことで、<code>bootstrap modal drag</code>とかでググればアッサリ答えにありつける。いつもながら Stack Overflow はすごいなあ、助かるなあと感謝しながらおもむろにページを開く。</p>
+
+<p><a href="http://stackoverflow.com/questions/12591597/twitter-bootstrap-modal-form-how-to-drag-and-drop">Twitter Bootstrap Modal Form: How to drag and drop? &ndash; Stack Overflow</a></p>
+
+<p>答えとしては、<a href="http://jqueryui.com/">jQuery UI</a> の <a href="http://jqueryui.com/draggable/">Draggable</a> を使えということ。</p>
+
+<p>``` javascript
+$(&ldquo;#myModal&rdquo;).draggable({</p>
+
+<pre><code>handle: ".modal-header"
+</code></pre>
+
+<p>});
+```</p>
+
+<p>そんだけー。</p>
+
+<p>じゃなかった…。そう言えば、このままだとセレクタ<code>.modal.fade</code>と<code>.modal.fade.in</code>に定義されている<code>top</code>と<code>transition</code>のプロパティ（モーダルが上から滑り降りてくるトランジション）による影響で、縦方向のドラッグがの〜んびりした動きになって違和感が残る。</p>
+
+<p>なので、上から滑り降りてくるトランジションはあきらめて、class 属性から<code>fade</code>を消してしまうのがいいと思う。</p>
+
+<p>jQuery UI については、すべての機能はいらないだろうから、Draggable だけとか、必要な機能だけ選択してダウンロードしましょう。</p>
+
+<h2>UI Bootstrap と AngularStrap</h2>
+
+<p>ちょっと脱線して、AngularJS のことも。</p>
+
+<p>AngularJS と Bootstrap を併用するときは <a href="http://angular-ui.github.io/bootstrap/">UI Bootstrap</a> か、<a href="http://mgcrea.github.io/angular-strap/">AngularStrap</a> を使うと、Bootstrap のコンポーネントが AngularJS の directive として定義されているのでとてもラク。自分で記述するコードがすごく少なくなって快適。</p>
+
+<p>ただ、この UI Bootstrap と AngularStrap は、それぞれいいとこも微妙なとこもあるので両方を使いたいと欲張っちゃうこともある。すると今回のメインである Modal でエラーが…。</p>
+
+<p>Modal に限れば UI Bootstrap のほうが優れてるので、AngularStrap の $modal directive コードを削除しちゃいましょう。</p>
+]]></content>
+  </entry>
+  
+</feed>
