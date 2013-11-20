@@ -61,6 +61,10 @@
         <lastmod>2013-11-08T01:13:37+09:00</lastmod>
     </url>
     <url>
+        <loc>http://angularjsninja.com/blog/2013/09/09/angularjs-context-path/</loc>
+        <lastmod>2013-11-20T12:51:03+09:00</lastmod>
+    </url>
+    <url>
         <loc>http://angularjsninja.com/blog/2013/09/09/hexcolortool/</loc>
         <lastmod>2013-09-09T23:47:52+09:00</lastmod>
     </url>
@@ -83,6 +87,10 @@
     <url>
         <loc>http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/</loc>
         <lastmod>2013-09-26T09:10:50+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com/blog/2013/10/05/angularjs-to-jquery/</loc>
+        <lastmod>2013-11-20T12:51:03+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs/</loc>
@@ -126,7 +134,7 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/archives/</loc>
-        <lastmod>2013-11-20T12:19:44+09:00</lastmod>
+        <lastmod>2013-11-20T12:51:03+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/categories/</loc>
@@ -134,7 +142,7 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/</loc>
-        <lastmod>2013-11-20T12:19:44+09:00</lastmod>
+        <lastmod>2013-11-20T12:51:03+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/robots.txt</loc>
