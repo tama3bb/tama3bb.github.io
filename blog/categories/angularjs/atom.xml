@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-19T10:05:47+09:00</updated>
+  <updated>2013-11-20T12:19:44+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,129 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その１）]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/20/angularjs-custom-directives/"/>
+    <updated>2013-11-20T12:08:23+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/20/angularjs-custom-directives</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>独自（カスタム）directive の話は複雑でボリュームがあるので、何回かに分けることにして、まずは<a href="http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude/">前回の ng-include</a> の流れを受けて、とりあえず HTML を分割することから始めてみよう。</p>
+
+<h2>単にテンプレート部分を Directive にするには</h2>
+
+<p>繰り返し出てくるコード部分を、テンプレートとして directive で宣言するサンプルコード。</p>
+
+<p>``` html</p>
+
+<div ninja-profile></div>
+
+
+<p><code>
+</code> javascript
+angular.module(&lsquo;Ninja&rsquo;, [])
+  .directive(&lsquo;ninjaCustomer&rsquo;, function() {</p>
+
+<pre><code>return {
+  templateUrl: 'partials/ninja-customer.html'
+};
+</code></pre>
+
+<p>  });
+```
+こんだけなので、まあどってことない。これだけなら ng-include のほうがラクでいいやんってことになるかな。でもまあ、とりあえずこんだけしか書かなくても directive として動作するのかってことを見ておく。</p>
+
+<!-- more -->
+
+
+<h2>要素として使う Directive としたければ</h2>
+
+<p>デフォルトでは属性（<code>restrict: 'A'</code>）として使う directive として作られる。なので、要素として HTML で指定する directive にしたければ、<code>restrict</code> オプションが必要になる。</p>
+
+<p><code>html
+&lt;ninja-customer&gt;&lt;/ninja-customer&gt;
+</code>
+``` javascript
+angular.module(&lsquo;Ninja&rsquo;, [])
+  .directive(&lsquo;ninjaCustomer&rsquo;, function() {</p>
+
+<pre><code>return {
+  restrict: 'E',
+  templateUrl: 'partials/ninja-customer.html'
+};
+</code></pre>
+
+<p>  });
+<code>``
+</code>restrict<code>オプションを指定する場合の選択肢として、覚えておけばいいのは以下の３種類。</code>A<code>は Attribute（属性）で、</code>E`は Element（要素）。</p>
+
+<p><code>javascript
+restrict: 'A' // 属性のみ（デフォルト）
+restrict: 'E' // 要素のみ
+restrict: 'AE' // 属性または要素
+</code></p>
+
+<p>属性と要素、どちらを選択するかについては、まとまったコンポーネントとして directive を位置付けるケースでは要素とし、既存の要素に機能を足すようなケースでは属性とするのがいいぽい。</p>
+
+<p>Directive の定義で return するオブジェクトに、オプションとして記述していく記述スタイルで、<code>restrict</code>や<code>templateUrl</code>の他に、<code>link</code>、<code>replace</code>、<code>transclude</code>、<code>scope</code>、<code>controller</code>など使えるオプションがあるんだけれど、ひとまず後回し。</p>
+
+<h2>どんなときにカスタム Directive を作るか</h2>
+
+<p>Controllers と AngularJS 標準の各種 directive を使えば大抵のことはできてしまうのと、directive の仕様が複雑すぎてわかりにくということで、AngularJS を使っていてもカスタム directive は手付かずだったり、作ってみてもこれでいいのか自信ないなって感じになりがちかなと。</p>
+
+<p>カスタム directive は、例えば jQuery（jqLite）などで直接 DOM を操作したいときや、繰り返し出てくるコードをリファクタリングしてまとめたいときに利用するのがいい。</p>
+
+<p>なお、AngularJS のアプリケーションでも jQuery を利用できることについては、過去エントリ「<a href="http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs/">jQuery と AngularJS</a>」に記載しているように、jQuery を先読みすればその jQuery が使え、jQuery 無しでも AngularJS が持つ jQuery のサブセット jqLite で DOM 操作のコードが同じように記述できる。</p>
+
+<p>さらに、複数のプロジェクトでの再利用を目指してコンポーネント化するなら <a href="http://angular-ui.github.io/bootstrap/">UI Bootstrap</a> のコードを参考に、複雑な directive の作成に取り組んでいきたいところ。</p>
+
+<h2>Directive とは何か</h2>
+
+<p>AngularJS で一番強力な機能と言え、HTML が持っていない意味合いや振る舞いを加えるように使うことができる。AngularJS 標準の<code>ng-bind</code>や<code>ng-model</code>、<code>ng-view</code>とかはすべて directive であって、controllers や services に記述したアプリケーションロジックを、属性や要素として DOM 要素にバインドできるようになる。</p>
+
+<p>簡単に言うと、データバインドするモデルやイベントハンドリングするロジックを、DOM に紐付けるためのものということ。</p>
+
+<h2>標準 Directive</h2>
+
+<p>AngularJS には標準（ビルトイン）の directives がたくさん存在し、公式サイトの <a href="http://docs.angularjs.org/api/ng#directive">ng (core module) ページ Directive</a> には、<code>ng-include</code>、<code>ng-controller</code>、<code>ng-click</code>などよく使う<code>ng</code>で始まるものだけでなく、普通の HTML のように見える<code>a</code>、<code>form</code>や<code>input</code>なども directive として記載されている。</p>
+
+<p>たとえば<code>a</code>については href 属性値が空のときにはデフォルトの動作が防止されるよう処理されたり、<code>form</code>だと name 属性があれば scope のほうでその名前で参照できるように処理されたりする。</p>
+
+<p>form には HTML で form を入れ子にできるよう<code>ng-form</code>があったり、<code>ng-submit</code>の機能、<code>ng-invalid</code>や<code>ng-dirty</code>などの機能についても触れたくなるけれど、その辺のことはまた別の機会に。</p>
+
+<h2>Directives の記述</h2>
+
+<p>Directives は JavaScript では camelCase で宣言し、HTML では小文字ハイフン区切りの lower-case で参照する。</p>
+
+<p>HTML では４種類の参照方法があるものの、基本的には要素か属性として記述する以下の２種類。</p>
+
+<p>``` html
+&lt;my-directive>&lt;/my-directive></p>
+
+<div my-directive></div>
+
+
+<p>```</p>
+
+<p>HTML の validation ツールを使いたければ<code>data-</code>を付けておくといい。</p>
+
+<p><code>html
+&lt;span ng-bind="name"&gt;&lt;/span&gt;
+&lt;span data-ng-bind="name"&gt;&lt;/span&gt;
+</code></p>
+
+<h2>Directives の接頭辞</h2>
+
+<p>カスタム directive の名前には、念のため接頭辞（ng を避ける）を付けておくほうがいいかもしれない。将来、偶然 HTML 標準として追加される要素名と重なってしまうケースや、AngularUI や AngularStrap などサードパーティ製の directives と重なってしまうケースもありえるので。</p>
+
+<h2>次回へ向けて</h2>
+
+<p>え、そんなちょっとしか記述しなくても directive として成立してるんだ、ってことを見てもらうのが初回の目的なので、ひとまずここで終了。</p>
+
+<p>こんなとこで終わったら、directive こわいままになっちゃうので、なんとしてでも次回も続けないと。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSでHTMLを分割するのにお手軽なng-include]]></title>
@@ -100,7 +223,7 @@ myApp.run(function($templateCache) {
 
 <h2>増殖現象デモ</h2>
 
-<p>{% raw %}</p>
+<p></p>
 
 <script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
 
@@ -136,14 +259,14 @@ angular.module('Ninja', ['ui.bootstrap'])
 </div>
 
 
-<p>{% endraw %}</p>
+<p></p>
 
 <!-- more -->
 
 
 <h2>サンプルコード</h2>
 
-<p>{% raw %}
+<p>
 ``` html</p>
 
 <script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
@@ -181,7 +304,7 @@ angular.module('Ninja', ['ui.bootstrap'])
 
 
 <p>```
-{% endraw %}</p>
+</p>
 
 <h2>ng-if には truthy じゃなく、true / false をちゃんと渡そう</h2>
 
@@ -232,11 +355,11 @@ scope.selectActive = function (matchIdx) {
 };
 </code></p>
 
-<p>{% raw %}
+<p>
 <code>html template
 &lt;li ng-repeat="match in matches" ng-class="{active: isActive($index)}" ng-mouseenter="selectActive($index)"&gt;
 </code>
-{% endraw %}</p>
+</p>
 
 <p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/typeahead">Typeahead</a> から抜き出したコードで、マウスホバーされた行のインデックスを active で保持し、ng-class では<code>isActive</code>で boolean を返す isActive を指定していて、ホバー行では<code>class="ng-scope active"</code>となり、その他の行では<code>class="ng-scope"</code>となるような指定になっている。</p>
 
@@ -248,7 +371,7 @@ scope.selectActive = function (matchIdx) {
 
 <p>ソート列のアイコンを変える UI を実現するサンプルコードはこんな感じに。</p>
 
-<p>{% raw %}
+<p>
 ``` html
 <link href="http://angularjsninja.com//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"></p>
 
@@ -309,7 +432,7 @@ angular.module('Ninja', [])
 
 
 <p>```
-{% endraw %}</p>
+</p>
 
 <p><link href="http://angularjsninja.com//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"></p>
 
@@ -406,104 +529,6 @@ angular.module('Ninja', [])
 <p>リリースの詳細は、<a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md">changelog</a> を参照。</p>
 
 <p>移行ガイドは <a href="http://docs.angularjs.org/guide/migration">our guides</a> を参照。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJSでカスタムfilterを書いてみよう]]></title>
-    <link href="http://angularjsninja.com/blog/2013/11/09/angularjs-filter/"/>
-    <updated>2013-11-09T00:01:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/11/09/angularjs-filter</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>filter とは</h2>
-
-<p>filter は、表示用に値を加工してくれる機能。HTML テンプレートだけでなく、controller や service でも利用できる。また、独自の filter を簡単に定義することもできる。</p>
-
-<p>構文から利用例、そしてカスタム filter のサンプルコードを紹介！</p>
-
-<!-- more -->
-
-
-<h2>filter の構文</h2>
-
-<p>こんなふうに、パイプ記号を使う構文で記述。
-<code>
-{% raw %}{{ expression | filter }}{% endraw %}
-</code>
-チェーン（chaining）することもできるし、
-<code>
-{% raw %}{{ expression | filter1 | filter2 }}{% endraw %}
-</code>
-引数を取ることもできる。
-<code>
-{% raw %}{{ expression | filter:arg1:arg2 }}{% endraw %}
-</code></p>
-
-<h2>filter の利用例</h2>
-
-<p>たとえば数値をカンマ区切りで表示したければ、AngularJS 標準の <a href="http://docs.angularjs.org/api/ng.filter:number">number</a> filter を使うだけでラクチン。</p>
-
-<p><code>
-{% raw %}{{ 123456789 | number }}{% endraw %}
-</code>
-123,456,789</p>
-
-<p>標準の filter については、AngularJS <a href="http://docs.angularjs.org/api/ng#filter">公式サイト</a>のほうで。<a href="http://docs.angularjs.org/api/ng.filter:filter">filter</a> filter はかなり使えるので要チェック！</p>
-
-<h2>カスタム filter を実装してみる</h2>
-
-<p>例として、全角英数字が混じってて見苦しいデータがあったとして、せめて表示の段階ででもスッキリと半角英数字に揃えて表示したいなーということを実現する filter のサンプルコードを。</p>
-
-<p>{% raw %}
-``` javascript</p>
-
-<script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
-
-
-<script>
-angular.module('Ninja', [])
-.filter('oneByte', function() {
-  return function(input) {
-    return input.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
-      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-    });
-  };
-});
-</script>
-
-
-<div ng-app="Ninja">
-  {{ val | oneByte }}<br>
-  <input type="text" ng-model="val" ng-init="val='Ａｎｇｕｌａｒｊｓ Ninja'">  
-</div>
-
-
-<p>```
-{% endraw %}</p>
-
-<script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
-
-
-<script>
-angular.module('Ninja', [])
-.filter('oneByte', function() {
-  return function(input) {
-    return input.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
-      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-    });
-  };
-});
-</script>
-
-
-<div ng-app="Ninja">
-  {% raw %}{{ val | oneByte }}{% endraw %}<br>
-  <input type="text" ng-model="val" ng-init="val='Ａｎｇｕｌａｒｊｓ Ninja'">
-</div>
-
-
-<p>いやー、filter 楽しい。でも filter はパフォーマンス的にアレなので、使いすぎにご注意を。</p>
 ]]></content>
   </entry>
   

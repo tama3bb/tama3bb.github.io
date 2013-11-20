@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-19T10:05:25+09:00</updated>
+  <updated>2013-11-20T12:19:44+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,143 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その１）]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/20/angularjs-custom-directives/"/>
+    <updated>2013-11-20T12:08:23+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/20/angularjs-custom-directives</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>独自（カスタム）directive の話は複雑でボリュームがあるので、何回かに分けることにして、まずは<a href="http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude/">前回の ng-include</a> の流れを受けて、とりあえず HTML を分割することから始めてみよう。</p>
+
+<h2>単にテンプレート部分を Directive にするには</h2>
+
+<p>繰り返し出てくるコード部分を、テンプレートとして directive で宣言するサンプルコード。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ninja-profile</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;Ninja&#39;</span><span class="p">,</span> <span class="p">[])</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;ninjaCustomer&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;partials/ninja-customer.html&#39;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>  <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんだけなので、まあどってことない。これだけなら ng-include のほうがラクでいいやんってことになるかな。でもまあ、とりあえずこんだけしか書かなくても directive として動作するのかってことを見ておく。</p>
+
+<!-- more -->
+
+
+<h2>要素として使う Directive としたければ</h2>
+
+<p>デフォルトでは属性（<code>restrict: 'A'</code>）として使う directive として作られる。なので、要素として HTML で指定する directive にしたければ、<code>restrict</code> オプションが必要になる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ninja</span><span class="na">-customer</span><span class="nt">&gt;</span><span class="err">&lt;</span>/ninja-customer&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;Ninja&#39;</span><span class="p">,</span> <span class="p">[])</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;ninjaCustomer&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">restrict</span><span class="o">:</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;partials/ninja-customer.html&#39;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>  <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>restrict</code>オプションを指定する場合の選択肢として、覚えておけばいいのは以下の３種類。<code>A</code>は Attribute（属性）で、<code>E</code>は Element（要素）。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">restrict</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span> <span class="c1">// 属性のみ（デフォルト）</span>
+</span><span class='line'><span class="nx">restrict</span><span class="o">:</span> <span class="s1">&#39;E&#39;</span> <span class="c1">// 要素のみ</span>
+</span><span class='line'><span class="nx">restrict</span><span class="o">:</span> <span class="s1">&#39;AE&#39;</span> <span class="c1">// 属性または要素</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>属性と要素、どちらを選択するかについては、まとまったコンポーネントとして directive を位置付けるケースでは要素とし、既存の要素に機能を足すようなケースでは属性とするのがいいぽい。</p>
+
+<p>Directive の定義で return するオブジェクトに、オプションとして記述していく記述スタイルで、<code>restrict</code>や<code>templateUrl</code>の他に、<code>link</code>、<code>replace</code>、<code>transclude</code>、<code>scope</code>、<code>controller</code>など使えるオプションがあるんだけれど、ひとまず後回し。</p>
+
+<h2>どんなときにカスタム Directive を作るか</h2>
+
+<p>Controllers と AngularJS 標準の各種 directive を使えば大抵のことはできてしまうのと、directive の仕様が複雑すぎてわかりにくということで、AngularJS を使っていてもカスタム directive は手付かずだったり、作ってみてもこれでいいのか自信ないなって感じになりがちかなと。</p>
+
+<p>カスタム directive は、例えば jQuery（jqLite）などで直接 DOM を操作したいときや、繰り返し出てくるコードをリファクタリングしてまとめたいときに利用するのがいい。</p>
+
+<p>なお、AngularJS のアプリケーションでも jQuery を利用できることについては、過去エントリ「<a href="http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs/">jQuery と AngularJS</a>」に記載しているように、jQuery を先読みすればその jQuery が使え、jQuery 無しでも AngularJS が持つ jQuery のサブセット jqLite で DOM 操作のコードが同じように記述できる。</p>
+
+<p>さらに、複数のプロジェクトでの再利用を目指してコンポーネント化するなら <a href="http://angular-ui.github.io/bootstrap/">UI Bootstrap</a> のコードを参考に、複雑な directive の作成に取り組んでいきたいところ。</p>
+
+<h2>Directive とは何か</h2>
+
+<p>AngularJS で一番強力な機能と言え、HTML が持っていない意味合いや振る舞いを加えるように使うことができる。AngularJS 標準の<code>ng-bind</code>や<code>ng-model</code>、<code>ng-view</code>とかはすべて directive であって、controllers や services に記述したアプリケーションロジックを、属性や要素として DOM 要素にバインドできるようになる。</p>
+
+<p>簡単に言うと、データバインドするモデルやイベントハンドリングするロジックを、DOM に紐付けるためのものということ。</p>
+
+<h2>標準 Directive</h2>
+
+<p>AngularJS には標準（ビルトイン）の directives がたくさん存在し、公式サイトの <a href="http://docs.angularjs.org/api/ng#directive">ng (core module) ページ Directive</a> には、<code>ng-include</code>、<code>ng-controller</code>、<code>ng-click</code>などよく使う<code>ng</code>で始まるものだけでなく、普通の HTML のように見える<code>a</code>、<code>form</code>や<code>input</code>なども directive として記載されている。</p>
+
+<p>たとえば<code>a</code>については href 属性値が空のときにはデフォルトの動作が防止されるよう処理されたり、<code>form</code>だと name 属性があれば scope のほうでその名前で参照できるように処理されたりする。</p>
+
+<p>form には HTML で form を入れ子にできるよう<code>ng-form</code>があったり、<code>ng-submit</code>の機能、<code>ng-invalid</code>や<code>ng-dirty</code>などの機能についても触れたくなるけれど、その辺のことはまた別の機会に。</p>
+
+<h2>Directives の記述</h2>
+
+<p>Directives は JavaScript では camelCase で宣言し、HTML では小文字ハイフン区切りの lower-case で参照する。</p>
+
+<p>HTML では４種類の参照方法があるものの、基本的には要素か属性として記述する以下の２種類。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;my</span><span class="na">-directive</span><span class="nt">&gt;</span><span class="err">&lt;</span>/my-directive&gt;
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">my-directive</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>HTML の validation ツールを使いたければ<code>data-</code>を付けておくといい。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+</span><span class='line'><span class="nt">&lt;span</span> <span class="na">data-ng-bind=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Directives の接頭辞</h2>
+
+<p>カスタム directive の名前には、念のため接頭辞（ng を避ける）を付けておくほうがいいかもしれない。将来、偶然 HTML 標準として追加される要素名と重なってしまうケースや、AngularUI や AngularStrap などサードパーティ製の directives と重なってしまうケースもありえるので。</p>
+
+<h2>次回へ向けて</h2>
+
+<p>え、そんなちょっとしか記述しなくても directive として成立してるんだ、ってことを見てもらうのが初回の目的なので、ひとまずここで終了。</p>
+
+<p>こんなとこで終わったら、directive こわいままになっちゃうので、なんとしてでも次回も続けないと。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSでHTMLを分割するのにお手軽なng-include]]></title>
@@ -1651,71 +1788,6 @@ angular.module('Ninja', [])
 
 
 <p>たいへん便利な国際化モジュール、angular-translate の紹介でした。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS で HTML をエスケープさせずに出力するには]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html/"/>
-    <updated>2013-09-04T16:49:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS での出力手段</h2>
-
-<p>AngularJS で単に文字列を出力するには、<code>{{expression}}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span&gt;</span>{{ninja.name}}<span class="nt">&lt;/span&gt;</span>
-</span><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">&quot;ninja.name&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!-- more -->
-
-
-<h2>{{expression}} が一瞬表示されてチラつく場合の対処方法</h2>
-
-<p><code>{{expression}}</code>をエントリーポイントの index.html で利用すると、AngularJS が処理するまで<code>{{expression}}</code>がそのままページに表示され、値が切り替わるときにチラついてしまう。</p>
-
-<p>この問題に対しては、<code>ng-bind</code>を利用するか、<a href="http://docs.angularjs.org/api/ng.directive:ngCloak"><code>ng-cloak</code></a>を以下のように利用することで解決できる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-cloak</span><span class="nt">&gt;</span>{{ninja.name}}<span class="nt">&lt;/span&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>なお、<a href="http://docs.angularjs.org/api/ngRoute.directive:ngView">ng-view</a> や <a href="http://docs.angularjs.org/api/ng.directive:ngInclude">ng-include</a> で挿入される断片（partial）の HTML では、このチラつく現象は発生しないため、ng-cloak の記述は不要である。</p>
-
-<h2>HTML をエスケープさせずに出力するには</h2>
-
-<p>HTML をエスケープさせずに出力するには、<a href="http://docs.angularjs.org/api/ng.directive:ngBindHtml"><code>ng-bind-html</code></a>を利用する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-bind-html=</span><span class="s">&quot;ninja.htmlContent&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>この<code>ng-bind-html</code>は、別のモジュール（ngSanitize）に分かれているため、angular-sanitize.min.js を index.html で参照し、依存するモジュールとして記述する必要がある。</p>
-
-<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;assets/lib/angular-1.1.5/angular-sanitize.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ngSanitize&#39;</span><span class="p">]);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>サニタイズせずに出力するには</h2>
-
-<p>出力する内容が安全であるとわかっている場合には、<a href="http://docs.angularjs.org/api/ng.$sce#trustAsHtml">$sce.trustAsHtml</a> を利用してまったくサニタイズせずに出力することができる。</p>
-
-<p>また、バージョン 1.1 までであれば、ngSanitize モジュールを利用することなく<code>ng-bind-html-unsafe</code>を利用できる。</p>
 ]]></content>
   </entry>
   
