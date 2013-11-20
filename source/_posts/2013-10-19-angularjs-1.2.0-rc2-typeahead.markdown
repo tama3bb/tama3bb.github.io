@@ -1,0 +1,17 @@
+---
+layout: post
+title: "AngularJS 1.2.0-rc2 で Typeahead が動かない"
+date: 2013-10-19 17:42
+comments: true
+categories: [AngularJS, Bootstrap]
+---
+---
+## AngularJS で UI Bootstrap の Typeahead が動かない
+
+AngularJS 1.2.0 の rc2 にした途端、UI Bootstrap (0.6.0) の Typeahead (Autocomplete みたいなやつ) が動かなくなった。
+
+仕様変更なのかバグなのかわからず、とりあえず`ui-bootstrap-tpls-0.6.0.js`のコードを見たりしながらも AngularJS か UI Bootstrap のほうでバグ修正してくんないかなーと期待＆様子見していたところ、AngularJS 1.2.0 の rc3 では正常に動作するようになったので一件落着。
+
+ちなみに、rc2 でのエラーは、`matches is undefined`というもの。
+
+Stack Overflow で関連する記事は、[AngularJS 1.2.0 Bootstrap UI 0.6.0 (bootstrap3_bis2) Typeahead](http://stackoverflow.com/questions/18764023/angularjs-1-2-0-bootstrap-ui-0-6-0-bootstrap3-bis2-typeahead/19377002#19377002) かな。rc2 では、`promise`絡みの実装に問題があったみたいだ。

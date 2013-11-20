@@ -1,0 +1,62 @@
+// This File is imported last, and will override other styles in the cascade
+// Add styles here to make changes without digging in too much
+
+#header h1 {
+  font-size: 23px;
+}
+
+article .entry-content h1,
+article .entry-content h2,
+article .entry-content h3,
+article .entry-content h4,
+article .entry-content h5,
+article .entry-content h6 {
+  margin-top: 30px;
+}
+
+.container .left-col {
+  opacity: 0.8;
+}
+
+.container .left-col #header .profilepic img {
+  border-radius: 0;
+}
+
+.container .mid-col .mid-col-container #content article .entry-content blockquote {
+  background-color: #f2f2f2;
+}
+
+body {
+  font-family: "Open Sans", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+article code,
+article pre {
+  background: #f2f2f2;
+}
+article code,
+article pre,
+figure.code .line-numbers {
+  font-family: Monaco, Menlo, Consolas, "Andale Mono", "lucida console", "Courier New", monospace;
+}
+
+article .entry-content {
+  text-align: left;
+}
+article .entry-content .demo th {
+  background: #f2f2f2;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+article .entry-content .demo th .icon-sort {
+  color: #bbb;
+}
+article .entry-content .demo th:hover .icon-sort {
+  color: #666;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
+  article code {
+    font-size: .6em !important;
+  }
+}

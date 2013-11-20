@@ -1,0 +1,30 @@
+---
+layout: post
+title: "AngularJS 1.2.0 リリース！"
+date: 2013-11-09 10:14
+comments: true
+categories: AngularJS
+---
+---
+待望の AngularJS 1.2.0 リリースがキター！！
+
+まだ把握してない内容もあるんだけど、取り急ぎ公式ブログの[内容](http://blog.angularjs.org/2013/11/angularjs-120-timely-delivery.html)を（一部省略して）日本語に訳しときます。
+
+---
+## AngularJS 1.2.0: timely-delivery
+
+1.2.0-rc3 で見つかった多くの問題を修正し、前回の安定版リリースからいくつもの新しい機能を導入している。
+
+前回の安定版リリースからの注目すべき変更点：
+
+* [アニメーションとトランジション](http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html)
+* [エラーメッセージ](http://kensheedlo.com/2013/08/15/error-message-minification-with-minerr.html)（error minification を含む）
+* [厳密なコンテキストのエスケーピング](http://docs.angularjs.org/api/ng.$sce)
+* [ng-repeat で重複を防ぐトラッキング機能](http://docs.angularjs.org/api/ng.directive:ngRepeat)
+* [テンプレート内で controller インスタンスにアクセスするための構文](http://egghead.io/lessons/angularjs-experimental-controller-as-syntax)
+* [Promise A+ に準拠](https://github.com/angular/angular.js/pull/3699)
+* [ngRoute を独自モジュールに分離](http://docs.angularjs.org/api/ngRoute)
+
+リリースの詳細は、[changelog](https://github.com/angular/angular.js/blob/master/CHANGELOG.md) を参照。
+
+移行ガイドは [our guides](http://docs.angularjs.org/guide/migration) を参照。
