@@ -1,0 +1,383 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>AngularJS Directive なんてこわくない（その２） - AngularJS Ninja</title>
+	<meta name="author" content="Akihito Tamagawa">
+
+	
+	<meta name="description" content="AngularJS Directive なんてこわくない（その２） compile と link 前回に引き続き、今回もカスタム directive について。 ２回目の今回は、compileとlinkの使い分けについて。 compile のサンプルコード &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="AngularJS Ninja" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("tama3bb@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">AngularJS Ninja</a></h1>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+
+<section class="aboutme">
+  <p>
+    AngularJS Ninja Blog
+  </p>
+</section>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/tama3bb" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/tama3bb" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">AngularJS Directive なんてこわくない（その２）</h1>
+	<div class="entry-content" itemprop="articleBody"><hr />
+
+<h2>compile と link</h2>
+
+<p><a href="/blog/2013/11/20/angularjs-custom-directives/">前回</a>に引き続き、今回もカスタム directive について。</p>
+
+<p>２回目の今回は、<code>compile</code>と<code>link</code>の使い分けについて。</p>
+
+<h2>compile のサンプルコード</h2>
+
+<p>まずは<code>compile</code>を利用するサンプルコードを、『<a href="http://www.amazon.co.jp/dp/B00EQ67J30">Mastering Web Application Development with AngularJS</a>』から抜粋して見ていく。</p>
+
+<p>このコードでは、Bootstrap の理由を前提として、以下に示すように Bootstrap でのボタンデザインに必要な CSS class の値を追加する処理を、<code>compile</code>で実装している。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myModule</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">restrict</span><span class="o">:</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">compile</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">element</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;btn&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;submit&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">element</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;btn-primary&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">size</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">element</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;btn-&#39;</span> <span class="o">+</span> <span class="nx">attrs</span><span class="p">.</span><span class="nx">size</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>&lt;button&gt;</code>の class 属性に<code>btn</code>を追加</li>
+<li><code>&lt;button type="submit"&gt;</code>のように <code>type="submit"</code>がある場合には、class 属性に<code>btn-primary</code>を追加</li>
+<li><code>&lt;button size="..."&gt;</code>のように size 属性がある場合には、<code>btn-large</code>など、<code>btn-</code> と size 属性で指定した文字列を組み合わせた文字列を class 属性に追加</li>
+</ul>
+
+
+<p>コードからわかるように、compile オプションの function 第１引数にある<code>element</code>は、jQuery（jqLite）オブジェクトになっているので、直接 jQuery の API を利用できる。つまり<code>$(element)</code>や、<code>$(button)</code>などとしてやる必要はない。</p>
+
+<p>第２引数の<code>attrs</code>では<code>attrs.size</code>のようにドット区切りで属性値にアクセスできるので、HTML テンプレート側の値を簡単に参照することができる。</p>
+
+<!-- more -->
+
+
+<h2>compile の流れ</h2>
+
+<p>AngularJS が HTML テンプレートをコンパイルするために、標準の directives とカスタム定義した directives のすべてを、DOM の要素・属性・コメント・CSS class から探し出す。各 directive の<code>compile</code>function を呼び出し、<code>compile</code>function から返される<code>link</code>function を後で呼び出すために集めていく流れとなる。</p>
+
+<p>なお、directives をコンパイルしていく処理の順序は<code>priority</code>の大きい順となるが、これについてはまた別の機会に先送り。</p>
+
+<p>重要なポイントとしては、<code>compile</code>の処理は scope ができる前の処理であり、<code>compile</code>function では scope を利用できない。</p>
+
+<p>すべてのコンパイル処理が終わった後、生成した scope を付けて<code>link</code>function を呼び出す流れとなり、この時点で<code>link</code>function の scope を利用した DOM との間での双方向バインドが効くことになる。</p>
+
+<h2>compile と link の使い分け</h2>
+
+<p><code>ng-repeat</code>の内側にある directive というケースなど、同じ directive が繰り返し使われることになるような場合では、<code>compile</code>の function は<code>ng-repeat</code>の繰り返しに関係なく一度だけ呼び出されるのに対し、<code>link</code>の function はイテレーションのたびに呼び出されることになる。</p>
+
+<p>これは、scope のデータや双方向バインドに依存ぜずに処理できる上記のサンプルコードのようなケースであれば、<code>compile</code>を使うことで同じ処理を繰り返す無駄を省くように最適化できることになる。</p>
+
+<p><code>compile</code>と<code>link</code>の両方を指定した場合には<code>link</code>が無視される仕様になっているため、両方を利用した実装をしたい場合には<code>compile</code>function から<code>link</code>function を return するよう実装することになる。</p>
+
+<h2>link のサンプルコード</h2>
+
+<p>ここから、最もよく利用することになる<code>link</code>の書き方について見ていく。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myModule</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;myDirective&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;xxxVar&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// ...</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>      <span class="nx">scope</span><span class="p">.</span><span class="nx">$on</span><span class="p">(</span><span class="s1">&#39;xxxEvent&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// ...</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このように、<code>link</code>では、<code>scope</code>にあるモデルの変更を検知して処理することや、イベントに応じた処理を記述して、DOM や controller とのやり取りを記述していく。</p>
+
+<h2>いろいろある link の書き方</h2>
+
+<p>Directives では<code>link</code>の書き方にバリエーションがあるので、ざっと眺めておく。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myModule</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;returnLinkFunction&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// ...</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>まず、単に<code>function</code>を return するだけという書き方ができて、これは<code>link</code>プロパティだけを持つオブジェクトを返しているのと同じことになる。<code>link</code>以外のプロパティを指定する必要が無ければ、こう書くことでシンプルなコードにできる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myModule</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;usingLinkOption&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// ...</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これはオブジェクト（DDO: Directive Definition Object）を返す書き方で、<code>compile</code>プロパティを使わない場合の書き方。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myModule</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;usingCompileOption&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">compile</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// ...</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// ...</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後に、<code>compile</code>プロパティを使う場合の書き方で、<code>compile</code>function で return している<code>function</code>が<code>link</code>function として扱われることになる。</p>
+
+<h2>３回目へ向けて</h2>
+
+<p>この２回目で compile と link の使い分けができるようになったので、ここまでの知識でとりあえず directive を使っていろいろ実装していけるんじゃないかと思う。</p>
+
+<p>けれども、<code>replace</code> <code>transclude</code> <code>scope</code> <code>controller</code> <code>require</code>といった大事なプロパティを抑えてないので、ここで終わったら directive こわいままになっちゃうので、３回目に続く。</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	<a href="http://b.hatena.ne.jp/entry/http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count" style="width: 108px"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<!-- <a class="addthis_counter addthis_pill_style"></a> -->
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Akihito Tamagawa -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'angularjsninja';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives/';
+        var disqus_url = 'http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-15091936-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-20T12:54:07+09:00</updated>
+  <updated>2013-11-22T14:31:05+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,192 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その２）]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives/"/>
+    <updated>2013-11-22T13:37:02+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>compile と link</h2>
+
+<p><a href="http://angularjsninja.com/blog/2013/11/20/angularjs-custom-directives/">前回</a>に引き続き、今回もカスタム directive について。</p>
+
+<p>２回目の今回は、<code>compile</code>と<code>link</code>の使い分けについて。</p>
+
+<h2>compile のサンプルコード</h2>
+
+<p>まずは<code>compile</code>を利用するサンプルコードを、『<a href="http://www.amazon.co.jp/dp/B00EQ67J30">Mastering Web Application Development with AngularJS</a>』から抜粋して見ていく。</p>
+
+<p>このコードでは、Bootstrap の理由を前提として、以下に示すように Bootstrap でのボタンデザインに必要な CSS class の値を追加する処理を、<code>compile</code>で実装している。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myModule</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">restrict</span><span class="o">:</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">compile</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">element</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;btn&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;submit&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">element</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;btn-primary&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">size</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">element</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;btn-&#39;</span> <span class="o">+</span> <span class="nx">attrs</span><span class="p">.</span><span class="nx">size</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>&lt;button&gt;</code>の class 属性に<code>btn</code>を追加</li>
+<li><code>&lt;button type="submit"&gt;</code>のように <code>type="submit"</code>がある場合には、class 属性に<code>btn-primary</code>を追加</li>
+<li><code>&lt;button size="..."&gt;</code>のように size 属性がある場合には、<code>btn-large</code>など、<code>btn-</code> と size 属性で指定した文字列を組み合わせた文字列を class 属性に追加</li>
+</ul>
+
+
+<p>コードからわかるように、compile オプションの function 第１引数にある<code>element</code>は、jQuery（jqLite）オブジェクトになっているので、直接 jQuery の API を利用できる。つまり<code>$(element)</code>や、<code>$(button)</code>などとしてやる必要はない。</p>
+
+<p>第２引数の<code>attrs</code>では<code>attrs.size</code>のようにドット区切りで属性値にアクセスできるので、HTML テンプレート側の値を簡単に参照することができる。</p>
+
+<!-- more -->
+
+
+<h2>compile の流れ</h2>
+
+<p>AngularJS が HTML テンプレートをコンパイルするために、標準の directives とカスタム定義した directives のすべてを、DOM の要素・属性・コメント・CSS class から探し出す。各 directive の<code>compile</code>function を呼び出し、<code>compile</code>function から返される<code>link</code>function を後で呼び出すために集めていく流れとなる。</p>
+
+<p>なお、directives をコンパイルしていく処理の順序は<code>priority</code>の大きい順となるが、これについてはまた別の機会に先送り。</p>
+
+<p>重要なポイントとしては、<code>compile</code>の処理は scope ができる前の処理であり、<code>compile</code>function では scope を利用できない。</p>
+
+<p>すべてのコンパイル処理が終わった後、生成した scope を付けて<code>link</code>function を呼び出す流れとなり、この時点で<code>link</code>function の scope を利用した DOM との間での双方向バインドが効くことになる。</p>
+
+<h2>compile と link の使い分け</h2>
+
+<p><code>ng-repeat</code>の内側にある directive というケースなど、同じ directive が繰り返し使われることになるような場合では、<code>compile</code>の function は<code>ng-repeat</code>の繰り返しに関係なく一度だけ呼び出されるのに対し、<code>link</code>の function はイテレーションのたびに呼び出されることになる。</p>
+
+<p>これは、scope のデータや双方向バインドに依存ぜずに処理できる上記のサンプルコードのようなケースであれば、<code>compile</code>を使うことで同じ処理を繰り返す無駄を省くように最適化できることになる。</p>
+
+<p><code>compile</code>と<code>link</code>の両方を指定した場合には<code>link</code>が無視される仕様になっているため、両方を利用した実装をしたい場合には<code>compile</code>function から<code>link</code>function を return するよう実装することになる。</p>
+
+<h2>link のサンプルコード</h2>
+
+<p>ここから、最もよく利用することになる<code>link</code>の書き方について見ていく。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myModule</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;myDirective&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;xxxVar&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// ...</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>      <span class="nx">scope</span><span class="p">.</span><span class="nx">$on</span><span class="p">(</span><span class="s1">&#39;xxxEvent&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// ...</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このように、<code>link</code>では、<code>scope</code>にあるモデルの変更を検知して処理することや、イベントに応じた処理を記述して、DOM や controller とのやり取りを記述していく。</p>
+
+<h2>いろいろある link の書き方</h2>
+
+<p>Directives では<code>link</code>の書き方にバリエーションがあるので、ざっと眺めておく。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myModule</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;returnLinkFunction&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// ...</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>まず、単に<code>function</code>を return するだけという書き方ができて、これは<code>link</code>プロパティだけを持つオブジェクトを返しているのと同じことになる。<code>link</code>以外のプロパティを指定する必要が無ければ、こう書くことでシンプルなコードにできる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myModule</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;usingLinkOption&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// ...</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これはオブジェクト（DDO: Directive Definition Object）を返す書き方で、<code>compile</code>プロパティを使わない場合の書き方。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myModule</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;usingCompileOption&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">compile</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// ...</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// ...</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後に、<code>compile</code>プロパティを使う場合の書き方で、<code>compile</code>function で return している<code>function</code>が<code>link</code>function として扱われることになる。</p>
+
+<h2>３回目へ向けて</h2>
+
+<p>この２回目で compile と link の使い分けができるようになったので、ここまでの知識でとりあえず directive を使っていろいろ実装していけるんじゃないかと思う。</p>
+
+<p>けれども、<code>replace</code> <code>transclude</code> <code>scope</code> <code>controller</code> <code>require</code>といった大事なプロパティを抑えてないので、ここで終わったら directive こわいままになっちゃうので、３回目に続く。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その１）]]></title>
@@ -146,7 +332,7 @@
 
 <p>え、そんなちょっとしか記述しなくても directive として成立してるんだ、ってことを見てもらうのが初回の目的なので、ひとまずここで終了。</p>
 
-<p>こんなとこで終わったら、directive こわいままになっちゃうので、なんとしてでも次回も続けないと。</p>
+<p>こんなとこで終わったら、directive こわいままになっちゃうので、なんとしてでも<a href="http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives/">次回</a>も続けないと。</p>
 ]]></content>
   </entry>
   
@@ -1435,112 +1621,6 @@ angular.module('Ninja', [])
 </span><span class='line'><span class="nt">&lt;/table&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS の学習リソースまとめ]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/07/learning-angularjs/"/>
-    <updated>2013-09-07T23:58:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/07/learning-angularjs</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2><img src="http://dotinstall.com/img/topbar_logo.png" alt="ドットインストール" /></h2>
-
-<p>なにはともあれドットインストール。最強の動画学習サイト。</p>
-
-<p><a href="http://dotinstall.com/lessons/basic_angularjs">AngularJS入門 (全12回) &ndash; プログラミングならドットインストール</a></p>
-
-<p>動画学習でオススメなのは、動画の再生速度を 1.5 倍速か 2 倍速にすること。時は金なり。</p>
-
-<p>ドットインストールは初心者向けの内容なので、今後は中級者向けの動画も提供されていくことを期待！</p>
-
-<!-- more -->
-
-
-<hr />
-
-<h2>Qiita</h2>
-
-<p><a href="http://qiita.com/tags/angularjs/items">AngularJS&rsquo;s new posts &ndash; Qiita</a></p>
-
-<p>情報たくさんあって活気ある Qiita。私も Qiita で情報発信したほうがたくさんの人に見てもらえただろうな…。</p>
-
-<hr />
-
-<h2><img src="https://raw.github.com/angular/angular.js/master/images/logo/AngularJS.exports/AngularJS-small.png" alt="AngularJS 公式サイト" /></h2>
-
-<p><a href="http://angularjs.org/">AngularJS — Superheroic JavaScript MVW Framework</a></p>
-
-<p>AngularJS 公式サイト。トップページだけでなく、Tutorial、Developer Guide、API Reference と見どころ満載。API Reference は頻繁に訪れることに。</p>
-
-<hr />
-
-<h2><img src="http://www.youtube.com/yt/brand/media/image/yt-brand-standard-logo-95x40.png" alt="Youtube" /></h2>
-
-<p><a href="http://www.youtube.com/user/angularjs">AngularJS &ndash; YouTube</a></p>
-
-<p>AngularJS の YouTube チャンネル。プログラミング系の学習は動画とホント相性がいい。最初のうちはとにかく動画から吸収しよう。</p>
-
-<hr />
-
-<h2><img src="http://d3gqmx6sr7od7s.cloudfront.net/assets/logo-1f7bbe07d5a965bf3720a02869dc7e95.svg" alt="egghead.io" /></h2>
-
-<p><a href="http://www.egghead.io/">AngularJS: Awesome Tutorial Videos, Workshops, and Training &ndash; @eggheadio</a></p>
-
-<p>AngularJS の動画学習サイトで、質が高い。AngularJS のキモと言える Directive について詳しく説明している。</p>
-
-<hr />
-
-<h2><img src="http://upload.wikimedia.org/wikipedia/en/9/95/Stack_Overflow_website_logo.png" alt="Stack Overflow" /></h2>
-
-<p><a href="http://stackoverflow.com/questions/tagged/angularjs">Highest Voted &lsquo;angularjs&rsquo; Questions &ndash; Stack Overflow</a></p>
-
-<p>Stack Overflow はホントすごいサイト。このサイトのお陰で自分の仕事が成立していると言っても過言ではないと思う。</p>
-
-<hr />
-
-<h2>洋書</h2>
-
-<p>『<a href="http://shop.oreilly.com/product/0636920028055.do">AngularJS</a>』by Brad Green, Shyam Seshadri &ndash; April 2013</p>
-
-<p>『<a href="http://www.packtpub.com/angularjs-web-application-development/book">Mastering Web Application Development with AngularJS</a>』by Peter Bacon Darwin, Pawel Kozlowski &ndash; August 2013</p>
-
-<p>『<a href="http://www.manning.com/bford/">AngularJS in Action</a>』by Brian Ford, Lukas Ruebbelke &ndash; January 2014</p>
-
-<p>とりあえずこの 3 冊。後発だけあって、後の 2 冊のほうが内容充実。AngularJS in Action は未完の書籍で、Early Access Edition で全 13 章のうち 5 章まで読める（2013年9月7日現在）。</p>
-
-<hr />
-
-<h2>AngularJS-Learning</h2>
-
-<p><a href="https://github.com/jmcunningham/AngularJS-Learning">jmcunningham/AngularJS-Learning</a></p>
-
-<p>AngularJS 学習系リソースまとめページ。リンク多過ぎて始めにここ見るとしんどくなるけど、きちんと分類されてる。</p>
-
-<hr />
-
-<h2>GitHub</h2>
-
-<p><a href="https://github.com/search?q=angular">Search · angular</a></p>
-
-<p>GitHub で実践的に。ここで angular で検索し、Star がたくさん付いてるもののコードを眺めていく。</p>
-
-<hr />
-
-<h2>Twitter</h2>
-
-<p><a href="https://twitter.com/angularjs">@angularjs</a></p>
-
-<p>AngularJS の情報がリツイートされてくるので、AngularJS 情報を日常的に取りたいときにはフォロー。</p>
-
-<hr />
-
-<h2>AngularJS Ninja</h2>
-
-<p><a href="http://angularjsninja.com/">AngularJS Ninja</a></p>
-
-<p>地道にコツコツと AngularJS の情報を発信していくでござる。</p>
 ]]></content>
   </entry>
   

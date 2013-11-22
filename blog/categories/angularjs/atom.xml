@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-20T12:54:07+09:00</updated>
+  <updated>2013-11-22T14:31:05+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,155 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その２）]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives/"/>
+    <updated>2013-11-22T13:37:02+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>compile と link</h2>
+
+<p><a href="/blog/2013/11/20/angularjs-custom-directives/">前回</a>に引き続き、今回もカスタム directive について。</p>
+
+<p>２回目の今回は、<code>compile</code>と<code>link</code>の使い分けについて。</p>
+
+<h2>compile のサンプルコード</h2>
+
+<p>まずは<code>compile</code>を利用するサンプルコードを、『<a href="http://www.amazon.co.jp/dp/B00EQ67J30">Mastering Web Application Development with AngularJS</a>』から抜粋して見ていく。</p>
+
+<p>このコードでは、Bootstrap の理由を前提として、以下に示すように Bootstrap でのボタンデザインに必要な CSS class の値を追加する処理を、<code>compile</code>で実装している。</p>
+
+<p>``` javascript
+myModule.directive(&lsquo;button&rsquo;, function() {
+  return {</p>
+
+<pre><code>restrict: 'E',
+compile: function(element, attrs) {
+  element.addClass('btn');
+  if (attrs.type === 'submit') {
+    element.addClass('btn-primary');
+  }
+  if (attrs.size) {
+    element.addClass('btn-' + attrs.size);
+  }
+}
+</code></pre>
+
+<p>  };
+});
+```</p>
+
+<ul>
+<li><code>&lt;button&gt;</code>の class 属性に<code>btn</code>を追加</li>
+<li><code>&lt;button type="submit"&gt;</code>のように <code>type="submit"</code>がある場合には、class 属性に<code>btn-primary</code>を追加</li>
+<li><code>&lt;button size="..."&gt;</code>のように size 属性がある場合には、<code>btn-large</code>など、<code>btn-</code> と size 属性で指定した文字列を組み合わせた文字列を class 属性に追加</li>
+</ul>
+
+
+<p>コードからわかるように、compile オプションの function 第１引数にある<code>element</code>は、jQuery（jqLite）オブジェクトになっているので、直接 jQuery の API を利用できる。つまり<code>$(element)</code>や、<code>$(button)</code>などとしてやる必要はない。</p>
+
+<p>第２引数の<code>attrs</code>では<code>attrs.size</code>のようにドット区切りで属性値にアクセスできるので、HTML テンプレート側の値を簡単に参照することができる。</p>
+
+<!-- more -->
+
+
+<h2>compile の流れ</h2>
+
+<p>AngularJS が HTML テンプレートをコンパイルするために、標準の directives とカスタム定義した directives のすべてを、DOM の要素・属性・コメント・CSS class から探し出す。各 directive の<code>compile</code>function を呼び出し、<code>compile</code>function から返される<code>link</code>function を後で呼び出すために集めていく流れとなる。</p>
+
+<p>なお、directives をコンパイルしていく処理の順序は<code>priority</code>の大きい順となるが、これについてはまた別の機会に先送り。</p>
+
+<p>重要なポイントとしては、<code>compile</code>の処理は scope ができる前の処理であり、<code>compile</code>function では scope を利用できない。</p>
+
+<p>すべてのコンパイル処理が終わった後、生成した scope を付けて<code>link</code>function を呼び出す流れとなり、この時点で<code>link</code>function の scope を利用した DOM との間での双方向バインドが効くことになる。</p>
+
+<h2>compile と link の使い分け</h2>
+
+<p><code>ng-repeat</code>の内側にある directive というケースなど、同じ directive が繰り返し使われることになるような場合では、<code>compile</code>の function は<code>ng-repeat</code>の繰り返しに関係なく一度だけ呼び出されるのに対し、<code>link</code>の function はイテレーションのたびに呼び出されることになる。</p>
+
+<p>これは、scope のデータや双方向バインドに依存ぜずに処理できる上記のサンプルコードのようなケースであれば、<code>compile</code>を使うことで同じ処理を繰り返す無駄を省くように最適化できることになる。</p>
+
+<p><code>compile</code>と<code>link</code>の両方を指定した場合には<code>link</code>が無視される仕様になっているため、両方を利用した実装をしたい場合には<code>compile</code>function から<code>link</code>function を return するよう実装することになる。</p>
+
+<h2>link のサンプルコード</h2>
+
+<p>ここから、最もよく利用することになる<code>link</code>の書き方について見ていく。</p>
+
+<p>``` javascript
+myModule.directive(&lsquo;myDirective&rsquo;, function () {
+  return {</p>
+
+<pre><code>link: function (scope, element) {
+  scope.$watch('xxxVar', function () {
+    // ...
+  });
+  scope.$on('xxxEvent', function () {
+    // ...
+  });
+}
+</code></pre>
+
+<p>  };
+});
+<code>``
+このように、</code>link<code>では、</code>scope`にあるモデルの変更を検知して処理することや、イベントに応じた処理を記述して、DOM や controller とのやり取りを記述していく。</p>
+
+<h2>いろいろある link の書き方</h2>
+
+<p>Directives では<code>link</code>の書き方にバリエーションがあるので、ざっと眺めておく。</p>
+
+<p>``` javascript
+myModule.directive(&lsquo;returnLinkFunction&rsquo;, function () {
+  return function(scope, element, attrs) {</p>
+
+<pre><code>// ...
+</code></pre>
+
+<p>  };
+});
+<code>``
+まず、単に</code>function<code>を return するだけという書き方ができて、これは</code>link<code>プロパティだけを持つオブジェクトを返しているのと同じことになる。</code>link`以外のプロパティを指定する必要が無ければ、こう書くことでシンプルなコードにできる。</p>
+
+<p>``` javascript
+myModule.directive(&lsquo;usingLinkOption&rsquo;, function () {
+  return {</p>
+
+<pre><code>link: function(scope, element, attrs) {
+  // ...
+}
+</code></pre>
+
+<p>  };
+});
+<code>``
+これはオブジェクト（DDO: Directive Definition Object）を返す書き方で、</code>compile`プロパティを使わない場合の書き方。</p>
+
+<p>``` javascript
+myModule.directive(&lsquo;usingCompileOption&rsquo;, function () {
+  return {</p>
+
+<pre><code>compile: function(element, attrs) {
+  // ...
+  return function(scope, element, attrs) {
+    // ...
+  };
+}
+</code></pre>
+
+<p>  };
+});
+<code>``
+最後に、</code>compile<code>プロパティを使う場合の書き方で、</code>compile<code>function で return している</code>function<code>が</code>link`function として扱われることになる。</p>
+
+<h2>３回目へ向けて</h2>
+
+<p>この２回目で compile と link の使い分けができるようになったので、ここまでの知識でとりあえず directive を使っていろいろ実装していけるんじゃないかと思う。</p>
+
+<p>けれども、<code>replace</code> <code>transclude</code> <code>scope</code> <code>controller</code> <code>require</code>といった大事なプロパティを抑えてないので、ここで終わったら directive こわいままになっちゃうので、３回目に続く。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その１）]]></title>
@@ -132,7 +281,7 @@ restrict: 'AE' // 属性または要素
 
 <p>え、そんなちょっとしか記述しなくても directive として成立してるんだ、ってことを見てもらうのが初回の目的なので、ひとまずここで終了。</p>
 
-<p>こんなとこで終わったら、directive こわいままになっちゃうので、なんとしてでも次回も続けないと。</p>
+<p>こんなとこで終わったら、directive こわいままになっちゃうので、なんとしてでも<a href="/blog/2013/11/22/angularjs-custom-directives/">次回</a>も続けないと。</p>
 ]]></content>
   </entry>
   
@@ -493,42 +642,6 @@ angular.module('Ninja', [])
 
 
 <p>見どころは 25 行目の<code>$scope.iconSort</code>function で return している object で、この<code>iconSort</code>を ng-class で使ってソートのアイコン表示を切り替えている。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS 1.2.0 リリース！]]></title>
-    <link href="http://angularjsninja.com/blog/2013/11/09/angularjs-1.2.0-timely-delivery/"/>
-    <updated>2013-11-09T10:14:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/11/09/angularjs-1.2.0-timely-delivery</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>待望の AngularJS 1.2.0 リリースがキター！！</p>
-
-<p>まだ把握してない内容もあるんだけど、取り急ぎ公式ブログの<a href="http://blog.angularjs.org/2013/11/angularjs-120-timely-delivery.html">内容</a>を（一部省略して）日本語に訳しときます。</p>
-
-<hr />
-
-<h2>AngularJS 1.2.0: timely-delivery</h2>
-
-<p>1.2.0-rc3 で見つかった多くの問題を修正し、前回の安定版リリースからいくつもの新しい機能を導入している。</p>
-
-<p>前回の安定版リリースからの注目すべき変更点：</p>
-
-<ul>
-<li><a href="http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html">アニメーションとトランジション</a></li>
-<li><a href="http://kensheedlo.com/2013/08/15/error-message-minification-with-minerr.html">エラーメッセージ</a>（error minification を含む）</li>
-<li><a href="http://docs.angularjs.org/api/ng.$sce">厳密なコンテキストのエスケーピング</a></li>
-<li><a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ng-repeat で重複を防ぐトラッキング機能</a></li>
-<li><a href="http://egghead.io/lessons/angularjs-experimental-controller-as-syntax">テンプレート内で controller インスタンスにアクセスするための構文</a></li>
-<li><a href="https://github.com/angular/angular.js/pull/3699">Promise A+ に準拠</a></li>
-<li><a href="http://docs.angularjs.org/api/ngRoute">ngRoute を独自モジュールに分離</a></li>
-</ul>
-
-
-<p>リリースの詳細は、<a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md">changelog</a> を参照。</p>
-
-<p>移行ガイドは <a href="http://docs.angularjs.org/guide/migration">our guides</a> を参照。</p>
 ]]></content>
   </entry>
   
