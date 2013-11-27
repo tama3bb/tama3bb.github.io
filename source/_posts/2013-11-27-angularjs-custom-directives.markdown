@@ -84,7 +84,7 @@ transclude: true // directive 要素の内容（内側）をテンプレート�
 transclude: 'element' // directive 要素ごとテンプレートで利用
 ```
 
-テンプレート側に ng-transclude を指定した要素の内側に append できる。上記サンプルコードの例では、`{{alert.msg}}`が`<div ng-transclude>`の内側に append される。
+テンプレート側に ng-transclude を指定した要素の内側に append できる。上記サンプルコードの例では、{% raw %}`{{alert.msg}}`{% endraw %}が`<div ng-transclude>`の内側に append される。
 
 上記コード例では、`alert`directive の内側部分{% raw %}`{{alert.msg}}`{% endraw %}が、`ng-transclude`に append されていることがわかる（`alert.msg: 'Another alert!'`という前提）。
 
