@@ -9,8 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/10/05 AngularJS, jQuery jQuery と AngularJS jQuery と AngularJS は併用できるのか？ jQuery と AngularJS は併用可能
-jQuery メインのサイトで AngularJS を部分的に使用可能 Read on & &hellip;">
+	<meta name="description" content="2013/10/19 AngularJS, Bootstrap AngularJS 1.2.0-rc2 で Typeahead が動かない AngularJS で UI Bootstrap の Typeahead が動かない AngularJS 1.2.0 の rc2 にした途端、UI &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +94,51 @@ jQuery メインのサイトで AngularJS を部分的に使用可能 Read on & 
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-19T17:42:00+09:00" data-updated="true" itemprop="datePublished">2013/10/19</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/bootstrap/'>Bootstrap</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/" itemprop="url">AngularJS 1.2.0-rc2 で Typeahead が動かない</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>AngularJS で UI Bootstrap の Typeahead が動かない</h2>
+
+<p>AngularJS 1.2.0 の rc2 にした途端、UI Bootstrap (0.6.0) の Typeahead (Autocomplete みたいなやつ) が動かなくなった。</p>
+
+<p>仕様変更なのかバグなのかわからず、とりあえず<code>ui-bootstrap-tpls-0.6.0.js</code>のコードを見たりしながらも AngularJS か UI Bootstrap のほうでバグ修正してくんないかなーと期待＆様子見していたところ、AngularJS 1.2.0 の rc3 では正常に動作するようになったので一件落着。</p>
+
+<p>ちなみに、rc2 でのエラーは、<code>matches is undefined</code>というもの。</p>
+
+<p>Stack Overflow で関連する記事は、<a href="http://stackoverflow.com/questions/18764023/angularjs-1-2-0-bootstrap-ui-0-6-0-bootstrap3-bis2-typeahead/19377002#19377002">AngularJS 1.2.0 Bootstrap UI 0.6.0 (bootstrap3_bis2) Typeahead</a> かな。rc2 では、<code>promise</code>絡みの実装に問題があったみたいだ。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -466,46 +510,6 @@ jQuery メインのサイトで AngularJS を部分的に使用可能 Read on & 
 
 		
 		<a href="/blog/2013/09/09/angularjs-context-path/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-08T20:33:00+09:00" data-updated="true" itemprop="datePublished">2013/09/08</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/" itemprop="url">AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<p>AngularJS 1.2 で追加された新しい directive の<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を紹介。</p>
-
-<p>通常の<a href="http://docs.angularjs.org/api/ng.directive:ngRepeat"><code>ng-repeat</code></a>では実現しにくかった複数の要素にまたがった繰り返しが可能になる。</p>
-
-
-		
-		<a href="/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

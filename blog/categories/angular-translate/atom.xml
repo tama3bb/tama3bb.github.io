@@ -4,7 +4,7 @@
   <title><![CDATA[Category: angular-translate | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angular-translate/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-26T16:40:39+09:00</updated>
+  <updated>2013-11-27T13:39:40+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -131,10 +131,10 @@ assets/i18n/
 
 <p>``` html filters</p>
 
-<h2>{{ 'HEADLINE' | translate }}</h2>
+<h2>{% raw %}{{ 'HEADLINE' | translate }}{% endraw %}</h2>
 
 
-<p>{{ 'PARAGRAPH' | translate }}</p>
+<p>{% raw %}{{ 'PARAGRAPH' | translate }}{% endraw %}</p>
 
 
 <p><code>
@@ -166,7 +166,7 @@ app.controller('Ctrl', ['$scope', '$translate', function ($scope, $translate) {
 
 <p><code>
 {
-  "TRANSLATION_ID": "{{username}} is logged in."
+  "TRANSLATION_ID": "{% raw %}{{username}}{% endraw %} is logged in."
 }
 </code></p>
 
@@ -187,10 +187,10 @@ angular.module(&lsquo;myApp&rsquo;).controller(&lsquo;Ctrl&rsquo;, [&lsquo;$scop
 $translate('TRANSLATION_ID', $scope.translationData);
 </code>
 <code>html filters
-{{ 'TRANSLATION_ID' | translate:translationData }}
+{% raw %}{{ 'TRANSLATION_ID' | translate:translationData }}{% endraw %}
 </code>
 <code>html directive
-&lt;ANY translate="TRANSLATION_ID" translate-values=""&gt;&lt;/ANY&gt;
+&lt;ANY translate="TRANSLATION_ID" translate-values="{{translationData}}"&gt;&lt;/ANY&gt;
 </code></p>
 
 <h2>言語の切り替え</h2>

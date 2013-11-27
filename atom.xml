@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-26T16:40:39+09:00</updated>
+  <updated>2013-11-27T13:39:29+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,183 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その３）]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/27/angularjs-custom-directives/"/>
+    <updated>2013-11-27T12:02:43+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/27/angularjs-custom-directives</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>replace, transclude, scope</h2>
+
+<p><a href="http://angularjsninja.com/blog/2013/11/20/angularjs-custom-directives/">前々回</a>、<a href="http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives/">前回</a>に引き続き、今回もカスタム directive について。</p>
+
+<p>今回のサンプルコードは、UI Bootstrap の <a href="https://github.com/angular-ui/bootstrap/tree/master/src/alert">Alert</a> からで、<code>replace</code> <code>transclude</code> <code>scope</code>オプションについて見ていく。</p>
+
+<figure class='code'><figcaption><span>alert.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s2">&quot;ui.bootstrap.alert&quot;</span><span class="p">,</span> <span class="p">[]).</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">restrict</span><span class="o">:</span><span class="s1">&#39;EA&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">templateUrl</span><span class="o">:</span><span class="s1">&#39;template/alert/alert.html&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">transclude</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">replace</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">scope</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">close</span><span class="o">:</span> <span class="s1">&#39;&amp;&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">iElement</span><span class="p">,</span> <span class="nx">iAttrs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">scope</span><span class="p">.</span><span class="nx">closeable</span> <span class="o">=</span> <span class="s2">&quot;close&quot;</span> <span class="k">in</span> <span class="nx">iAttrs</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>template/alert/alert.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;alert&quot;</span> <span class="na">ng-class=</span><span class="s">&quot;type &amp;&amp; &#39;alert-&#39; + type&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">ng-show=</span><span class="s">&quot;closeable&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;close&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;close()&quot;</span><span class="nt">&gt;</span><span class="ni">&amp;times;</span><span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">ng-transclude</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;alert</span> <span class="na">ng-repeat=</span><span class="s">&quot;alert in alerts&quot;</span> <span class="na">type=</span><span class="s">&quot;alert.type&quot;</span> <span class="na">close=</span><span class="s">&quot;closeAlert($index)&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  {{alert.msg}}
+</span><span class='line'><span class="nt">&lt;/alert&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<h2>replace</h2>
+
+<p><code>template</code>または<code>templateUrl</code>で指定された HTML のフラグメントは、デフォルトでは directive を指定した要素の内側に append される。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;alert</span> <span class="err">...</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#39;alert&#39;</span> <span class="err">...</span><span class="nt">&gt;</span>
+</span><span class='line'>    ...
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/alert&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このコード例のように、directive を要素として指定できるよう<code>restrict</code>に<code>'E'</code>を含めるときには、HTML として不適当な要素名が記述されることになるため、<code>replace: true</code>を指定する前提で directive を設計しよう。</p>
+
+<p><code>replace: true</code> を指定することによって、directive を指定した要素自体を置き換えることができるので、directive がコンパイルされた結果は以下のようなコードとなる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-class=</span><span class="s">&quot;type &amp;&amp; &#39;alert-&#39; + type&quot;</span> <span class="na">class=</span><span class="s">&quot;alert ng-scope&quot;</span> <span class="na">close=</span><span class="s">&quot;closeAlert($index)&quot;</span> <span class="na">type=</span><span class="s">&quot;alert.type&quot;</span> <span class="na">ng-repeat=</span><span class="s">&quot;alert in alerts&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;close()&quot;</span> <span class="na">class=</span><span class="s">&quot;close&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">ng-show=</span><span class="s">&quot;closeable&quot;</span><span class="nt">&gt;</span>×<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">ng-transclude=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;ng-scope ng-binding&quot;</span><span class="nt">&gt;</span>Another alert!<span class="nt">&lt;/span&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>replace: true</code> の場合、 directive を指定した要素にある属性は、テンプレート側のルート要素にコピーされる。なので、<code>ng-repeat="alert in alerts"</code>や<code>type="alert.type"</code>、<code>close="closeAlert($index)"</code>も有効となる。</p>
+
+<p>両方に class 属性があるケースでは、両方の class 属性値をいい感じにマージしてくれる。</p>
+
+<h2>transclude</h2>
+
+<p><code>transclude</code>には、<code>true</code>または<code>'element'</code>を指定でき、directive とした要素の内容を、テンプレートの一部として利用できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">transclude</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">// directive 要素の内容（内側）をテンプレートで利用</span>
+</span><span class='line'><span class="nx">transclude</span><span class="o">:</span> <span class="s1">&#39;element&#39;</span> <span class="c1">// directive 要素ごとテンプレートで利用</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>テンプレート側に ng-transclude を指定した要素の内側に append できる。上記サンプルコードの例では、<code>`が</code><div ng-transclude>`の内側に append される。</p>
+
+<p>上記コード例では、<code>alert</code>directive の内側部分<code>{{alert.msg}}</code>が、<code>ng-transclude</code>に append されていることがわかる（<code>alert.msg: 'Another alert!'</code>という前提）。</p>
+
+<h2>scope</h2>
+
+<p>scope には、以下の３種類の指定方法がある。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">scope</span><span class="o">:</span> <span class="kc">false</span> <span class="c1">// directive が利用される場所での scope を利用（デフォルト）</span>
+</span><span class='line'><span class="nx">scope</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">// directive が利用される場所での scope を継承する、新たな scope を生成</span>
+</span><span class='line'><span class="nx">scope</span><span class="o">:</span> <span class="p">{...}</span> <span class="c1">// directive が利用される場所での scope を継承しない、独立した新たな scope を生成</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>scope: true</code>が指定されている代表的な directive は<code>ng-controller</code>で、ご存知のとおり<code>ng-controller</code>を利用すると scope を継承する新たな scope が生成される。これにより、親の scope にあるデータや function を利用したり、オーバーライドしたりできるようになる。</p>
+
+<p>一方で、コンポーネントとして再利用可能な directive を設計するには、directive を利用する場所での scope による影響を受けない分離・独立した scope を生成したい。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">scope</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;@&#39;</span><span class="p">,</span> <span class="c1">// interpolate（値、string）</span>
+</span><span class='line'>  <span class="nx">info</span><span class="o">:</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="c1">// data bind</span>
+</span><span class='line'>  <span class="nx">cancel</span><span class="o">:</span> <span class="s1">&#39;&amp;&#39;</span> <span class="c1">// expression（function）</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このように、<code>scope</code>にオブジェクトを記述することで、この directive が利用されるたびに<code>name</code> <code>info</code> <code>cancel</code>のみ存在する新たな scope が生成される。</p>
+
+<p>なお、directive を利用する側と、テンプレート側とで異なる名前を使いたいときは、以下のように記述することができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">scope</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">customerInfo</span><span class="o">:</span> <span class="s1">&#39;=info&#39;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こうすることで、テンプレート内では<code>customerInfo</code>を、directive を利用する要素での属性名には<code>info</code>を利用できるようになる。</p>
+
+<h2>４回目へ向けて</h2>
+
+<p>この３回目で、再利用のための directive を記述する方法が理解できた。もう Directive なんてこわくない！</p>
+
+<p>なんだけど、４回目でも引き続き、<code>controller</code> <code>require</code>といった directive のプロパティを扱う。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その２）]]></title>
@@ -195,7 +372,7 @@
 
 <p>この２回目で compile と link の使い分けができるようになったので、ここまでの知識でとりあえず directive を使っていろいろ実装していけるんじゃないかと思う。</p>
 
-<p>けれども、<code>replace</code> <code>transclude</code> <code>scope</code> <code>controller</code> <code>require</code>といった大事なプロパティを抑えてないので、ここで終わったら directive こわいままになっちゃうので、３回目に続く。</p>
+<p>けれども、<code>replace</code> <code>transclude</code> <code>scope</code> <code>controller</code> <code>require</code>といった大事なプロパティを抑えてないので、ここで終わったら directive こわいままになっちゃうので、<a href="http://angularjsninja.com/blog/2013/11/27/angularjs-custom-directives/">３回目</a>に続く。</p>
 ]]></content>
   </entry>
   
@@ -1544,83 +1721,6 @@ angular.module('Ninja', [])
 <p>このツールを使って得たヘックスコードをグラデーションなどに利用して、統一感の取れたカラーデザインのページを実現しよう。</p>
 
 <p>AngularJS と直接関係しない内容だけれど、今後は UI デザインのことも書いていこ。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/"/>
-    <updated>2013-09-08T20:33:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>AngularJS 1.2 で追加された新しい directive の<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を紹介。</p>
-
-<p>通常の<a href="http://docs.angularjs.org/api/ng.directive:ngRepeat"><code>ng-repeat</code></a>では実現しにくかった複数の要素にまたがった繰り返しが可能になる。</p>
-
-<!-- more -->
-
-
-<h2>ul / ol</h2>
-
-<p>コードを見るほうがわかりやすいので、まずは通常の<code>ng-repeat</code>で<code>&lt;li&gt;</code>を繰り返すコード例から。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">&quot;user in users&quot;</span><span class="nt">&gt;</span>user.name<span class="nt">&lt;/li&gt;</span>
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>dl</h2>
-
-<p>次は<code>&lt;dl&gt;</code>の例。このケースでは<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を使う。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;dl&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;dt</span> <span class="na">ng-repeat-start=</span><span class="s">&quot;user in users&quot;</span><span class="nt">&gt;</span>user.name<span class="nt">&lt;/li&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;dd</span> <span class="na">ng-repeat-end</span><span class="nt">&gt;</span>user.description<span class="nt">&lt;/li&gt;</span>
-</span><span class='line'><span class="nt">&lt;/dl&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>&lt;dl&gt;</code>は特殊で、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>が交互に並び<code>&lt;dl&gt;</code>で囲まれない。そのため、ng-repeat ではうまく指定できなかった。<code>&lt;dl&gt;</code>に対して ng-repeat を指定すると<code>&lt;dl&gt;</code>ごと繰り返されてしまう。</p>
-
-<p><code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用すると、<code>&lt;dt&gt;&lt;dd&gt;&lt;dt&gt;&lt;dd&gt;</code>のように、<code>&lt;dt&gt;</code>と<code>&lt;dd&gt;</code>がセットで繰り返される。</p>
-
-<h2>table</h2>
-
-<p>また、以下のテーブルのコード例のように、2 行分を繰り返すような場合にも<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を利用するとうまくいく。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;table&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;tbody&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tr</span> <span class="na">ng-repeat-start=</span><span class="s">&quot;user in users&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;td&gt;</span>user.name<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;td&gt;</span>user.sex<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tr</span> <span class="na">ng-repeat-end</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>user.description<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/tbody&gt;</span>
-</span><span class='line'><span class="nt">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

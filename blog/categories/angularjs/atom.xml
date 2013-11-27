@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-26T16:40:39+09:00</updated>
+  <updated>2013-11-27T13:39:40+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,146 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その３）]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/27/angularjs-custom-directives/"/>
+    <updated>2013-11-27T12:02:43+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/27/angularjs-custom-directives</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>replace, transclude, scope</h2>
+
+<p><a href="/blog/2013/11/20/angularjs-custom-directives/">前々回</a>、<a href="/blog/2013/11/22/angularjs-custom-directives/">前回</a>に引き続き、今回もカスタム directive について。</p>
+
+<p>今回のサンプルコードは、UI Bootstrap の <a href="https://github.com/angular-ui/bootstrap/tree/master/src/alert">Alert</a> からで、<code>replace</code> <code>transclude</code> <code>scope</code>オプションについて見ていく。</p>
+
+<p>``` javascript alert.js
+angular.module(&ldquo;ui.bootstrap.alert&rdquo;, []).directive(&lsquo;alert&rsquo;, function() {
+  return {</p>
+
+<pre><code>restrict:'EA',
+templateUrl:'template/alert/alert.html',
+transclude:true,
+replace:true,
+scope: {
+  type: '=',
+  close: '&amp;'
+},
+link: function(scope, iElement, iAttrs) {
+  scope.closeable = "close" in iAttrs;
+}
+</code></pre>
+
+<p>  };
+});
+<code>
+</code> html template/alert/alert.html</p>
+
+<div class="alert" ng-class="type && 'alert-' + type">
+    <button ng-show="closeable" type="button" class="close" ng-click="close()">&times;</button>
+    <div ng-transclude></div>
+</div>
+
+
+<p><code>
+{% raw %}
+</code> html
+<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">
+  {{alert.msg}}
+</alert>
+```
+{% endraw %}</p>
+
+<!-- more -->
+
+
+<h2>replace</h2>
+
+<p><code>template</code>または<code>templateUrl</code>で指定された HTML のフラグメントは、デフォルトでは directive を指定した要素の内側に append される。</p>
+
+<p>``` html
+<alert ...>
+  <div class='alert' ...></p>
+
+<pre><code>...
+</code></pre>
+
+<p>  </div>
+</alert>
+```</p>
+
+<p>このコード例のように、directive を要素として指定できるよう<code>restrict</code>に<code>'E'</code>を含めるときには、HTML として不適当な要素名が記述されることになるため、<code>replace: true</code>を指定する前提で directive を設計しよう。</p>
+
+<p><code>replace: true</code> を指定することによって、directive を指定した要素自体を置き換えることができるので、directive がコンパイルされた結果は以下のようなコードとなる。</p>
+
+<p>{% raw %}
+``` html</p>
+
+<div ng-class="type && 'alert-' + type" class="alert ng-scope" close="closeAlert($index)" type="alert.type" ng-repeat="alert in alerts">
+    <button ng-click="close()" class="close" type="button" ng-show="closeable">×</button>
+    <div ng-transclude=""><span class="ng-scope ng-binding">Another alert!</span></div>
+</div>
+
+
+<p>```
+{% endraw %}</p>
+
+<p><code>replace: true</code> の場合、 directive を指定した要素にある属性は、テンプレート側のルート要素にコピーされる。なので、<code>ng-repeat="alert in alerts"</code>や<code>type="alert.type"</code>、<code>close="closeAlert($index)"</code>も有効となる。</p>
+
+<p>両方に class 属性があるケースでは、両方の class 属性値をいい感じにマージしてくれる。</p>
+
+<h2>transclude</h2>
+
+<p><code>transclude</code>には、<code>true</code>または<code>'element'</code>を指定でき、directive とした要素の内容を、テンプレートの一部として利用できる。</p>
+
+<p><code>javascript
+transclude: true // directive 要素の内容（内側）をテンプレートで利用
+transclude: 'element' // directive 要素ごとテンプレートで利用
+</code></p>
+
+<p>テンプレート側に ng-transclude を指定した要素の内側に append できる。上記サンプルコードの例では、<code>{{alert.msg}}</code>が<code>&lt;div ng-transclude&gt;</code>の内側に append される。</p>
+
+<p>上記コード例では、<code>alert</code>directive の内側部分{% raw %}<code>{{alert.msg}}</code>{% endraw %}が、<code>ng-transclude</code>に append されていることがわかる（<code>alert.msg: 'Another alert!'</code>という前提）。</p>
+
+<h2>scope</h2>
+
+<p>scope には、以下の３種類の指定方法がある。</p>
+
+<p><code>javascript
+scope: false // directive が利用される場所での scope を利用（デフォルト）
+scope: true // directive が利用される場所での scope を継承する、新たな scope を生成
+scope: {...} // directive が利用される場所での scope を継承しない、独立した新たな scope を生成
+</code></p>
+
+<p><code>scope: true</code>が指定されている代表的な directive は<code>ng-controller</code>で、ご存知のとおり<code>ng-controller</code>を利用すると scope を継承する新たな scope が生成される。これにより、親の scope にあるデータや function を利用したり、オーバーライドしたりできるようになる。</p>
+
+<p>一方で、コンポーネントとして再利用可能な directive を設計するには、directive を利用する場所での scope による影響を受けない分離・独立した scope を生成したい。</p>
+
+<p><code>javascript
+scope: {
+  name: '@', // interpolate（値、string）
+  info: '=', // data bind
+  cancel: '&amp;' // expression（function）
+}
+</code>
+このように、<code>scope</code>にオブジェクトを記述することで、この directive が利用されるたびに<code>name</code> <code>info</code> <code>cancel</code>のみ存在する新たな scope が生成される。</p>
+
+<p>なお、directive を利用する側と、テンプレート側とで異なる名前を使いたいときは、以下のように記述することができる。
+<code>javascript
+scope: {
+  customerInfo: '=info'
+}
+</code>
+こうすることで、テンプレート内では<code>customerInfo</code>を、directive を利用する要素での属性名には<code>info</code>を利用できるようになる。</p>
+
+<h2>４回目へ向けて</h2>
+
+<p>この３回目で、再利用のための directive を記述する方法が理解できた。もう Directive なんてこわくない！</p>
+
+<p>なんだけど、４回目でも引き続き、<code>controller</code> <code>require</code>といった directive のプロパティを扱う。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その２）]]></title>
@@ -158,7 +298,7 @@ myModule.directive(&lsquo;usingCompileOption&rsquo;, function () {
 
 <p>この２回目で compile と link の使い分けができるようになったので、ここまでの知識でとりあえず directive を使っていろいろ実装していけるんじゃないかと思う。</p>
 
-<p>けれども、<code>replace</code> <code>transclude</code> <code>scope</code> <code>controller</code> <code>require</code>といった大事なプロパティを抑えてないので、ここで終わったら directive こわいままになっちゃうので、３回目に続く。</p>
+<p>けれども、<code>replace</code> <code>transclude</code> <code>scope</code> <code>controller</code> <code>require</code>といった大事なプロパティを抑えてないので、ここで終わったら directive こわいままになっちゃうので、<a href="/blog/2013/11/27/angularjs-custom-directives/">３回目</a>に続く。</p>
 ]]></content>
   </entry>
   
@@ -372,7 +512,7 @@ myApp.run(function($templateCache) {
 
 <h2>増殖現象デモ</h2>
 
-<p></p>
+<p>{% raw %}</p>
 
 <script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
 
@@ -408,14 +548,14 @@ angular.module('Ninja', ['ui.bootstrap'])
 </div>
 
 
-<p></p>
+<p>{% endraw %}</p>
 
 <!-- more -->
 
 
 <h2>サンプルコード</h2>
 
-<p>
+<p>{% raw %}
 ``` html</p>
 
 <script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
@@ -453,7 +593,7 @@ angular.module('Ninja', ['ui.bootstrap'])
 
 
 <p>```
-</p>
+{% endraw %}</p>
 
 <h2>ng-if には truthy じゃなく、true / false をちゃんと渡そう</h2>
 
@@ -470,178 +610,6 @@ OK: &lt;div ng-if="!!notifications.length"&gt;
 てことで、増殖現象に出会ったら、この記事のことを思い出してくださーい。</p>
 
 <p>追記：AngularJS <a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md#121-underscore-empathy-2013-11-14">1.2.1 underscore-empathy</a> で、早速バグフィックスされましたね。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJSのng-classを使いこなそう]]></title>
-    <link href="http://angularjsninja.com/blog/2013/11/12/angularjs-ngclass/"/>
-    <updated>2013-11-12T16:16:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/11/12/angularjs-ngclass</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>ng-class とは</h2>
-
-<p><a href="http://docs.angularjs.org/api/ng.directive:ngClass">ng-class</a> は、HTML 要素に CSS class 属性値を動的にセットできる directive で、ほんとよく使う。</p>
-
-<p>すでに同じ class 属性値が要素にセットされてるときは、重複しないようになっているあたりもいい感じ。</p>
-
-<p>ng-class の使い方は、スペース区切りの class 文字列<code>'active disabled'</code>を保持する変数や、class 属性値文字列の配列<code>['active', 'disabled']</code>を保持する変数を指定する。</p>
-
-<p>けれど一番良く使うのは、class 属性値と boolean 値をマッピングした object で、これを ng-class に指定する使い方について紹介。</p>
-
-<!-- more -->
-
-
-<h2>ng-class の利用例</h2>
-
-<p><code>javascript link
-scope.isActive = function (matchIdx) {
-  return scope.active == matchIdx;
-};
-scope.selectActive = function (matchIdx) {
-  return scope.active = matchIdx;
-};
-</code></p>
-
-<p>
-<code>html template
-&lt;li ng-repeat="match in matches" ng-class="{active: isActive($index)}" ng-mouseenter="selectActive($index)"&gt;
-</code>
-</p>
-
-<p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/typeahead">Typeahead</a> から抜き出したコードで、マウスホバーされた行のインデックスを active で保持し、ng-class では<code>isActive</code>で boolean を返す isActive を指定していて、ホバー行では<code>class="ng-scope active"</code>となり、その他の行では<code>class="ng-scope"</code>となるような指定になっている。</p>
-
-<p>ちなみに、<code>$index</code>は ng-repeat で利用できるインデックス（0..length-1）で、<code>ng-scope</code>は scope ができる要素に AngularJS が自動的に付けてる class。</p>
-
-<h2>ng-class を controller で実装してみる</h2>
-
-<p>たくさんの class 属性値を制御したい場合、ng-class の指定がすごく長くなって微妙な気分になってくるので、そんなときは controller のほうに移すのもいいかもしれない（CSS の class が JavaScript 側に行ってしまうのもまた微妙だけれど）。</p>
-
-<p>ソート列のアイコンを変える UI を実現するサンプルコードはこんな感じに。</p>
-
-<p>
-``` html
-<link href="http://angularjsninja.com//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"></p>
-
-<script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
-
-
-<script>
-angular.module('Ninja', [])
-.controller('SortCtrl', function($scope) {
-  $scope.sortField = undefined;
-  $scope.ascending = true;
-  $scope.sort = function(fieldName) {
-    if ($scope.sortField == fieldName) {
-      $scope.ascending = !$scope.ascending;
-    } else {
-      $scope.sortField = fieldName;
-      $scope.ascending = true;
-    }
-  };
-  var isSortedBy = function(fieldName) {
-    return $scope.sortField === fieldName;
-  };
-  var isSortedAscending = function(fieldName) {
-    return isSortedBy(fieldName) && $scope.ascending;
-  };
-  var isSortedDescending = function(fieldName) {
-    return isSortedBy(fieldName) && !$scope.ascending;
-  };
-  $scope.iconSort = function(fieldName) {
-    return {
-      'icon-sort': !isSortedBy(fieldName),
-      'icon-sort-up': isSortedAscending(fieldName),
-      'icon-sort-down': isSortedDescending(fieldName)
-    };
-  };
-});
-</script>
-
-
-<table ng-app="Ninja" class="demo">
-  <thead ng-controller="SortCtrl">
-    <tr>
-      <th ng-click="sort('name')">
-        Name <i ng-class="iconSort('name')"></i>
-      </th>
-      <th ng-click="sort('modified')">
-        Date Modified <i ng-class="iconSort('modified')"></i>
-      </th>
-      <th ng-click="sort('size')">
-        Size <i ng-class="iconSort('size')"></i>
-      </th>
-      <th ng-click="sort('kind')">
-        Kind <i ng-class="iconSort('kind')"></i>
-      </th>
-    </tr>
-  </thead>
-</table>
-
-
-<p>```
-</p>
-
-<p><link href="http://angularjsninja.com//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"></p>
-
-<script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
-
-
-<script>
-angular.module('Ninja', [])
-.controller('SortCtrl', function($scope) {
-  $scope.sortField = undefined;
-  $scope.ascending = true;
-  $scope.sort = function(fieldName) {
-    if ($scope.sortField == fieldName) {
-      $scope.ascending = !$scope.ascending;
-    } else {
-      $scope.sortField = fieldName;
-      $scope.ascending = true;
-    }
-  };
-  var isSortedBy = function(fieldName) {
-    return $scope.sortField === fieldName;
-  };
-  var isSortedAscending = function(fieldName) {
-    return isSortedBy(fieldName) && $scope.ascending;
-  };
-  var isSortedDescending = function(fieldName) {
-    return isSortedBy(fieldName) && !$scope.ascending;
-  };
-  $scope.iconSort = function(fieldName) {
-    return {
-      'icon-sort': !isSortedBy(fieldName),
-      'icon-sort-up': isSortedAscending(fieldName),
-      'icon-sort-down': isSortedDescending(fieldName)
-    };
-  };
-});
-</script>
-
-
-<table ng-app="Ninja" class="demo">
-  <thead ng-controller="SortCtrl">
-    <tr>
-      <th ng-click="sort('name')">
-        Name <i ng-class="iconSort('name')"></i>
-      </th>
-      <th ng-click="sort('modified')">
-        Date Modified <i ng-class="iconSort('modified')"></i>
-      </th>
-      <th ng-click="sort('size')">
-        Size <i ng-class="iconSort('size')"></i>
-      </th>
-      <th ng-click="sort('kind')">
-        Kind <i ng-class="iconSort('kind')"></i>
-      </th>
-    </tr>
-  </thead>
-</table>
-
-
-<p>見どころは 25 行目の<code>$scope.iconSort</code>function で return している object で、この<code>iconSort</code>を ng-class で使ってソートのアイコン表示を切り替えている。</p>
 ]]></content>
   </entry>
   
