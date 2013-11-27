@@ -126,4 +126,4 @@ myModule.directive('usingCompileOption', function () {
 
 この２回目で compile と link の使い分けができるようになったので、ここまでの知識でとりあえず directive を使っていろいろ実装していけるんじゃないかと思う。
 
-けれども、`replace` `transclude` `scope` `controller` `require`といった大事なプロパティを抑えてないので、ここで終わったら directive こわいままになっちゃうので、３回目に続く。
+けれども、`replace` `transclude` `scope` `controller` `require`といった大事なプロパティを抑えてないので、ここで終わったら directive こわいままになっちゃうので、[３回目](/blog/2013/11/27/angularjs-custom-directives/)に続く。

@@ -14,7 +14,7 @@ categories: [AngularJS, directive]
 繰り返し出てくるコード部分を、テンプレートとして directive で宣言するサンプルコード。
 
 ``` html
-<div ninja-profile></div>
+<div ninja-customer></div>
 ```
 ``` javascript
 angular.module('Ninja', [])
