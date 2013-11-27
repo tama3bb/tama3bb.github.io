@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-27T13:39:40+09:00</updated>
+  <updated>2013-11-27T14:07:16+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -55,13 +55,13 @@ link: function(scope, iElement, iAttrs) {
 
 
 <p><code>
-{% raw %}
+
 </code> html
 <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">
   {{alert.msg}}
 </alert>
 ```
-{% endraw %}</p>
+</p>
 
 <!-- more -->
 
@@ -85,7 +85,7 @@ link: function(scope, iElement, iAttrs) {
 
 <p><code>replace: true</code> を指定することによって、directive を指定した要素自体を置き換えることができるので、directive がコンパイルされた結果は以下のようなコードとなる。</p>
 
-<p>{% raw %}
+<p>
 ``` html</p>
 
 <div ng-class="type && 'alert-' + type" class="alert ng-scope" close="closeAlert($index)" type="alert.type" ng-repeat="alert in alerts">
@@ -95,7 +95,7 @@ link: function(scope, iElement, iAttrs) {
 
 
 <p>```
-{% endraw %}</p>
+</p>
 
 <p><code>replace: true</code> の場合、 directive を指定した要素にある属性は、テンプレート側のルート要素にコピーされる。なので、<code>ng-repeat="alert in alerts"</code>や<code>type="alert.type"</code>、<code>close="closeAlert($index)"</code>も有効となる。</p>
 
@@ -112,7 +112,7 @@ transclude: 'element' // directive 要素ごとテンプレートで利用
 
 <p>テンプレート側に ng-transclude を指定した要素の内側に append できる。上記サンプルコードの例では、<code>{{alert.msg}}</code>が<code>&lt;div ng-transclude&gt;</code>の内側に append される。</p>
 
-<p>上記コード例では、<code>alert</code>directive の内側部分{% raw %}<code>{{alert.msg}}</code>{% endraw %}が、<code>ng-transclude</code>に append されていることがわかる（<code>alert.msg: 'Another alert!'</code>という前提）。</p>
+<p>上記コード例では、<code>alert</code>directive の内側部分<code>{{alert.msg}}</code>が、<code>ng-transclude</code>に append されていることがわかる（<code>alert.msg: 'Another alert!'</code>という前提）。</p>
 
 <h2>scope</h2>
 
@@ -512,7 +512,7 @@ myApp.run(function($templateCache) {
 
 <h2>増殖現象デモ</h2>
 
-<p>{% raw %}</p>
+<p></p>
 
 <script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
 
@@ -548,14 +548,14 @@ angular.module('Ninja', ['ui.bootstrap'])
 </div>
 
 
-<p>{% endraw %}</p>
+<p></p>
 
 <!-- more -->
 
 
 <h2>サンプルコード</h2>
 
-<p>{% raw %}
+<p>
 ``` html</p>
 
 <script src="http://angularjsninja.com//code.angularjs.org/1.2.0/angular.min.js"></script>
@@ -593,7 +593,7 @@ angular.module('Ninja', ['ui.bootstrap'])
 
 
 <p>```
-{% endraw %}</p>
+</p>
 
 <h2>ng-if には truthy じゃなく、true / false をちゃんと渡そう</h2>
 

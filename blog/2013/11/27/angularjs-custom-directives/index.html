@@ -209,7 +209,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>テンプレート側に ng-transclude を指定した要素の内側に append できる。上記サンプルコードの例では、<code>`が</code><div ng-transclude>`の内側に append される。</p>
+<p>テンプレート側に ng-transclude を指定した要素の内側に append できる。上記サンプルコードの例では、<code>{{alert.msg}}</code>が<code>&lt;div ng-transclude&gt;</code>の内側に append される。</p>
 
 <p>上記コード例では、<code>alert</code>directive の内側部分<code>{{alert.msg}}</code>が、<code>ng-transclude</code>に append されていることがわかる（<code>alert.msg: 'Another alert!'</code>という前提）。</p>
 
