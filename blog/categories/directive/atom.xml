@@ -4,7 +4,7 @@
   <title><![CDATA[Category: directive | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/directive/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-29T16:37:43+09:00</updated>
+  <updated>2013-11-29T17:03:37+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -327,7 +327,7 @@ scope: {
 
 <p>この３回目で、再利用のための directive を記述する方法が理解できた。もう Directive なんてこわくない！</p>
 
-<p>なんだけど、４回目でも引き続き、<code>controller</code> <code>require</code>といった directive のプロパティを扱う。</p>
+<p>なんだけど、<a href="/blog/2013/11/29/angularjs-custom-directives/">４回目</a>でも引き続き、<code>controller</code> <code>require</code>といった directive のプロパティを扱う。</p>
 ]]></content>
   </entry>
   
