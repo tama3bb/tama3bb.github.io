@@ -123,4 +123,4 @@ scope: {
 
 この３回目で、再利用のための directive を記述する方法が理解できた。もう Directive なんてこわくない！
 
-なんだけど、４回目でも引き続き、`controller` `require`といった directive のプロパティを扱う。
+なんだけど、[４回目](/blog/2013/11/29/angularjs-custom-directives/)でも引き続き、`controller` `require`といった directive のプロパティを扱う。
