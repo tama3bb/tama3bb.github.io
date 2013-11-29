@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-27T14:07:16+09:00</updated>
+  <updated>2013-11-29T16:37:43+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,261 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その４）]]></title>
+    <link href="http://angularjsninja.com/blog/2013/11/29/angularjs-custom-directives/"/>
+    <updated>2013-11-29T15:33:32+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/11/29/angularjs-custom-directives</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>controller, require</h2>
+
+<p><a href="http://angularjsninja.com/blog/2013/11/20/angularjs-custom-directives/">その１</a>、<a href="http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives/">その２</a>、<a href="http://angularjsninja.com/blog/2013/11/27/angularjs-custom-directives/">その３</a>に引き続き、今回もカスタム directive について。</p>
+
+<p>今回のサンプルコードは、UI Bootstrap の <a href="https://github.com/angular-ui/bootstrap/tree/master/src/tabs">Tabs</a> からの一部抜粋で、<code>controller</code> <code>require</code>オプションについて見ていく。</p>
+
+<figure class='code'><figcaption><span>tabs.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;ui.bootstrap.tabs&#39;</span><span class="p">,</span> <span class="p">[])</span>
+</span><span class='line'><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;TabsetController&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="nx">TabsetCtrl</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">ctrl</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">tabs</span> <span class="o">=</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">tabs</span> <span class="o">=</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">tabs</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">ctrl</span><span class="p">.</span><span class="nx">select</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tab</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">angular</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">tabs</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tab</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">tab</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="nx">tab</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'><span class="p">}])</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;tabset&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">restrict</span><span class="o">:</span> <span class="s1">&#39;EA&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">transclude</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">replace</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">require</span><span class="o">:</span> <span class="s1">&#39;^tabset&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">scope</span><span class="o">:</span> <span class="p">{},</span>
+</span><span class='line'>    <span class="nx">controller</span><span class="o">:</span> <span class="s1">&#39;TabsetController&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;template/tabs/tabset.html&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">compile</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">elm</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">transclude</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">tabsetCtrl</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// ...</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;tab&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$parse&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$parse</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">require</span><span class="o">:</span> <span class="s1">&#39;^tabset&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">restrict</span><span class="o">:</span> <span class="s1">&#39;EA&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">replace</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;template/tabs/tab.html&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">transclude</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">scope</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">heading</span><span class="o">:</span> <span class="s1">&#39;@&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">onSelect</span><span class="o">:</span> <span class="s1">&#39;&amp;select&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">onDeselect</span><span class="o">:</span> <span class="s1">&#39;&amp;deselect&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">controller</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+</span><span class='line'>    <span class="nx">compile</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">elm</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">transclude</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kd">function</span> <span class="nx">postLink</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">elm</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">tabsetCtrl</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// ...</span>
+</span><span class='line'>        <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">active</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">setActive</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">$parent</span><span class="p">,</span> <span class="nx">active</span><span class="p">);</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="nx">active</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">tabsetCtrl</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">scope</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">scope</span><span class="p">.</span><span class="nx">onSelect</span><span class="p">();</span>
+</span><span class='line'>          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">scope</span><span class="p">.</span><span class="nx">onDeselect</span><span class="p">();</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>        <span class="c1">// ...</span>
+</span><span class='line'>        <span class="nx">scope</span><span class="p">.</span><span class="nx">select</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">scope</span><span class="p">.</span><span class="nx">disabled</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">scope</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>        <span class="p">};</span>
+</span><span class='line'>        <span class="nx">tabsetCtrl</span><span class="p">.</span><span class="nx">addTab</span><span class="p">(</span><span class="nx">scope</span><span class="p">);</span>
+</span><span class='line'>        <span class="nx">scope</span><span class="p">.</span><span class="nx">$on</span><span class="p">(</span><span class="s1">&#39;$destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">tabsetCtrl</span><span class="p">.</span><span class="nx">removeTab</span><span class="p">(</span><span class="nx">scope</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>        <span class="c1">// ...</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">}])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<h2>controller</h2>
+
+<p>directive にも<code>ng-controller</code>で利用するときに定義するのと同じような<code>controller</code>を記述でき、<code>$scope</code>や<code>$http</code>などをインジェクト（DI）することもできる。directive の場合でも、<code>controller</code>では DOM 操作するコードは記述しないようにし、<code>compile</code>または <code>link</code>のほうに記述する。</p>
+
+<p>なお、directive の<code>controller</code>には、モジュールで定義した<code>controller</code>の名前を記述することができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;tabset&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">...,</span>
+</span><span class='line'>    <span class="nx">controller</span><span class="o">:</span> <span class="s1">&#39;TabsetController&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意すべき点としては、再利用されるコンポーネントとして directive を作成する場合、<code>controller</code>に付ける名前が重複されにくい名前にしておくこと。</p>
+
+<p><code>controller</code>に名前を付けずに、直接 function を記述することもできる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;tabset&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">...,</span>
+</span><span class='line'>    <span class="nx">controller</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// ...</span>
+</span><span class='line'>    <span class="p">}],</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>$scope</code>だけでなく<code>$http</code>や<code>$timeout</code>などをインジェクト（DI）できる。また、directive の<code>controller</code>では<code>$element</code> <code>$attrs</code> <code>$transclude</code>の service をインジェクトできるようになっている。</p>
+
+<p><code>link</code>でも<code>controller</code>でも、どちらでも同じような処理を記述することができそうに思う。違う点は、DI を利用できるか否かと、処理のタイミング（<code>controller</code>が先で、<code>link</code>が後）。使い分けのヒントとしては、子要素など別の directive から呼び出すのであれば<code>controller</code>として API を公開する感じで実装し、そうでなければ<code>link</code>で実装するという感じで。</p>
+
+<h2>require</h2>
+
+<p>ネストされた directive から親の directive の<code>controller</code>で定義された API を呼び出すには<code>require</code>が必要となる。</p>
+
+<p>上のコード例では、<code>require: '^tabset'</code>の記述があり、これによって<code>tabset</code> directive の<code>controller</code>である<code>tabsetCtrl</code>を参照して API を利用できるようになる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">compile</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">elm</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">transclude</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kd">function</span> <span class="nx">postLink</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">elm</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">tabsetCtrl</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">tabsetCtrl</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">scope</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">tabsetCtrl</span><span class="p">.</span><span class="nx">addTab</span><span class="p">(</span><span class="nx">scope</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">tabsetCtrl</span><span class="p">.</span><span class="nx">removeTab</span><span class="p">(</span><span class="nx">scope</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>なお、<code>^</code>を付けない場合、親階層ではなく directive を指定した要素の<code>controller</code>を探すこととなる。このケースでよく使うのは<code>require: 'ngModel'</code>で、directive と同じ要素に<code>ng-model="..."</code>の記述があることを前提として実装できることになる。</p>
+
+<p>同じ要素に<code>ng-model</code>属性の記述が無い場合、こんなエラーになる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">Error</span><span class="o">:</span> <span class="p">[</span><span class="nx">$compile</span><span class="o">:</span><span class="nx">ctreq</span><span class="p">]</span> <span class="nx">Controller</span> <span class="s1">&#39;ngModel&#39;</span><span class="p">,</span> <span class="nx">required</span> <span class="nx">by</span> <span class="nx">directive</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="nx">can</span><span class="err">&#39;</span><span class="nx">t</span> <span class="nx">be</span> <span class="nx">found</span><span class="o">!</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このエラーを発生させる必要が無いなら、<code>require: '?ngModel'</code>のように<code>?</code>を付けて記述する。</p>
+
+<h2>これでもうカスタム directive を書ける</h2>
+
+<p>この４回目で<code>controller</code>と<code>require</code>を使って、複数の directive でコンポーネントを構成することについての理解も進んだので、どんどん directive を活用していこう！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その３）]]></title>
@@ -1699,28 +1954,6 @@ angular.module('Ninja', [])
 <p>え？ LESS や Sass を使えばいいって？ 実はあんまり好きじゃないんですよね…。</p>
 
 <p>てことで、今回は AngularJS と直接関係ない内容。UI デザインに関したこともちょくちょく書いてくということで。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hex Color Tool]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/09/angularjs-context-path/"/>
-    <updated>2013-09-09T23:34:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/09/angularjs-context-path</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><img src="http://hexcolortool.com/images/logo.svg" alt="Hex Color Tool" /></p>
-
-<p>ベースカラーを少し明るくした色や、少し暗くした色が欲しくても、ヘックスコードがわかんないってときには、<a href="http://hexcolortool.com/">Hex Color Tool</a> を使おう。ベースカラーを 5% 刻みで明るく、または暗くした値を表示させることができる。</p>
-
-<!-- more -->
-
-
-<p>なお、#ffffff（白色）を 5% ずつ暗くすると、#f2f2f2, #e6e6e6, #d9d9d9, #cccccc となり、<a href="http://getbootstrap.com/">Twitter Bootstrap</a> の CSS でも頻繁に指定されている薄いグレー色の値となる。</p>
-
-<p>このツールを使って得たヘックスコードをグラデーションなどに利用して、統一感の取れたカラーデザインのページを実現しよう。</p>
-
-<p>AngularJS と直接関係しない内容だけれど、今後は UI デザインのことも書いていこ。</p>
 ]]></content>
   </entry>
   
