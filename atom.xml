@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-03T11:12:21+09:00</updated>
+  <updated>2013-12-03T11:15:27+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -16,9 +16,11 @@
   <entry>
     <title type="html"><![CDATA[AngularJSのminify対策がngminでラクになる]]></title>
     <link href="http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin/"/>
-    <updated>2013-12-03T09:23:48+09:00</updated>
+    <updated>2013-12-03T11:15:48+09:00</updated>
     <id>http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin</id>
-    <content type="html"><![CDATA[<h2>AngularJS の minify 対策、めんどくさい</h2>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS の minify 対策、めんどくさい</h2>
 
 <p>AngularJS の JavaScript コードを minify するには、function の引数でインジェクト（DI）する各 services の名前を、文字列として重複させて記述する必要がある。</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-03T11:12:21+09:00</updated>
+  <updated>2013-12-03T11:15:27+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのminify対策がngminでラクになる]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin/"/>
+    <updated>2013-12-03T11:15:48+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS の minify 対策、めんどくさい</h2>
+
+<p>AngularJS の JavaScript コードを minify するには、function の引数でインジェクト（DI）する各 services の名前を、文字列として重複させて記述する必要がある。</p>
+
+<p>これって、めっちゃめんどくさい。あほらしすぎる。</p>
+
+<h2>ngmin</h2>
+
+<p>そこで <a href="https://github.com/btford/ngmin">ngmin</a> を使う。</p>
+
+<p><code>
+npm install -g ngmin
+</code>
+<code>
+ngmin somefile.js somefile.annotate.js
+</code></p>
+
+<p>以下のコードが、</p>
+
+<p>``` javascript somefile.js
+angular.module(&lsquo;app&rsquo;, [])</p>
+
+<p>  .controller(&lsquo;TodoCtrl&rsquo;, function($scope, $timeout, Projects) {</p>
+
+<pre><code>// comments
+$scope.createTask = function(task) {
+  task.title = "New Task";
+};
+</code></pre>
+
+<p>  });
+```</p>
+
+<p>ngmin 後は、こうなる。</p>
+
+<p>``` javascript somefile.annotate.js
+angular.module(&lsquo;app&rsquo;, []).controller(&lsquo;TodoCtrl&rsquo;, [
+  &lsquo;$scope&rsquo;,
+  &lsquo;$timeout&rsquo;,
+  &lsquo;Projects&rsquo;,
+  function ($scope, $timeout, Projects) {</p>
+
+<pre><code>$scope.createTask = function (task) {
+  task.title = 'New Task';
+};
+</code></pre>
+
+<p>  }
+]);
+```</p>
+
+<!-- more -->
+
+
+<p>function の引数に記述している DI する services の名前が、自動的に文字列としても列挙されるので、これで minify 対策がラクになる！</p>
+
+<p>その他、空行・コメント行削除、シングルクオート置換も実施される。</p>
+
+<p><a href="https://github.com/btford/ngmin">ngmin</a> は <a href="http://gruntjs.com/">Grunt</a> タスク（<a href="https://github.com/btford/grunt-ngmin">grunt-ngmin</a>）としても利用可能で自動化できる！</p>
+
+<p><blockquote><p>Life is too short to declare the names of dependencies!</p></blockquote></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その４）]]></title>
@@ -600,80 +671,6 @@ restrict: 'AE' // 属性または要素
 <p>え、そんなちょっとしか記述しなくても directive として成立してるんだ、ってことを見てもらうのが初回の目的なので、ひとまずここで終了。</p>
 
 <p>こんなとこで終わったら、directive こわいままになっちゃうので、なんとしてでも<a href="/blog/2013/11/22/angularjs-custom-directives/">次回</a>も続けないと。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJSでHTMLを分割するのにお手軽なng-include]]></title>
-    <link href="http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude/"/>
-    <updated>2013-11-19T09:17:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS で HTML を分割するのにお手軽な ng-include</h2>
-
-<p>``` html</p>
-
-<div ng-include="'partials/sidebar.html'"></div>
-
-
-<p><code>
-</code> html
-&lt;ng-include src=&ldquo;&lsquo;partials/sidebar.html&rsquo;&rdquo;>&lt;/ng-include>
-```</p>
-
-<p>ポイントとしては、属性値に文字列を渡す必要があって、ダブルクオートの内側にシングルクオートを記述すること。</p>
-
-<p>変数を渡して、可変にもできる。</p>
-
-<p><code>javascript
-$scope.sidebarUrl = 'partials/sidebar.html';
-</code>
-``` html</p>
-
-<div ng-include="sidebarUrl"></div>
-
-
-<p>```</p>
-
-<p><code>ng-include</code>で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、<code>ng-controller</code>も指定できる。</p>
-
-<p>``` html</p>
-
-<div ng-include="'partials/sidebar.html'" ng-controller="SidebarCtrl"></div>
-
-
-<p>```</p>
-
-<!-- more -->
-
-
-<h2>分割した HTML は $templateCache でキャッシュしてくれる</h2>
-
-<p>分割した HTML は、通信して取得した時点で AngularJS が $templateCache で（メモリに）保持するため、分割されている部分を表示するたびに取得する通信が発生するわけではない。</p>
-
-<p>かつ、必要となった時点で取得しにいくレイジーローディングなので、ユーザがまったく表示しない部分であれば、１度も取得しにいかないので効率的でもある。</p>
-
-<p>一方で、Grunt などでビルドする時に、この HTML フラグメントを一つのファイルにしてしまい、一括してロードさせることでネットワークでのロスを下げるという方向で工夫もできる。</p>
-
-<p>スクリプトとして HTML テンプレートを記述する場合は、script 要素に<code>type</code>と<code>id</code>を指定する。</p>
-
-<p><code>html
-&lt;scipt type="text/ng-template" id="templateId.html"&gt;
-  This is the content of the template
-&lt;/script&gt;
-</code></p>
-
-<p>初期処理でテンプレートを<code>$templateCache</code>に<code>put</code>するようにしておけば、その分だけ操作性の向上も期待できる。</p>
-
-<p><code>javascript
-var myApp = angular.module('Ninja', []);
-myApp.run(function($templateCache) {
-  $templateCache.put('templateId.html', 'This is the content of the template');
-});
-</code></p>
-
-<p>お手軽に断片化できる ng-include の紹介でしたが、HTML を分割する手段としては他にも ng-view の routing で templateUrl を指定することや、custom directive を作成することもできるので、次回以降でその辺も触れる（たぶん）。</p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: DI | AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/blog/categories/di/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2013-12-03T11:15:27+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのminify対策がngminでラクになる]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin/"/>
+    <updated>2013-12-03T11:15:48+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS の minify 対策、めんどくさい</h2>
+
+<p>AngularJS の JavaScript コードを minify するには、function の引数でインジェクト（DI）する各 services の名前を、文字列として重複させて記述する必要がある。</p>
+
+<p>これって、めっちゃめんどくさい。あほらしすぎる。</p>
+
+<h2>ngmin</h2>
+
+<p>そこで <a href="https://github.com/btford/ngmin">ngmin</a> を使う。</p>
+
+<p><code>
+npm install -g ngmin
+</code>
+<code>
+ngmin somefile.js somefile.annotate.js
+</code></p>
+
+<p>以下のコードが、</p>
+
+<p>``` javascript somefile.js
+angular.module(&lsquo;app&rsquo;, [])</p>
+
+<p>  .controller(&lsquo;TodoCtrl&rsquo;, function($scope, $timeout, Projects) {</p>
+
+<pre><code>// comments
+$scope.createTask = function(task) {
+  task.title = "New Task";
+};
+</code></pre>
+
+<p>  });
+```</p>
+
+<p>ngmin 後は、こうなる。</p>
+
+<p>``` javascript somefile.annotate.js
+angular.module(&lsquo;app&rsquo;, []).controller(&lsquo;TodoCtrl&rsquo;, [
+  &lsquo;$scope&rsquo;,
+  &lsquo;$timeout&rsquo;,
+  &lsquo;Projects&rsquo;,
+  function ($scope, $timeout, Projects) {</p>
+
+<pre><code>$scope.createTask = function (task) {
+  task.title = 'New Task';
+};
+</code></pre>
+
+<p>  }
+]);
+```</p>
+
+<!-- more -->
+
+
+<p>function の引数に記述している DI する services の名前が、自動的に文字列としても列挙されるので、これで minify 対策がラクになる！</p>
+
+<p>その他、空行・コメント行削除、シングルクオート置換も実施される。</p>
+
+<p><a href="https://github.com/btford/ngmin">ngmin</a> は <a href="http://gruntjs.com/">Grunt</a> タスク（<a href="https://github.com/btford/grunt-ngmin">grunt-ngmin</a>）としても利用可能で自動化できる！</p>
+
+<p><blockquote><p>Life is too short to declare the names of dependencies!</p></blockquote></p>
+]]></content>
+  </entry>
+  
+</feed>
