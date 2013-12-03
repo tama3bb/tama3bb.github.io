@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "AngularJSのminify対策がngminでラクになる"
-date: 2013-12-03 09:23:48 +0900
+date: 2013-12-03 11:15:48 +0900
 comments: true
-categories: 
+categories: [AngularJS, DI]
 ---
-
+---
 ## AngularJS の minify 対策、めんどくさい
 
 AngularJS の JavaScript コードを minify するには、function の引数でインジェクト（DI）する各 services の名前を、文字列として重複させて記述する必要がある。
