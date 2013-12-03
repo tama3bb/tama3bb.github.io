@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-11-29T17:03:37+09:00</updated>
+  <updated>2013-12-03T11:12:21+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,93 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのminify対策がngminでラクになる]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin/"/>
+    <updated>2013-12-03T09:23:48+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin</id>
+    <content type="html"><![CDATA[<h2>AngularJS の minify 対策、めんどくさい</h2>
+
+<p>AngularJS の JavaScript コードを minify するには、function の引数でインジェクト（DI）する各 services の名前を、文字列として重複させて記述する必要がある。</p>
+
+<p>これって、めっちゃめんどくさい。あほらしすぎる。</p>
+
+<h2>ngmin</h2>
+
+<p>そこで <a href="https://github.com/btford/ngmin">ngmin</a> を使う。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g ngmin</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ngmin somefile.js somefile.annotate.js</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以下のコードが、</p>
+
+<figure class='code'><figcaption><span>somefile.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[])</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;TodoCtrl&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$timeout</span><span class="p">,</span> <span class="nx">Projects</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// comments</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">createTask</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">task</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">&quot;New Task&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>  <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ngmin 後は、こうなる。</p>
+
+<figure class='code'><figcaption><span>somefile.annotate.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[]).</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;TodoCtrl&#39;</span><span class="p">,</span> <span class="p">[</span>
+</span><span class='line'>  <span class="s1">&#39;$scope&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s1">&#39;$timeout&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s1">&#39;Projects&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$timeout</span><span class="p">,</span> <span class="nx">Projects</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">createTask</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">task</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;New Task&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>function の引数に記述している DI する services の名前が、自動的に文字列としても列挙されるので、これで minify 対策がラクになる！</p>
+
+<p>その他、空行・コメント行削除、シングルクオート置換も実施される。</p>
+
+<p><a href="https://github.com/btford/ngmin">ngmin</a> は <a href="http://gruntjs.com/">Grunt</a> タスク（<a href="https://github.com/btford/grunt-ngmin">grunt-ngmin</a>）としても利用可能で自動化できる！</p>
+
+<blockquote><p>Life is too short to declare the names of dependencies!</p></blockquote>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その４）]]></title>
@@ -1930,30 +2017,6 @@ angular.module('Ninja', [])
 <p>ステッカーだけでなくＴシャツもあるし、AngularJS だけでなく Node.js や Backbone.js など他にもいろいろある！</p>
 
 <p>ちなみに私の MacBook Air には、白いリンゴマークしか付けてませんけどね。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hex Color Tool で明度だけを変えたヘックスコードを取得する]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/09/hexcolortool/"/>
-    <updated>2013-09-09T23:34:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/09/hexcolortool</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><img src="http://hexcolortool.com/images/logo.svg" alt="Hex Color Tool" /></p>
-
-<p>ベースカラーを少し明るくした色や、少し暗くした色が欲しくても、ヘックスコードがわかんないってときには、<a href="http://hexcolortool.com/">Hex Color Tool</a> を使おう。ベースカラーを 5% 刻みで明るく、または暗くした値を表示させることができる。</p>
-
-<!-- more -->
-
-
-<p>白色の #ffffff を 5% ずつ暗くすると、#f2f2f2, #e6e6e6, #d9d9d9, #cccccc となり、<a href="http://getbootstrap.com/">Twitter Bootstrap</a> の CSS でも頻繁に指定されている薄いグレー色の値となる。</p>
-
-<p>このツールを使って得たヘックスコードをグラデーションなどに利用して、統一感の取れたカラーデザインのページを実現しよう。</p>
-
-<p>え？ LESS や Sass を使えばいいって？ 実はあんまり好きじゃないんですよね…。</p>
-
-<p>てことで、今回は AngularJS と直接関係ない内容。UI デザインに関したこともちょくちょく書いてくということで。</p>
 ]]></content>
   </entry>
   
