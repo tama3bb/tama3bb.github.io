@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-04T11:41:03+09:00</updated>
+  <updated>2013-12-06T14:00:11+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,75 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ObjectでもArrayでも回せるangular.forEach]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/06/angular-foreach/"/>
+    <updated>2013-12-06T13:55:45+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/06/angular-foreach</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>angular.forEach</h2>
+
+<p>AngularJS 標準の <a href="http://docs.angularjs.org/api/ng#function">Global API</a> から、<a href="http://docs.angularjs.org/api/angular.forEach">angular.forEach</a> の紹介。</p>
+
+<p>angular.forEach は、Object でも Array でも回してくれる。</p>
+
+<h2>angular.forEach(Object, Function)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;ninja&#39;</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="nx">weapons</span><span class="o">:</span> <span class="p">[</span> <span class="p">...,</span> <span class="p">...</span> <span class="p">]</span> <span class="p">};</span>
+</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>オブジェクトを回す場合の Iterator function の引数は value, key の順。</p>
+
+<h2>angular.forEach(Array, Function)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">records</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span> <span class="p">];</span>
+</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">records</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">record</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>配列を回す場合の Iterator function は第１引数が配列の中身で、第２引数が配列インデックスとなる。</p>
+
+<!-- more -->
+
+
+<h2>context の指定</h2>
+
+<p>第３引数に Iteration function での context (this) を指定できる。</p>
+
+<p>以下、公式サイトの <a href="http://docs.angularjs.org/api/angular.forEach">angular.forEach</a> ページに掲載されているコード。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;misko&#39;</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;male&#39;</span><span class="p">};</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">values</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">key</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span> <span class="nx">log</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この例だと、第３引数（context）に<code>log</code>を渡していて、この<code>log</code>が iterator の中での context <code>this</code>となる。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSのminify対策がngminでラクになる]]></title>
@@ -1989,36 +2058,6 @@ angular.module('Ninja', [])
 </span><span class='line'><span class="nx">$http</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">](</span><span class="err">…</span><span class="p">)</span> <span class="c1">// これで OK</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS のステッカーをゲットするには]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/10/angularjs-stickers/"/>
-    <updated>2013-09-10T14:14:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/10/angularjs-stickers</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><img src="http://ih0.redbubble.net/image.13710650.1031/sticker,375x360.u8.png" alt="AngularJS ×2 by csyz ★ $1.49 stickers" /></p>
-
-<p>AngularJS が好きで好きでしょうがない？</p>
-
-<p>ステッカーを MacBook Air に貼って、AngularJS Ninja っぷりをアピールしたい？</p>
-
-<p>よくイベントとかで配ってたりするけど、AngularJS のイベントなんてやってない？</p>
-
-<p>そんなときは買っちゃおう！</p>
-
-<!-- more -->
-
-
-<h2>Redbubble</h2>
-
-<p><a href="http://www.redbubble.com/people/csyz/portfolio">csyz ★ $1.49 stickers: Art, Design &amp; Photography | Redbubble</a></p>
-
-<p>ステッカーだけでなくＴシャツもあるし、AngularJS だけでなく Node.js や Backbone.js など他にもいろいろある！</p>
-
-<p>ちなみに私の MacBook Air には、白いリンゴマークしか付けてませんけどね。</p>
 ]]></content>
   </entry>
   

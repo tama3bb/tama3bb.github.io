@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: global APIs | AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/blog/categories/global-apis/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2013-12-06T14:00:11+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ObjectでもArrayでも回せるangular.forEach]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/06/angular-foreach/"/>
+    <updated>2013-12-06T13:55:45+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/06/angular-foreach</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>angular.forEach</h2>
+
+<p>AngularJS 標準の <a href="http://docs.angularjs.org/api/ng#function">Global API</a> から、<a href="http://docs.angularjs.org/api/angular.forEach">angular.forEach</a> の紹介。</p>
+
+<p>angular.forEach は、Object でも Array でも回してくれる。</p>
+
+<h2>angular.forEach(Object, Function)</h2>
+
+<p><code>javascript
+var user = { name: 'ninja', gender: 'unknown', weapons: [ ..., ... ] };
+angular.forEach(user, function(value, key) {
+  // ...
+});
+</code></p>
+
+<p>オブジェクトを回す場合の Iterator function の引数は value, key の順。</p>
+
+<h2>angular.forEach(Array, Function)</h2>
+
+<p><code>javascript
+var records = [ { ... }, { ... } ];
+angular.forEach(records, function(record, i) {
+  // ...
+});
+</code></p>
+
+<p>配列を回す場合の Iterator function は第１引数が配列の中身で、第２引数が配列インデックスとなる。</p>
+
+<!-- more -->
+
+
+<h2>context の指定</h2>
+
+<p>第３引数に Iteration function での context (this) を指定できる。</p>
+
+<p>以下、公式サイトの <a href="http://docs.angularjs.org/api/angular.forEach">angular.forEach</a> ページに掲載されているコード。</p>
+
+<p><code>javascript
+var values = {name: 'misko', gender: 'male'};
+var log = [];
+angular.forEach(values, function(value, key) {
+  this.push(key + ': ' + value);
+}, log);
+</code></p>
+
+<p>この例だと、第３引数（context）に<code>log</code>を渡していて、この<code>log</code>が iterator の中での context <code>this</code>となる。</p>
+]]></content>
+  </entry>
+  
+</feed>
