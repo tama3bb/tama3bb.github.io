@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-06T14:00:11+09:00</updated>
+  <updated>2013-12-08T00:19:02+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,253 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSでちゃちゃっとアニメーションを試す]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/07/angularjs-nganimate/"/>
+    <updated>2013-12-07T23:01:54+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/07/angularjs-nganimate</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>AngularJS 1.2.4</h2>
+
+<p>AngularJS 1.2.4 がリリースされ、$animate 関連の <a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md#1.2.4">Bug Fixes</a> が入り ng-include をネストした ng-repeat でアニメーションが効かない問題も解消されたので、アニメーションをちゃちゃっと試す方法を紹介。</p>
+
+<h2>angular-animate.js</h2>
+
+<p>HTML に angular と angular-animate の js ファイルを記述する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;angular.min.js&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;angular-animate.min.js&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ngAnimate モジュール</h2>
+
+<p>依存モジュールとして <code>ngAnimate</code> を記述する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;ngAnimate&#39;</span> <span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>CSS 定義</h2>
+
+<p>これだけでもうゴール間近で、あとはどんなアニメーションを適用するのかを考えて定義するだけ。</p>
+
+<p>アニメーションを CSS で定義する方法と JavaScript で記述する方法があり、ここではちゃちゃっと試すのが簡単な CSS を例示する。</p>
+
+<!-- more -->
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.ng-enter</span><span class="o">,</span>
+</span><span class='line'><span class="nc">.ng-leave</span><span class="o">,</span>
+</span><span class='line'><span class="nc">.ng-move</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">0.15s</span> <span class="n">linear</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">0.15s</span> <span class="n">linear</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.ng-enter</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.ng-enter.ng-enter-active</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.ng-leave</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.ng-leave.ng-leave-active</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.ng-move</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="o">.</span><span class="m">5</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.ng-move.ng-move-active</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この CSS 定義だけで、<code>enter</code> <code>leave</code> <code>move</code>系の<code>ngRepeat</code> <code>ngView</code> <code>ngInclude</code> <code>ngSwitch</code> <code>ngIf</code> directives に fade（フェード）のアニメーションが適用される。</p>
+
+<h2>アニメーションを限定的に適用</h2>
+
+<p>ちゃちゃっとアニメーションを試してみるのにはさっきの CSS で OK だけど、アニメーションされすぎで気持ち悪いとか、アニメーションのせいでむしろ遅い UI に感じられるとか、テーブルタグなどで不自然なレンダリングになるとか…。</p>
+
+<p>なので、ちゃんとアニメーションを使うときには CSS のセレクタに class name（以下では animated）を追加し、適用箇所を限定する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.animated.ng-enter</span><span class="o">,</span>
+</span><span class='line'><span class="nc">.animated.ng-leave</span><span class="o">,</span>
+</span><span class='line'><span class="nc">.animated.ng-move</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">0.15s</span> <span class="n">linear</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">0.15s</span> <span class="n">linear</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.animated.ng-enter</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.animated.ng-enter.ng-enter-active</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.animated.ng-leave</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.animated.ng-leave.ng-leave-active</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.animated.ng-move</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="o">.</span><span class="m">5</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.animated.ng-move.ng-move-active</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そして、HTML 側でアニメーションさせたい<code>ng-if</code>や<code>ng-repeat</code>を指定した要素の class 属性に <code>animated</code> を追記する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-if=</span><span class="s">&quot;model.visible&quot;</span> <span class="na">class=</span><span class="s">&quot;animated&quot;</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>むやみやたらにアニメーションするのでなく、こうしてポイントポイントで上品に適用していくことを心掛けよう。</p>
+
+<h2>サンプル</h2>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/EpiHEwuK/26/embed?output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<h2>class 属性の変化</h2>
+
+<p>class 属性が変化する流れを見ておく。</p>
+
+<p><code>model.visible = false;</code>（非表示状態）のときがこのようなコードだとして、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-if=</span><span class="s">&quot;model.visible&quot;</span> <span class="na">class=</span><span class="s">&quot;animated&quot;</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>model.visible = true;</code>（表示に切替）になるとまず<code>ng-enter</code>が追加（<code>opacity: 0;</code>）されて、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-if=</span><span class="s">&quot;model.visible&quot;</span> <span class="na">class=</span><span class="s">&quot;animated ng-enter&quot;</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>その後すぐに<code>ng-enter-active</code>が追加（<code>opacity: 1;</code>）されることでアニメーションが開始する。CSS で定義している <code>transition: opacity 0.15s linear;</code>により 0.15s の速度でフェードしながら表示（fadeIn）され、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-if=</span><span class="s">&quot;model.visible&quot;</span> <span class="na">class=</span><span class="s">&quot;animated ng-enter ng-enter-active&quot;</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>要素の class 属性は元に戻る。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-if=</span><span class="s">&quot;model.visible&quot;</span> <span class="na">class=</span><span class="s">&quot;animated&quot;</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>その逆で表示から非表示になるときには、<code>ng-enter</code>の代わりに<code>ng-leave</code>と<code>ng-leave-active</code>が class 属性に追加される。</p>
+
+<h2>アニメーションに対応する標準 directive</h2>
+
+<p>以下の AngularJS 標準 directive には、アニメーションのための処理が実装されているので、表示・非表示が切り替わるタイミングで class 属性に先述したような値（<code>ng-enter</code>など）が反映される。</p>
+
+<table>
+<thead>
+<tr>
+<th>Directive </th>
+<th> Supported Animations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ngRepeat </td>
+<td> enter, leave, move</td>
+</tr>
+<tr>
+<td>ngView </td>
+<td> enter, leave</td>
+</tr>
+<tr>
+<td>ngInclude </td>
+<td> enter, leave</td>
+</tr>
+<tr>
+<td>ngSwitch </td>
+<td> enter, leave</td>
+</tr>
+<tr>
+<td>ngIf </td>
+<td> enter, leave</td>
+</tr>
+<tr>
+<td>ngClass </td>
+<td> add, remove</td>
+</tr>
+<tr>
+<td>ngShow / ngHide </td>
+<td> add, remove (ng-hide class 値)</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>もちろんカスタム directive でも $animate service を利用して標準 directive と同じようにアニメーションを実現できるけど、その方法についてはまた別の機会に。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ObjectでもArrayでも回せるangular.forEach]]></title>
@@ -1946,118 +2193,6 @@ angular.module('Ninja', [])
 <p>Google+ での情報によると、$600 ドルは Early Bird Ticket Sales、つまり早割で安くなっていて、正規の金額は 2 日間で $800 の様子。</p>
 
 <p>さあ、みんなで行こうじゃありませんかー！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS を古い IE に対応させるには]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/11/angularjs-ie-compatibility/"/>
-    <updated>2013-09-11T23:58:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/11/angularjs-ie-compatibility</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>AngularJS を IE 8 以前の Internet Explorer に対応させるには、<a href="http://docs.angularjs.org/guide/ie">AngularJS: Internet Explorer Compatibility</a> のページに記載されている手順を実施する必要がある。</p>
-
-<!-- more -->
-
-
-<p>まず json2.js または json3.js。</p>
-
-<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html</span> <span class="na">xmlns:ng=</span><span class="s">&quot;http://angularjs.org&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="c">&lt;!--[if lte IE 8]&gt;</span>
-</span><span class='line'><span class="c">      &lt;script src=&quot;/path/to/json2.js&quot;&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="c">    &lt;![endif]--&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    ...
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>次に &ldquo;ng-app&rdquo; という値の id 属性を、ng-app 属性を記述する要素に追加。</p>
-
-<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html</span> <span class="na">xmlns:ng=</span><span class="s">&quot;http://angularjs.org&quot;</span> <span class="na">id=</span><span class="s">&quot;ng-app&quot;</span> <span class="na">ng-app=</span><span class="s">&quot;optionalModuleName&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  ...
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最後に、カスタムタグを使わないようにする。</p>
-
-<p>または、&lt;ng-view> や 独自のカスタムタグ（例えば <alert> や <tabset> など）を使うのであれば、そのためのコード（document.createElement）を追加。</p>
-
-<figure class='code'><figcaption><span>index.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html</span> <span class="na">xmlns:ng=</span><span class="s">&quot;http://angularjs.org&quot;</span> <span class="na">id=</span><span class="s">&quot;ng-app&quot;</span> <span class="na">ng-app=</span><span class="s">&quot;optionalModuleName&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="c">&lt;!--[if lte IE 8]&gt;</span>
-</span><span class='line'><span class="c">      &lt;script&gt;</span>
-</span><span class='line'><span class="c">        document.createElement(&#39;ng-include&#39;);</span>
-</span><span class='line'><span class="c">        document.createElement(&#39;ng-pluralize&#39;);</span>
-</span><span class='line'><span class="c">        document.createElement(&#39;ng-view&#39;);</span>
-</span><span class='line'><span class="c"> </span>
-</span><span class='line'><span class="c">        // Optionally these for CSS</span>
-</span><span class='line'><span class="c">        document.createElement(&#39;ng:include&#39;);</span>
-</span><span class='line'><span class="c">        document.createElement(&#39;ng:pluralize&#39;);</span>
-</span><span class='line'><span class="c">        document.createElement(&#39;ng:view&#39;);</span>
-</span><span class='line'><span class="c">      &lt;/script&gt;</span>
-</span><span class='line'><span class="c">    &lt;![endif]--&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    ...
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>それだけで済まない場合も</h2>
-
-<p>最後に、さっきのページでは扱われていないものの、$http の delete メソッドを使っているとエラーが発生して動かないので、delete メソッドを以下のように変更。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$http</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="err">…</span><span class="p">)</span> <span class="c1">// エラー</span>
-</span><span class='line'><span class="nx">$http</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">](</span><span class="err">…</span><span class="p">)</span> <span class="c1">// これで OK</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
