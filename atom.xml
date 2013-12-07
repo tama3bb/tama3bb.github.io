@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-08T00:19:02+09:00</updated>
+  <updated>2013-12-08T00:20:43+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AngularJSでちゃちゃっとアニメーションを試す]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/07/angularjs-nganimate/"/>
-    <updated>2013-12-07T23:01:54+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/07/angularjs-nganimate</id>
+    <link href="http://angularjsninja.com/blog/2013/12/08/angularjs-nganimate/"/>
+    <updated>2013-12-08T00:20:54+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/08/angularjs-nganimate</id>
     <content type="html"><![CDATA[<hr />
 
 <h2>AngularJS 1.2.4</h2>
