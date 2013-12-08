@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-08T00:20:43+09:00</updated>
+  <updated>2013-12-08T13:30:35+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -257,6 +257,12 @@
 
 
 <p>もちろんカスタム directive でも $animate service を利用して標準 directive と同じようにアニメーションを実現できるけど、その方法についてはまた別の機会に。</p>
+
+<h2>ngAnimate-animate.css</h2>
+
+<p>最後に、<a href="https://daneden.me/animate/">animate.css</a> を AngularJS 1.2 で利用できるようにするドライバーモジュール <a href="https://github.com/yearofmoo/ngAnimate-animate.css">ngAnimate-animate.css</a> を紹介。</p>
+
+<p>animate.css とこのモジュールを使えば、class 属性に <code>dn-fade</code> と記述するだけでフェードのアニメーションを利用できるようになる。その他いろいろなアニメーションも class 属性に指定するだけで試せる。</p>
 ]]></content>
   </entry>
   
