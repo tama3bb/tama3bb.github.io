@@ -156,3 +156,9 @@ ngClass | add, remove
 ngShow / ngHide | add, remove (ng-hide class 値)
 
 もちろんカスタム directive でも $animate service を利用して標準 directive と同じようにアニメーションを実現できるけど、その方法についてはまた別の機会に。
+
+## ngAnimate-animate.css
+
+最後に、[animate.css](https://daneden.me/animate/) を AngularJS 1.2 で利用できるようにするドライバーモジュール [ngAnimate-animate.css](https://github.com/yearofmoo/ngAnimate-animate.css) を紹介。
+
+animate.css とこのモジュールを使えば、class 属性に `dn-fade` と記述するだけでフェードのアニメーションを利用できるようになる。その他いろいろなアニメーションも class 属性に指定するだけで試せる。
