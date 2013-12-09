@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-08T13:30:35+09:00</updated>
+  <updated>2013-12-10T02:08:34+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのHTMLバインド {{expression}} ではundefinedを気にしない]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/10/angularjs-expressions-forgiving/"/>
+    <updated>2013-12-10T01:46:47+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/10/angularjs-expressions-forgiving</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>Forgiving</h2>
+
+<p><a href="http://docs.angularjs.org/guide/expression">AngularJS: Expressions</a> ページで <a href="http://docs.angularjs.org/guide/expression#property-evaluation_forgiving">Forgiving</a> として説明されているように、HTML（テンプレート）で記述する AngularJS のバインド部分（<code>{{ result.title.value }}</code> や<code>ng-if=“result.tags.length”</code>）では、result、title、tags が、undefined や null でないかや object かどうかということを考慮したコードにしなくていい。</p>
+
+<p>result が通信してサーバから取得するデータであれば、レスポンスが返るまでの間 result は undefined の状態になるけど、だからと言って<code>{{ ((result || {}).title || {}).c }}</code>とか、<code>result &amp;&amp; result.title &amp;&amp; result.title.value</code>のようにコーディングしなくていい。</p>
+
+<!-- more -->
+
+
+<h2>サンプル</h2>
+
+<p>以下のサンプルでは、<code>ng-hide="result.hidden"</code>のとこで、result なんて定義してないので undefined だけど、エラーにならずに falsy として扱われている。</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/oTOMaFIJ/11/embed?html,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSでちゃちゃっとアニメーションを試す]]></title>
@@ -2163,42 +2187,6 @@ angular.module('Ninja', [])
 
 
 <p>これだけ。とにかく便利。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS カンファレンス『ng-conf』が年始に開催]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/"/>
-    <updated>2013-09-12T23:31:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/12/ng-conf-2014</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><img src="http://lh5.googleusercontent.com/proxy/wsYUaddAvIcNhXYf0kt63gkDYp_VzQ2-JwB-jUlPzAazYg53ibQF8JdCn2SNwI9ZucozuoJDrhvT54sOHfX44Jiq_v0FvlzDIsQc-4s-q-mnJdx_y6nDHx-VmA=w120-h120" alt="ng-conf" /></p>
-
-<p>AngularJS だけの初めてのカンファレンスが、2014 年 1 月 16 日、17 日に開催される。開催地はユタ州ソルトレイクシティ。</p>
-
-<!-- more -->
-
-
-<h4>公式ページ</h4>
-
-<p><a href="http://www.ng-conf.org/">ng-conf 2014 &ndash; The World&rsquo;s First Angular Conference in Salt Lake City, Utah</a></p>
-
-<h4>Eventbrite</h4>
-
-<p><a href="http://ng-conf-slc-2014.eventbrite.com">ng-conf 2014 Tickets, Salt Lake City &ndash; Eventbrite</a></p>
-
-<h4>Google+</h4>
-
-<p><a href="https://plus.google.com/101125427377197999853/posts">ng-conf &ndash; Google+</a></p>
-
-<p>Eventbrite の情報では、開催前日の 1 月 15 日に Jon Lindquist さんにより、6 時間のトレーニングを受けられるみたい。Jon Lindquist さんは、AngularJS の学習動画で有名な <a href="http://egghead.io">Egghead.io</a> の人。</p>
-
-<p>2 日間で $600.00 + $27.95、トレーニングを含む 3 日間で $1,000.00 + $39.95。いつもながら、アメリカのカンファレンスってほんと高い。まあ、AngularJS のおかげで稼がせてもらってるようなもんですから、こういうときにお返ししましょうね。</p>
-
-<p>Google+ での情報によると、$600 ドルは Early Bird Ticket Sales、つまり早割で安くなっていて、正規の金額は 2 日間で $800 の様子。</p>
-
-<p>さあ、みんなで行こうじゃありませんかー！</p>
 ]]></content>
   </entry>
   
