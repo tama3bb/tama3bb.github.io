@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/12/10 AngularJS AngularJSのHTMLバインド {{expression}} ではundefinedを気にしない Forgiving AngularJS: Expressions ページで Forgiving として説明されているように、HTML（テンプレート） &hellip;">
+	<meta name="description" content="2013/12/13 AngularJS, scope AngularJS のデータバインドを支える $watch $watch AngularJS の強力なデータバインドを支える仕組みのうち、まず $watch について取り上げる。 $watch を使えば、監視（Observe） &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,7 +110,83 @@
   
 
 
-<time datetime="2013-12-10T01:46:47+09:00" data-updated="true" itemprop="datePublished">2013/12/10</time></div>
+<time datetime="2013-12-13T18:43:39+09:00" data-updated="true" itemprop="datePublished">2013/12/13</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/scope/'>scope</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/13/angularjs-watch/" itemprop="url">AngularJS のデータバインドを支える $watch</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>$watch</h2>
+
+<p>AngularJS の強力なデータバインドを支える仕組みのうち、まず <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watch">$watch</a> について取り上げる。</p>
+
+<p>$watch を使えば、監視（Observe）したいオブジェクトやプロパティが変化したときに実行する処理（リスナー）を容易に記述できる。</p>
+
+<p>$watch を利用する場所は scope のある directive や controller で、ng-model や ng-bind のようなデータバインドする directive を独自に実装する場合や、モデルの変更に応じて処理をバインドする場合などに使用できる。</p>
+
+<h2>$digest サイクル</h2>
+
+<p>$watch による変更検知処理は、ポーリング的（一定間隔で頻繁）に実施されるのではなく、以下のイベントが生じたときに $digest サイクル（または $digest ループ）と呼ばれる処理が実行され、その中で実行される。</p>
+
+<table>
+<thead>
+<tr>
+<th>イベント </th>
+<th> 概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ナビゲーション </td>
+<td> ブラウザの location 変更時</td>
+</tr>
+<tr>
+<td>ネットワーク </td>
+<td> $http, $resource レスポンス受信時</td>
+</tr>
+<tr>
+<td>DOM イベント </td>
+<td> ng-click, ng-mouseover などの実行時</td>
+</tr>
+<tr>
+<td>タイマー </td>
+<td> $timeout によるタイマー処理の実行時</td>
+</tr>
+</tbody>
+</table>
+
+
+
+		
+		<a href="/blog/2013/12/13/angularjs-watch/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-10T02:09:47+09:00" data-updated="true" itemprop="datePublished">2013/12/10</time></div>
 		<div class="tags">
 
 
@@ -886,84 +962,6 @@
 
 		
 		<a href="/blog/2013/11/19/angularjs-nginclude/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-16T02:11:00+09:00" data-updated="true" itemprop="datePublished">2013/11/16</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/11/16/angularjs-ngif-proliferation/" itemprop="url">AngularJSで増殖現象に出会ったらng-ifを疑おう</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>増殖現象にビビる</h2>
-
-<p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/alert">alert</a> と、<a href="https://github.com/angular-app/angular-app">angular-app</a> あたりを参考にしながらメッセージ表示機能を実装していたら、どんどんメッセージが増殖してくのでビビった。１件メッセージを追加するたびに、メッセージ配列ごと増えるという…。</p>
-
-<h2>増殖現象デモ</h2>
-
-<script src="//code.angularjs.org/1.2.0/angular.min.js"></script>
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap.min.js"></script>
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
-
-
-<script>
-angular.module('Ninja', ['ui.bootstrap'])
-  .controller('NotificationsCtrl', function($scope) {
-    $scope.i = 0;
-    $scope.notifications = [];
-    $scope.addMessage = function(message, type) {
-      $scope.notifications.push({
-        message: message + $scope.i++,
-        type: type || 'error'
-      });
-    };
-  });
-</script>
-
-
-<div ng-app="Ninja" ng-controller="NotificationsCtrl" ng-cloak>
-  <a href="" ng-click="addMessage('message:')">Add a message: {{i}}</a>　← 何回かクリック！
-  <div ng-if="notifications.length">
-    <alert type="notification.type" ng-repeat="notification in notifications">
-      {{notification.message}}
-    </alert>
-  </div>
-</div>
-
-
-
-
-
-		
-		<a href="/blog/2013/11/16/angularjs-ngif-proliferation/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

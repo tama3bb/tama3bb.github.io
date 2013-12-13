@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-10T02:08:34+09:00</updated>
+  <updated>2013-12-13T19:13:49+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -14,9 +14,166 @@
 
   
   <entry>
+    <title type="html"><![CDATA[AngularJS のデータバインドを支える $watch]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/13/angularjs-watch/"/>
+    <updated>2013-12-13T18:43:39+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/13/angularjs-watch</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>$watch</h2>
+
+<p>AngularJS の強力なデータバインドを支える仕組みのうち、まず <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watch">$watch</a> について取り上げる。</p>
+
+<p>$watch を使えば、監視（Observe）したいオブジェクトやプロパティが変化したときに実行する処理（リスナー）を容易に記述できる。</p>
+
+<p>$watch を利用する場所は scope のある directive や controller で、ng-model や ng-bind のようなデータバインドする directive を独自に実装する場合や、モデルの変更に応じて処理をバインドする場合などに使用できる。</p>
+
+<h2>$digest サイクル</h2>
+
+<p>$watch による変更検知処理は、ポーリング的（一定間隔で頻繁）に実施されるのではなく、以下のイベントが生じたときに $digest サイクル（または $digest ループ）と呼ばれる処理が実行され、その中で実行される。</p>
+
+<table>
+<thead>
+<tr>
+<th>イベント </th>
+<th> 概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ナビゲーション </td>
+<td> ブラウザの location 変更時</td>
+</tr>
+<tr>
+<td>ネットワーク </td>
+<td> $http, $resource レスポンス受信時</td>
+</tr>
+<tr>
+<td>DOM イベント </td>
+<td> ng-click, ng-mouseover などの実行時</td>
+</tr>
+<tr>
+<td>タイマー </td>
+<td> $timeout によるタイマー処理の実行時</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- more -->
+
+
+<h2>構文</h2>
+
+<p><code>$watch(watchExpression, listener, objectEquality)</code></p>
+
+<h3>watchExpression</h3>
+
+<p>監視したいオブジェクトや値（を返す function）を第 1 引数に指定する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">$location</span><span class="p">.</span><span class="nx">path</span><span class="p">();</span>
+</span><span class='line'><span class="p">},</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// $location の path が変わった時</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>scope にあるオブジェクトや値であれば、文字列で指定できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// scope の name が変わった時</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>listener</h3>
+
+<p>watchExpression で監視しているオブジェクトや値が変化したときに実行するリスナー function を第 2 引数に指定する。</p>
+
+<p>変更後の値だけでなく、変更前の値を参照することもできる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newVal</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// newVal: 変更後の値: &#39;Hanzo&#39;</span>
+</span><span class='line'>  <span class="c1">// oldVal: 変更前の値: &#39;unknown&#39;</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Hanzo&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>なお、このリスナー function についても、scope に定義があれば文字列で指定できる。</p>
+
+<h3>objectEquality</h3>
+
+<p>ここまでのコード例では、すべて $watch の対象となる watchExpression が文字列であったため、変更が常に検知される。</p>
+
+<p>watchExpression がオブジェクトの場合には注意が必要で、この第 3 引数を省略（または false を指定）している場合は reference（同じオブジェクトを参照しているか）で比較されることとなり、オブジェクトのプロパティ値が変わろうと配列の中身が変わろうと、変化したとは扱われない。</p>
+
+<p>このオブジェクト id での比較のほうが高速に処理されるが、どうしてもオブジェクトをプロパティごとに比較したい場合には、第 3 引数 objectEquality に true を指定する。性能の点では不利になるが、オブジェクトや配列の中身が変更されたかを検知できるようになる。</p>
+
+<p>なお、性能だけでなく、新旧比較のためにオブジェクトや配列全体のコピー（angular.copy）を保持することになり、メモリ消費の点でも不利になる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;male&#39;</span>
+</span><span class='line'>  <span class="err">…</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newVal</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// newVal: user オブジェクト</span>
+</span><span class='line'>  <span class="c1">// オブジェクトの参照が変わった時、または オブジェクトのいずれかのプロパティが変わった時</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">newVal</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// オブジェクトの場合は undefined チェックを</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">},</span> <span class="kc">true</span><span class="p">);</span>  <span class="c1">// 性能、メモリ消費の点からできるだけ true を指定しない方法を検討すべき</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>単にオブジェクトが持つ特定のプロパティを監視したいだけであれば、以下のように記述しよう。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;user.name&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newVal</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// newVal: user オブジェクト</span>
+</span><span class='line'>  <span class="c1">// オブジェクトの name プロパティが変わった時</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[AngularJSのHTMLバインド {{expression}} ではundefinedを気にしない]]></title>
     <link href="http://angularjsninja.com/blog/2013/12/10/angularjs-expressions-forgiving/"/>
-    <updated>2013-12-10T01:46:47+09:00</updated>
+    <updated>2013-12-10T02:09:47+09:00</updated>
     <id>http://angularjsninja.com/blog/2013/12/10/angularjs-expressions-forgiving</id>
     <content type="html"><![CDATA[<hr />
 
@@ -2127,66 +2284,6 @@ angular.module('Ninja', [])
 <p>ただ、この UI Bootstrap と AngularStrap は、それぞれいいとこも微妙なとこもあるので両方を使いたいと欲張っちゃうこともある。すると今回のメインである Modal でエラーが…。</p>
 
 <p>Modal に限れば UI Bootstrap のほうが優れてるので、AngularStrap の $modal directive コードを削除しちゃいましょう。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS の localStorage モジュール angularLocalStorage]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/13/angular-localstorage/"/>
-    <updated>2013-09-13T23:38:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/13/angular-localstorage</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>AngularJS アプリケーションで localStorage を使うときに便利なモジュールの紹介。</p>
-
-<p><a href="https://github.com/agrublev/angularLocalStorage">agrublev/angularLocalStorage</a></p>
-
-<!-- more -->
-
-
-<h2>機能</h2>
-
-<ul>
-<li>AngularJS の model と localStorage を双方向にバインド</li>
-<li>オブジェクト、配列も変換不要</li>
-<li>localStorage 非対応のブラウザでは $cookies にフォールバック（angular-cookies.min.js を参照し、<code>ngCookies</code>を依存モジュールとして記述）</li>
-</ul>
-
-
-<h2>使い方</h2>
-
-<p>依存モジュールとして<code>localStorage</code>を追加。</p>
-
-<figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">yourApp</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;yourApp&#39;</span><span class="p">,</span> <span class="p">[...,</span> <span class="s1">&#39;angularLocalStorage&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>controller に<code>storage</code>を記述。</p>
-
-<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">yourApp</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;yourController&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">storage</span><span class="p">)</span> <span class="p">{</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>storage</code>を使う。デフォルト値やキーを変更可能。</p>
-
-<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// storage.variable にバインド</span>
-</span><span class='line'><span class="nx">storage</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span><span class="s1">&#39;varName&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// * defaultValue: デフォルト値</span>
-</span><span class='line'><span class="c1">// * storeName: 変数名と異なる localStorage への保存 key を指定</span>
-</span><span class='line'><span class="nx">storage</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="s1">&#39;varName&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">defaultValue</span><span class="o">:</span> <span class="s1">&#39;randomValue123&#39;</span><span class="p">,</span> <span class="nx">storeName</span><span class="o">:</span> <span class="s1">&#39;customStoreKey&#39;</span><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これだけ。とにかく便利。</p>
 ]]></content>
   </entry>
   

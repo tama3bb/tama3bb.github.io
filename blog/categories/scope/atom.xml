@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: scope | AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/blog/categories/scope/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2013-12-13T19:13:49+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS のデータバインドを支える $watch]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/13/angularjs-watch/"/>
+    <updated>2013-12-13T18:43:39+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/13/angularjs-watch</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>$watch</h2>
+
+<p>AngularJS の強力なデータバインドを支える仕組みのうち、まず <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watch">$watch</a> について取り上げる。</p>
+
+<p>$watch を使えば、監視（Observe）したいオブジェクトやプロパティが変化したときに実行する処理（リスナー）を容易に記述できる。</p>
+
+<p>$watch を利用する場所は scope のある directive や controller で、ng-model や ng-bind のようなデータバインドする directive を独自に実装する場合や、モデルの変更に応じて処理をバインドする場合などに使用できる。</p>
+
+<h2>$digest サイクル</h2>
+
+<p>$watch による変更検知処理は、ポーリング的（一定間隔で頻繁）に実施されるのではなく、以下のイベントが生じたときに $digest サイクル（または $digest ループ）と呼ばれる処理が実行され、その中で実行される。</p>
+
+<table>
+<thead>
+<tr>
+<th>イベント </th>
+<th> 概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ナビゲーション </td>
+<td> ブラウザの location 変更時</td>
+</tr>
+<tr>
+<td>ネットワーク </td>
+<td> $http, $resource レスポンス受信時</td>
+</tr>
+<tr>
+<td>DOM イベント </td>
+<td> ng-click, ng-mouseover などの実行時</td>
+</tr>
+<tr>
+<td>タイマー </td>
+<td> $timeout によるタイマー処理の実行時</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- more -->
+
+
+<h2>構文</h2>
+
+<p><code>$watch(watchExpression, listener, objectEquality)</code></p>
+
+<h3>watchExpression</h3>
+
+<p>監視したいオブジェクトや値（を返す function）を第 1 引数に指定する。</p>
+
+<p><code>javascript
+$scope.$watch(function() {
+  return $location.path();
+}, function() {
+  // $location の path が変わった時
+});
+</code></p>
+
+<p>scope にあるオブジェクトや値であれば、文字列で指定できる。</p>
+
+<p><code>javascript
+$scope.name = 'unknown';
+$scope.$watch('name', function() {
+  // scope の name が変わった時
+});
+</code></p>
+
+<h3>listener</h3>
+
+<p>watchExpression で監視しているオブジェクトや値が変化したときに実行するリスナー function を第 2 引数に指定する。</p>
+
+<p>変更後の値だけでなく、変更前の値を参照することもできる。</p>
+
+<p><code>javascript
+$scope.name = 'unknown';
+$scope.$watch('name', function(newVal, oldVal) {
+  // newVal: 変更後の値: 'Hanzo'
+  // oldVal: 変更前の値: 'unknown'
+});
+$scope.name = 'Hanzo';
+</code></p>
+
+<p>なお、このリスナー function についても、scope に定義があれば文字列で指定できる。</p>
+
+<h3>objectEquality</h3>
+
+<p>ここまでのコード例では、すべて $watch の対象となる watchExpression が文字列であったため、変更が常に検知される。</p>
+
+<p>watchExpression がオブジェクトの場合には注意が必要で、この第 3 引数を省略（または false を指定）している場合は reference（同じオブジェクトを参照しているか）で比較されることとなり、オブジェクトのプロパティ値が変わろうと配列の中身が変わろうと、変化したとは扱われない。</p>
+
+<p>このオブジェクト id での比較のほうが高速に処理されるが、どうしてもオブジェクトをプロパティごとに比較したい場合には、第 3 引数 objectEquality に true を指定する。性能の点では不利になるが、オブジェクトや配列の中身が変更されたかを検知できるようになる。</p>
+
+<p>なお、性能だけでなく、新旧比較のためにオブジェクトや配列全体のコピー（angular.copy）を保持することになり、メモリ消費の点でも不利になる。</p>
+
+<p><code>javascript
+$scope.user = {
+  name: 'unknown',
+  gender: 'male'
+  …
+};
+$scope.$watch('user', function(newVal, oldVal) {
+  // newVal: user オブジェクト
+  // オブジェクトの参照が変わった時、または オブジェクトのいずれかのプロパティが変わった時
+  if (newVal) {  // オブジェクトの場合は undefined チェックを
+  }
+}, true);  // 性能、メモリ消費の点からできるだけ true を指定しない方法を検討すべき
+</code></p>
+
+<p>単にオブジェクトが持つ特定のプロパティを監視したいだけであれば、以下のように記述しよう。</p>
+
+<p><code>javascript
+$scope.$watch('user.name', function(newVal, oldVal) {
+  // newVal: user オブジェクト
+  // オブジェクトの name プロパティが変わった時
+});
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
