@@ -4,7 +4,7 @@
   <title><![CDATA[Category: DI | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/di/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-15T16:54:58+09:00</updated>
+  <updated>2013-12-15T16:58:41+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -80,7 +80,9 @@ angular.module(&lsquo;app&rsquo;, []).controller(&lsquo;TodoCtrl&rsquo;, [
 
 <p><a href="https://github.com/btford/ngmin">ngmin</a> は <a href="http://gruntjs.com/">Grunt</a> タスク（<a href="https://github.com/btford/grunt-ngmin">grunt-ngmin</a>）としても利用可能で自動化できる！</p>
 
-<p><blockquote><p>Life is too short to declare the names of dependencies!</p></blockquote></p>
+<p>{% blockquote %}
+Life is too short to declare the names of dependencies!
+{% endblockquote %}</p>
 ]]></content>
   </entry>
   
