@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-13T19:13:49+09:00</updated>
+  <updated>2013-12-15T16:54:58+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.3 では IE 8 がサポートされない]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/"/>
+    <updated>2013-12-15T16:16:01+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS 1.3 についての記事『<a href="http://blog.angularjs.org/2013/12/angularjs-13-new-release-approaches.html">AngularJS 1.3: a new release approaches</a>』が公式ブログのほうに上がりました。</p>
+
+<p>日本でのエンタープライズ（業務系）なんかでは、まだまだ IE 8 は当たり前のようにサポート対象のブラウザになっているところが多いと思うので、ちょっと大きなニュースですね。</p>
+
+<p>なお、AngularJS 1.2.x 以前を IE 8 で動作させるには、過去記事『<a href="/blog/2013/09/11/angularjs-ie-compatibility/">AngularJS を古い IE に対応させるには</a>』をご参照ください。</p>
+
+<h2>AngularJS 1.3 は　IE 8 をサポートしない</h2>
+
+<p>サポートをやめる理由としては、IE 8 で動作させるためのコードのせいで性能に悪影響があるし、すでに IE 8 ユーザは全体の数パーセント程度だし、Microsoft による Windows XP のサポートも 2014年4月に終わるし、とのこと。動作性能の向上はもちろん、機能を追加していくのも速くなると。</p>
+
+<p>どうしても IE 8 で動作させ続けたい場合は：</p>
+
+<ul>
+<li>AngularJS 1.2.x を使い続ける</li>
+<li>AngularJS 1.3 をトライする</li>
+<li>IE 8 で動作する AngularJS を商用サポートとして提供する会社を見つける。</li>
+</ul>
+
+
+<p>1.3 バージョンでは IE 8 用のハックを積極的に削除していくことはないようで、1.2.x バージョンのアプリケーションが IE 8 で動作しているのであれば、大部分は 1.3 でも動作するのではないかということ。ただし、1.3 では IE 8 向けのテストもバグフィックスも実施しなくなると。</p>
+
+<!-- more -->
+
+
+<h2>非推奨（deprecated）の API を削除</h2>
+
+<p><a href="https://github.com/angular/angular.js/commit/5dc35b527b3c99f6544b8cb52e93c6510d3ac577">fix($parse): deprecate promise unwrapping and make it an opt-in</a></p>
+
+<p>promise の unwrapping についてのことを指しているようで、この API のことは以前の記事『<a href="/blog/2013/10/26/angularjs-1.2.0-rc3-promises/">AngularJS 1.2.0-rc3 以降の Promise</a>』をご参照ください。</p>
+
+<h2>リリースバージョンの命名規約</h2>
+
+<p>odd/even versioning から、semantic versioning に切り替えるということで、以前は 1.1.x（奇数）を開発バージョン、1.0.x や 1.2.x（偶数）を安定バージョンとしてきたバージョニングを、1.3.0-beta.1、1.3.0-beta.2 などを経て、安定版 1.3.0 リリースとするバージョニングになるということ。</p>
+
+<h2>1.3 新機能についてコメントを！</h2>
+
+<p>1月2日まで 1.3 での<a href="https://github.com/angular/angular.js/issues?milestone=32&amp;page=1&amp;state=open">新機能</a>についてのコメントを受け付けているようです。"+1" とコメントすれば投票したことに。</p>
+
+<h2>1.3（ベータ）リリースはいつ頃か</h2>
+
+<p>1.3 の最初のベータバージョンが 1 月で、その後 1 〜 2 週間間隔でリリース。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS のデータバインドを支える $watch]]></title>
@@ -414,77 +465,6 @@ angular.forEach(values, function(value, key) {
 </code></p>
 
 <p>この例だと、第３引数（context）に<code>log</code>を渡していて、この<code>log</code>が iterator の中での context <code>this</code>となる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJSのminify対策がngminでラクになる]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin/"/>
-    <updated>2013-12-03T11:15:48+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS の minify 対策、めんどくさい</h2>
-
-<p>AngularJS の JavaScript コードを minify するには、function の引数でインジェクト（DI）する各 services の名前を、文字列として重複させて記述する必要がある。</p>
-
-<p>これって、めっちゃめんどくさい。あほらしすぎる。</p>
-
-<h2>ngmin</h2>
-
-<p>そこで <a href="https://github.com/btford/ngmin">ngmin</a> を使う。</p>
-
-<p><code>
-npm install -g ngmin
-</code>
-<code>
-ngmin somefile.js somefile.annotate.js
-</code></p>
-
-<p>以下のコードが、</p>
-
-<p>``` javascript somefile.js
-angular.module(&lsquo;app&rsquo;, [])</p>
-
-<p>  .controller(&lsquo;TodoCtrl&rsquo;, function($scope, $timeout, Projects) {</p>
-
-<pre><code>// comments
-$scope.createTask = function(task) {
-  task.title = "New Task";
-};
-</code></pre>
-
-<p>  });
-```</p>
-
-<p>ngmin 後は、こうなる。</p>
-
-<p>``` javascript somefile.annotate.js
-angular.module(&lsquo;app&rsquo;, []).controller(&lsquo;TodoCtrl&rsquo;, [
-  &lsquo;$scope&rsquo;,
-  &lsquo;$timeout&rsquo;,
-  &lsquo;Projects&rsquo;,
-  function ($scope, $timeout, Projects) {</p>
-
-<pre><code>$scope.createTask = function (task) {
-  task.title = 'New Task';
-};
-</code></pre>
-
-<p>  }
-]);
-```</p>
-
-<!-- more -->
-
-
-<p>function の引数に記述している DI する services の名前が、自動的に文字列としても列挙されるので、これで minify 対策がラクになる！</p>
-
-<p>その他、空行・コメント行削除、シングルクオート置換も実施される。</p>
-
-<p><a href="https://github.com/btford/ngmin">ngmin</a> は <a href="http://gruntjs.com/">Grunt</a> タスク（<a href="https://github.com/btford/grunt-ngmin">grunt-ngmin</a>）としても利用可能で自動化できる！</p>
-
-<p><blockquote><p>Life is too short to declare the names of dependencies!</p></blockquote></p>
 ]]></content>
   </entry>
   

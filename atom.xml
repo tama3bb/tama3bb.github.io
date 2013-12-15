@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-13T19:13:49+09:00</updated>
+  <updated>2013-12-15T16:54:58+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.3 では IE 8 がサポートされない]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/"/>
+    <updated>2013-12-15T16:16:01+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>AngularJS 1.3 についての記事『<a href="http://blog.angularjs.org/2013/12/angularjs-13-new-release-approaches.html">AngularJS 1.3: a new release approaches</a>』が公式ブログのほうに上がりました。</p>
+
+<p>日本でのエンタープライズ（業務系）なんかでは、まだまだ IE 8 は当たり前のようにサポート対象のブラウザになっているところが多いと思うので、ちょっと大きなニュースですね。</p>
+
+<p>なお、AngularJS 1.2.x 以前を IE 8 で動作させるには、過去記事『<a href="http://angularjsninja.com/blog/2013/09/11/angularjs-ie-compatibility/">AngularJS を古い IE に対応させるには</a>』をご参照ください。</p>
+
+<h2>AngularJS 1.3 は　IE 8 をサポートしない</h2>
+
+<p>サポートをやめる理由としては、IE 8 で動作させるためのコードのせいで性能に悪影響があるし、すでに IE 8 ユーザは全体の数パーセント程度だし、Microsoft による Windows XP のサポートも 2014年4月に終わるし、とのこと。動作性能の向上はもちろん、機能を追加していくのも速くなると。</p>
+
+<p>どうしても IE 8 で動作させ続けたい場合は：</p>
+
+<ul>
+<li>AngularJS 1.2.x を使い続ける</li>
+<li>AngularJS 1.3 をトライする</li>
+<li>IE 8 で動作する AngularJS を商用サポートとして提供する会社を見つける。</li>
+</ul>
+
+
+<p>1.3 バージョンでは IE 8 用のハックを積極的に削除していくことはないようで、1.2.x バージョンのアプリケーションが IE 8 で動作しているのであれば、大部分は 1.3 でも動作するのではないかということ。ただし、1.3 では IE 8 向けのテストもバグフィックスも実施しなくなると。</p>
+
+<!-- more -->
+
+
+<h2>非推奨（deprecated）の API を削除</h2>
+
+<p><a href="https://github.com/angular/angular.js/commit/5dc35b527b3c99f6544b8cb52e93c6510d3ac577">fix($parse): deprecate promise unwrapping and make it an opt-in</a></p>
+
+<p>promise の unwrapping についてのことを指しているようで、この API のことは以前の記事『<a href="http://angularjsninja.com/blog/2013/10/26/angularjs-1.2.0-rc3-promises/">AngularJS 1.2.0-rc3 以降の Promise</a>』をご参照ください。</p>
+
+<h2>リリースバージョンの命名規約</h2>
+
+<p>odd/even versioning から、semantic versioning に切り替えるということで、以前は 1.1.x（奇数）を開発バージョン、1.0.x や 1.2.x（偶数）を安定バージョンとしてきたバージョニングを、1.3.0-beta.1、1.3.0-beta.2 などを経て、安定版 1.3.0 リリースとするバージョニングになるということ。</p>
+
+<h2>1.3 新機能についてコメントを！</h2>
+
+<p>1月2日まで 1.3 での<a href="https://github.com/angular/angular.js/issues?milestone=32&amp;page=1&amp;state=open">新機能</a>についてのコメントを受け付けているようです。&#8221;+1&#8221; とコメントすれば投票したことに。</p>
+
+<h2>1.3（ベータ）リリースはいつ頃か</h2>
+
+<p>1.3 の最初のベータバージョンが 1 月で、その後 1 〜 2 週間間隔でリリース。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS のデータバインドを支える $watch]]></title>
@@ -2231,59 +2282,6 @@ angular.module('Ninja', [])
 <p>jQuery メインに実装してきたサイトで AngularJS を部分的に使うということも可能で、そういう場合には AngularJS の適用範囲（scope）を決めるルート的な directive の<code>ng-app</code>を<code>html</code>や<code>body</code>要素ではなく、必要最小限の範囲を囲う要素に対して記述する。</p>
 
 <p>jQuery で大半を実装しているようなサイトやアプリケーションで、全面的に AngularJS に書き変える決断がすぐにできない場合には、少しずつ部分的に導入して攻めていこう。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Twitter Bootstrap のモーダルをドラッグで動かしたいときは]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/"/>
-    <updated>2013-09-25T21:57:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>みんな大好き <a href="http://getbootstrap.com/2.3.2/">Twitter Bootstrap</a> の話。CSS フレームワークの枠を超え、フロントエンド開発のキングというか、デファクトですね。</p>
-
-<p>数年前のプロジェクトで <a href="http://www.blueprintcss.org">Blueprint</a> をチョイスした自分がバカみたいに、その後の Bootstrap の大流行。<a href="http://getbootstrap.com">Bootstrap 3</a> も引き続き人気を博するだろうか。</p>
-
-<p>そんな Bootstrap なんだけど、不満があるとすれば、モーダル（<a href="http://getbootstrap.com/2.3.2/javascript.html#modals">Modals</a>）を動かせないこと！ モーダルダイアログがなんでドラッグで動かないんだ！</p>
-
-<!-- more -->
-
-
-<h2>困ったときはググるでしょ</h2>
-
-<p>てことで、<code>bootstrap modal drag</code>とかでググればアッサリ答えにありつける。いつもながら Stack Overflow はすごいなあ、助かるなあと感謝しながらおもむろにページを開く。</p>
-
-<p><a href="http://stackoverflow.com/questions/12591597/twitter-bootstrap-modal-form-how-to-drag-and-drop">Twitter Bootstrap Modal Form: How to drag and drop? &ndash; Stack Overflow</a></p>
-
-<p>答えとしては、<a href="http://jqueryui.com/">jQuery UI</a> の <a href="http://jqueryui.com/draggable/">Draggable</a> を使えということ。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#myModal&quot;</span><span class="p">).</span><span class="nx">draggable</span><span class="p">({</span>
-</span><span class='line'>    <span class="nx">handle</span><span class="o">:</span> <span class="s2">&quot;.modal-header&quot;</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>そんだけー。</p>
-
-<p>じゃなかった…。そう言えば、このままだとセレクタ<code>.modal.fade</code>と<code>.modal.fade.in</code>に定義されている<code>top</code>と<code>transition</code>のプロパティ（モーダルが上から滑り降りてくるトランジション）による影響で、縦方向のドラッグがの〜んびりした動きになって違和感が残る。</p>
-
-<p>なので、上から滑り降りてくるトランジションはあきらめて、class 属性から<code>fade</code>を消してしまうのがいいと思う。</p>
-
-<p>jQuery UI については、すべての機能はいらないだろうから、Draggable だけとか、必要な機能だけ選択してダウンロードしましょう。</p>
-
-<h2>UI Bootstrap と AngularStrap</h2>
-
-<p>ちょっと脱線して、AngularJS のことも。</p>
-
-<p>AngularJS と Bootstrap を併用するときは <a href="http://angular-ui.github.io/bootstrap/">UI Bootstrap</a> か、<a href="http://mgcrea.github.io/angular-strap/">AngularStrap</a> を使うと、Bootstrap のコンポーネントが AngularJS の directive として定義されているのでとてもラク。自分で記述するコードがすごく少なくなって快適。</p>
-
-<p>ただ、この UI Bootstrap と AngularStrap は、それぞれいいとこも微妙なとこもあるので両方を使いたいと欲張っちゃうこともある。すると今回のメインである Modal でエラーが…。</p>
-
-<p>Modal に限れば UI Bootstrap のほうが優れてるので、AngularStrap の $modal directive コードを削除しちゃいましょう。</p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,226 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>AngularJS 1.3 では IE 8 がサポートされない - AngularJS Ninja</title>
+	<meta name="author" content="Akihito Tamagawa">
+
+	
+	<meta name="description" content="AngularJS 1.3 では IE 8 がサポートされない AngularJS 1.3 についての記事『AngularJS 1.3: a new release approaches』が公式ブログのほうに上がりました。 日本でのエンタープライズ（業務系）なんかでは、まだまだ IE 8 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="AngularJS Ninja" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://angularjsninja.com/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("tama3bb@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">AngularJS Ninja</a></h1>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+
+<section class="aboutme">
+  <p>
+    AngularJS Ninja Blog
+  </p>
+</section>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/tama3bb" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/tama3bb" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">AngularJS 1.3 では IE 8 がサポートされない</h1>
+	<div class="entry-content" itemprop="articleBody"><hr />
+
+<p>AngularJS 1.3 についての記事『<a href="http://blog.angularjs.org/2013/12/angularjs-13-new-release-approaches.html">AngularJS 1.3: a new release approaches</a>』が公式ブログのほうに上がりました。</p>
+
+<p>日本でのエンタープライズ（業務系）なんかでは、まだまだ IE 8 は当たり前のようにサポート対象のブラウザになっているところが多いと思うので、ちょっと大きなニュースですね。</p>
+
+<p>なお、AngularJS 1.2.x 以前を IE 8 で動作させるには、過去記事『<a href="/blog/2013/09/11/angularjs-ie-compatibility/">AngularJS を古い IE に対応させるには</a>』をご参照ください。</p>
+
+<h2>AngularJS 1.3 は　IE 8 をサポートしない</h2>
+
+<p>サポートをやめる理由としては、IE 8 で動作させるためのコードのせいで性能に悪影響があるし、すでに IE 8 ユーザは全体の数パーセント程度だし、Microsoft による Windows XP のサポートも 2014年4月に終わるし、とのこと。動作性能の向上はもちろん、機能を追加していくのも速くなると。</p>
+
+<p>どうしても IE 8 で動作させ続けたい場合は：</p>
+
+<ul>
+<li>AngularJS 1.2.x を使い続ける</li>
+<li>AngularJS 1.3 をトライする</li>
+<li>IE 8 で動作する AngularJS を商用サポートとして提供する会社を見つける。</li>
+</ul>
+
+
+<p>1.3 バージョンでは IE 8 用のハックを積極的に削除していくことはないようで、1.2.x バージョンのアプリケーションが IE 8 で動作しているのであれば、大部分は 1.3 でも動作するのではないかということ。ただし、1.3 では IE 8 向けのテストもバグフィックスも実施しなくなると。</p>
+
+<!-- more -->
+
+
+<h2>非推奨（deprecated）の API を削除</h2>
+
+<p><a href="https://github.com/angular/angular.js/commit/5dc35b527b3c99f6544b8cb52e93c6510d3ac577">fix($parse): deprecate promise unwrapping and make it an opt-in</a></p>
+
+<p>promise の unwrapping についてのことを指しているようで、この API のことは以前の記事『<a href="/blog/2013/10/26/angularjs-1.2.0-rc3-promises/">AngularJS 1.2.0-rc3 以降の Promise</a>』をご参照ください。</p>
+
+<h2>リリースバージョンの命名規約</h2>
+
+<p>odd/even versioning から、semantic versioning に切り替えるということで、以前は 1.1.x（奇数）を開発バージョン、1.0.x や 1.2.x（偶数）を安定バージョンとしてきたバージョニングを、1.3.0-beta.1、1.3.0-beta.2 などを経て、安定版 1.3.0 リリースとするバージョニングになるということ。</p>
+
+<h2>1.3 新機能についてコメントを！</h2>
+
+<p>1月2日まで 1.3 での<a href="https://github.com/angular/angular.js/issues?milestone=32&amp;page=1&amp;state=open">新機能</a>についてのコメントを受け付けているようです。&#8221;+1&#8221; とコメントすれば投票したことに。</p>
+
+<h2>1.3（ベータ）リリースはいつ頃か</h2>
+
+<p>1.3 の最初のベータバージョンが 1 月で、その後 1 〜 2 週間間隔でリリース。</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	<a href="http://b.hatena.ne.jp/entry/http://angularjsninja.com/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count" style="width: 108px"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<!-- <a class="addthis_counter addthis_pill_style"></a> -->
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Akihito Tamagawa -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-15091936-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</body>
+</html>
