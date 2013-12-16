@@ -9,8 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/11/19 AngularJS, directive AngularJSでHTMLを分割するのにお手軽なng-include AngularJS で HTML を分割するのにお手軽な ng-include 1
-&lt;div ng-include=&quot;&#39;partials &hellip;">
+	<meta name="description" content="2013/11/20 AngularJS, directive AngularJS Directive なんてこわくない（その１） 独自（カスタム）directive の話は複雑でボリュームがあるので、何回かに分けることにして、まずは前回の ng-include の流れを受けて、とりあえず &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +94,70 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-20T12:08:23+09:00" data-updated="true" itemprop="datePublished">2013/11/20</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/11/20/angularjs-custom-directives/" itemprop="url">AngularJS Directive なんてこわくない（その１）</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<p>独自（カスタム）directive の話は複雑でボリュームがあるので、何回かに分けることにして、まずは<a href="http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude/">前回の ng-include</a> の流れを受けて、とりあえず HTML を分割することから始めてみよう。</p>
+
+<h2>単にテンプレート部分を Directive にするには</h2>
+
+<p>繰り返し出てくるコード部分を、テンプレートとして directive で宣言するサンプルコード。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ninja-customer</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;Ninja&#39;</span><span class="p">,</span> <span class="p">[])</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;ninjaCustomer&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;partials/ninja-customer.html&#39;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>  <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんだけなので、まあどってことない。これだけなら ng-include のほうがラクでいいやんってことになるかな。でもまあ、とりあえずこんだけしか書かなくても directive として動作するのかってことを見ておく。</p>
+
+
+		
+		<a href="/blog/2013/11/20/angularjs-custom-directives/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -585,50 +648,6 @@ angular.module('Ninja', ['ui.bootstrap'])
 
 		
 		<a href="/blog/2013/10/05/jquery-to-angularjs/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-05T20:32:00+09:00" data-updated="true" itemprop="datePublished">2013/10/05</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/10/05/angularjs-to-jquery/" itemprop="url">AngularJS と jQuery</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<p>AngularJS と jQuery は併用できるのか？</p>
-
-<ul>
-<li>AngularJS と jQuery は併用可能</li>
-<li>jQuery メインのサイトで AngularJS を部分的に使用可能</li>
-</ul>
-
-
-
-		
-		<a href="/blog/2013/10/05/angularjs-to-jquery/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

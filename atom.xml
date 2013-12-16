@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-15T16:59:53+09:00</updated>
+  <updated>2013-12-17T00:01:21+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,161 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[$watchと$watchの中間的な位置付けの$watchCollection]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/17/angularjs-watchcollection/"/>
+    <updated>2013-12-17T00:01:26+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/17/angularjs-watchcollection</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>$watchCollection</h2>
+
+<p><a href="">AngularJSのデータバインドを支える$watch</a> で見たように、$watch ではオブジェクトの参照を監視するか、またはオブジェクトの中身まですべて監視（deep watch）するかを切り替えることができる。</p>
+
+<p>その 2 種類の $watch の中間に位置付けられる <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watchcollection">$watchCollection</a> というのもあり、1 階層分だけを監視（shallow watch）してくれる。</p>
+
+<h2>配列の場合</h2>
+
+<p>配列の場合に $watch、$watchCollection、および $watch (deep watch) がそれぞれどのように異なるのかを見ていく。</p>
+
+<!-- more -->
+
+
+<h3>$watch</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">results</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{...},</span> <span class="p">{...},</span> <span class="p">...</span> <span class="p">];</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{...});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>$watch の場合、参照が変更されたときだけリスナーが動作する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>  <span class="c1">// 動かない</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({...});</span>  <span class="c1">// 動かない</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span> <span class="o">=</span> <span class="p">[...];</span>  <span class="c1">// 動く</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>$watchCollection</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">results</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{...},</span> <span class="p">{...},</span> <span class="p">...</span> <span class="p">];</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watchCollection</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{...});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>$watchCollection の場合、監視している配列に追加、削除などをした場合にも動作する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>  <span class="c1">// 動かない</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({...});</span>  <span class="c1">// 動く</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span> <span class="o">=</span> <span class="p">[...];</span>  <span class="c1">// 動く</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>$watch（deep watch）</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">results</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{...},</span> <span class="p">{...},</span> <span class="p">...</span> <span class="p">];</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{...},</span> <span class="kc">true</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>$watch (deep watch) の場合、なにかしらあれば動作する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>  <span class="c1">// 動く</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({...});</span>  <span class="c1">// 動く</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span> <span class="o">=</span> <span class="p">[...];</span>  <span class="c1">// 動く</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>普通のオブジェクトの場合</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">images</span><span class="o">:</span> <span class="p">[...]</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watchCollection</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{...});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>普通のオブジェクトを対象とした $watchCollection の動作は、監視しているオブジェクトのプロパティ値の変更や、プロパティの追加・削除でも動作する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">user</span><span class="p">.</span><span class="nx">images</span><span class="p">.</span><span class="nx">push</span><span class="p">(...);</span>  <span class="c1">// 動かない</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;known&#39;</span><span class="p">;</span>  <span class="c1">// 動く</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">user</span><span class="p">.</span><span class="nx">newProperty</span> <span class="o">=</span> <span class="s1">&#39;new prop!&#39;</span><span class="p">;</span>  <span class="c1">// 動く</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">user</span> <span class="o">=</span> <span class="p">{...};</span>  <span class="c1">// 動く</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS 1.3 では IE 8 がサポートされない]]></title>
@@ -2220,44 +2375,6 @@ angular.module('Ninja', [])
 
 <ul>
 <li>jQuery と AngularJS は併用可能</li>
-<li>jQuery メインのサイトで AngularJS を部分的に使用可能</li>
-</ul>
-
-
-<!-- more -->
-
-
-<h2>AngularJS と jQuery は併用可能</h2>
-
-<p>AngularJS より先に jQuery を読み込ませていればその jQuery が利用される。jQuery を読み込ませていなければ AngularJS が内蔵している jqLite（jQuery の API 互換サブセット）の実装が利用される。</p>
-
-<p>jqLite が実装している jQuery 互換の DOM 操作関連の API は、<a href="http://docs.angularjs.org/api/angular.element">AngularJS: element</a> で確認できるが、DOM 操作系の主要なメソッドは実装されている。</p>
-
-<p>AngularJS 1.2 では、<code>bind()</code>/<code>unbind()</code>でなく<code>on()</code>/<code>off()</code>が利用されるため、jQuery のバージョンは 1.7.1 以降とする必要がある。</p>
-
-<p>AngularJS で jQuery の DOM 操作を実装する場合、controller では要素の追加・削除や表示・非表示などの DOM 操作を実装せずに、AngularJS にビルトイン（標準）の directive を利用するか、自作の directive で DOM 操作を実装しよう。</p>
-
-<p><code>ng-repeat</code>、<code>ng-show</code>、<code>ng-class</code>など、jQuery で実装していた処理を代替できる directive が多数存在するので、積極的に利用してコード量を減らそう。</p>
-
-<h2>jQuery メインのサイトで AngularJS を部分的に使用可能</h2>
-
-<p>jQuery メインに実装してきたサイトで AngularJS を部分的に使うということも可能で、そういう場合には AngularJS の適用範囲（scope）を決めるルート的な directive の<code>ng-app</code>を<code>html</code>や<code>body</code>要素ではなく、必要最小限の範囲を囲う要素に対して記述する。</p>
-
-<p>jQuery で大半を実装しているようなサイトやアプリケーションで、全面的に AngularJS に書き変える決断がすぐにできない場合には、少しずつ部分的に導入して攻めていこう。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS と jQuery]]></title>
-    <link href="http://angularjsninja.com/blog/2013/10/05/angularjs-to-jquery/"/>
-    <updated>2013-10-05T20:32:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/10/05/angularjs-to-jquery</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>AngularJS と jQuery は併用できるのか？</p>
-
-<ul>
-<li>AngularJS と jQuery は併用可能</li>
 <li>jQuery メインのサイトで AngularJS を部分的に使用可能</li>
 </ul>
 

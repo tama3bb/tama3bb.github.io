@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-15T16:59:53+09:00</updated>
+  <updated>2013-12-17T00:01:21+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,119 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[$watchと$watchの中間的な位置付けの$watchCollection]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/17/angularjs-watchcollection/"/>
+    <updated>2013-12-17T00:01:26+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/17/angularjs-watchcollection</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>$watchCollection</h2>
+
+<p><a href="">AngularJSのデータバインドを支える$watch</a> で見たように、$watch ではオブジェクトの参照を監視するか、またはオブジェクトの中身まですべて監視（deep watch）するかを切り替えることができる。</p>
+
+<p>その 2 種類の $watch の中間に位置付けられる <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watchcollection">$watchCollection</a> というのもあり、1 階層分だけを監視（shallow watch）してくれる。</p>
+
+<h2>配列の場合</h2>
+
+<p>配列の場合に $watch、$watchCollection、および $watch (deep watch) がそれぞれどのように異なるのかを見ていく。</p>
+
+<!-- more -->
+
+
+<h3>$watch</h3>
+
+<p><code>javascript
+$scope.results = [ {...}, {...}, ... ];
+$scope.$watch('results', function() {...});
+</code></p>
+
+<p>$watch の場合、参照が変更されたときだけリスナーが動作する。</p>
+
+<p><code>javascript
+results[0].title = '';  // 動かない
+</code></p>
+
+<p><code>javascript
+results.push({...});  // 動かない
+</code></p>
+
+<p><code>javascript
+results = [...];  // 動く
+</code></p>
+
+<h3>$watchCollection</h3>
+
+<p><code>javascript
+$scope.results = [ {...}, {...}, ... ];
+$scope.$watchCollection('results', function() {...});
+</code></p>
+
+<p>$watchCollection の場合、監視している配列に追加、削除などをした場合にも動作する。</p>
+
+<p><code>javascript
+results[0].title = '';  // 動かない
+</code></p>
+
+<p><code>javascript
+results.push({...});  // 動く
+</code></p>
+
+<p><code>javascript
+results = [...];  // 動く
+</code></p>
+
+<h3>$watch（deep watch）</h3>
+
+<p><code>javascript
+$scope.results = [ {...}, {...}, ... ];
+$scope.$watch('results', function() {...}, true);
+</code></p>
+
+<p>$watch (deep watch) の場合、なにかしらあれば動作する。</p>
+
+<p><code>javascript
+results[0].title = '';  // 動く
+</code></p>
+
+<p><code>javascript
+results.push({...});  // 動く
+</code></p>
+
+<p><code>javascript
+results = [...];  // 動く
+</code></p>
+
+<h2>普通のオブジェクトの場合</h2>
+
+<p><code>javascript
+$scope.user = {
+  name: 'unknown',
+  images: [...]
+};
+$scope.$watchCollection('user', function() {...});
+</code></p>
+
+<p>普通のオブジェクトを対象とした $watchCollection の動作は、監視しているオブジェクトのプロパティ値の変更や、プロパティの追加・削除でも動作する。</p>
+
+<p><code>javascript
+user.images.push(...);  // 動かない
+</code></p>
+
+<p><code>javascript
+user.name = 'known';  // 動く
+</code></p>
+
+<p><code>javascript
+user.newProperty = 'new prop!';  // 動く
+</code></p>
+
+<p><code>javascript
+user = {...};  // 動く
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS 1.3 では IE 8 がサポートされない]]></title>
@@ -409,62 +522,6 @@ angular.module('app', [ 'ngAnimate' ])
 <p>最後に、<a href="https://daneden.me/animate/">animate.css</a> を AngularJS 1.2 で利用できるようにするドライバーモジュール <a href="https://github.com/yearofmoo/ngAnimate-animate.css">ngAnimate-animate.css</a> を紹介。</p>
 
 <p>animate.css とこのモジュールを使えば、class 属性に <code>dn-fade</code> と記述するだけでフェードのアニメーションを利用できるようになる。その他いろいろなアニメーションも class 属性に指定するだけで試せる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ObjectでもArrayでも回せるangular.forEach]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/06/angular-foreach/"/>
-    <updated>2013-12-06T13:55:45+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/06/angular-foreach</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>angular.forEach</h2>
-
-<p>AngularJS 標準の <a href="http://docs.angularjs.org/api/ng#function">Global API</a> から、<a href="http://docs.angularjs.org/api/angular.forEach">angular.forEach</a> の紹介。</p>
-
-<p>angular.forEach は、Object でも Array でも回してくれる。</p>
-
-<h2>angular.forEach(Object, Function)</h2>
-
-<p><code>javascript
-var user = { name: 'ninja', gender: 'unknown', weapons: [ ..., ... ] };
-angular.forEach(user, function(value, key) {
-  // ...
-});
-</code></p>
-
-<p>オブジェクトを回す場合の Iterator function の引数は value, key の順。</p>
-
-<h2>angular.forEach(Array, Function)</h2>
-
-<p><code>javascript
-var records = [ { ... }, { ... } ];
-angular.forEach(records, function(record, i) {
-  // ...
-});
-</code></p>
-
-<p>配列を回す場合の Iterator function は第１引数が配列の中身で、第２引数が配列インデックスとなる。</p>
-
-<!-- more -->
-
-
-<h2>context の指定</h2>
-
-<p>第３引数に Iteration function での context (this) を指定できる。</p>
-
-<p>以下、公式サイトの <a href="http://docs.angularjs.org/api/angular.forEach">angular.forEach</a> ページに掲載されているコード。</p>
-
-<p><code>javascript
-var values = {name: 'misko', gender: 'male'};
-var log = [];
-angular.forEach(values, function(value, key) {
-  this.push(key + ': ' + value);
-}, log);
-</code></p>
-
-<p>この例だと、第３引数（context）に<code>log</code>を渡していて、この<code>log</code>が iterator の中での context <code>this</code>となる。</p>
 ]]></content>
   </entry>
   
