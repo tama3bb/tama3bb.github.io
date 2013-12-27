@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-27T16:55:38+09:00</updated>
+  <updated>2013-12-27T21:56:40+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -79,17 +79,37 @@
 
 <h2>$interval と setInterval を比較して $apply を理解する</h2>
 
-<p>まず、AngularJS 標準 API の $interval を利用している例として、1 秒毎に日時を更新し続けるサンプルコード。</p>
+<p>まず、AngularJS 標準 API の $interval を利用している例。これであれば 1 秒毎に日時が更新され続ける。</p>
 
-<p><a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/8/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p><code>javascript
+var update = function() {
+  $scope.now = new Date();
+};
+update();
+$interval(update, 1000);
+</code></p>
 
-<p>次に、setInterval を利用したサンプルコード。反映されない…。</p>
+<p>次に、setInterval を利用したコード。これだと 1 秒ごとには反映されない。なにかしら $digest ループが起きたタイミングで反映される。</p>
 
-<p><a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/9/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p><code>javascript
+var update = function() {
+  $scope.now = new Date();
+};
+update();
+setInterval(update, 1000);
+</code></p>
 
-<p>最後に、setInterval に $apply を付けたサンプルコード。</p>
+<p>setInterval に $apply を付ければ、1 秒ごとに反映されるようになる。</p>
 
-<p><a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/2/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p><code>javascript
+var update = function() {
+  $scope.now = new Date();
+};
+update();
+setInterval(function() {
+  $scope.$apply(update);
+}, 1000);
+</code></p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-27T16:55:38+09:00</updated>
+  <updated>2013-12-27T21:56:40+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -79,17 +79,54 @@
 
 <h2>$interval と setInterval を比較して $apply を理解する</h2>
 
-<p>まず、AngularJS 標準 API の $interval を利用している例として、1 秒毎に日時を更新し続けるサンプルコード。</p>
+<p>まず、AngularJS 標準 API の $interval を利用している例。これであれば 1 秒毎に日時が更新され続ける。</p>
 
-<p><a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/8/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">update</span><span class="p">();</span>
+</span><span class='line'><span class="nx">$interval</span><span class="p">(</span><span class="nx">update</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>次に、setInterval を利用したサンプルコード。反映されない…。</p>
 
-<p><a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/9/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p>次に、setInterval を利用したコード。これだと 1 秒ごとには反映されない。なにかしら $digest ループが起きたタイミングで反映される。</p>
 
-<p>最後に、setInterval に $apply を付けたサンプルコード。</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">update</span><span class="p">();</span>
+</span><span class='line'><span class="nx">setInterval</span><span class="p">(</span><span class="nx">update</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p><a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/2/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>setInterval に $apply を付ければ、1 秒ごとに反映されるようになる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">update</span><span class="p">();</span>
+</span><span class='line'><span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">$apply</span><span class="p">(</span><span class="nx">update</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
