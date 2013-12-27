@@ -40,14 +40,34 @@ AngularJS と無関係なところ（jQuery など）で XHR 通信して受け�
 
 ## $interval と setInterval を比較して $apply を理解する
 
-まず、AngularJS 標準 API の $interval を利用している例として、1 秒毎に日時を更新し続けるサンプルコード。
+まず、AngularJS 標準 API の $interval を利用している例。これであれば 1 秒毎に日時が更新され続ける。
 
-<a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/8/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
+``` javascript
+var update = function() {
+  $scope.now = new Date();
+};
+update();
+$interval(update, 1000);
+```
 
-次に、setInterval を利用したサンプルコード。反映されない…。
+次に、setInterval を利用したコード。これだと 1 秒ごとには反映されない。なにかしら $digest ループが起きたタイミングで反映される。
 
-<a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/9/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
+``` javascript
+var update = function() {
+  $scope.now = new Date();
+};
+update();
+setInterval(update, 1000);
+```
 
-最後に、setInterval に $apply を付けたサンプルコード。
+setInterval に $apply を付ければ、1 秒ごとに反映されるようになる。
 
-<a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/2/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
+``` javascript
+var update = function() {
+  $scope.now = new Date();
+};
+update();
+setInterval(function() {
+  $scope.$apply(update);
+}, 1000);
+```
