@@ -9,8 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/10/05 AngularJS, jQuery jQuery と AngularJS jQuery と AngularJS は併用できるのか？ jQuery と AngularJS は併用可能
-jQuery メインのサイトで AngularJS を部分的に使用可能 Read on & &hellip;">
+	<meta name="description" content="2013/10/19 AngularJS, Bootstrap AngularJS 1.2.0-rc2 で Typeahead が動かない AngularJS で UI Bootstrap の Typeahead が動かない AngularJS 1.2.0 の rc2 にした途端、UI &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +94,51 @@ jQuery メインのサイトで AngularJS を部分的に使用可能 Read on & 
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-19T17:42:00+09:00" data-updated="true" itemprop="datePublished">2013/10/19</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/bootstrap/'>Bootstrap</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/" itemprop="url">AngularJS 1.2.0-rc2 で Typeahead が動かない</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>AngularJS で UI Bootstrap の Typeahead が動かない</h2>
+
+<p>AngularJS 1.2.0 の rc2 にした途端、UI Bootstrap (0.6.0) の Typeahead (Autocomplete みたいなやつ) が動かなくなった。</p>
+
+<p>仕様変更なのかバグなのかわからず、とりあえず<code>ui-bootstrap-tpls-0.6.0.js</code>のコードを見たりしながらも AngularJS か UI Bootstrap のほうでバグ修正してくんないかなーと期待＆様子見していたところ、AngularJS 1.2.0 の rc3 では正常に動作するようになったので一件落着。</p>
+
+<p>ちなみに、rc2 でのエラーは、<code>matches is undefined</code>というもの。</p>
+
+<p>Stack Overflow で関連する記事は、<a href="http://stackoverflow.com/questions/18764023/angularjs-1-2-0-bootstrap-ui-0-6-0-bootstrap3-bis2-typeahead/19377002#19377002">AngularJS 1.2.0 Bootstrap UI 0.6.0 (bootstrap3_bis2) Typeahead</a> かな。rc2 では、<code>promise</code>絡みの実装に問題があったみたいだ。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -466,52 +510,6 @@ jQuery メインのサイトで AngularJS を部分的に使用可能 Read on & 
 
 		
 		<a href="/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-07T23:58:00+09:00" data-updated="true" itemprop="datePublished">2013/09/07</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/09/07/learning-angularjs/" itemprop="url">AngularJS の学習リソースまとめ</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2><img src="http://dotinstall.com/img/topbar_logo.png" alt="ドットインストール" /></h2>
-
-<p>なにはともあれドットインストール。最強の動画学習サイト。</p>
-
-<p><a href="http://dotinstall.com/lessons/basic_angularjs">AngularJS入門 (全12回) &ndash; プログラミングならドットインストール</a></p>
-
-<p>動画学習でオススメなのは、動画の再生速度を 1.5 倍速か 2 倍速にすること。時は金なり。</p>
-
-<p>ドットインストールは初心者向けの内容なので、今後は中級者向けの動画も提供されていくことを期待！</p>
-
-
-		
-		<a href="/blog/2013/09/07/learning-angularjs/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

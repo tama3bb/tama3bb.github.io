@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/12/20 AngularJS AngularJSのスゴ本が今だけ安い！ Mastering Web Application Development with AngularJS 『Mastering Web Application Development with AngularJS &hellip;">
+	<meta name="description" content="2013/12/27 AngularJS, scope AngularJS のデータバインドを支える $apply データバインドが効かない？！ AngualrJS を使っていて楽しいのは超ラクチンなデータバインド。なのに、そのデータバインドで以下のような困ったことに遭遇しているとしたら、それは &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,54 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-27T16:19:50+09:00" data-updated="true" itemprop="datePublished">2013/12/27</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/scope/'>scope</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/27/angularjs-apply/" itemprop="url">AngularJS のデータバインドを支える $apply</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>データバインドが効かない？！</h2>
+
+<p>AngualrJS を使っていて楽しいのは超ラクチンなデータバインド。なのに、そのデータバインドで以下のような困ったことに遭遇しているとしたら、それは <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$apply">$apply</a> を学ぶときが来ているということ。</p>
+
+<ul>
+<li>データバインドが効かないぞ？！</li>
+<li>データの反映が次のイベントまで遅れてる気がする？？</li>
+</ul>
+
+
+<p>こういうときは $apply の出番だ。$apply を使う必要があるケースというのは、ざくっと言うと AngularJS が知りえないところでイベントが起こっているとき。$apply で AngularJS に変化が起きていることを伝え、後のことは任せることができる。</p>
+
+
+		
+		<a href="/blog/2013/12/27/angularjs-apply/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -794,105 +842,6 @@
 
 		
 		<a href="/blog/2013/11/29/angularjs-custom-directives/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-27T12:02:43+09:00" data-updated="true" itemprop="datePublished">2013/11/27</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/11/27/angularjs-custom-directives/" itemprop="url">AngularJS Directive なんてこわくない（その３）</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>replace, transclude, scope</h2>
-
-<p><a href="/blog/2013/11/20/angularjs-custom-directives/">前々回</a>、<a href="/blog/2013/11/22/angularjs-custom-directives/">前回</a>に引き続き、今回もカスタム directive について。</p>
-
-<p>今回のサンプルコードは、UI Bootstrap の <a href="https://github.com/angular-ui/bootstrap/tree/master/src/alert">Alert</a> からで、<code>replace</code> <code>transclude</code> <code>scope</code>オプションについて見ていく。</p>
-
-<figure class='code'><figcaption><span>alert.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s2">&quot;ui.bootstrap.alert&quot;</span><span class="p">,</span> <span class="p">[]).</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">restrict</span><span class="o">:</span><span class="s1">&#39;EA&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">templateUrl</span><span class="o">:</span><span class="s1">&#39;template/alert/alert.html&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">transclude</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">replace</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">scope</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span>
-</span><span class='line'>      <span class="nx">close</span><span class="o">:</span> <span class="s1">&#39;&amp;&#39;</span>
-</span><span class='line'>    <span class="p">},</span>
-</span><span class='line'>    <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">iElement</span><span class="p">,</span> <span class="nx">iAttrs</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">scope</span><span class="p">.</span><span class="nx">closeable</span> <span class="o">=</span> <span class="s2">&quot;close&quot;</span> <span class="k">in</span> <span class="nx">iAttrs</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">};</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span>template/alert/alert.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;alert&quot;</span> <span class="na">ng-class=</span><span class="s">&quot;type &amp;&amp; &#39;alert-&#39; + type&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">ng-show=</span><span class="s">&quot;closeable&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;close&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;close()&quot;</span><span class="nt">&gt;</span><span class="ni">&amp;times;</span><span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">ng-transclude</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;alert</span> <span class="na">ng-repeat=</span><span class="s">&quot;alert in alerts&quot;</span> <span class="na">type=</span><span class="s">&quot;alert.type&quot;</span> <span class="na">close=</span><span class="s">&quot;closeAlert($index)&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  {{alert.msg}}
-</span><span class='line'><span class="nt">&lt;/alert&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-
-		
-		<a href="/blog/2013/11/27/angularjs-custom-directives/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

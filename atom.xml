@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-20T10:22:16+09:00</updated>
+  <updated>2013-12-27T16:55:38+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,86 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS のデータバインドを支える $apply]]></title>
+    <link href="http://angularjsninja.com/blog/2013/12/27/angularjs-apply/"/>
+    <updated>2013-12-27T16:19:50+09:00</updated>
+    <id>http://angularjsninja.com/blog/2013/12/27/angularjs-apply</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>データバインドが効かない？！</h2>
+
+<p>AngualrJS を使っていて楽しいのは超ラクチンなデータバインド。なのに、そのデータバインドで以下のような困ったことに遭遇しているとしたら、それは <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$apply">$apply</a> を学ぶときが来ているということ。</p>
+
+<ul>
+<li>データバインドが効かないぞ？！</li>
+<li>データの反映が次のイベントまで遅れてる気がする？？</li>
+</ul>
+
+
+<p>こういうときは $apply の出番だ。$apply を使う必要があるケースというのは、ざくっと言うと AngularJS が知りえないところでイベントが起こっているとき。$apply で AngularJS に変化が起きていることを伝え、後のことは任せることができる。</p>
+
+<!-- more -->
+
+
+<h2>$apply が必要ないケース</h2>
+
+<p>整合性を維持するための dirty checking（$watch）処理は、$digest ループ（サイクル）でまとめて実行される。この $digest ループが始まるきっかけは、『<a href="http://angularjsninja.com/blog/2013/12/13/angularjs-watch/">AngularJS のデータバインドを支える $watch</a>』 のページにも掲載した以下に示す各種イベント。</p>
+
+<table>
+<thead>
+<tr>
+<th>イベント </th>
+<th> 概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ナビゲーション </td>
+<td> ブラウザの location 変更時</td>
+</tr>
+<tr>
+<td>ネットワーク </td>
+<td> $http, $resource レスポンス受信時</td>
+</tr>
+<tr>
+<td>DOM イベント </td>
+<td> ng-click, ng-mouseover などの実行時</td>
+</tr>
+<tr>
+<td>タイマー </td>
+<td> $timeout によるタイマー処理の実行時</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>こういった処理によってデータや UI に変更があった場合のことは、$apply を自分で記述することなく AngularJS におまかせできる。こうしたイベントでは、内部的に $apply が使われている。</p>
+
+<h2>$apply が必要なケース</h2>
+
+<p>じゃあ、どういうときには $apply を自分で記述する必要があるのか。それは、AngularJS 組み込みの services（$http や $timeout など）や directives（ng-click など）を使わない（使えない）とき、ということ。</p>
+
+<p>AngularJS と無関係なところ（jQuery など）で XHR 通信して受け取ったデータをモデルに反映した場合や、あるいは datepicker などのプラグインからモデルに値を反映した場合は、そのモデルと UI が ng-model や ng-bind などでバインドされていたとしても、それだけでは即時には反映されない。反映されるのを、次の $digest サイクルが起こるまでただ待つことになる。</p>
+
+<p>この $digest サイクルを起こす役割が $apply である。</p>
+
+<h2>$interval と setInterval を比較して $apply を理解する</h2>
+
+<p>まず、AngularJS 標準 API の $interval を利用している例として、1 秒毎に日時を更新し続けるサンプルコード。</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/8/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>次に、setInterval を利用したサンプルコード。反映されない…。</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/9/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>最後に、setInterval に $apply を付けたサンプルコード。</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/OkuhUXud/2/embed?js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSのスゴ本が今だけ安い！]]></title>
@@ -2367,25 +2447,6 @@ angular.module('Ninja', [])
 <p><a href="https://github.com/angular/angular.js/issues/4158">Automatic unwrapping of promises by $parse severely limits its usefulness · Issue #4158 · angular/angular.js</a></p>
 
 <p>この変更によって、前回のエントリーで書いた Angular UI の Typeahead も動作するようになったということ。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS 1.2.0-rc2 で Typeahead が動かない]]></title>
-    <link href="http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/"/>
-    <updated>2013-10-19T17:42:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS で UI Bootstrap の Typeahead が動かない</h2>
-
-<p>AngularJS 1.2.0 の rc2 にした途端、UI Bootstrap (0.6.0) の Typeahead (Autocomplete みたいなやつ) が動かなくなった。</p>
-
-<p>仕様変更なのかバグなのかわからず、とりあえず<code>ui-bootstrap-tpls-0.6.0.js</code>のコードを見たりしながらも AngularJS か UI Bootstrap のほうでバグ修正してくんないかなーと期待＆様子見していたところ、AngularJS 1.2.0 の rc3 では正常に動作するようになったので一件落着。</p>
-
-<p>ちなみに、rc2 でのエラーは、<code>matches is undefined</code>というもの。</p>
-
-<p>Stack Overflow で関連する記事は、<a href="http://stackoverflow.com/questions/18764023/angularjs-1-2-0-bootstrap-ui-0-6-0-bootstrap3-bis2-typeahead/19377002#19377002">AngularJS 1.2.0 Bootstrap UI 0.6.0 (bootstrap3_bis2) Typeahead</a> かな。rc2 では、<code>promise</code>絡みの実装に問題があったみたいだ。</p>
 ]]></content>
   </entry>
   
