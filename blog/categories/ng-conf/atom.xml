@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ng-conf | AngularJS Ninja]]></title>
+  <link href="http://angularjsninja.com/blog/categories/ng-conf/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com/"/>
+  <updated>2014-01-17T14:32:03+09:00</updated>
+  <id>http://angularjsninja.com/</id>
+  <author>
+    <name><![CDATA[Akihito Tamagawa]]></name>
+    <email><![CDATA[tama3bb@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2014）Jan. 16 動画まとめ]]></title>
+    <link href="http://angularjsninja.com/blog/2014/01/17/ng-conf-2014/"/>
+    <updated>2014-01-17T14:12:50+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/01/17/ng-conf-2014</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>ng-conf 2014 &ndash; The World&rsquo;s First Angular Conference in Salt Lake City, Utah</h2>
+
+<p>Angular カンファレンス <a href="http://ng-conf.org">ng-conf 2014</a> が、アメリカはユタ州ソルトレイクシティで開催中です。</p>
+
+<p>YouTube の <a href="http://www.youtube.com/user/ngconfvideos">ng-conf 2014 チャンネル</a> のほうに動画はまとめてアップロードされていますが、このエントリーでは当日のスケジュールどおりに並べています。</p>
+
+<h3>Keynote</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/r1A1VR0ibIQ" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Miško Hevery &amp; Brad Green</p>
+
+<!-- more -->
+
+
+<h3>AngularJS in 20-ish Minutes</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/tnXO-i7944M" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Dan Wahlin</p>
+
+<h3>Writing a Massive Angular App</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/r1A1VR0ibIQ" frameborder="0" allowfullscreen></iframe>
+
+
+<p>The Google Double Click Team</p>
+
+<h3>Going Postal with Angular in Promises</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/XcRdO5QVlqE" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Christian Lilley</p>
+
+<h3>Deep Dive into Custom Directives</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/UMkd0nYmLzY" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Dave Smith</p>
+
+<h3>Progressive Saving</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/JLij19xbefI" frameborder="0" allowfullscreen></iframe>
+
+
+<p>John Papa</p>
+
+<h3>Rapid Prototyping with Angular &amp; Deployd</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/JLij19xbefI" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Jeff Cross</p>
+
+<h3>Rich Data Models &amp; Angular</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/JfykD-0tpjI" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Ben Teese</p>
+
+<h3>Angular Weapon Defense</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/f62k7b753-Y" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Tom Valletta &amp; Gabe Dayley</p>
+
+<h3>Filters: Beyond OrderBy and LimitTo</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/L4FJ_kuO9Rc" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Sharon DiOrio</p>
+
+<h3>Awesome Interfaces with AngularJS Animations</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/L4FJ_kuO9Rc" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Lukas Rubbelke &amp; Matias Niemela</p>
+
+<h3>Dependency Injection</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/_OGGsf1ZXMs" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Vojta Jina</p>
+
+<h3>Angular Team Panel</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/srt3OBP2kGc" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Angular Team</p>
+]]></content>
+  </entry>
+  
+</feed>

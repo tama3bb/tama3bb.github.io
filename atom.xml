@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2013-12-27T21:56:40+09:00</updated>
+  <updated>2014-01-17T14:31:56+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,115 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2014）Jan. 16 動画まとめ]]></title>
+    <link href="http://angularjsninja.com/blog/2014/01/17/ng-conf-2014/"/>
+    <updated>2014-01-17T14:12:50+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/01/17/ng-conf-2014</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>ng-conf 2014 &ndash; The World&rsquo;s First Angular Conference in Salt Lake City, Utah</h2>
+
+<p>Angular カンファレンス <a href="http://ng-conf.org">ng-conf 2014</a> が、アメリカはユタ州ソルトレイクシティで開催中です。</p>
+
+<p>YouTube の <a href="http://www.youtube.com/user/ngconfvideos">ng-conf 2014 チャンネル</a> のほうに動画はまとめてアップロードされていますが、このエントリーでは当日のスケジュールどおりに並べています。</p>
+
+<h3>Keynote</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/r1A1VR0ibIQ" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Miško Hevery &amp; Brad Green</p>
+
+<!-- more -->
+
+
+<h3>AngularJS in 20-ish Minutes</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/tnXO-i7944M" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Dan Wahlin</p>
+
+<h3>Writing a Massive Angular App</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/r1A1VR0ibIQ" frameborder="0" allowfullscreen></iframe>
+
+
+<p>The Google Double Click Team</p>
+
+<h3>Going Postal with Angular in Promises</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/XcRdO5QVlqE" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Christian Lilley</p>
+
+<h3>Deep Dive into Custom Directives</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/UMkd0nYmLzY" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Dave Smith</p>
+
+<h3>Progressive Saving</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/JLij19xbefI" frameborder="0" allowfullscreen></iframe>
+
+
+<p>John Papa</p>
+
+<h3>Rapid Prototyping with Angular &amp; Deployd</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/JLij19xbefI" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Jeff Cross</p>
+
+<h3>Rich Data Models &amp; Angular</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/JfykD-0tpjI" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Ben Teese</p>
+
+<h3>Angular Weapon Defense</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/f62k7b753-Y" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Tom Valletta &amp; Gabe Dayley</p>
+
+<h3>Filters: Beyond OrderBy and LimitTo</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/L4FJ_kuO9Rc" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Sharon DiOrio</p>
+
+<h3>Awesome Interfaces with AngularJS Animations</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/L4FJ_kuO9Rc" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Lukas Rubbelke &amp; Matias Niemela</p>
+
+<h3>Dependency Injection</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/_OGGsf1ZXMs" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Vojta Jina</p>
+
+<h3>Angular Team Panel</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/srt3OBP2kGc" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Angular Team</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS のデータバインドを支える $apply]]></title>
@@ -2447,43 +2556,6 @@ angular.module('Ninja', [])
 <h2>区切り文字の変更は？</h2>
 
 <p>まあ、とりあえずカンマ区切りでヨシということで。ここの <a href="https://github.com/angular/angular.js/blob/v1.2.0-rc.3/src/ng/directive/input.js#L1381">value.join(&lsquo;, &rsquo;)</a> がおかしいんだろうと思いつつも、必要になるまで置いとこう。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS 1.2.0-rc3 以降の Promise]]></title>
-    <link href="http://angularjsninja.com/blog/2013/10/26/angularjs-1.2.0-rc3-promises/"/>
-    <updated>2013-10-26T14:15:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/10/26/angularjs-1.2.0-rc3-promises</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS 1.2.0-rc3 以降、Promise の扱いに注意</h2>
-
-<p>rc2 までと異なり、promise の自動アンラップ（auto unwrapping）がデフォルトで無効となり、promise を直接 $scope の変数に突っ込んでたりするとうまく動かなくなる。</p>
-
-<p>rc2 までは、promise がリターンされるとき、こんなふうに書けた。</p>
-
-<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">values</span> <span class="o">=</span> <span class="nx">NinjaService</span><span class="p">.</span><span class="nx">getValues</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>rc3 からは、こう書かないと動かない。</p>
-
-<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">NinjaService</span><span class="p">.</span><span class="nx">getValues</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">values</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">values</span> <span class="o">=</span> <span class="nx">values</span><span class="p">;</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>自動アンラップを採用しなくした理由は、この Issue でのやり取りに詳しく書かれている。</p>
-
-<p><a href="https://github.com/angular/angular.js/issues/4158">Automatic unwrapping of promises by $parse severely limits its usefulness · Issue #4158 · angular/angular.js</a></p>
-
-<p>この変更によって、前回のエントリーで書いた Angular UI の Typeahead も動作するようになったということ。</p>
 ]]></content>
   </entry>
   

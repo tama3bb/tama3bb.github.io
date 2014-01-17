@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/10/19 AngularJS, Bootstrap AngularJS 1.2.0-rc2 で Typeahead が動かない AngularJS で UI Bootstrap の Typeahead が動かない AngularJS 1.2.0 の rc2 にした途端、UI &hellip;">
+	<meta name="description" content="2013/10/26 AngularJS, service AngularJS 1.2.0-rc3 以降の Promise AngularJS 1.2.0-rc3 以降、Promise の扱いに注意 rc2 までと異なり、promise の自動アンラップ（auto unwrapping） &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,69 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-26T14:15:00+09:00" data-updated="true" itemprop="datePublished">2013/10/26</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/service/'>service</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/10/26/angularjs-1.2.0-rc3-promises/" itemprop="url">AngularJS 1.2.0-rc3 以降の Promise</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>AngularJS 1.2.0-rc3 以降、Promise の扱いに注意</h2>
+
+<p>rc2 までと異なり、promise の自動アンラップ（auto unwrapping）がデフォルトで無効となり、promise を直接 $scope の変数に突っ込んでたりするとうまく動かなくなる。</p>
+
+<p>rc2 までは、promise がリターンされるとき、こんなふうに書けた。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">values</span> <span class="o">=</span> <span class="nx">NinjaService</span><span class="p">.</span><span class="nx">getValues</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rc3 からは、こう書かないと動かない。</p>
+
+<figure class='code'><figcaption><span>controllers.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">NinjaService</span><span class="p">.</span><span class="nx">getValues</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">values</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">values</span> <span class="o">=</span> <span class="nx">values</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>自動アンラップを採用しなくした理由は、この Issue でのやり取りに詳しく書かれている。</p>
+
+<p><a href="https://github.com/angular/angular.js/issues/4158">Automatic unwrapping of promises by $parse severely limits its usefulness · Issue #4158 · angular/angular.js</a></p>
+
+<p>この変更によって、前回のエントリーで書いた Angular UI の Typeahead も動作するようになったということ。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -474,46 +537,6 @@
 
 </article>
 
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-08T20:33:00+09:00" data-updated="true" itemprop="datePublished">2013/09/08</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/" itemprop="url">AngularJS 1.2 で追加されたng-repeat-startとng-repeat-end</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<p>AngularJS 1.2 で追加された新しい directive の<code>ng-repeat-start</code>と<code>ng-repeat-end</code>を紹介。</p>
-
-<p>通常の<a href="http://docs.angularjs.org/api/ng.directive:ngRepeat"><code>ng-repeat</code></a>では実現しにくかった複数の要素にまたがった繰り返しが可能になる。</p>
-
-
-		
-		<a href="/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
 </div>
 <nav id="pagenavi">
     
@@ -526,7 +549,7 @@
 </nav></div>
 			</div>
 			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2013 - Akihito Tamagawa -
+  Copyright &copy; 2014 - Akihito Tamagawa -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
