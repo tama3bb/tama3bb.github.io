@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ng-conf | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/ng-conf/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-01-17T14:32:03+09:00</updated>
+  <updated>2014-01-17T14:46:59+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2014）Jan. 16 動画まとめ]]></title>
     <link href="http://angularjsninja.com/blog/2014/01/17/ng-conf-2014/"/>
-    <updated>2014-01-17T14:12:50+09:00</updated>
+    <updated>2014-01-17T14:32:50+09:00</updated>
     <id>http://angularjsninja.com/blog/2014/01/17/ng-conf-2014</id>
     <content type="html"><![CDATA[<hr />
 
@@ -45,7 +45,7 @@
 
 <h3>Writing a Massive Angular App</h3>
 
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/r1A1VR0ibIQ" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/62RvRQuMVyg" frameborder="0" allowfullscreen></iframe>
 
 
 <p>The Google Double Click Team</p>
@@ -73,7 +73,7 @@
 
 <h3>Rapid Prototyping with Angular &amp; Deployd</h3>
 
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/JLij19xbefI" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/0V8fQoqQLLA" frameborder="0" allowfullscreen></iframe>
 
 
 <p>Jeff Cross</p>
@@ -101,7 +101,7 @@
 
 <h3>Awesome Interfaces with AngularJS Animations</h3>
 
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/L4FJ_kuO9Rc" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/hC0MpgUoui4" frameborder="0" allowfullscreen></iframe>
 
 
 <p>Lukas Rubbelke &amp; Matias Niemela</p>
