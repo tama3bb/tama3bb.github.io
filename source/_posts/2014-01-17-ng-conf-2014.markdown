@@ -29,7 +29,7 @@ Dan Wahlin
 
 ### Writing a Massive Angular App
 
-<iframe width="560" height="315" src="//www.youtube.com/embed/r1A1VR0ibIQ" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="//www.youtube.com/embed/62RvRQuMVyg" frameborder="0" allowfullscreen></iframe>
 
 The Google Double Click Team
 
@@ -53,7 +53,7 @@ John Papa
 
 ### Rapid Prototyping with Angular & Deployd
 
-<iframe width="560" height="315" src="//www.youtube.com/embed/JLij19xbefI" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="//www.youtube.com/embed/0V8fQoqQLLA" frameborder="0" allowfullscreen></iframe>
 
 Jeff Cross
 
@@ -77,7 +77,7 @@ Sharon DiOrio
 
 ### Awesome Interfaces with AngularJS Animations
 
-<iframe width="560" height="315" src="//www.youtube.com/embed/L4FJ_kuO9Rc" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="//www.youtube.com/embed/hC0MpgUoui4" frameborder="0" allowfullscreen></iframe>
 
 Lukas Rubbelke & Matias Niemela
 
