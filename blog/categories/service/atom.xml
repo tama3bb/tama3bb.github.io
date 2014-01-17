@@ -4,7 +4,7 @@
   <title><![CDATA[Category: service | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/service/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-01-17T14:46:59+09:00</updated>
+  <updated>2014-01-17T14:48:28+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -122,9 +122,9 @@ angular.module('app', [ 'ngAnimate' ])
 
 <h2>サンプル</h2>
 
-<p>{% raw %}
+<p>
 <a class="jsbin-embed" href="http://jsbin.com/EpiHEwuK/26/embed?output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
-{% endraw %}</p>
+</p>
 
 <h2>class 属性の変化</h2>
 
