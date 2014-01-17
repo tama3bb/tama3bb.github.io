@@ -1,0 +1,94 @@
+---
+layout: post
+title: "Angular カンファレンス（ng-conf 2014）Jan. 16 動画まとめ"
+date: 2014-01-17 14:32:50 +0900
+comments: true
+categories: [AngularJS, ng-conf]
+---
+---
+
+## ng-conf 2014 - The World's First Angular Conference in Salt Lake City, Utah
+
+Angular カンファレンス [ng-conf 2014](http://ng-conf.org) が、アメリカはユタ州ソルトレイクシティで開催中です。 
+
+YouTube の [ng-conf 2014 チャンネル](http://www.youtube.com/user/ngconfvideos) のほうに動画はまとめてアップロードされていますが、このエントリーでは当日のスケジュールどおりに並べています。
+
+### Keynote
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/r1A1VR0ibIQ" frameborder="0" allowfullscreen></iframe>
+
+Miško Hevery & Brad Green
+
+<!-- more -->
+
+### AngularJS in 20-ish Minutes
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/tnXO-i7944M" frameborder="0" allowfullscreen></iframe>
+
+Dan Wahlin
+
+### Writing a Massive Angular App
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/r1A1VR0ibIQ" frameborder="0" allowfullscreen></iframe>
+
+The Google Double Click Team
+
+### Going Postal with Angular in Promises
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/XcRdO5QVlqE" frameborder="0" allowfullscreen></iframe>
+
+Christian Lilley
+
+### Deep Dive into Custom Directives
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/UMkd0nYmLzY" frameborder="0" allowfullscreen></iframe>
+
+Dave Smith
+
+### Progressive Saving
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/JLij19xbefI" frameborder="0" allowfullscreen></iframe>
+
+John Papa
+
+### Rapid Prototyping with Angular & Deployd
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/JLij19xbefI" frameborder="0" allowfullscreen></iframe>
+
+Jeff Cross
+
+### Rich Data Models & Angular
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/JfykD-0tpjI" frameborder="0" allowfullscreen></iframe>
+
+Ben Teese
+
+### Angular Weapon Defense
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/f62k7b753-Y" frameborder="0" allowfullscreen></iframe>
+
+Tom Valletta & Gabe Dayley
+
+### Filters: Beyond OrderBy and LimitTo
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/L4FJ_kuO9Rc" frameborder="0" allowfullscreen></iframe>
+
+Sharon DiOrio
+
+### Awesome Interfaces with AngularJS Animations
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/L4FJ_kuO9Rc" frameborder="0" allowfullscreen></iframe>
+
+Lukas Rubbelke & Matias Niemela
+
+### Dependency Injection
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/_OGGsf1ZXMs" frameborder="0" allowfullscreen></iframe>
+
+Vojta Jina
+
+### Angular Team Panel
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/srt3OBP2kGc" frameborder="0" allowfullscreen></iframe>
+
+Angular Team
