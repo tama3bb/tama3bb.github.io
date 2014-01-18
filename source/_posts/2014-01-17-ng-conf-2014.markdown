@@ -11,7 +11,7 @@ categories: [AngularJS, ng-conf]
 
 Angular カンファレンス [ng-conf 2014](http://ng-conf.org) が、アメリカはユタ州ソルトレイクシティで開催中です。 
 
-YouTube の [ng-conf 2014 チャンネル](http://www.youtube.com/user/ngconfvideos) のほうに動画はまとめてアップロードされていますが、このエントリーでは当日のスケジュールどおりに並べています。
+YouTube の [ng-conf 2014 チャンネル](http://www.youtube.com/user/ngconfvideos) のほうに動画はまとめてアップロードされていますが、このエントリーでは当日（Thursday, January 16）のスケジュールどおりに並べています。最終日（Friday, January 17）の動画は[次のエントリー](/blog/2014/01/18/ng-conf-2014/)で。
 
 ### Keynote
 
