@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-01-17T14:48:28+09:00</updated>
+  <updated>2014-01-18T12:49:28+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,129 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2014）Jan. 17 動画まとめ]]></title>
+    <link href="http://angularjsninja.com/blog/2014/01/18/ng-conf-2014/"/>
+    <updated>2014-01-18T12:49:50+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/01/18/ng-conf-2014</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>ng-conf 2014 &ndash; The World’s First Angular Conference in Salt Lake City, Utah</h2>
+
+<p>Angular カンファレンス <a href="http://ng-conf.org">ng-conf 2014</a> 最終日（Friday, January 17）の動画まとめです。</p>
+
+<p>YouTube の <a href="http://www.youtube.com/user/ngconfvideos">ng-conf 2014 チャンネル</a> だけでなく、公式サイトの<a href="http://angularjs.org">トップページ</a>にも動画が表示されるようになっていますが、このエントリーでは最終日のスケジュールどおりに並べています。</p>
+
+<h3>Angular === Community (Keynote)</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/h-SQvre_6qU" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Igor Minar</p>
+
+<!-- more -->
+
+
+<h3>How to use Typescript on your Angular Application and Be Happy</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/u6TeBM_SC8w" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Sean Hess</p>
+
+<h3>Building Realtime Apps With Firebase and Angular</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/e4yUTkva_FM" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Anant Narayanan</p>
+
+<h3>Angular Directives that Scale</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/TQoV0Jt3IJg" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Burke Holland</p>
+
+<h3>Dart, it&rsquo;s Angular Too</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/RqKUTGB-CxA" frameborder="0" allowfullscreen></iframe>
+
+
+<p>James Deboer</p>
+
+<h3>Zones</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/3IqtmUscE_U" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Brian Ford</p>
+
+<h3>Angular with Browserify</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/NTPutZ99XWY" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Ben Clinkinbeard</p>
+
+<h3>Angular and RequireJS</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/4yulGISBF8w" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Thomas Burleson</p>
+
+<h3>Using AngularJS to create iPhone &amp; Android applications with PhoneGap</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/wVntVkRLR3M" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Daniel Zen</p>
+
+<h3>Robotics powering interfaces with AngularJS to the Arduino.</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/MhVgGE-pgEY" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Ari Lerner</p>
+
+<h3>End to End Angular Testing with Protractor</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/aQipuiTcn3U" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Julie Ralph</p>
+
+<h3>Using ngModelController to Make Sexy Custom Components</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/jVzymluqmg4" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Jason Aden</p>
+
+<h3>PhotoHunt</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/I-TvWfXVR08" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Silvano Luciani</p>
+
+<h3>Angular Performance</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/zyYpHIOrk_Y" frameborder="0" allowfullscreen></iframe>
+
+
+<p>The Double Click Team</p>
+
+<h3>AngularJS ORM</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/Iw-3qgG_ipU" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Dean Sofer</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2014）Jan. 16 動画まとめ]]></title>
@@ -357,57 +480,6 @@ user.newProperty = 'new prop!';  // 動く
 <p><code>javascript
 user = {...};  // 動く
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS 1.3 では IE 8 がサポートされない]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/"/>
-    <updated>2013-12-15T16:16:01+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>AngularJS 1.3 についての記事『<a href="http://blog.angularjs.org/2013/12/angularjs-13-new-release-approaches.html">AngularJS 1.3: a new release approaches</a>』が公式ブログのほうに上がりました。</p>
-
-<p>日本でのエンタープライズ（業務系）なんかでは、まだまだ IE 8 は当たり前のようにサポート対象のブラウザになっているところが多いと思うので、ちょっと大きなニュースですね。</p>
-
-<p>なお、AngularJS 1.2.x 以前を IE 8 で動作させるには、過去記事『<a href="/blog/2013/09/11/angularjs-ie-compatibility/">AngularJS を古い IE に対応させるには</a>』をご参照ください。</p>
-
-<h2>AngularJS 1.3 は IE 8 をサポートしない</h2>
-
-<p>サポートをやめる理由としては、IE 8 で動作させるためのコードのせいで性能に悪影響があるし、すでに IE 8 ユーザは全体の数パーセント程度だし、Microsoft による Windows XP のサポートも 2014年4月に終わるし、とのこと。動作性能の向上はもちろん、機能を追加していくのも速くなると。</p>
-
-<p>どうしても IE 8 で動作させ続けたい場合は：</p>
-
-<ul>
-<li>AngularJS 1.2.x を使い続ける</li>
-<li>AngularJS 1.3 をトライする</li>
-<li>IE 8 で動作する AngularJS を商用サポートとして提供する会社を見つける。</li>
-</ul>
-
-
-<p>1.3 バージョンでは IE 8 用のハックを積極的に削除していくことはないようで、1.2.x バージョンのアプリケーションが IE 8 で動作しているのであれば、大部分は 1.3 でも動作するのではないかということ。ただし、1.3 では IE 8 向けのテストもバグフィックスも実施しなくなると。</p>
-
-<!-- more -->
-
-
-<h2>非推奨（deprecated）の API を削除</h2>
-
-<p><a href="https://github.com/angular/angular.js/commit/5dc35b527b3c99f6544b8cb52e93c6510d3ac577">fix($parse): deprecate promise unwrapping and make it an opt-in</a></p>
-
-<p>promise の unwrapping についてのことを指しているようで、この API のことは以前の記事『<a href="/blog/2013/10/26/angularjs-1.2.0-rc3-promises/">AngularJS 1.2.0-rc3 以降の Promise</a>』をご参照ください。</p>
-
-<h2>リリースバージョンの命名規約</h2>
-
-<p>odd/even versioning から、semantic versioning に切り替えるということで、以前は 1.1.x（奇数）を開発バージョン、1.0.x や 1.2.x（偶数）を安定バージョンとしてきたバージョニングを、1.3.0-beta.1、1.3.0-beta.2 などを経て、安定版 1.3.0 リリースとするバージョニングになるということ。</p>
-
-<h2>1.3 新機能についてコメントを！</h2>
-
-<p>1月2日まで 1.3 での<a href="https://github.com/angular/angular.js/issues?milestone=32&amp;page=1&amp;state=open">新機能</a>についてのコメントを受け付けているようです。"+1" とコメントすれば投票したことに。</p>
-
-<h2>1.3（ベータ）リリースはいつ頃か</h2>
-
-<p>1.3 の最初のベータバージョンが 1 月で、その後 1 〜 2 週間間隔でリリース。</p>
 ]]></content>
   </entry>
   

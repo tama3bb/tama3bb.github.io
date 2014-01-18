@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2014/01/17 AngularJS, ng-conf Angular カンファレンス（ng-conf 2014）Jan. 16 動画まとめ ng-conf 2014 &ndash; The World&rsquo;s First Angular Conference in Salt &hellip;">
+	<meta name="description" content="2014/01/18 AngularJS, ng-conf Angular カンファレンス（ng-conf 2014）Jan. 17 動画まとめ ng-conf 2014 &ndash; The World’s First Angular Conference in Salt Lake City &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,55 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-18T12:49:50+09:00" data-updated="true" itemprop="datePublished">2014/01/18</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/ng-conf/'>ng-conf</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/18/ng-conf-2014/" itemprop="url">Angular カンファレンス（ng-conf 2014）Jan. 17 動画まとめ</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>ng-conf 2014 &ndash; The World’s First Angular Conference in Salt Lake City, Utah</h2>
+
+<p>Angular カンファレンス <a href="http://ng-conf.org">ng-conf 2014</a> 最終日（Friday, January 17）の動画まとめです。</p>
+
+<p>YouTube の <a href="http://www.youtube.com/user/ngconfvideos">ng-conf 2014 チャンネル</a> だけでなく、公式サイトの<a href="http://angularjs.org">トップページ</a>にも動画が表示されるようになっていますが、このエントリーでは最終日のスケジュールどおりに並べています。</p>
+
+<h3>Angular === Community (Keynote)</h3>
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/h-SQvre_6qU" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Igor Minar</p>
+
+
+		
+		<a href="/blog/2014/01/18/ng-conf-2014/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -598,110 +647,6 @@
 
 		
 		<a href="/blog/2013/12/06/angular-foreach/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-03T11:15:48+09:00" data-updated="true" itemprop="datePublished">2013/12/03</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/di/'>DI</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/12/03/angularjs-ngmin/" itemprop="url">AngularJSのminify対策がngminでラクになる</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>AngularJS の minify 対策、めんどくさい</h2>
-
-<p>AngularJS の JavaScript コードを minify するには、function の引数でインジェクト（DI）する各 services の名前を、文字列として重複させて記述する必要がある。</p>
-
-<p>これって、めっちゃめんどくさい。あほらしすぎる。</p>
-
-<h2>ngmin</h2>
-
-<p>そこで <a href="https://github.com/btford/ngmin">ngmin</a> を使う。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g ngmin</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ngmin somefile.js somefile.annotate.js</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以下のコードが、</p>
-
-<figure class='code'><figcaption><span>somefile.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[])</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;TodoCtrl&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$timeout</span><span class="p">,</span> <span class="nx">Projects</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// comments</span>
-</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">createTask</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">task</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">&quot;New Task&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'>  <span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ngmin 後は、こうなる。</p>
-
-<figure class='code'><figcaption><span>somefile.annotate.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[]).</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;TodoCtrl&#39;</span><span class="p">,</span> <span class="p">[</span>
-</span><span class='line'>  <span class="s1">&#39;$scope&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s1">&#39;$timeout&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s1">&#39;Projects&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$timeout</span><span class="p">,</span> <span class="nx">Projects</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">createTask</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">task</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;New Task&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">]);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-
-		
-		<a href="/blog/2013/12/03/angularjs-ngmin/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

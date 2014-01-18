@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ng-conf | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/ng-conf/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-01-17T14:48:28+09:00</updated>
+  <updated>2014-01-18T12:49:28+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,129 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2014）Jan. 17 動画まとめ]]></title>
+    <link href="http://angularjsninja.com/blog/2014/01/18/ng-conf-2014/"/>
+    <updated>2014-01-18T12:49:50+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/01/18/ng-conf-2014</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>ng-conf 2014 &ndash; The World’s First Angular Conference in Salt Lake City, Utah</h2>
+
+<p>Angular カンファレンス <a href="http://ng-conf.org">ng-conf 2014</a> 最終日（Friday, January 17）の動画まとめです。</p>
+
+<p>YouTube の <a href="http://www.youtube.com/user/ngconfvideos">ng-conf 2014 チャンネル</a> だけでなく、公式サイトの<a href="http://angularjs.org">トップページ</a>にも動画が表示されるようになっていますが、このエントリーでは最終日のスケジュールどおりに並べています。</p>
+
+<h3>Angular === Community (Keynote)</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/h-SQvre_6qU" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Igor Minar</p>
+
+<!-- more -->
+
+
+<h3>How to use Typescript on your Angular Application and Be Happy</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/u6TeBM_SC8w" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Sean Hess</p>
+
+<h3>Building Realtime Apps With Firebase and Angular</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/e4yUTkva_FM" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Anant Narayanan</p>
+
+<h3>Angular Directives that Scale</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/TQoV0Jt3IJg" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Burke Holland</p>
+
+<h3>Dart, it&rsquo;s Angular Too</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/RqKUTGB-CxA" frameborder="0" allowfullscreen></iframe>
+
+
+<p>James Deboer</p>
+
+<h3>Zones</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/3IqtmUscE_U" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Brian Ford</p>
+
+<h3>Angular with Browserify</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/NTPutZ99XWY" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Ben Clinkinbeard</p>
+
+<h3>Angular and RequireJS</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/4yulGISBF8w" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Thomas Burleson</p>
+
+<h3>Using AngularJS to create iPhone &amp; Android applications with PhoneGap</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/wVntVkRLR3M" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Daniel Zen</p>
+
+<h3>Robotics powering interfaces with AngularJS to the Arduino.</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/MhVgGE-pgEY" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Ari Lerner</p>
+
+<h3>End to End Angular Testing with Protractor</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/aQipuiTcn3U" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Julie Ralph</p>
+
+<h3>Using ngModelController to Make Sexy Custom Components</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/jVzymluqmg4" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Jason Aden</p>
+
+<h3>PhotoHunt</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/I-TvWfXVR08" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Silvano Luciani</p>
+
+<h3>Angular Performance</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/zyYpHIOrk_Y" frameborder="0" allowfullscreen></iframe>
+
+
+<p>The Double Click Team</p>
+
+<h3>AngularJS ORM</h3>
+
+<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/Iw-3qgG_ipU" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Dean Sofer</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2014）Jan. 16 動画まとめ]]></title>
