@@ -1,0 +1,104 @@
+---
+layout: post
+title: "Angular カンファレンス（ng-conf 2014）Jan. 17 動画まとめ"
+date: 2014-01-18 12:49:50 +0900
+comments: true
+categories: [AngularJS, ng-conf]
+---
+---
+
+## ng-conf 2014 - The World’s First Angular Conference in Salt Lake City, Utah
+
+Angular カンファレンス [ng-conf 2014](http://ng-conf.org) 最終日（Friday, January 17）の動画まとめです。
+
+YouTube の [ng-conf 2014 チャンネル](http://www.youtube.com/user/ngconfvideos) だけでなく、公式サイトの[トップページ](http://angularjs.org)にも動画が表示されるようになっていますが、このエントリーでは最終日のスケジュールどおりに並べています。
+
+### Angular === Community (Keynote)
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/h-SQvre_6qU" frameborder="0" allowfullscreen></iframe>
+
+Igor Minar
+
+<!-- more -->
+
+### How to use Typescript on your Angular Application and Be Happy
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/u6TeBM_SC8w" frameborder="0" allowfullscreen></iframe>
+
+Sean Hess
+
+### Building Realtime Apps With Firebase and Angular
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/e4yUTkva_FM" frameborder="0" allowfullscreen></iframe>
+
+Anant Narayanan
+
+### Angular Directives that Scale
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/TQoV0Jt3IJg" frameborder="0" allowfullscreen></iframe>
+Burke Holland
+
+### Dart, it's Angular Too
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/RqKUTGB-CxA" frameborder="0" allowfullscreen></iframe>
+
+James Deboer
+
+### Zones
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/3IqtmUscE_U" frameborder="0" allowfullscreen></iframe>
+
+Brian Ford
+
+### Angular with Browserify
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/NTPutZ99XWY" frameborder="0" allowfullscreen></iframe>
+
+Ben Clinkinbeard
+
+### Angular and RequireJS
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/4yulGISBF8w" frameborder="0" allowfullscreen></iframe>
+
+Thomas Burleson
+
+### Using AngularJS to create iPhone & Android applications with PhoneGap
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/wVntVkRLR3M" frameborder="0" allowfullscreen></iframe>
+
+Daniel Zen
+
+### Robotics powering interfaces with AngularJS to the Arduino.
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/MhVgGE-pgEY" frameborder="0" allowfullscreen></iframe>
+Ari Lerner
+
+### End to End Angular Testing with Protractor
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/aQipuiTcn3U" frameborder="0" allowfullscreen></iframe>
+
+Julie Ralph
+
+### Using ngModelController to Make Sexy Custom Components
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/jVzymluqmg4" frameborder="0" allowfullscreen></iframe>
+
+Jason Aden
+
+### PhotoHunt
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/I-TvWfXVR08" frameborder="0" allowfullscreen></iframe>
+
+Silvano Luciani
+
+### Angular Performance
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/zyYpHIOrk_Y" frameborder="0" allowfullscreen></iframe>
+
+The Double Click Team
+
+### AngularJS ORM
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/Iw-3qgG_ipU" frameborder="0" allowfullscreen></iframe>
+
+Dean Sofer
