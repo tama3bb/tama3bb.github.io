@@ -4,7 +4,7 @@
   <title><![CDATA[Category: directive | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/directive/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-01-22T13:23:06+09:00</updated>
+  <updated>2014-02-03T18:38:59+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS で Enter キーを検出するコード]]></title>
+    <link href="http://angularjsninja.com/blog/2014/02/03/angularjs-event-on-enter/"/>
+    <updated>2014-02-03T18:28:23+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/02/03/angularjs-event-on-enter</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>テキストボックスなどで、Enter キーによるイベント処理を記述するコード例をいくつか。</p>
+
+<h2>$event オブジェクト</h2>
+
+<p><code>ng-keydown</code>などの directive を利用する際には、<code>$event</code>でイベントオブジェクトを利用。</p>
+
+<p>``` javascript
+$scope.comments = [];
+$scope.handleKeydown = function(e) {
+  if (e.which !== 13) {</p>
+
+<pre><code>$scope.comments.push($scope.newComment);
+$scope.newComment = '';
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>``` html
+<input type="text" ng-model="newComment" ng-keydown="handleKeydown($event)"></p>
+
+<p><ul>
+  <li ng-repeat="comment in comments"></li>
+<ul>
+```</p>
+
+<p><!-- more --></p>
+
+<h2>カスタム directive でのイベント処理</h2>
+
+<p>カスタム directive を定義する場合は、jQuery と同じような感じでバインド。</p>
+
+<p>``` javascript
+myApp.directive(&lsquo;handleKeydown&rsquo;, function() {
+  return {</p>
+
+<pre><code>require: 'ngModel',
+link: function(scope, element, attrs, modelCtrl) {
+  element.bind('keydown', function(e) {
+    if (e.which === 13) {
+      scope.$apply(function() {
+        scope.comments.push(scope.newComment);
+        scope.newComment = '';
+      });
+    }
+  });
+}
+</code></pre>
+
+<p>  };
+});
+```</p>
+
+<p><code>html
+&lt;input type="text" ng-model="newComment" handle-keydown&gt;
+</code></p>
+
+<h2>form（ng-form）の submit</h2>
+
+<p>最後に持ってきたものの、form の submit で実現することを真っ先に検討するのが吉。Enter キーも処理されるし、テキストボックスがたくさんあっても無問題。</p>
+
+<p><code>html
+&lt;form ng-submit="handleKeydown()"&gt;
+  &lt;input type="text" ng-model="newComment"&gt;
+&lt;/form&gt;
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その４）]]></title>
@@ -600,80 +677,6 @@ restrict: 'AE' // 属性または要素
 <p>え、そんなちょっとしか記述しなくても directive として成立してるんだ、ってことを見てもらうのが初回の目的なので、ひとまずここで終了。</p>
 
 <p>こんなとこで終わったら、directive こわいままになっちゃうので、なんとしてでも<a href="/blog/2013/11/22/angularjs-custom-directives/">次回</a>も続けないと。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJSでHTMLを分割するのにお手軽なng-include]]></title>
-    <link href="http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude/"/>
-    <updated>2013-11-19T09:17:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS で HTML を分割するのにお手軽な ng-include</h2>
-
-<p>``` html</p>
-
-<div ng-include="'partials/sidebar.html'"></div>
-
-
-<p><code>
-</code> html
-&lt;ng-include src=&ldquo;&lsquo;partials/sidebar.html&rsquo;&rdquo;>&lt;/ng-include>
-```</p>
-
-<p>ポイントとしては、属性値に文字列を渡す必要があって、ダブルクオートの内側にシングルクオートを記述すること。</p>
-
-<p>変数を渡して、可変にもできる。</p>
-
-<p><code>javascript
-$scope.sidebarUrl = 'partials/sidebar.html';
-</code>
-``` html</p>
-
-<div ng-include="sidebarUrl"></div>
-
-
-<p>```</p>
-
-<p><code>ng-include</code>で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、<code>ng-controller</code>も指定できる。</p>
-
-<p>``` html</p>
-
-<div ng-include="'partials/sidebar.html'" ng-controller="SidebarCtrl"></div>
-
-
-<p>```</p>
-
-<!-- more -->
-
-
-<h2>分割した HTML は $templateCache でキャッシュしてくれる</h2>
-
-<p>分割した HTML は、通信して取得した時点で AngularJS が $templateCache で（メモリに）保持するため、分割されている部分を表示するたびに取得する通信が発生するわけではない。</p>
-
-<p>かつ、必要となった時点で取得しにいくレイジーローディングなので、ユーザがまったく表示しない部分であれば、１度も取得しにいかないので効率的でもある。</p>
-
-<p>一方で、Grunt などでビルドする時に、この HTML フラグメントを一つのファイルにしてしまい、一括してロードさせることでネットワークでのロスを下げるという方向で工夫もできる。</p>
-
-<p>スクリプトとして HTML テンプレートを記述する場合は、script 要素に<code>type</code>と<code>id</code>を指定する。</p>
-
-<p><code>html
-&lt;scipt type="text/ng-template" id="templateId.html"&gt;
-  This is the content of the template
-&lt;/script&gt;
-</code></p>
-
-<p>初期処理でテンプレートを<code>$templateCache</code>に<code>put</code>するようにしておけば、その分だけ操作性の向上も期待できる。</p>
-
-<p><code>javascript
-var myApp = angular.module('Ninja', []);
-myApp.run(function($templateCache) {
-  $templateCache.put('templateId.html', 'This is the content of the template');
-});
-</code></p>
-
-<p>お手軽に断片化できる ng-include の紹介でしたが、HTML を分割する手段としては他にも ng-view の routing で templateUrl を指定することや、custom directive を作成することもできるので、次回以降でその辺も触れる（たぶん）。</p>
 ]]></content>
   </entry>
   

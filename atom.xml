@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-01-22T13:23:06+09:00</updated>
+  <updated>2014-02-03T18:38:59+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS で Enter キーを検出するコード]]></title>
+    <link href="http://angularjsninja.com/blog/2014/02/03/angularjs-event-on-enter/"/>
+    <updated>2014-02-03T18:28:23+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/02/03/angularjs-event-on-enter</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>テキストボックスなどで、Enter キーによるイベント処理を記述するコード例をいくつか。</p>
+
+<h2>$event オブジェクト</h2>
+
+<p><code>ng-keydown</code>などの directive を利用する際には、<code>$event</code>でイベントオブジェクトを利用。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">comments</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">handleKeydown</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">which</span> <span class="o">!==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">comments</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">newComment</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">newComment</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;newComment&quot;</span> <span class="na">ng-keydown=</span><span class="s">&quot;handleKeydown($event)&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">&quot;comment in comments&quot;</span><span class="nt">&gt;</span><span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<h2>カスタム directive でのイベント処理</h2>
+
+<p>カスタム directive を定義する場合は、jQuery と同じような感じでバインド。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myApp</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;handleKeydown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">require</span><span class="o">:</span> <span class="s1">&#39;ngModel&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">modelCtrl</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">element</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">which</span> <span class="o">===</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">scope</span><span class="p">.</span><span class="nx">$apply</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">scope</span><span class="p">.</span><span class="nx">comments</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">newComment</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">scope</span><span class="p">.</span><span class="nx">newComment</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>          <span class="p">});</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;newComment&quot;</span> <span class="na">handle-keydown</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>form（ng-form）の submit</h2>
+
+<p>最後に持ってきたものの、form の submit で実現することを真っ先に検討するのが吉。Enter キーも処理されるし、テキストボックスがたくさんあっても無問題。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">ng-submit=</span><span class="s">&quot;handleKeydown()&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;newComment&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2014）Jan. 17 動画まとめ]]></title>
@@ -2399,118 +2506,6 @@ angular.module('Ninja', [])
 <p>リリースの詳細は、<a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md">changelog</a> を参照。</p>
 
 <p>移行ガイドは <a href="http://docs.angularjs.org/guide/migration">our guides</a> を参照。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJSでカスタムfilterを書いてみよう]]></title>
-    <link href="http://angularjsninja.com/blog/2013/11/09/angularjs-filter/"/>
-    <updated>2013-11-09T00:01:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/11/09/angularjs-filter</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>filter とは</h2>
-
-<p>filter は、表示用に値を加工してくれる機能。HTML テンプレートだけでなく、controller や service でも利用できる。また、独自の filter を簡単に定義することもできる。</p>
-
-<p>構文から利用例、そしてカスタム filter のサンプルコードを紹介！</p>
-
-<!-- more -->
-
-
-<h2>filter の構文</h2>
-
-<p>こんなふうに、パイプ記号を使う構文で記述。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{{ expression | filter }}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>チェーン（chaining）することもできるし、</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{{ expression | filter1 | filter2 }}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>引数を取ることもできる。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{{ expression | filter:arg1:arg2 }}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>filter の利用例</h2>
-
-<p>たとえば数値をカンマ区切りで表示したければ、AngularJS 標準の <a href="http://docs.angularjs.org/api/ng.filter:number">number</a> filter を使うだけでラクチン。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{{ 123456789 | number }}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>123,456,789</p>
-
-<p>標準の filter については、AngularJS <a href="http://docs.angularjs.org/api/ng#filter">公式サイト</a>のほうで。<a href="http://docs.angularjs.org/api/ng.filter:filter">filter</a> filter はかなり使えるので要チェック！</p>
-
-<h2>カスタム filter を実装してみる</h2>
-
-<p>例として、全角英数字が混じってて見苦しいデータがあったとして、せめて表示の段階ででもスッキリと半角英数字に揃えて表示したいなーということを実現する filter のサンプルコードを。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://code.angularjs.org/1.2.0-rc.3/angular.min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;Ninja&#39;</span><span class="p">,</span> <span class="p">[])</span>
-</span><span class='line'><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="s1">&#39;oneByte&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nx">input</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[Ａ-Ｚａ-ｚ０-９]/g</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0xFEE0</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>  <span class="p">};</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">app</span><span class="o">=</span><span class="s2">&quot;Ninja&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="p">{{</span> <span class="nx">val</span> <span class="o">|</span> <span class="nx">oneByte</span> <span class="p">}}</span><span class="o">&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">model</span><span class="o">=</span><span class="s2">&quot;val&quot;</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">init</span><span class="o">=</span><span class="s2">&quot;val=&#39;Ａｎｇｕｌａｒｊｓ Ninja&#39;&quot;</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
-
-
-<script>
-angular.module('Ninja', [])
-.filter('oneByte', function() {
-  return function(input) {
-    return input.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
-      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-    });
-  };
-});
-</script>
-
-
-<div ng-app="Ninja">
-  {{ val | oneByte }}<br>
-  <input type="text" ng-model="val" ng-init="val='Ａｎｇｕｌａｒｊｓ Ninja'">
-</div>
-
-
-<p>いやー、filter 楽しい。でも filter はパフォーマンス的にアレなので、使いすぎにご注意を。</p>
 ]]></content>
   </entry>
   

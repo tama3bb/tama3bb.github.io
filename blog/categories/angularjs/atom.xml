@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-01-22T13:23:06+09:00</updated>
+  <updated>2014-02-03T18:38:59+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS で Enter キーを検出するコード]]></title>
+    <link href="http://angularjsninja.com/blog/2014/02/03/angularjs-event-on-enter/"/>
+    <updated>2014-02-03T18:28:23+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/02/03/angularjs-event-on-enter</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>テキストボックスなどで、Enter キーによるイベント処理を記述するコード例をいくつか。</p>
+
+<h2>$event オブジェクト</h2>
+
+<p><code>ng-keydown</code>などの directive を利用する際には、<code>$event</code>でイベントオブジェクトを利用。</p>
+
+<p>``` javascript
+$scope.comments = [];
+$scope.handleKeydown = function(e) {
+  if (e.which !== 13) {</p>
+
+<pre><code>$scope.comments.push($scope.newComment);
+$scope.newComment = '';
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>``` html
+<input type="text" ng-model="newComment" ng-keydown="handleKeydown($event)"></p>
+
+<p><ul>
+  <li ng-repeat="comment in comments"></li>
+<ul>
+```</p>
+
+<p><!-- more --></p>
+
+<h2>カスタム directive でのイベント処理</h2>
+
+<p>カスタム directive を定義する場合は、jQuery と同じような感じでバインド。</p>
+
+<p>``` javascript
+myApp.directive(&lsquo;handleKeydown&rsquo;, function() {
+  return {</p>
+
+<pre><code>require: 'ngModel',
+link: function(scope, element, attrs, modelCtrl) {
+  element.bind('keydown', function(e) {
+    if (e.which === 13) {
+      scope.$apply(function() {
+        scope.comments.push(scope.newComment);
+        scope.newComment = '';
+      });
+    }
+  });
+}
+</code></pre>
+
+<p>  };
+});
+```</p>
+
+<p><code>html
+&lt;input type="text" ng-model="newComment" handle-keydown&gt;
+</code></p>
+
+<h2>form（ng-form）の submit</h2>
+
+<p>最後に持ってきたものの、form の submit で実現することを真っ先に検討するのが吉。Enter キーも処理されるし、テキストボックスがたくさんあっても無問題。</p>
+
+<p><code>html
+&lt;form ng-submit="handleKeydown()"&gt;
+  &lt;input type="text" ng-model="newComment"&gt;
+&lt;/form&gt;
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2014）Jan. 17 動画まとめ]]></title>
@@ -367,119 +444,6 @@ setInterval(function() {
 <p>この本は、AngularJS のサンプルアプリケーション実装として GitHub で 2,274 スター（2013/12/20 現在）も付いている <a href="https://github.com/angular-app/angular-app">angular-app</a> の実装についてのパターンや技術を詳細に解説していて、実際に動作させることもできる CRUD アプリケーションで、AngularJS のフォルダ構成や modules の使い方、テスト、REST バックエンドとの接続、ナビゲーション、セキュリティ（authentication、authorization）などのベストプラクティスを学ぶことができる。</p>
 
 <p>AngularJS やるぜって衆の年末年始は、コレで決まりだ！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[$watchと$watchの中間的な位置付けの$watchCollection]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/17/angularjs-watchcollection/"/>
-    <updated>2013-12-17T00:01:26+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/17/angularjs-watchcollection</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>$watchCollection</h2>
-
-<p><a href="http://angularjsninja.com/blog/2013/12/13/angularjs-watch/">AngularJSのデータバインドを支える$watch</a> で見たように、$watch ではオブジェクトの参照を監視するか、またはオブジェクトの中身まですべて監視（deep watch）するかを切り替えることができる。</p>
-
-<p>その 2 種類の $watch の中間に位置付けられる <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watchcollection">$watchCollection</a> というのもあり、1 階層分だけを監視（shallow watch）してくれる。</p>
-
-<h2>配列の場合</h2>
-
-<p>配列の場合に $watch、$watchCollection、および $watch (deep watch) がそれぞれどのように異なるのかを見ていく。</p>
-
-<!-- more -->
-
-
-<h3>$watch</h3>
-
-<p><code>javascript
-$scope.results = [ {...}, {...}, ... ];
-$scope.$watch('results', function() {...});
-</code></p>
-
-<p>$watch の場合、参照が変更されたときだけリスナーが動作する。</p>
-
-<p><code>javascript
-results[0].title = '';  // 動かない
-</code></p>
-
-<p><code>javascript
-results.push({...});  // 動かない
-</code></p>
-
-<p><code>javascript
-results = [...];  // 動く
-</code></p>
-
-<h3>$watchCollection</h3>
-
-<p><code>javascript
-$scope.results = [ {...}, {...}, ... ];
-$scope.$watchCollection('results', function() {...});
-</code></p>
-
-<p>$watchCollection の場合、監視している配列に追加、削除などをした場合にも動作する。</p>
-
-<p><code>javascript
-results[0].title = '';  // 動かない
-</code></p>
-
-<p><code>javascript
-results.push({...});  // 動く
-</code></p>
-
-<p><code>javascript
-results = [...];  // 動く
-</code></p>
-
-<h3>$watch（deep watch）</h3>
-
-<p><code>javascript
-$scope.results = [ {...}, {...}, ... ];
-$scope.$watch('results', function() {...}, true);
-</code></p>
-
-<p>$watch (deep watch) の場合、なにかしらあれば動作する。</p>
-
-<p><code>javascript
-results[0].title = '';  // 動く
-</code></p>
-
-<p><code>javascript
-results.push({...});  // 動く
-</code></p>
-
-<p><code>javascript
-results = [...];  // 動く
-</code></p>
-
-<h2>普通のオブジェクトの場合</h2>
-
-<p><code>javascript
-$scope.user = {
-  name: 'unknown',
-  images: [...]
-};
-$scope.$watchCollection('user', function() {...});
-</code></p>
-
-<p>普通のオブジェクトを対象とした $watchCollection の動作は、監視しているオブジェクトのプロパティ値の変更や、プロパティの追加・削除でも動作する。</p>
-
-<p><code>javascript
-user.images.push(...);  // 動かない
-</code></p>
-
-<p><code>javascript
-user.name = 'known';  // 動く
-</code></p>
-
-<p><code>javascript
-user.newProperty = 'new prop!';  // 動く
-</code></p>
-
-<p><code>javascript
-user = {...};  // 動く
-</code></p>
 ]]></content>
   </entry>
   
