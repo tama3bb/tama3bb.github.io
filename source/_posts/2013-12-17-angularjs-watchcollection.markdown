@@ -8,7 +8,7 @@ categories: [AngularJS, scope]
 ---
 ## $watchCollection
 
-[AngularJSのデータバインドを支える$watch]() で見たように、$watch ではオブジェクトの参照を監視するか、またはオブジェクトの中身まですべて監視（deep watch）するかを切り替えることができる。
+[AngularJSのデータバインドを支える$watch](http://angularjsninja.com/blog/2013/12/13/angularjs-watch/) で見たように、$watch ではオブジェクトの参照を監視するか、またはオブジェクトの中身まですべて監視（deep watch）するかを切り替えることができる。
 
 その 2 種類の $watch の中間に位置付けられる [$watchCollection](http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watchcollection) というのもあり、1 階層分だけを監視（shallow watch）してくれる。
 
