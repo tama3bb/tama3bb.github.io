@@ -4,7 +4,7 @@
   <title><![CDATA[Category: service | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/service/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-03T18:38:59+09:00</updated>
+  <updated>2014-02-04T16:21:49+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS で HTTP ヘッダを設定するには]]></title>
+    <link href="http://angularjsninja.com/blog/2014/02/04/angularjs-http-headers/"/>
+    <updated>2014-02-04T16:08:51+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/02/04/angularjs-http-headers</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>HTTP Headers を設定</h2>
+
+<p>AngularJS による HTTP リクエストについては、<code>$httpProvider.defaults.headers</code>オブジェクトで HTTP ヘッダ情報を設定できる。</p>
+
+<p><code>javascript
+$httpProvider.defaults.headers.common.Authorization = '...';
+</code></p>
+
+<p>以下のように、get だけ、post だけに適用することも。</p>
+
+<p><code>javascript
+$httpProvider.defaults.headers.get['Authorization'] = '...';
+$httpProvider.defaults.headers.post = { 'Authorization' : '...' };
+</code></p>
+
+<p>（複数の書き方を例示するために、わざと違った書き方にしてます）</p>
+
+<!-- more -->
+
+
+<h2>Cache-Control の設定例</h2>
+
+<p>IE は XHR (Ajax) リクエストでもキャッシュするようなので、IE をサポートするのであれば初めから Cache-Control などの設定を入れておくのがいいのかも。</p>
+
+<p><code>javascript
+$httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache';
+</code></p>
+
+<p>他にも If-Modified-Since を設定する必要がありそう。あるいは Expires のほうが適切なのかも。ここの設定について詳しい方、こっそり教えてください！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSでちゃちゃっとアニメーションを試す]]></title>

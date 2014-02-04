@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-03T18:38:59+09:00</updated>
+  <updated>2014-02-04T16:21:49+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS で HTTP ヘッダを設定するには]]></title>
+    <link href="http://angularjsninja.com/blog/2014/02/04/angularjs-http-headers/"/>
+    <updated>2014-02-04T16:08:51+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/02/04/angularjs-http-headers</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>HTTP Headers を設定</h2>
+
+<p>AngularJS による HTTP リクエストについては、<code>$httpProvider.defaults.headers</code>オブジェクトで HTTP ヘッダ情報を設定できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">common</span><span class="p">.</span><span class="nx">Authorization</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以下のように、get だけ、post だけに適用することも。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">get</span><span class="p">[</span><span class="s1">&#39;Authorization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">post</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;Authorization&#39;</span> <span class="o">:</span> <span class="s1">&#39;...&#39;</span> <span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>（複数の書き方を例示するために、わざと違った書き方にしてます）</p>
+
+<!-- more -->
+
+
+<h2>Cache-Control の設定例</h2>
+
+<p>IE は XHR (Ajax) リクエストでもキャッシュするようなので、IE をサポートするのであれば初めから Cache-Control などの設定を入れておくのがいいのかも。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">common</span><span class="p">[</span><span class="s1">&#39;Cache-Control&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>他にも If-Modified-Since を設定する必要がありそう。あるいは Expires のほうが適切なのかも。ここの設定について詳しい方、こっそり教えてください！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS で Enter キーを検出するコード]]></title>
@@ -2470,42 +2513,6 @@ angular.module('Ninja', [])
 
 
 <p>見どころは 25 行目の<code>$scope.iconSort</code>function で return している object で、この<code>iconSort</code>を ng-class で使ってソートのアイコン表示を切り替えている。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS 1.2.0 リリース！]]></title>
-    <link href="http://angularjsninja.com/blog/2013/11/09/angularjs-1.2.0-timely-delivery/"/>
-    <updated>2013-11-09T10:14:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/11/09/angularjs-1.2.0-timely-delivery</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>待望の AngularJS 1.2.0 リリースがキター！！</p>
-
-<p>まだ把握してない内容もあるんだけど、取り急ぎ公式ブログの<a href="http://blog.angularjs.org/2013/11/angularjs-120-timely-delivery.html">内容</a>を（一部省略して）日本語に訳しときます。</p>
-
-<hr />
-
-<h2>AngularJS 1.2.0: timely-delivery</h2>
-
-<p>1.2.0-rc3 で見つかった多くの問題を修正し、前回の安定版リリースからいくつもの新しい機能を導入している。</p>
-
-<p>前回の安定版リリースからの注目すべき変更点：</p>
-
-<ul>
-<li><a href="http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html">アニメーションとトランジション</a></li>
-<li><a href="http://kensheedlo.com/2013/08/15/error-message-minification-with-minerr.html">エラーメッセージ</a>（error minification を含む）</li>
-<li><a href="http://docs.angularjs.org/api/ng.$sce">厳密なコンテキストのエスケーピング</a></li>
-<li><a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ng-repeat で重複を防ぐトラッキング機能</a></li>
-<li><a href="http://egghead.io/lessons/angularjs-experimental-controller-as-syntax">テンプレート内で controller インスタンスにアクセスするための構文</a></li>
-<li><a href="https://github.com/angular/angular.js/pull/3699">Promise A+ に準拠</a></li>
-<li><a href="http://docs.angularjs.org/api/ngRoute">ngRoute を独自モジュールに分離</a></li>
-</ul>
-
-
-<p>リリースの詳細は、<a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md">changelog</a> を参照。</p>
-
-<p>移行ガイドは <a href="http://docs.angularjs.org/guide/migration">our guides</a> を参照。</p>
 ]]></content>
   </entry>
   
