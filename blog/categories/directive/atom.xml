@@ -4,7 +4,7 @@
   <title><![CDATA[Category: directive | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/directive/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-04T16:21:49+09:00</updated>
+  <updated>2014-02-05T17:58:51+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのng-ifで文字列を使うなら !! を付けよう]]></title>
+    <link href="http://angularjsninja.com/blog/2014/02/05/ngif-string-caveat/"/>
+    <updated>2014-02-05T17:44:16+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/02/05/ngif-string-caveat</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>&lsquo;0&rsquo; が表示されない…</h2>
+
+<p><code>ng-if</code> あるいは、<code>ng-show</code>や<code>ng-hide</code>を使うときに、string 値の有無で表示判定を記述することもある。</p>
+
+<p>
+``` html</p>
+
+<p ng-if="model.value">{{model.label}}</p>
+
+
+<p>```
+</p>
+
+<p>そんなとき、<code>model.value</code>の値が<code>'0'</code>だったらどうなるか。</p>
+
+<p>なんと、表示されない…。</p>
+
+<!-- more -->
+
+
+<h2>&lsquo;0&rsquo; だけじゃない</h2>
+
+<p>この現象、<code>'0'</code>だけでなく、<code>'f'</code> <code>'no'</code> <code>'n'</code>といった文字列（大文字・小文字問わず）の場合であっても表示されない。</p>
+
+<p>angular.js のコードはこうなってる。</p>
+
+<p>``` javascript
+function toBoolean(value) {
+  if (typeof value === &lsquo;function&rsquo;) {</p>
+
+<pre><code>value = true;
+</code></pre>
+
+<p>  } else if (value &amp;&amp; value.length !== 0) {</p>
+
+<pre><code>var v = lowercase("" + value);
+value = !(v == 'f' || v == '0' || v == 'false' || v == 'no' || v == 'n' || v == '[]');
+</code></pre>
+
+<p>  } else {</p>
+
+<pre><code>value = false;
+</code></pre>
+
+<p>  }
+  return value;
+}
+```</p>
+
+<h2>boolean にしちゃっておこう</h2>
+
+<p>ということで、文字列の有無で判定させたいだけってときは<code>!!</code>を付けときましょう。boolean とか object の場合でも<code>!!</code>付ける方針にしとくのがラクでいいかな。</p>
+
+<p>
+``` html</p>
+
+<p ng-if="!!model.value">{{model.label}}</p>
+
+
+<p>```
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS で Enter キーを検出するコード]]></title>
@@ -554,129 +625,6 @@ myModule.directive(&lsquo;usingCompileOption&rsquo;, function () {
 <p>この２回目で compile と link の使い分けができるようになったので、ここまでの知識でとりあえず directive を使っていろいろ実装していけるんじゃないかと思う。</p>
 
 <p>けれども、<code>replace</code> <code>transclude</code> <code>scope</code> <code>controller</code> <code>require</code>といった大事なプロパティを抑えてないので、ここで終わったら directive こわいままになっちゃうので、<a href="/blog/2013/11/27/angularjs-custom-directives/">３回目</a>に続く。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その１）]]></title>
-    <link href="http://angularjsninja.com/blog/2013/11/20/angularjs-custom-directives/"/>
-    <updated>2013-11-20T12:08:23+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/11/20/angularjs-custom-directives</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>独自（カスタム）directive の話は複雑でボリュームがあるので、何回かに分けることにして、まずは<a href="http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude/">前回の ng-include</a> の流れを受けて、とりあえず HTML を分割することから始めてみよう。</p>
-
-<h2>単にテンプレート部分を Directive にするには</h2>
-
-<p>繰り返し出てくるコード部分を、テンプレートとして directive で宣言するサンプルコード。</p>
-
-<p>``` html</p>
-
-<div ninja-customer></div>
-
-
-<p><code>
-</code> javascript
-angular.module(&lsquo;Ninja&rsquo;, [])
-  .directive(&lsquo;ninjaCustomer&rsquo;, function() {</p>
-
-<pre><code>return {
-  templateUrl: 'partials/ninja-customer.html'
-};
-</code></pre>
-
-<p>  });
-```
-こんだけなので、まあどってことない。これだけなら ng-include のほうがラクでいいやんってことになるかな。でもまあ、とりあえずこんだけしか書かなくても directive として動作するのかってことを見ておく。</p>
-
-<!-- more -->
-
-
-<h2>要素として使う Directive としたければ</h2>
-
-<p>デフォルトでは属性（<code>restrict: 'A'</code>）として使う directive として作られる。なので、要素として HTML で指定する directive にしたければ、<code>restrict</code> オプションが必要になる。</p>
-
-<p><code>html
-&lt;ninja-customer&gt;&lt;/ninja-customer&gt;
-</code>
-``` javascript
-angular.module(&lsquo;Ninja&rsquo;, [])
-  .directive(&lsquo;ninjaCustomer&rsquo;, function() {</p>
-
-<pre><code>return {
-  restrict: 'E',
-  templateUrl: 'partials/ninja-customer.html'
-};
-</code></pre>
-
-<p>  });
-<code>``
-</code>restrict<code>オプションを指定する場合の選択肢として、覚えておけばいいのは以下の３種類。</code>A<code>は Attribute（属性）で、</code>E`は Element（要素）。</p>
-
-<p><code>javascript
-restrict: 'A' // 属性のみ（デフォルト）
-restrict: 'E' // 要素のみ
-restrict: 'AE' // 属性または要素
-</code></p>
-
-<p>属性と要素、どちらを選択するかについては、まとまったコンポーネントとして directive を位置付けるケースでは要素とし、既存の要素に機能を足すようなケースでは属性とするのがいいぽい。</p>
-
-<p>Directive の定義で return するオブジェクトに、オプションとして記述していく記述スタイルで、<code>restrict</code>や<code>templateUrl</code>の他に、<code>link</code>、<code>replace</code>、<code>transclude</code>、<code>scope</code>、<code>controller</code>など使えるオプションがあるんだけれど、ひとまず後回し。</p>
-
-<h2>どんなときにカスタム Directive を作るか</h2>
-
-<p>Controllers と AngularJS 標準の各種 directive を使えば大抵のことはできてしまうのと、directive の仕様が複雑すぎてわかりにくということで、AngularJS を使っていてもカスタム directive は手付かずだったり、作ってみてもこれでいいのか自信ないなって感じになりがちかなと。</p>
-
-<p>カスタム directive は、例えば jQuery（jqLite）などで直接 DOM を操作したいときや、繰り返し出てくるコードをリファクタリングしてまとめたいときに利用するのがいい。</p>
-
-<p>なお、AngularJS のアプリケーションでも jQuery を利用できることについては、過去エントリ「<a href="http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs/">jQuery と AngularJS</a>」に記載しているように、jQuery を先読みすればその jQuery が使え、jQuery 無しでも AngularJS が持つ jQuery のサブセット jqLite で DOM 操作のコードが同じように記述できる。</p>
-
-<p>さらに、複数のプロジェクトでの再利用を目指してコンポーネント化するなら <a href="http://angular-ui.github.io/bootstrap/">UI Bootstrap</a> のコードを参考に、複雑な directive の作成に取り組んでいきたいところ。</p>
-
-<h2>Directive とは何か</h2>
-
-<p>AngularJS で一番強力な機能と言え、HTML が持っていない意味合いや振る舞いを加えるように使うことができる。AngularJS 標準の<code>ng-bind</code>や<code>ng-model</code>、<code>ng-view</code>とかはすべて directive であって、controllers や services に記述したアプリケーションロジックを、属性や要素として DOM 要素にバインドできるようになる。</p>
-
-<p>簡単に言うと、データバインドするモデルやイベントハンドリングするロジックを、DOM に紐付けるためのものということ。</p>
-
-<h2>標準 Directive</h2>
-
-<p>AngularJS には標準（ビルトイン）の directives がたくさん存在し、公式サイトの <a href="http://docs.angularjs.org/api/ng#directive">ng (core module) ページ Directive</a> には、<code>ng-include</code>、<code>ng-controller</code>、<code>ng-click</code>などよく使う<code>ng</code>で始まるものだけでなく、普通の HTML のように見える<code>a</code>、<code>form</code>や<code>input</code>なども directive として記載されている。</p>
-
-<p>たとえば<code>a</code>については href 属性値が空のときにはデフォルトの動作が防止されるよう処理されたり、<code>form</code>だと name 属性があれば scope のほうでその名前で参照できるように処理されたりする。</p>
-
-<p>form には HTML で form を入れ子にできるよう<code>ng-form</code>があったり、<code>ng-submit</code>の機能、<code>ng-invalid</code>や<code>ng-dirty</code>などの機能についても触れたくなるけれど、その辺のことはまた別の機会に。</p>
-
-<h2>Directives の記述</h2>
-
-<p>Directives は JavaScript では camelCase で宣言し、HTML では小文字ハイフン区切りの lower-case で参照する。</p>
-
-<p>HTML では４種類の参照方法があるものの、基本的には要素か属性として記述する以下の２種類。</p>
-
-<p>``` html
-&lt;my-directive>&lt;/my-directive></p>
-
-<div my-directive></div>
-
-
-<p>```</p>
-
-<p>HTML の validation ツールを使いたければ<code>data-</code>を付けておくといい。</p>
-
-<p><code>html
-&lt;span ng-bind="name"&gt;&lt;/span&gt;
-&lt;span data-ng-bind="name"&gt;&lt;/span&gt;
-</code></p>
-
-<h2>Directives の接頭辞</h2>
-
-<p>カスタム directive の名前には、念のため接頭辞（ng を避ける）を付けておくほうがいいかもしれない。将来、偶然 HTML 標準として追加される要素名と重なってしまうケースや、AngularUI や AngularStrap などサードパーティ製の directives と重なってしまうケースもありえるので。</p>
-
-<h2>次回へ向けて</h2>
-
-<p>え、そんなちょっとしか記述しなくても directive として成立してるんだ、ってことを見てもらうのが初回の目的なので、ひとまずここで終了。</p>
-
-<p>こんなとこで終わったら、directive こわいままになっちゃうので、なんとしてでも<a href="/blog/2013/11/22/angularjs-custom-directives/">次回</a>も続けないと。</p>
 ]]></content>
   </entry>
   

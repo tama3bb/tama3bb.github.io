@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/12/08 AngularJS, service AngularJSでちゃちゃっとアニメーションを試す AngularJS 1.2.4 AngularJS 1.2.4 がリリースされ、$animate 関連の Bug Fixes が入り ng-include をネストした ng- &hellip;">
+	<meta name="description" content="2013/12/10 AngularJS AngularJSのHTMLバインド {{expression}} ではundefinedを気にしない Forgiving AngularJS: Expressions ページで Forgiving として説明されているように、HTML（テンプレート） &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,48 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-10T02:09:47+09:00" data-updated="true" itemprop="datePublished">2013/12/10</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/10/angularjs-expressions-forgiving/" itemprop="url">AngularJSのHTMLバインド {{expression}} ではundefinedを気にしない</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>Forgiving</h2>
+
+<p><a href="http://docs.angularjs.org/guide/expression">AngularJS: Expressions</a> ページで <a href="http://docs.angularjs.org/guide/expression#property-evaluation_forgiving">Forgiving</a> として説明されているように、HTML（テンプレート）で記述する AngularJS のバインド部分（<code>{{ result.title.value }}</code> や<code>ng-if=“result.tags.length”</code>）では、result、title、tags が、undefined や null でないかや object かどうかということを考慮したコードにしなくていい。</p>
+
+<p>result が通信してサーバから取得するデータであれば、レスポンスが返るまでの間 result は undefined の状態になるけど、だからと言って<code>{{ ((result || {}).title || {}).c }}</code>とか、<code>result &amp;&amp; result.title &amp;&amp; result.title.value</code>のようにコーディングしなくていい。</p>
+
+
+		
+		<a href="/blog/2013/12/10/angularjs-expressions-forgiving/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -922,52 +964,6 @@ angular.module('Ninja', ['ui.bootstrap'])
 
 		
 		<a href="/blog/2013/11/16/angularjs-ngif-proliferation/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-12T16:16:00+09:00" data-updated="true" itemprop="datePublished">2013/11/12</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/11/12/angularjs-ngclass/" itemprop="url">AngularJSのng-classを使いこなそう</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>ng-class とは</h2>
-
-<p><a href="http://docs.angularjs.org/api/ng.directive:ngClass">ng-class</a> は、HTML 要素に CSS class 属性値を動的にセットできる directive で、ほんとよく使う。</p>
-
-<p>すでに同じ class 属性値が要素にセットされてるときは、重複しないようになっているあたりもいい感じ。</p>
-
-<p>ng-class の使い方は、スペース区切りの class 文字列<code>'active disabled'</code>を保持する変数や、class 属性値文字列の配列<code>['active', 'disabled']</code>を保持する変数を指定する。</p>
-
-<p>けれど一番良く使うのは、class 属性値と boolean 値をマッピングした object で、これを ng-class に指定する使い方について紹介。</p>
-
-
-		
-		<a href="/blog/2013/11/12/angularjs-ngclass/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

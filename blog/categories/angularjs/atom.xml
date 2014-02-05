@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-04T16:21:49+09:00</updated>
+  <updated>2014-02-05T17:58:51+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJSのng-ifで文字列を使うなら !! を付けよう]]></title>
+    <link href="http://angularjsninja.com/blog/2014/02/05/ngif-string-caveat/"/>
+    <updated>2014-02-05T17:44:16+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/02/05/ngif-string-caveat</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>&lsquo;0&rsquo; が表示されない…</h2>
+
+<p><code>ng-if</code> あるいは、<code>ng-show</code>や<code>ng-hide</code>を使うときに、string 値の有無で表示判定を記述することもある。</p>
+
+<p>
+``` html</p>
+
+<p ng-if="model.value">{{model.label}}</p>
+
+
+<p>```
+</p>
+
+<p>そんなとき、<code>model.value</code>の値が<code>'0'</code>だったらどうなるか。</p>
+
+<p>なんと、表示されない…。</p>
+
+<!-- more -->
+
+
+<h2>&lsquo;0&rsquo; だけじゃない</h2>
+
+<p>この現象、<code>'0'</code>だけでなく、<code>'f'</code> <code>'no'</code> <code>'n'</code>といった文字列（大文字・小文字問わず）の場合であっても表示されない。</p>
+
+<p>angular.js のコードはこうなってる。</p>
+
+<p>``` javascript
+function toBoolean(value) {
+  if (typeof value === &lsquo;function&rsquo;) {</p>
+
+<pre><code>value = true;
+</code></pre>
+
+<p>  } else if (value &amp;&amp; value.length !== 0) {</p>
+
+<pre><code>var v = lowercase("" + value);
+value = !(v == 'f' || v == '0' || v == 'false' || v == 'no' || v == 'n' || v == '[]');
+</code></pre>
+
+<p>  } else {</p>
+
+<pre><code>value = false;
+</code></pre>
+
+<p>  }
+  return value;
+}
+```</p>
+
+<h2>boolean にしちゃっておこう</h2>
+
+<p>ということで、文字列の有無で判定させたいだけってときは<code>!!</code>を付けときましょう。boolean とか object の場合でも<code>!!</code>付ける方針にしとくのがラクでいいかな。</p>
+
+<p>
+``` html</p>
+
+<p ng-if="!!model.value">{{model.label}}</p>
+
+
+<p>```
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS で HTTP ヘッダを設定するには]]></title>
@@ -358,106 +429,6 @@ link: function(scope, element, attrs, modelCtrl) {
 
 
 <p>Angular Team</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS のデータバインドを支える $apply]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/27/angularjs-apply/"/>
-    <updated>2013-12-27T16:19:50+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/27/angularjs-apply</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>データバインドが効かない？！</h2>
-
-<p>AngualrJS を使っていて楽しいのは超ラクチンなデータバインド。なのに、そのデータバインドで以下のような困ったことに遭遇しているとしたら、それは <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$apply">$apply</a> を学ぶときが来ているということ。</p>
-
-<ul>
-<li>データバインドが効かないぞ？！</li>
-<li>データの反映が次のイベントまで遅れてる気がする？？</li>
-</ul>
-
-
-<p>こういうときは $apply の出番だ。$apply を使う必要があるケースというのは、ざくっと言うと AngularJS が知りえないところでイベントが起こっているとき。$apply で AngularJS に変化が起きていることを伝え、後のことは任せることができる。</p>
-
-<!-- more -->
-
-
-<h2>$apply が必要ないケース</h2>
-
-<p>整合性を維持するための dirty checking（$watch）処理は、$digest ループ（サイクル）でまとめて実行される。この $digest ループが始まるきっかけは、『<a href="/blog/2013/12/13/angularjs-watch/">AngularJS のデータバインドを支える $watch</a>』 のページにも掲載した以下に示す各種イベント。</p>
-
-<table>
-<thead>
-<tr>
-<th>イベント </th>
-<th> 概要</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ナビゲーション </td>
-<td> ブラウザの location 変更時</td>
-</tr>
-<tr>
-<td>ネットワーク </td>
-<td> $http, $resource レスポンス受信時</td>
-</tr>
-<tr>
-<td>DOM イベント </td>
-<td> ng-click, ng-mouseover などの実行時</td>
-</tr>
-<tr>
-<td>タイマー </td>
-<td> $timeout によるタイマー処理の実行時</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>こういった処理によってデータや UI に変更があった場合のことは、$apply を自分で記述することなく AngularJS におまかせできる。こうしたイベントでは、内部的に $apply が使われている。</p>
-
-<h2>$apply が必要なケース</h2>
-
-<p>じゃあ、どういうときには $apply を自分で記述する必要があるのか。それは、AngularJS 組み込みの services（$http や $timeout など）や directives（ng-click など）を使わない（使えない）とき、ということ。</p>
-
-<p>AngularJS と無関係なところ（jQuery など）で XHR 通信して受け取ったデータをモデルに反映した場合や、あるいは datepicker などのプラグインからモデルに値を反映した場合は、そのモデルと UI が ng-model や ng-bind などでバインドされていたとしても、それだけでは即時には反映されない。反映されるのを、次の $digest サイクルが起こるまでただ待つことになる。</p>
-
-<p>この $digest サイクルを起こす役割が $apply である。</p>
-
-<h2>$interval と setInterval を比較して $apply を理解する</h2>
-
-<p>まず、AngularJS 標準 API の $interval を利用している例。これであれば 1 秒毎に日時が更新され続ける。</p>
-
-<p><code>javascript
-var update = function() {
-  $scope.now = new Date();
-};
-update();
-$interval(update, 1000);
-</code></p>
-
-<p>次に、setInterval を利用したコード。これだと 1 秒ごとには反映されない。なにかしら $digest ループが起きたタイミングで反映される。</p>
-
-<p><code>javascript
-var update = function() {
-  $scope.now = new Date();
-};
-update();
-setInterval(update, 1000);
-</code></p>
-
-<p>setInterval に $apply を付ければ、1 秒ごとに反映されるようになる。</p>
-
-<p><code>javascript
-var update = function() {
-  $scope.now = new Date();
-};
-update();
-setInterval(function() {
-  $scope.$apply(update);
-}, 1000);
-</code></p>
 ]]></content>
   </entry>
   
