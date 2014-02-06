@@ -18,6 +18,8 @@ categories: [AngularJS, directive]
 
 どちらでも見た目は同じになるし、イベント処理は`ng-click`がやってくれるし、`<a>`のほうがコードは短くなるしって感じで、どっちも一緒なんだし`<a>`にしとこってノリでやってると、`disabled` のワナにハマるかも。
 
+<!-- more -->
+
 ## aタグの場合、ng-disabled で非活性にできるのは見た目だけ
 
 ボタンを非活性にするための AngularJS 標準 directive に、[`ng-disabled`](http://docs.angularjs.org/api/ng.directive:ngDisabled)がある。これを使うと、`ng-disabled="true"`となるときにボタンが非活性になってくれる。
