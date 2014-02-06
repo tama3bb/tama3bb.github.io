@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-06T15:29:03+09:00</updated>
+  <updated>2014-02-06T15:33:21+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[非活性（ng-disabled）にしてもaタグのボタンだとng-click動くので注意]]></title>
     <link href="http://angularjsninja.com/blog/2014/02/06/anchor-with-ngdisabled-caveat/"/>
-    <updated>2014-02-06T15:15:21+09:00</updated>
+    <updated>2014-02-06T15:29:21+09:00</updated>
     <id>http://angularjsninja.com/blog/2014/02/06/anchor-with-ngdisabled-caveat</id>
     <content type="html"><![CDATA[<hr />
 
@@ -32,6 +32,9 @@
 
 
 <p>どちらでも見た目は同じになるし、イベント処理は<code>ng-click</code>がやってくれるし、<code>&lt;a&gt;</code>のほうがコードは短くなるしって感じで、どっちも一緒なんだし<code>&lt;a&gt;</code>にしとこってノリでやってると、<code>disabled</code> のワナにハマるかも。</p>
+
+<!-- more -->
+
 
 <h2>aタグの場合、ng-disabled で非活性にできるのは見た目だけ</h2>
 

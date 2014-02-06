@@ -110,7 +110,7 @@
   
 
 
-<time datetime="2014-02-06T15:15:21+09:00" data-updated="true" itemprop="datePublished">2014/02/06</time></div>
+<time datetime="2014-02-06T15:29:21+09:00" data-updated="true" itemprop="datePublished">2014/02/06</time></div>
 		<div class="tags">
 
 
@@ -137,23 +137,9 @@
 
 <p>どちらでも見た目は同じになるし、イベント処理は<code>ng-click</code>がやってくれるし、<code>&lt;a&gt;</code>のほうがコードは短くなるしって感じで、どっちも一緒なんだし<code>&lt;a&gt;</code>にしとこってノリでやってると、<code>disabled</code> のワナにハマるかも。</p>
 
-<h2>aタグの場合、ng-disabled で非活性にできるのは見た目だけ</h2>
-
-<p>ボタンを非活性にするための AngularJS 標準 directive に、<a href="http://docs.angularjs.org/api/ng.directive:ngDisabled"><code>ng-disabled</code></a>がある。これを使うと、<code>ng-disabled="true"</code>となるときにボタンが非活性になってくれる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;handleClick()&quot;</span> <span class="na">ng-disabled=</span><span class="s">&quot;aForm.$invalid&quot;</span><span class="nt">&gt;</span>Done<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;handleClick()&quot;</span> <span class="na">ng-disabled=</span><span class="s">&quot;aForm.$invalid&quot;</span><span class="nt">&gt;</span>Done<span class="nt">&lt;/a&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ここで注意が必要なのは、<code>&lt;a&gt;</code>のほうは<code>ng-disabled="true"</code>で非活性になっているときでも、ボタンクリックで<code>ng-click</code>の処理が走るという点。見た目が非活性になっているので、<code>ng-click</code>のほうも制御してくれているだろうと期待して（思い込んで）しまう。</p>
-
-<p>そんなわけで、<code>&lt;a&gt;</code>タグに<code>ng-disabled</code>を使うときは注意しよう。<code>&lt;button type="button"&gt;</code>に変えるか、どうしても<code>&lt;a&gt;</code>タグでいくなら<code>ng-click="!aForm.$invalid &amp;&amp; handleClick()"</code>とかってしときましょう…。</p>
 
 		
-		
+		<a href="/blog/2014/02/06/anchor-with-ngdisabled-caveat/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
