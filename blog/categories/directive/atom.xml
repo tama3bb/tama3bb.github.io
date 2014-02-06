@@ -4,7 +4,7 @@
   <title><![CDATA[Category: directive | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/directive/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-05T17:58:51+09:00</updated>
+  <updated>2014-02-06T15:29:03+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[非活性（ng-disabled）にしてもaタグのボタンだとng-click動くので注意]]></title>
+    <link href="http://angularjsninja.com/blog/2014/02/06/anchor-with-ngdisabled-caveat/"/>
+    <updated>2014-02-06T15:15:21+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/02/06/anchor-with-ngdisabled-caveat</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>Bootstrap のボタン</h2>
+
+<p><a href="http://getbootstrap.com">Bootstrap</a> ベースのボタンに<code>ng-click</code>を記述する（form を submit しない）コードは、主に以下の 2 通りある。</p>
+
+<p><code>html
+&lt;button type="button" class="btn" ng-click="handleClick()"&gt;Done&lt;/button&gt;
+&lt;a href="#" class="btn" ng-click="handleClick()"&gt;Done&lt;/a&gt;
+</code></p>
+
+<p>どちらでも見た目は同じになるし、イベント処理は<code>ng-click</code>がやってくれるし、<code>&lt;a&gt;</code>のほうがコードは短くなるしって感じで、どっちも一緒なんだし<code>&lt;a&gt;</code>にしとこってノリでやってると、<code>disabled</code> のワナにハマるかも。</p>
+
+<h2>aタグの場合、ng-disabled で非活性にできるのは見た目だけ</h2>
+
+<p>ボタンを非活性にするための AngularJS 標準 directive に、<a href="http://docs.angularjs.org/api/ng.directive:ngDisabled"><code>ng-disabled</code></a>がある。これを使うと、<code>ng-disabled="true"</code>となるときにボタンが非活性になってくれる。</p>
+
+<p><code>html
+&lt;button type="button" class="btn" ng-click="handleClick()" ng-disabled="aForm.$invalid"&gt;Done&lt;/button&gt;
+&lt;a href="#" class="btn" ng-click="handleClick()" ng-disabled="aForm.$invalid"&gt;Done&lt;/a&gt;
+</code></p>
+
+<p>ここで注意が必要なのは、<code>&lt;a&gt;</code>のほうは<code>ng-disabled="true"</code>で非活性になっているときでも、ボタンクリックで<code>ng-click</code>の処理が走るという点。見た目が非活性になっているので、<code>ng-click</code>のほうも制御してくれているだろうと期待して（思い込んで）しまう。</p>
+
+<p>そんなわけで、<code>&lt;a&gt;</code>タグに<code>ng-disabled</code>を使うときは注意しよう。<code>&lt;button type="button"&gt;</code>に変えるか、どうしても<code>&lt;a&gt;</code>タグでいくなら<code>ng-click="!aForm.$invalid &amp;&amp; handleClick()"</code>とかってしときましょう…。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSのng-ifで文字列を使うなら !! を付けよう]]></title>
@@ -476,155 +509,6 @@ scope: {
 <p>この３回目で、再利用のための directive を記述する方法が理解できた。もう Directive なんてこわくない！</p>
 
 <p>なんだけど、<a href="/blog/2013/11/29/angularjs-custom-directives/">４回目</a>でも引き続き、<code>controller</code> <code>require</code>といった directive のプロパティを扱う。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その２）]]></title>
-    <link href="http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives/"/>
-    <updated>2013-11-22T13:37:02+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>compile と link</h2>
-
-<p><a href="/blog/2013/11/20/angularjs-custom-directives/">前回</a>に引き続き、今回もカスタム directive について。</p>
-
-<p>２回目の今回は、<code>compile</code>と<code>link</code>の使い分けについて。</p>
-
-<h2>compile のサンプルコード</h2>
-
-<p>まずは<code>compile</code>を利用するサンプルコードを、『<a href="http://www.amazon.co.jp/dp/B00EQ67J30">Mastering Web Application Development with AngularJS</a>』から抜粋して見ていく。</p>
-
-<p>このコードでは、Bootstrap の理由を前提として、以下に示すように Bootstrap でのボタンデザインに必要な CSS class の値を追加する処理を、<code>compile</code>で実装している。</p>
-
-<p>``` javascript
-myModule.directive(&lsquo;button&rsquo;, function() {
-  return {</p>
-
-<pre><code>restrict: 'E',
-compile: function(element, attrs) {
-  element.addClass('btn');
-  if (attrs.type === 'submit') {
-    element.addClass('btn-primary');
-  }
-  if (attrs.size) {
-    element.addClass('btn-' + attrs.size);
-  }
-}
-</code></pre>
-
-<p>  };
-});
-```</p>
-
-<ul>
-<li><code>&lt;button&gt;</code>の class 属性に<code>btn</code>を追加</li>
-<li><code>&lt;button type="submit"&gt;</code>のように <code>type="submit"</code>がある場合には、class 属性に<code>btn-primary</code>を追加</li>
-<li><code>&lt;button size="..."&gt;</code>のように size 属性がある場合には、<code>btn-large</code>など、<code>btn-</code> と size 属性で指定した文字列を組み合わせた文字列を class 属性に追加</li>
-</ul>
-
-
-<p>コードからわかるように、compile オプションの function 第１引数にある<code>element</code>は、jQuery（jqLite）オブジェクトになっているので、直接 jQuery の API を利用できる。つまり<code>$(element)</code>や、<code>$(button)</code>などとしてやる必要はない。</p>
-
-<p>第２引数の<code>attrs</code>では<code>attrs.size</code>のようにドット区切りで属性値にアクセスできるので、HTML テンプレート側の値を簡単に参照することができる。</p>
-
-<!-- more -->
-
-
-<h2>compile の流れ</h2>
-
-<p>AngularJS が HTML テンプレートをコンパイルするために、標準の directives とカスタム定義した directives のすべてを、DOM の要素・属性・コメント・CSS class から探し出す。各 directive の<code>compile</code>function を呼び出し、<code>compile</code>function から返される<code>link</code>function を後で呼び出すために集めていく流れとなる。</p>
-
-<p>なお、directives をコンパイルしていく処理の順序は<code>priority</code>の大きい順となるが、これについてはまた別の機会に先送り。</p>
-
-<p>重要なポイントとしては、<code>compile</code>の処理は scope ができる前の処理であり、<code>compile</code>function では scope を利用できない。</p>
-
-<p>すべてのコンパイル処理が終わった後、生成した scope を付けて<code>link</code>function を呼び出す流れとなり、この時点で<code>link</code>function の scope を利用した DOM との間での双方向バインドが効くことになる。</p>
-
-<h2>compile と link の使い分け</h2>
-
-<p><code>ng-repeat</code>の内側にある directive というケースなど、同じ directive が繰り返し使われることになるような場合では、<code>compile</code>の function は<code>ng-repeat</code>の繰り返しに関係なく一度だけ呼び出されるのに対し、<code>link</code>の function はイテレーションのたびに呼び出されることになる。</p>
-
-<p>これは、scope のデータや双方向バインドに依存ぜずに処理できる上記のサンプルコードのようなケースであれば、<code>compile</code>を使うことで同じ処理を繰り返す無駄を省くように最適化できることになる。</p>
-
-<p><code>compile</code>と<code>link</code>の両方を指定した場合には<code>link</code>が無視される仕様になっているため、両方を利用した実装をしたい場合には<code>compile</code>function から<code>link</code>function を return するよう実装することになる。</p>
-
-<h2>link のサンプルコード</h2>
-
-<p>ここから、最もよく利用することになる<code>link</code>の書き方について見ていく。</p>
-
-<p>``` javascript
-myModule.directive(&lsquo;myDirective&rsquo;, function () {
-  return {</p>
-
-<pre><code>link: function (scope, element) {
-  scope.$watch('xxxVar', function () {
-    // ...
-  });
-  scope.$on('xxxEvent', function () {
-    // ...
-  });
-}
-</code></pre>
-
-<p>  };
-});
-<code>``
-このように、</code>link<code>では、</code>scope`にあるモデルの変更を検知して処理することや、イベントに応じた処理を記述して、DOM や controller とのやり取りを記述していく。</p>
-
-<h2>いろいろある link の書き方</h2>
-
-<p>Directives では<code>link</code>の書き方にバリエーションがあるので、ざっと眺めておく。</p>
-
-<p>``` javascript
-myModule.directive(&lsquo;returnLinkFunction&rsquo;, function () {
-  return function(scope, element, attrs) {</p>
-
-<pre><code>// ...
-</code></pre>
-
-<p>  };
-});
-<code>``
-まず、単に</code>function<code>を return するだけという書き方ができて、これは</code>link<code>プロパティだけを持つオブジェクトを返しているのと同じことになる。</code>link`以外のプロパティを指定する必要が無ければ、こう書くことでシンプルなコードにできる。</p>
-
-<p>``` javascript
-myModule.directive(&lsquo;usingLinkOption&rsquo;, function () {
-  return {</p>
-
-<pre><code>link: function(scope, element, attrs) {
-  // ...
-}
-</code></pre>
-
-<p>  };
-});
-<code>``
-これはオブジェクト（DDO: Directive Definition Object）を返す書き方で、</code>compile`プロパティを使わない場合の書き方。</p>
-
-<p>``` javascript
-myModule.directive(&lsquo;usingCompileOption&rsquo;, function () {
-  return {</p>
-
-<pre><code>compile: function(element, attrs) {
-  // ...
-  return function(scope, element, attrs) {
-    // ...
-  };
-}
-</code></pre>
-
-<p>  };
-});
-<code>``
-最後に、</code>compile<code>プロパティを使う場合の書き方で、</code>compile<code>function で return している</code>function<code>が</code>link`function として扱われることになる。</p>
-
-<h2>３回目へ向けて</h2>
-
-<p>この２回目で compile と link の使い分けができるようになったので、ここまでの知識でとりあえず directive を使っていろいろ実装していけるんじゃないかと思う。</p>
-
-<p>けれども、<code>replace</code> <code>transclude</code> <code>scope</code> <code>controller</code> <code>require</code>といった大事なプロパティを抑えてないので、ここで終わったら directive こわいままになっちゃうので、<a href="/blog/2013/11/27/angularjs-custom-directives/">３回目</a>に続く。</p>
 ]]></content>
   </entry>
   

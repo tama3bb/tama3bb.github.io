@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2014/02/05 AngularJS, directive AngularJSのng-ifで文字列を使うなら !! を付けよう &lsquo;0&rsquo; が表示されない… ng-if あるいは、ng-showやng-hideを使うときに、string &hellip;">
+	<meta name="description" content="2014/02/06 AngularJS, directive 非活性（ng-disabled）にしてもaタグのボタンだとng-click動くので注意 Bootstrap のボタン Bootstrap ベースのボタンにng-clickを記述する（form を submit しない）コードは、 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,69 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-06T15:15:21+09:00" data-updated="true" itemprop="datePublished">2014/02/06</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/02/06/anchor-with-ngdisabled-caveat/" itemprop="url">非活性（ng-disabled）にしてもaタグのボタンだとng-click動くので注意</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>Bootstrap のボタン</h2>
+
+<p><a href="http://getbootstrap.com">Bootstrap</a> ベースのボタンに<code>ng-click</code>を記述する（form を submit しない）コードは、主に以下の 2 通りある。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;handleClick()&quot;</span><span class="nt">&gt;</span>Done<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;handleClick()&quot;</span><span class="nt">&gt;</span>Done<span class="nt">&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>どちらでも見た目は同じになるし、イベント処理は<code>ng-click</code>がやってくれるし、<code>&lt;a&gt;</code>のほうがコードは短くなるしって感じで、どっちも一緒なんだし<code>&lt;a&gt;</code>にしとこってノリでやってると、<code>disabled</code> のワナにハマるかも。</p>
+
+<h2>aタグの場合、ng-disabled で非活性にできるのは見た目だけ</h2>
+
+<p>ボタンを非活性にするための AngularJS 標準 directive に、<a href="http://docs.angularjs.org/api/ng.directive:ngDisabled"><code>ng-disabled</code></a>がある。これを使うと、<code>ng-disabled="true"</code>となるときにボタンが非活性になってくれる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;handleClick()&quot;</span> <span class="na">ng-disabled=</span><span class="s">&quot;aForm.$invalid&quot;</span><span class="nt">&gt;</span>Done<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;handleClick()&quot;</span> <span class="na">ng-disabled=</span><span class="s">&quot;aForm.$invalid&quot;</span><span class="nt">&gt;</span>Done<span class="nt">&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここで注意が必要なのは、<code>&lt;a&gt;</code>のほうは<code>ng-disabled="true"</code>で非活性になっているときでも、ボタンクリックで<code>ng-click</code>の処理が走るという点。見た目が非活性になっているので、<code>ng-click</code>のほうも制御してくれているだろうと期待して（思い込んで）しまう。</p>
+
+<p>そんなわけで、<code>&lt;a&gt;</code>タグに<code>ng-disabled</code>を使うときは注意しよう。<code>&lt;button type="button"&gt;</code>に変えるか、どうしても<code>&lt;a&gt;</code>タグでいくなら<code>ng-click="!aForm.$invalid &amp;&amp; handleClick()"</code>とかってしときましょう…。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -570,82 +633,6 @@
 
 		
 		<a href="/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-13T18:43:39+09:00" data-updated="true" itemprop="datePublished">2013/12/13</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/scope/'>scope</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/12/13/angularjs-watch/" itemprop="url">AngularJS のデータバインドを支える $watch</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>$watch</h2>
-
-<p>AngularJS の強力なデータバインドを支える仕組みのうち、まず <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watch">$watch</a> について取り上げる。</p>
-
-<p>$watch を使えば、監視（Observe）したいオブジェクトやプロパティが変化したときに実行する処理（リスナー）を容易に記述できる。</p>
-
-<p>$watch を利用する場所は scope のある directive や controller で、ng-model や ng-bind のようなデータバインドする directive を独自に実装する場合や、モデルの変更に応じて処理をバインドする場合などに使用できる。</p>
-
-<h2>$digest サイクル</h2>
-
-<p>$watch による変更検知処理は、ポーリング的（一定間隔で頻繁）に実施されるのではなく、以下のイベントが生じたときに $digest サイクル（または $digest ループ）と呼ばれる処理が実行され、その中で実行される。</p>
-
-<table>
-<thead>
-<tr>
-<th>イベント </th>
-<th> 概要</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ナビゲーション </td>
-<td> ブラウザの location 変更時</td>
-</tr>
-<tr>
-<td>ネットワーク </td>
-<td> $http, $resource レスポンス受信時</td>
-</tr>
-<tr>
-<td>DOM イベント </td>
-<td> ng-click, ng-mouseover などの実行時</td>
-</tr>
-<tr>
-<td>タイマー </td>
-<td> $timeout によるタイマー処理の実行時</td>
-</tr>
-</tbody>
-</table>
-
-
-
-		
-		<a href="/blog/2013/12/13/angularjs-watch/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

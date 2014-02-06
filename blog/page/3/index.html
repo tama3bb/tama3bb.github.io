@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/11/12 AngularJS, directive AngularJSのng-classを使いこなそう ng-class とは ng-class は、HTML 要素に CSS class 属性値を動的にセットできる directive で、ほんとよく使う。 すでに同じ class &hellip;">
+	<meta name="description" content="2013/11/16 AngularJS, directive AngularJSで増殖現象に出会ったらng-ifを疑おう 増殖現象にビビる UI Bootstrap の alert と、angular-app あたりを参考にしながらメッセージ表示機能を実装していたら、 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,84 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-16T02:11:00+09:00" data-updated="true" itemprop="datePublished">2013/11/16</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/11/16/angularjs-ngif-proliferation/" itemprop="url">AngularJSで増殖現象に出会ったらng-ifを疑おう</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>増殖現象にビビる</h2>
+
+<p>UI Bootstrap の <a href="http://angular-ui.github.io/bootstrap/#/alert">alert</a> と、<a href="https://github.com/angular-app/angular-app">angular-app</a> あたりを参考にしながらメッセージ表示機能を実装していたら、どんどんメッセージが増殖してくのでビビった。１件メッセージを追加するたびに、メッセージ配列ごと増えるという…。</p>
+
+<h2>増殖現象デモ</h2>
+
+<script src="//code.angularjs.org/1.2.0/angular.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
+
+
+<script>
+angular.module('Ninja', ['ui.bootstrap'])
+  .controller('NotificationsCtrl', function($scope) {
+    $scope.i = 0;
+    $scope.notifications = [];
+    $scope.addMessage = function(message, type) {
+      $scope.notifications.push({
+        message: message + $scope.i++,
+        type: type || 'error'
+      });
+    };
+  });
+</script>
+
+
+<div ng-app="Ninja" ng-controller="NotificationsCtrl" ng-cloak>
+  <a href="" ng-click="addMessage('message:')">Add a message: {{i}}</a>　← 何回かクリック！
+  <div ng-if="notifications.length">
+    <alert type="notification.type" ng-repeat="notification in notifications">
+      {{notification.message}}
+    </alert>
+  </div>
+</div>
+
+
+
+
+
+		
+		<a href="/blog/2013/11/16/angularjs-ngif-proliferation/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -523,46 +601,6 @@
 
 		
 		<a href="/blog/2013/09/25/twitter-bootstrap-modal-draggable/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-13T23:38:00+09:00" data-updated="true" itemprop="datePublished">2013/09/13</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/localstorage/'>localStorage</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/09/13/angular-localstorage/" itemprop="url">AngularJS の localStorage モジュール angularLocalStorage</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<p>AngularJS アプリケーションで localStorage を使うときに便利なモジュールの紹介。</p>
-
-<p><a href="https://github.com/agrublev/angularLocalStorage">agrublev/angularLocalStorage</a></p>
-
-
-		
-		<a href="/blog/2013/09/13/angular-localstorage/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

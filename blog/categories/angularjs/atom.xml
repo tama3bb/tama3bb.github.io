@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-05T17:58:51+09:00</updated>
+  <updated>2014-02-06T15:29:03+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[非活性（ng-disabled）にしてもaタグのボタンだとng-click動くので注意]]></title>
+    <link href="http://angularjsninja.com/blog/2014/02/06/anchor-with-ngdisabled-caveat/"/>
+    <updated>2014-02-06T15:15:21+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/02/06/anchor-with-ngdisabled-caveat</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>Bootstrap のボタン</h2>
+
+<p><a href="http://getbootstrap.com">Bootstrap</a> ベースのボタンに<code>ng-click</code>を記述する（form を submit しない）コードは、主に以下の 2 通りある。</p>
+
+<p><code>html
+&lt;button type="button" class="btn" ng-click="handleClick()"&gt;Done&lt;/button&gt;
+&lt;a href="#" class="btn" ng-click="handleClick()"&gt;Done&lt;/a&gt;
+</code></p>
+
+<p>どちらでも見た目は同じになるし、イベント処理は<code>ng-click</code>がやってくれるし、<code>&lt;a&gt;</code>のほうがコードは短くなるしって感じで、どっちも一緒なんだし<code>&lt;a&gt;</code>にしとこってノリでやってると、<code>disabled</code> のワナにハマるかも。</p>
+
+<h2>aタグの場合、ng-disabled で非活性にできるのは見た目だけ</h2>
+
+<p>ボタンを非活性にするための AngularJS 標準 directive に、<a href="http://docs.angularjs.org/api/ng.directive:ngDisabled"><code>ng-disabled</code></a>がある。これを使うと、<code>ng-disabled="true"</code>となるときにボタンが非活性になってくれる。</p>
+
+<p><code>html
+&lt;button type="button" class="btn" ng-click="handleClick()" ng-disabled="aForm.$invalid"&gt;Done&lt;/button&gt;
+&lt;a href="#" class="btn" ng-click="handleClick()" ng-disabled="aForm.$invalid"&gt;Done&lt;/a&gt;
+</code></p>
+
+<p>ここで注意が必要なのは、<code>&lt;a&gt;</code>のほうは<code>ng-disabled="true"</code>で非活性になっているときでも、ボタンクリックで<code>ng-click</code>の処理が走るという点。見た目が非活性になっているので、<code>ng-click</code>のほうも制御してくれているだろうと期待して（思い込んで）しまう。</p>
+
+<p>そんなわけで、<code>&lt;a&gt;</code>タグに<code>ng-disabled</code>を使うときは注意しよう。<code>&lt;button type="button"&gt;</code>に変えるか、どうしても<code>&lt;a&gt;</code>タグでいくなら<code>ng-click="!aForm.$invalid &amp;&amp; handleClick()"</code>とかってしときましょう…。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJSのng-ifで文字列を使うなら !! を付けよう]]></title>
@@ -320,115 +353,6 @@ link: function(scope, element, attrs, modelCtrl) {
 
 
 <p>Dean Sofer</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2014）Jan. 16 動画まとめ]]></title>
-    <link href="http://angularjsninja.com/blog/2014/01/17/ng-conf-2014/"/>
-    <updated>2014-01-17T14:32:50+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/01/17/ng-conf-2014</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>ng-conf 2014 &ndash; The World&rsquo;s First Angular Conference in Salt Lake City, Utah</h2>
-
-<p>Angular カンファレンス <a href="http://ng-conf.org">ng-conf 2014</a> が、アメリカはユタ州ソルトレイクシティで開催中です。</p>
-
-<p>YouTube の <a href="http://www.youtube.com/user/ngconfvideos">ng-conf 2014 チャンネル</a> のほうに動画はまとめてアップロードされていますが、このエントリーでは当日（Thursday, January 16）のスケジュールどおりに並べています。最終日（Friday, January 17）の動画は<a href="/blog/2014/01/18/ng-conf-2014/">次のエントリー</a>で。</p>
-
-<h3>Keynote</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/r1A1VR0ibIQ" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Miško Hevery &amp; Brad Green</p>
-
-<!-- more -->
-
-
-<h3>AngularJS in 20-ish Minutes</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/tnXO-i7944M" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Dan Wahlin</p>
-
-<h3>Writing a Massive Angular App</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/62RvRQuMVyg" frameborder="0" allowfullscreen></iframe>
-
-
-<p>The Google Double Click Team</p>
-
-<h3>Going Postal with Angular in Promises</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/XcRdO5QVlqE" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Christian Lilley</p>
-
-<h3>Deep Dive into Custom Directives</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/UMkd0nYmLzY" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Dave Smith</p>
-
-<h3>Progressive Saving</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/JLij19xbefI" frameborder="0" allowfullscreen></iframe>
-
-
-<p>John Papa</p>
-
-<h3>Rapid Prototyping with Angular &amp; Deployd</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/0V8fQoqQLLA" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Jeff Cross</p>
-
-<h3>Rich Data Models &amp; Angular</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/JfykD-0tpjI" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Ben Teese</p>
-
-<h3>Angular Weapon Defense</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/f62k7b753-Y" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Tom Valletta &amp; Gabe Dayley</p>
-
-<h3>Filters: Beyond OrderBy and LimitTo</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/L4FJ_kuO9Rc" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Sharon DiOrio</p>
-
-<h3>Awesome Interfaces with AngularJS Animations</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/hC0MpgUoui4" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Lukas Rubbelke &amp; Matias Niemela</p>
-
-<h3>Dependency Injection</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/_OGGsf1ZXMs" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Vojta Jina</p>
-
-<h3>Angular Team Panel</h3>
-
-<iframe width="560" height="315" src="http://angularjsninja.com//www.youtube.com/embed/srt3OBP2kGc" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Angular Team</p>
 ]]></content>
   </entry>
   
