@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-17T02:27:04+09:00</updated>
+  <updated>2014-02-17T02:58:15+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -96,14 +96,14 @@
 
 <p><code>ng-if</code> あるいは、<code>ng-show</code>や<code>ng-hide</code>を使うときに、string 値の有無で表示判定を記述することもある。</p>
 
-<p>
+<p>{% raw %}
 ``` html</p>
 
 <p ng-if="model.value">{{model.label}}</p>
 
 
 <p>```
-</p>
+{% endraw %}</p>
 
 <p>そんなとき、<code>model.value</code>の値が<code>'0'</code>だったらどうなるか。</p>
 
@@ -145,14 +145,14 @@ value = !(v == 'f' || v == '0' || v == 'false' || v == 'no' || v == 'n' || v == 
 
 <p>ということで、文字列の有無で判定させたいだけってときは<code>!!</code>を付けときましょう。boolean とか object の場合でも<code>!!</code>付ける方針にしとくのがラクでいいかな。</p>
 
-<p>
+<p>{% raw %}
 ``` html</p>
 
 <p ng-if="!!model.value">{{model.label}}</p>
 
 
 <p>```
-</p>
+{% endraw %}</p>
 ]]></content>
   </entry>
   
@@ -225,7 +225,7 @@ $scope.newComment = '';
 <input type="text" ng-model="newComment" ng-keydown="handleKeydown($event)"></p>
 
 <p><ul>
-  <li ng-repeat="comment in comments"></li>
+  <li ng-repeat="comment in comments">{{comment}}</li>
 <ul>
 ```</p>
 
