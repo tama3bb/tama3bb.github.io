@@ -7,9 +7,6 @@ categories: [AngularJS, AngularFire, Firebase]
 ---
 
 ---
-
-![AngularFire](http://angularfire.com/img/afire-logo.png)
-
 Firebase の AngularJS 向け API、[AngularFire](http://angularfire.com) のページが公開されたばかりで、ちょうどいい機会なのでリアルタイムチャットアプリケーションの実装がどれほど簡単にできるのかを見ておく。
 
 <!-- more -->
