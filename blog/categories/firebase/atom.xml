@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Firebase | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/firebase/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-06T15:33:21+09:00</updated>
+  <updated>2014-02-17T01:13:22+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -19,8 +19,6 @@
     <updated>2013-09-01T00:29:00+09:00</updated>
     <id>http://angularjsninja.com/blog/2013/09/01/angularfire-realtime-chat-app</id>
     <content type="html"><![CDATA[<hr />
-
-<p><img src="http://angularfire.com/img/afire-logo.png" alt="AngularFire" /></p>
 
 <p>Firebase の AngularJS 向け API、<a href="http://angularfire.com">AngularFire</a> のページが公開されたばかりで、ちょうどいい機会なのでリアルタイムチャットアプリケーションの実装がどれほど簡単にできるのかを見ておく。</p>
 
