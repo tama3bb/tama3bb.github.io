@@ -9,7 +9,8 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/09/03 AngularJS, jQuery なぜ AngularJS を採用したのか 今回は、AngularJS を採用した理由について軽くまとめておく。 JavaScript MVC 系のフレームワーク導入を検討することにし、もっとも普及している Backbone.js と、 &hellip;">
+	<meta name="description" content="2013/09/04 AngularJS, directive AngularJS で HTML をエスケープさせずに出力するには AngularJS での出力手段 AngularJS で単に文字列を出力するには、{{expression}}またはng-bindを HTML で利用する。 1
+2 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +95,55 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-04T16:49:00+09:00" data-updated="true" itemprop="datePublished">2013/09/04</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/09/04/angularjs-ng-bind-html/" itemprop="url">AngularJS で HTML をエスケープさせずに出力するには</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>AngularJS での出力手段</h2>
+
+<p>AngularJS で単に文字列を出力するには、<code>{{expression}}</code>または<a href="http://docs.angularjs.org/api/ng.directive:ngBind"><code>ng-bind</code></a>を HTML で利用する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span&gt;</span>{{ninja.name}}<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'><span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">&quot;ninja.name&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+
+		
+		<a href="/blog/2013/09/04/angularjs-ng-bind-html/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">

@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/12/13 AngularJS, scope AngularJS のデータバインドを支える $watch $watch AngularJS の強力なデータバインドを支える仕組みのうち、まず $watch について取り上げる。 $watch を使えば、監視（Observe） &hellip;">
+	<meta name="description" content="2013/12/15 AngularJS AngularJS 1.3 では IE 8 がサポートされない AngularJS 1.3 についての記事『AngularJS 1.3: a new release approaches』が公式ブログのほうに上がりました。 日本でのエンタープライズ（ &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,63 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-15T16:16:01+09:00" data-updated="true" itemprop="datePublished">2013/12/15</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/" itemprop="url">AngularJS 1.3 では IE 8 がサポートされない</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<p>AngularJS 1.3 についての記事『<a href="http://blog.angularjs.org/2013/12/angularjs-13-new-release-approaches.html">AngularJS 1.3: a new release approaches</a>』が公式ブログのほうに上がりました。</p>
+
+<p>日本でのエンタープライズ（業務系）なんかでは、まだまだ IE 8 は当たり前のようにサポート対象のブラウザになっているところが多いと思うので、ちょっと大きなニュースですね。</p>
+
+<p>なお、AngularJS 1.2.x 以前を IE 8 で動作させるには、過去記事『<a href="/blog/2013/09/11/angularjs-ie-compatibility/">AngularJS を古い IE に対応させるには</a>』をご参照ください。</p>
+
+<h2>AngularJS 1.3 は IE 8 をサポートしない</h2>
+
+<p>サポートをやめる理由としては、IE 8 で動作させるためのコードのせいで性能に悪影響があるし、すでに IE 8 ユーザは全体の数パーセント程度だし、Microsoft による Windows XP のサポートも 2014年4月に終わるし、とのこと。動作性能の向上はもちろん、機能を追加していくのも速くなると。</p>
+
+<p>どうしても IE 8 で動作させ続けたい場合は：</p>
+
+<ul>
+<li>AngularJS 1.2.x を使い続ける</li>
+<li>AngularJS 1.3 をトライする</li>
+<li>IE 8 で動作する AngularJS を商用サポートとして提供する会社を見つける。</li>
+</ul>
+
+
+<p>1.3 バージョンでは IE 8 用のハックを積極的に削除していくことはないようで、1.2.x バージョンのアプリケーションが IE 8 で動作しているのであれば、大部分は 1.3 でも動作するのではないかということ。ただし、1.3 では IE 8 向けのテストもバグフィックスも実施しなくなると。</p>
+
+
+		
+		<a href="/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -893,75 +950,6 @@
 
 		
 		<a href="/blog/2013/11/20/angularjs-custom-directives/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-19T09:17:00+09:00" data-updated="true" itemprop="datePublished">2013/11/19</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/11/19/angularjs-nginclude/" itemprop="url">AngularJSでHTMLを分割するのにお手軽なng-include</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>AngularJS で HTML を分割するのにお手軽な ng-include</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ng</span><span class="na">-include</span> <span class="na">src=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>/ng-include&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ポイントとしては、属性値に文字列を渡す必要があって、ダブルクオートの内側にシングルクオートを記述すること。</p>
-
-<p>変数を渡して、可変にもできる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">sidebarUrl</span> <span class="o">=</span> <span class="s1">&#39;partials/sidebar.html&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;sidebarUrl&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>ng-include</code>で表示する HTML 部分でも、もちろん普通に AngularJS の管理下にあり、データバインドも効く。分割したフラグメント専用に controller の scope を作るなら、<code>ng-controller</code>も指定できる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">ng-include=</span><span class="s">&quot;&#39;partials/sidebar.html&#39;&quot;</span> <span class="na">ng-controller=</span><span class="s">&quot;SidebarCtrl&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-		
-		<a href="/blog/2013/11/19/angularjs-nginclude/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Firebase | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/firebase/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-17T01:13:22+09:00</updated>
+  <updated>2014-02-17T02:14:42+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS Ionic Firebase で作るモバイルチャットアプリ]]></title>
+    <link href="http://angularjsninja.com/blog/2014/02/17/angularjs-ionic-firebase/"/>
+    <updated>2014-02-17T01:21:39+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/02/17/angularjs-ionic-firebase</id>
+    <content type="html"><![CDATA[<p>この週末、オリンピックを見ながら日本人が出てくるまでヒマだったりしたので、ふとモバイルチャットでも作ってみるかと思い立ってダラダラとやってみました。</p>
+
+<p>数時間しかかけてないので「ザ・未完成」なデキですが、サクッとリアルタイムなモバイルチャットアプリケーションを作れてしまうのは、なんともラクチンで楽しい。</p>
+
+<h2>利用した技術</h2>
+
+<ul>
+<li><a href="http://angularjs.org/">AngularJS</a></li>
+<li><a href="http://ionicframework.com/">Ionic</a></li>
+<li><a href="https://www.firebase.com/">Firebase</a></li>
+</ul>
+
+
+<p>Ionic についてはこれまでにブログで、書いてないや…。Firebase については<a href="/blog/2013/09/01/angularfire-realtime-chat-app/">ずいぶん前に</a>。</p>
+
+<h2>モバイルチャットアプリ</h2>
+
+<p>リアルタイム処理は Firebase まかせ。見た目は Ionic ベースで少し CSS をいじった程度。認証はとりあえず付けなかったので、サムネイルには AngularJS Ninja のがずっと出ます。</p>
+
+<p><a href="http://ionic-fire.firebaseapp.com/">http://ionic-fire.firebaseapp.com/</a></p>
+
+<iframe src="http://ionic-fire.firebaseapp.com/" height="568" width="320" frameborder="0" style="border: 2px double #333;"></iframe>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularFire でリアルタイムアプリケーション]]></title>
@@ -86,7 +117,7 @@ angularFire(ref, $scope, 'items');
 <p>``` html</p>
 
 <ul ng-controller="MyCtrl">
-  <li ng-repeat="item in items">: </li>
+  <li ng-repeat="item in items">{{item.name}}: {{item.desc}}</li>
 </ul>
 
 
