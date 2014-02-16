@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-17T02:14:42+09:00</updated>
+  <updated>2014-02-17T02:27:04+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[AngularJS Ionic Firebase で作るモバイルチャットアプリ]]></title>
     <link href="http://angularjsninja.com/blog/2014/02/17/angularjs-ionic-firebase/"/>
-    <updated>2014-02-17T01:21:39+09:00</updated>
+    <updated>2014-02-17T02:15:39+09:00</updated>
     <id>http://angularjsninja.com/blog/2014/02/17/angularjs-ionic-firebase</id>
     <content type="html"><![CDATA[<p>この週末、オリンピックを見ながら日本人が出てくるまでヒマだったりしたので、ふとモバイルチャットでも作ってみるかと思い立ってダラダラとやってみました。</p>
 
@@ -33,13 +33,18 @@
 
 <p>Ionic についてはこれまでにブログで、書いてないや…。Firebase については<a href="/blog/2013/09/01/angularfire-realtime-chat-app/">ずいぶん前に</a>。</p>
 
+<!-- more -->
+
+
 <h2>モバイルチャットアプリ</h2>
 
-<p>リアルタイム処理は Firebase まかせ。見た目は Ionic ベースで少し CSS をいじった程度。認証はとりあえず付けなかったので、サムネイルには AngularJS Ninja のがずっと出ます。</p>
+<p>リアルタイム処理は Firebase まかせ。見た目は Ionic ベースで少し CSS をいじった程度。認証はとりあえず付けなかったので、サムネイルには AngularJS Ninja のをずっと出しちゃってます。</p>
+
+<p>iPhone や Android から、以下のアドレスを表示して試していただくのがオススメです。</p>
 
 <p><a href="http://ionic-fire.firebaseapp.com/">http://ionic-fire.firebaseapp.com/</a></p>
 
-<iframe src="http://ionic-fire.firebaseapp.com/" height="568" width="320" frameborder="0" style="border: 2px double #333;"></iframe>
+<iframe src="http://ionic-fire.firebaseapp.com/" height="568" width="320" frameborder="0" style="border: 3px double #aaa;"></iframe>
 
 ]]></content>
   </entry>
@@ -91,14 +96,14 @@
 
 <p><code>ng-if</code> あるいは、<code>ng-show</code>や<code>ng-hide</code>を使うときに、string 値の有無で表示判定を記述することもある。</p>
 
-<p>{% raw %}
+<p>
 ``` html</p>
 
 <p ng-if="model.value">{{model.label}}</p>
 
 
 <p>```
-{% endraw %}</p>
+</p>
 
 <p>そんなとき、<code>model.value</code>の値が<code>'0'</code>だったらどうなるか。</p>
 
@@ -140,14 +145,14 @@ value = !(v == 'f' || v == '0' || v == 'false' || v == 'no' || v == 'n' || v == 
 
 <p>ということで、文字列の有無で判定させたいだけってときは<code>!!</code>を付けときましょう。boolean とか object の場合でも<code>!!</code>付ける方針にしとくのがラクでいいかな。</p>
 
-<p>{% raw %}
+<p>
 ``` html</p>
 
 <p ng-if="!!model.value">{{model.label}}</p>
 
 
 <p>```
-{% endraw %}</p>
+</p>
 ]]></content>
   </entry>
   
@@ -220,7 +225,7 @@ $scope.newComment = '';
 <input type="text" ng-model="newComment" ng-keydown="handleKeydown($event)"></p>
 
 <p><ul>
-  <li ng-repeat="comment in comments">{{comment}}</li>
+  <li ng-repeat="comment in comments"></li>
 <ul>
 ```</p>
 
