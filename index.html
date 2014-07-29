@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2014/02/17 AngularJS, Firebase, Ionic AngularJS Ionic Firebase で作るモバイルチャットアプリ この週末、オリンピックを見ながら日本人が出てくるまでヒマだったりしたので、 &hellip;">
+	<meta name="description" content="2014/07/29 AngularJS AngularJS Styleguide 日本語訳 @toddmotto さんが AngularJS styleguide を GitHub に上げてました。 Open sourced my opinionated AngularJS &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,12 +24,22 @@
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-15091936-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
 
 </head>
 
@@ -39,23 +49,21 @@
 		<div class="left-col">
 			<div class="intrude-less">
 			<header id="header" class="inner"><div class="profilepic">
+	
 	<script src="/javascripts/md5.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("tama3bb@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
 		});
 	</script>
+	
 </div>
-<hgroup>
-  <h1><a href="/">AngularJS Ninja</a></h1>
-  
-</hgroup>
 
-<nav id="main-nav"><ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Blog</a></li>
+    <li><a href="http://about.me/shashankmehta">About</a></li>
+    <li><a href="/blog/archives">Archives</a></li>
 </ul>
-
 
 <section class="aboutme">
   <p>
@@ -66,21 +74,28 @@
 <nav id="sub-nav">
 	<div class="social">
 		
-		
-		
-		<a class="twitter" href="http://twitter.com/tama3bb" title="Twitter">Twitter</a>
-		
-		
-		<a class="github" href="https://github.com/tama3bb" title="GitHub">GitHub</a>
+			<a class="email" href="mailto:tama3bb@gmail.com" title="Email">Email</a>
 		
 		
 		
 		
+			<a class="twitter" href="http://twitter.com/tama3bb" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/tama3bb" title="GitHub">GitHub</a>
 		
 		
 		
 		
-		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
 		
 	</div>
 </nav>
@@ -94,6 +109,55 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-29T08:22:55+09:00" data-updated="true" itemprop="datePublished">2014/07/29</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/07/29/angularjs-styleguide-in-Japanese/" itemprop="url">AngularJS Styleguide 日本語訳</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="https://twitter.com/toddmotto">@toddmotto</a> さんが AngularJS styleguide を GitHub に上げてました。</p>
+
+<blockquote class="twitter-tweet" data-cards="hidden" lang="ja"><p>Open sourced my opinionated AngularJS styleguide on GitHub: <a href="https://t.co/g2BPwkUXuS">https://t.co/g2BPwkUXuS</a> <a href="https://twitter.com/hashtag/angular?src=hash">#angular</a> <a href="https://twitter.com/hashtag/javascript?src=hash">#javascript</a></p>&mdash; Todd Motto (@toddmotto) <a href="https://twitter.com/toddmotto/statuses/493406283887050753">2014, 7月 27</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<h3>AngularJS styleguide 日本語訳</h3>
+
+<p>この AngularJS styleguide を Fork し、『<a href="https://github.com/tama3bb/angularjs-styleguide">AngularJS スタイルガイド</a>』として日本語に訳しておきました。</p>
+
+<h3>JavaScript Style Guide</h3>
+
+<p>なお、JavaScript のスタイルガイドについては、Airbnb の <a href="https://github.com/airbnb/javascript">JavaScript Style Guide</a> がお気に入りです。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -569,52 +633,6 @@
 
 </article>
 
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-17T00:01:26+09:00" data-updated="true" itemprop="datePublished">2013/12/17</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/scope/'>scope</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/12/17/angularjs-watchcollection/" itemprop="url">$watchと$watchの中間的な位置付けの$watchCollection</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>$watchCollection</h2>
-
-<p><a href="http://angularjsninja.com/blog/2013/12/13/angularjs-watch/">AngularJSのデータバインドを支える$watch</a> で見たように、$watch ではオブジェクトの参照を監視するか、またはオブジェクトの中身まですべて監視（deep watch）するかを切り替えることができる。</p>
-
-<p>その 2 種類の $watch の中間に位置付けられる <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watchcollection">$watchCollection</a> というのもあり、1 階層分だけを監視（shallow watch）してくれる。</p>
-
-<h2>配列の場合</h2>
-
-<p>配列の場合に $watch、$watchCollection、および $watch (deep watch) がそれぞれどのように異なるのかを見ていく。</p>
-
-
-		
-		<a href="/blog/2013/12/17/angularjs-watchcollection/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
 </div>
 <nav id="pagenavi">
     
@@ -624,13 +642,15 @@
     <div class="center"><a href="/blog/archives">Blog Archives</a></div>
 </nav></div>
 			</div>
-			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2014 - Akihito Tamagawa -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Akihito Tamagawa
+
 
 Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
-			
+		</div>
+	</div>
+	
 
 
 
@@ -666,23 +686,6 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
   </script>
 
 
-
-
-
-		</div>
-	</div>
-	
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-15091936-4']);
-		_gaq.push(['_trackPageview']);
-
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
 
 
 </body>

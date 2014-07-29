@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-02-17T02:58:15+09:00</updated>
+  <updated>2014-07-29T09:04:28+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS styleguide 日本語訳]]></title>
+    <link href="http://angularjsninja.com/blog/2014/07/29/angularjs-styleguide-in-Japanese/"/>
+    <updated>2014-07-29T08:22:55+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/07/29/angularjs-styleguide-in-Japanese</id>
+    <content type="html"><![CDATA[<p><a href="https://twitter.com/toddmotto">@toddmotto</a> さんが AngularJS styleguide を GitHub に上げてました。</p>
+
+<blockquote class="twitter-tweet" data-cards="hidden" lang="ja"><p>Open sourced my opinionated AngularJS styleguide on GitHub: <a href="https://t.co/g2BPwkUXuS">https://t.co/g2BPwkUXuS</a> <a href="https://twitter.com/hashtag/angular?src=hash">#angular</a> <a href="https://twitter.com/hashtag/javascript?src=hash">#javascript</a></p>&mdash; Todd Motto (@toddmotto) <a href="https://twitter.com/toddmotto/statuses/493406283887050753">2014, 7月 27</a></blockquote>
+
+
+<script async src="http://angularjsninja.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<h3>AngularJS styleguide 日本語訳</h3>
+
+<p>この AngularJS styleguide を Fork し、『<a href="https://github.com/tama3bb/angularjs-styleguide">AngularJS スタイルガイド</a>』として日本語に訳しておきました。</p>
+
+<h3>JavaScript Style Guide</h3>
+
+<p>なお、JavaScript のスタイルガイドについては、Airbnb の <a href="https://github.com/airbnb/javascript">JavaScript Style Guide</a> がお気に入りです。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS Ionic Firebase で作るモバイルチャットアプリ]]></title>
@@ -96,14 +119,14 @@
 
 <p><code>ng-if</code> あるいは、<code>ng-show</code>や<code>ng-hide</code>を使うときに、string 値の有無で表示判定を記述することもある。</p>
 
-<p>{% raw %}
+<p>
 ``` html</p>
 
 <p ng-if="model.value">{{model.label}}</p>
 
 
 <p>```
-{% endraw %}</p>
+</p>
 
 <p>そんなとき、<code>model.value</code>の値が<code>'0'</code>だったらどうなるか。</p>
 
@@ -145,14 +168,14 @@ value = !(v == 'f' || v == '0' || v == 'false' || v == 'no' || v == 'n' || v == 
 
 <p>ということで、文字列の有無で判定させたいだけってときは<code>!!</code>を付けときましょう。boolean とか object の場合でも<code>!!</code>付ける方針にしとくのがラクでいいかな。</p>
 
-<p>{% raw %}
+<p>
 ``` html</p>
 
 <p ng-if="!!model.value">{{model.label}}</p>
 
 
 <p>```
-{% endraw %}</p>
+</p>
 ]]></content>
   </entry>
   
@@ -192,83 +215,6 @@ $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache';
 </code></p>
 
 <p>他にも If-Modified-Since を設定する必要がありそう。あるいは Expires のほうが適切なのかも。ここの設定について詳しい方、こっそり教えてください！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS で Enter キーを検出するコード]]></title>
-    <link href="http://angularjsninja.com/blog/2014/02/03/angularjs-event-on-enter/"/>
-    <updated>2014-02-03T18:28:23+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/02/03/angularjs-event-on-enter</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>テキストボックスなどで、Enter キーによるイベント処理を記述するコード例をいくつか。</p>
-
-<h2>$event オブジェクト</h2>
-
-<p><code>ng-keydown</code>などの directive を利用する際には、<code>$event</code>でイベントオブジェクトを利用。</p>
-
-<p>``` javascript
-$scope.comments = [];
-$scope.handleKeydown = function(e) {
-  if (e.which !== 13) {</p>
-
-<pre><code>$scope.comments.push($scope.newComment);
-$scope.newComment = '';
-</code></pre>
-
-<p>  }
-}
-```</p>
-
-<p>``` html
-<input type="text" ng-model="newComment" ng-keydown="handleKeydown($event)"></p>
-
-<p><ul>
-  <li ng-repeat="comment in comments">{{comment}}</li>
-<ul>
-```</p>
-
-<p><!-- more --></p>
-
-<h2>カスタム directive でのイベント処理</h2>
-
-<p>カスタム directive を定義する場合は、jQuery と同じような感じでバインド。</p>
-
-<p>``` javascript
-myApp.directive(&lsquo;handleKeydown&rsquo;, function() {
-  return {</p>
-
-<pre><code>require: 'ngModel',
-link: function(scope, element, attrs, modelCtrl) {
-  element.bind('keydown', function(e) {
-    if (e.which === 13) {
-      scope.$apply(function() {
-        scope.comments.push(scope.newComment);
-        scope.newComment = '';
-      });
-    }
-  });
-}
-</code></pre>
-
-<p>  };
-});
-```</p>
-
-<p><code>html
-&lt;input type="text" ng-model="newComment" handle-keydown&gt;
-</code></p>
-
-<h2>form（ng-form）の submit</h2>
-
-<p>最後に持ってきたものの、form の submit で実現することを真っ先に検討するのが吉。Enter キーも処理されるし、テキストボックスがたくさんあっても無問題。</p>
-
-<p><code>html
-&lt;form ng-submit="handleKeydown()"&gt;
-  &lt;input type="text" ng-model="newComment"&gt;
-&lt;/form&gt;
-</code></p>
 ]]></content>
   </entry>
   
