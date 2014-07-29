@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cea3cc6e-aa09-4981-92b7-8cec94f40834" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CNAME" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/background.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/blankButton.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/divider.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/fullscreenButton.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/fullscreenButtonOver.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/muteButton.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/muteButtonOver.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/normalscreenButton.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/normalscreenButtonOver.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/pauseButton.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/pauseButtonOver.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/playButton.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/playButtonOver.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/timeSliderBuffer.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/timeSliderCapLeft.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/timeSliderCapRight.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/timeSliderProgress.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/timeSliderRail.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/unmuteButton.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/unmuteButtonOver.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/display/background.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/display/bufferIcon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/display/muteIcon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/display/playIcon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/dock/button.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/glow.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/playlist/item.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/playlist/itemOver.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/playlist/sliderCapBottom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/playlist/sliderCapTop.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/jwplayer/glow/playlist/sliderRail.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/08/26/angularjs-ninja-scroll/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/08/27/ngshow-nghide-ngswitch/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/08/28/how-to-declare-models/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/08/29/angularjs-web-api-call/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/08/30/angularjs-project-structure/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/08/31/yeoman-generator-for-angularjs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/01/angularfire-realtime-chat-app/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/02/angularjs-basics-ngapp-ngmodel/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/03/why-angularjs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/04/angularjs-ng-bind-html/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/05/angularjs-i18n/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/06/ngview-does-not-work-at-initial-route/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/07/learning-angularjs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/09/hexcolortool/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/10/angularjs-stickers/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/11/angularjs-ie-compatibility/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/12/ng-conf-2014/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/13/angular-localstorage/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/09/25/twitter-bootstrap-modal-draggable/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/10/05/jquery-to-angularjs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/10/26/angularjs-1.2.0-rc3-promises/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/11/08/angularjs-nglist/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/11/09/angularjs-1.2.0-timely-delivery/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/11/09/angularjs-filter/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/11/12/angularjs-ngclass/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/11/16/angularjs-ngif-proliferation/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/11/19/angularjs-nginclude/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/2013/11/20/angularjs-custom-directives/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/archives/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/angular-translate/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/angular-translate/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/angularfire/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/angularfire/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/angularjs/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/angularjs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/bootstrap/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/bootstrap/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/controller/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/controller/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/directive/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/directive/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/filter/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/filter/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/firebase/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/firebase/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/jquery/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/jquery/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/localstorage/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/localstorage/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/service/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/service/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/ui/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/ui/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/yeoman/atom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/categories/yeoman/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/page/2/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blog/page/3/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/favicon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/font/fontawesome-webfont.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/font/fontawesome-webfont.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/font/fontawesome-webfont.svgz" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/font/fontawesome-webfont.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/font/fontawesome-webfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/google9ce0cc1172254538.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/bird_32_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/bird_32_gray_fail.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/code_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/dotted-border.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/email.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/fancybox/blank.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/fancybox/fancybox_loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/fancybox/fancybox_sprite.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/line-tile.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/loading_gray.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/loading_pacman.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/noise.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/rss.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/search.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/social/coderwall.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/social/delicious.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/social/facebook.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/social/github.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/social/google.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/social/linkedin.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/social/pinboard.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/social/pinterest.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/social/rss.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/social/stackoverflow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/social/twitter.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/javascripts/github.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/javascripts/jquery.fancybox.pack.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/javascripts/libs/jXHR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/javascripts/libs/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/javascripts/libs/swfobject-dynamic.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/javascripts/md5.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/javascripts/modernizr-2.0.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/javascripts/octopress.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/javascripts/pinboard.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/javascripts/slash.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/javascripts/twitter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/robots.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sitemap.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source/_posts/2013-09-09-angularjs-context-path.markdown" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/stylesheets/font-awesome.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/stylesheets/screen.css" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/favicon.png" afterPath="$PROJECT_DIR$/source/favicon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.themes/greyshade" afterPath="$PROJECT_DIR$/.themes/greyshade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/parts/_archive.scss" afterPath="$PROJECT_DIR$/sass/parts/_archive.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/parts/_article.scss" afterPath="$PROJECT_DIR$/sass/parts/_article.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/base/_color.scss" afterPath="$PROJECT_DIR$/sass/base/_color.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/custom/_colors.scss" afterPath="$PROJECT_DIR$/sass/custom/_colors.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/base/_font.scss" afterPath="$PROJECT_DIR$/sass/base/_font.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/custom/_fonts.scss" afterPath="$PROJECT_DIR$/sass/custom/_fonts.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/_greyshade.scss" afterPath="$PROJECT_DIR$/sass/_greyshade.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/parts/_header.scss" afterPath="$PROJECT_DIR$/sass/parts/_header.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/base/_layout.scss" afterPath="$PROJECT_DIR$/sass/base/_layout.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/custom/_layout.scss" afterPath="$PROJECT_DIR$/sass/custom/_layout.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/parts/_post.scss" afterPath="$PROJECT_DIR$/sass/parts/_post.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/custom/_styles.scss" afterPath="$PROJECT_DIR$/sass/custom/_styles.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/base/_theme.scss" afterPath="$PROJECT_DIR$/sass/base/_theme.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/_includes/custom/after_footer.html" afterPath="$PROJECT_DIR$/source/_includes/custom/after_footer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/_layouts/default.html" afterPath="$PROJECT_DIR$/source/_layouts/default.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/_includes/custom/footer.html" afterPath="$PROJECT_DIR$/source/_includes/custom/footer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/_includes/head.html" afterPath="$PROJECT_DIR$/source/_includes/head.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/_includes/custom/head.html" afterPath="$PROJECT_DIR$/source/_includes/custom/head.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/_includes/header.html" afterPath="$PROJECT_DIR$/source/_includes/header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/_includes/custom/header.html" afterPath="$PROJECT_DIR$/source/_includes/custom/header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/_includes/custom/navigation.html" afterPath="$PROJECT_DIR$/source/_includes/custom/navigation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/screen.scss" afterPath="$PROJECT_DIR$/sass/screen.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/_includes/post/sharing.html" afterPath="$PROJECT_DIR$/source/_includes/post/sharing.html" />
+    </list>
+    <ignored path="octopress.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="octopress" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="_fonts.scss" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sass/custom/_fonts.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="288">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_custom.scss" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sass/custom/_custom.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="509">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="true" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/sass/custom/_fonts.scss" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="22" />
+    <option name="width" value="1920" />
+    <option name="height" value="1174" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="octopress" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="octopress" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="octopress" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="octopress" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="octopress" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="octopress" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="octopress" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="custom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="271" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="272" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="277" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1070" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="271" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="272" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="277" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1070" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="name" value="Dart" />
+      <option name="saveOutputToFile" value="false" />
+      <option name="showConsoleOnStdErr" value="false" />
+      <option name="showConsoleOnStdOut" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
+      <setting name="configLocationType" value="CONFIG_FILE" />
+      <setting name="settingsFile" value="" />
+      <setting name="serverType" value="INTERNAL" />
+      <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cea3cc6e-aa09-4981-92b7-8cec94f40834" name="Default" comment="" />
+      <created>1406591367898</created>
+      <updated>1406591367898</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="22" width="1920" height="1174" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49140272" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/sass/custom/_fonts.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="509">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sass/custom/_custom.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="534">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+
