@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-07-29T09:29:09+09:00</updated>
+  <updated>2014-09-02T17:08:43+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[【動画】Yeoman で AngularJS アプリケーションを作ろう！]]></title>
+    <link href="http://angularjsninja.com/blog/2014/09/02/video-angularjs-app-with-yeoman/"/>
+    <updated>2014-09-02T16:58:19+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/09/02/video-angularjs-app-with-yeoman</id>
+    <content type="html"><![CDATA[<p>Yeoman のサイトにある <a href="http://yeoman.io/codelab.html">Tutorial (codelab)</a> をスクリーンキャストしてみました。</p>
+
+<iframe width="853" height="480" src="http://angularjsninja.com//www.youtube.com/embed/uv_ALCiCA6E?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+<p><a href="https://github.com/yeoman/generator-angular">generator-angular</a> で AngularJS 用のコードを生成し、そこから TODO アプリケーションに変更していく流れをデモしてます。</p>
+
+<p>Yeoman がどんなものか試してみたかった方や、眺めてるだけで試した気になれる方にオススメです！</p>
+
+<!-- more -->
+
+
+<p>スクリーンキャストで学習するのが好きなので、自分でもスクリーンキャストをやってみようという「はじめて」の試みなので、わかりにくいところが多々あるかと思います。お気付きのところがありましたらご指摘ください。今後のスクリーンキャストにて改善していきますので！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS styleguide 日本語訳]]></title>
@@ -176,45 +197,6 @@ value = !(v == 'f' || v == '0' || v == 'false' || v == 'no' || v == 'n' || v == 
 
 <p>```
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS で HTTP ヘッダを設定するには]]></title>
-    <link href="http://angularjsninja.com/blog/2014/02/04/angularjs-http-headers/"/>
-    <updated>2014-02-04T16:08:51+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/02/04/angularjs-http-headers</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>HTTP Headers を設定</h2>
-
-<p>AngularJS による HTTP リクエストについては、<code>$httpProvider.defaults.headers</code>オブジェクトで HTTP ヘッダ情報を設定できる。</p>
-
-<p><code>javascript
-$httpProvider.defaults.headers.common.Authorization = '...';
-</code></p>
-
-<p>以下のように、get だけ、post だけに適用することも。</p>
-
-<p><code>javascript
-$httpProvider.defaults.headers.get['Authorization'] = '...';
-$httpProvider.defaults.headers.post = { 'Authorization' : '...' };
-</code></p>
-
-<p>（複数の書き方を例示するために、わざと違った書き方にしてます）</p>
-
-<!-- more -->
-
-
-<h2>Cache-Control の設定例</h2>
-
-<p>IE は XHR (Ajax) リクエストでもキャッシュするようなので、IE をサポートするのであれば初めから Cache-Control などの設定を入れておくのがいいのかも。</p>
-
-<p><code>javascript
-$httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache';
-</code></p>
-
-<p>他にも If-Modified-Since を設定する必要がありそう。あるいは Expires のほうが適切なのかも。ここの設定について詳しい方、こっそり教えてください！</p>
 ]]></content>
   </entry>
   

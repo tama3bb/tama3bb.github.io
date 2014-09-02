@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/12/17 AngularJS, scope $watchと$watchの中間的な位置付けの$watchCollection $watchCollection AngularJSのデータバインドを支える$watch で見たように、$watch ではオブジェクトの参照を監視するか、 &hellip;">
+	<meta name="description" content="2013/12/20 AngularJS AngularJSのスゴ本が今だけ安い！ Mastering Web Application Development with AngularJS 『Mastering Web Application Development with AngularJS &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,6 +112,57 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-20T10:10:31+09:00" data-updated="true" itemprop="datePublished">2013/12/20</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/20/mastering-web-application-development-with-angularjs/" itemprop="url">AngularJSのスゴ本が今だけ安い！</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<p><img src="https://www.packtpub.com/sites/default/files/782x300_Main_banner.jpg" alt="eBook Bonanza" /></p>
+
+<h2>Mastering Web Application Development with AngularJS</h2>
+
+<p>『<a href="http://www.packtpub.com/angularjs-web-application-development/book">Mastering Web Application Development with AngularJS | Packt Publishing</a>』が、Packt Publishing のサイトで年明け 1 月 3 日までたったの <strong>$ 5.00</strong> で販売中！</p>
+
+<p>ちなみに Amazon では ￥ 1,854（2013/12/20 現在）で販売中。</p>
+
+<p>『Mastering Web Application Development with AngularJS』は洋書だけど、AngularJS やるならこれだけは読んどけっていう、ほんとによく書かれてる本。めっちゃ勉強になってます。</p>
+
+<p>これまでに読んだ AngularJS の本として比較できるのは O’Reilly の『AngularJS』と、Manning の『AngularJS in Action』（Early Access Edition で、まだ 6 章まで）だけど、『Mastering Web Application Development with AngularJS』が質・量ともに圧倒してる。</p>
+
+<p>この本は、AngularJS のサンプルアプリケーション実装として GitHub で 2,274 スター（2013/12/20 現在）も付いている <a href="https://github.com/angular-app/angular-app">angular-app</a> の実装についてのパターンや技術を詳細に解説していて、実際に動作させることもできる CRUD アプリケーションで、AngularJS のフォルダ構成や modules の使い方、テスト、REST バックエンドとの接続、ナビゲーション、セキュリティ（authentication、authorization）などのベストプラクティスを学ぶことができる。</p>
+
+<p>AngularJS やるぜって衆の年末年始は、コレで決まりだ！</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -860,96 +911,6 @@
 
 		
 		<a href="/blog/2013/11/27/angularjs-custom-directives/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-22T13:37:02+09:00" data-updated="true" itemprop="datePublished">2013/11/22</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/11/22/angularjs-custom-directives/" itemprop="url">AngularJS Directive なんてこわくない（その２）</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>compile と link</h2>
-
-<p><a href="/blog/2013/11/20/angularjs-custom-directives/">前回</a>に引き続き、今回もカスタム directive について。</p>
-
-<p>２回目の今回は、<code>compile</code>と<code>link</code>の使い分けについて。</p>
-
-<h2>compile のサンプルコード</h2>
-
-<p>まずは<code>compile</code>を利用するサンプルコードを、『<a href="http://www.amazon.co.jp/dp/B00EQ67J30">Mastering Web Application Development with AngularJS</a>』から抜粋して見ていく。</p>
-
-<p>このコードでは、Bootstrap の理由を前提として、以下に示すように Bootstrap でのボタンデザインに必要な CSS class の値を追加する処理を、<code>compile</code>で実装している。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myModule</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">restrict</span><span class="o">:</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">compile</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">element</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;btn&#39;</span><span class="p">);</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;submit&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">element</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;btn-primary&#39;</span><span class="p">);</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">size</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">element</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;btn-&#39;</span> <span class="o">+</span> <span class="nx">attrs</span><span class="p">.</span><span class="nx">size</span><span class="p">);</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">};</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><code>&lt;button&gt;</code>の class 属性に<code>btn</code>を追加</li>
-<li><code>&lt;button type="submit"&gt;</code>のように <code>type="submit"</code>がある場合には、class 属性に<code>btn-primary</code>を追加</li>
-<li><code>&lt;button size="..."&gt;</code>のように size 属性がある場合には、<code>btn-large</code>など、<code>btn-</code> と size 属性で指定した文字列を組み合わせた文字列を class 属性に追加</li>
-</ul>
-
-
-<p>コードからわかるように、compile オプションの function 第１引数にある<code>element</code>は、jQuery（jqLite）オブジェクトになっているので、直接 jQuery の API を利用できる。つまり<code>$(element)</code>や、<code>$(button)</code>などとしてやる必要はない。</p>
-
-<p>第２引数の<code>attrs</code>では<code>attrs.size</code>のようにドット区切りで属性値にアクセスできるので、HTML テンプレート側の値を簡単に参照することができる。</p>
-
-
-		
-		<a href="/blog/2013/11/22/angularjs-custom-directives/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
