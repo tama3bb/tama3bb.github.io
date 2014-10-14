@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-10-14T12:52:11+09:00</updated>
+  <updated>2014-10-15T08:42:19+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,476 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS: Migrating from 1.2 to 1.3 日本語訳]]></title>
+    <link href="http://angularjsninja.com/blog/2014/10/15/migrating-from-1.2-to-1.3-in-Japanese/"/>
+    <updated>2014-10-15T08:24:48+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/10/15/migrating-from-1.2-to-1.3-in-Japanese</id>
+    <content type="html"><![CDATA[<p><a href="http://angularjsninja.com/blog/2014/10/14/angularjs-1.3.0-released/">AngularJS 1.3.0 がリリース</a>されたので、移行ガイド (<a href="https://docs.angularjs.org/guide/migration#migrating-from-1-2-to-1-3">Migrating from 1.2 to 1.3</a>) のほうも日本語訳しておきました。</p>
+
+<hr />
+
+<h2>Migrating from 1.2 to 1.3</h2>
+
+<h3>$parse</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/77ada4c82d6b8fc6d977c26f3cdb48c2f5fbe5a5">prevent invocation of Function&rsquo;s bind, call and apply</a></em></p>
+
+<p>angular 式の中では function の <code>.bind</code> <code>.call</code> <code>.apply</code> を呼び出せなくなりました。既存 function の振る舞いを予測できない形で変更させないようにするためです。</p>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/6081f20769e64a800ee8075c168412b21f026d99">forbid <code>__proto__</code> properties in angular expressions</a></em></p>
+
+<p>angular 式の中では (deprecated) <code>__proto__</code> プロパティは動作しなくなりました。</p>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/48fa3aadd546036c7e69f71046f659ab1de244c6">forbid <code>__{define,lookup}{Getter,Setter}__</code> properties</a></em></p>
+
+<p>angular 式の中では <code>__{define,lookup}{Getter,Setter}__</code> を利用できなくなりました。必要な場合は、危険でなくなるようにラップ／バインドして scope オブジェクトを通して利用してください。</p>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/528be29d1662122a34e204dd607e1c0bd9c16bbc">forbid referencing Object in angular expressions</a></em></p>
+
+<p>angular 式の中では <code>Object</code> を利用できなくなりました。<code>Object.keys</code> が必要な場合は scope でアクセスできるようにしてください。</p>
+
+<!-- more -->
+
+
+<h3>Angular.copy</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/b59b04f98a0b59eead53f6a53391ce1bbcbe9b57">preserve prototype chain when copying objects</a></em></p>
+
+<p>コピー元オブジェクトの prototype をコピー先オブジェクトに適用するように <code>angular.copy</code> を変更しています。以前はプロトタイプチェーンのプロパティを直接コピーしていました。</p>
+
+<p>コピー先オブジェクトの <code>hasOwnProperty</code> プロパティだけを iterate しても、prototype からのプロパティは含まれなくなり、より適切な振る舞いになっていると考えています。</p>
+
+<p>もしアプリケーションがこの振る舞いに依存している場合は、オブジェクト（と継承プロパティ）のすべてのプロパティを <code>hasOwnProperty</code> でフィルタしないように iterate してください。</p>
+
+<p><strong>この変更は IE 8 で動作しない機能を使っていることに注意してください。</strong>もし IE 8 で動作させたい場合は <code>Object.create</code> と <code>Object.getPrototypeOf</code> の polyfill を使ってください。</p>
+
+<h3>core</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/bdfc9c02d021e08babfbc966a007c71b4946d69d">drop the toBoolean function</a></em></p>
+
+<p><code>f</code> <code>0</code> <code>false</code> <code>no</code> <code>n</code> <code>[]</code> は falsy として扱われず、JavaScript の falsy 値である <code>false</code> <code>null</code> <code>undefined</code> <code>NaN</code> <code>0</code> <code>""</code> のみ falsy として扱われるようになりました。</p>
+
+<h3>$compile</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/2cde927e58c8d1588569d94a797e43cdfbcedaf9">always error if two directives add isolate-scope and new-scope</a></em></p>
+
+<p>1 つの要素に isolate scope と別の scope をリクエストするとエラーとなるように変更されました。変更前は、isolate でない scope の directive の次に、isolate な scope の directive という順でコンパイラが適用する場合には、2 つの directive が child scope と isolate scope をリクエストすることが可能でした。</p>
+
+<p>順番にかかわらず、コンパイラはエラーとするようになりました。</p>
+
+<p><code>$compile:multidir</code> エラーとなるようであれば、同じ要素で複数の directive が isolate と isolate でない scope をリクエストしていないかを確認し、コードを修正してください。</p>
+
+<h3>NgModel</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/1be9bb9d3527e0758350c4f7417a4228d8571440">ensure pattern and ngPattern use the same validator</a></em></p>
+
+<p>ng-pattern (<code>ng-pattern="exp"</code>) あるいは pattern 属性 (<code>pattern=""</code>) で angular 式が使われて文字列として評価される場合、validator は正規表現オブジェクトのリテラル (<code>/abc/i</code>) として文字列を解析せず、文字列全体を正規表現としてしまいます。つまり、フラグが正規表現として正しく扱われません。この制限を回避するために、正規表現オブジェクトを angular 式の値に使用してください。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// before</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">exp</span> <span class="o">=</span> <span class="s1">&#39;/abc/i&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// after</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">exp</span> <span class="o">=</span> <span class="sr">/abc/i</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Scope</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/8c6a8171f9bdaa5cdabc0cc3f7d3ce10af7b434d">change Scope#id to be a simple number</a></em></p>
+
+<p>Scope#$id は文字列ではなく数値型となりました。この id は主にデバッグ目的で利用されており、他に影響を与えないものと考えています。</p>
+
+<h3>forEach</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/55991e33af6fece07ea347a059da061b76fc95f5">cache array length</a></em></p>
+
+<p>forEach は配列の初期数だけ iterate するようになり、iteration 中に配列に追加されたアイテムは forEach の対象となりません。</p>
+
+<p>この変更により、forEach が Array#forEach の動作により近くなりました。</p>
+
+<h3>jqLite</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/a196c8bca82a28c08896d31f1863cf4ecd11401c">data should store data only on Element and Document nodes</a></em></p>
+
+<p>テキスト／コメントのノードにも jqLite のデータをセットできていましたが、jQuery と同じように要素とドキュメントのノードのみとなりました。</p>
+
+<h3>$resource</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/d3c50c845671f0f8bcc3f7842df9e2fb1d1b1c40">allow props beginning with $ to be used on resources</a></em></p>
+
+<p><code>$resource</code> がプロパティを削除する挙動を期待している場合、手動で行う必要があります。</p>
+
+<h3>angular.toJson</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/c054288c9722875e3595e6e6162193e0fb67a251">only strip properties beginning with $$, not $</a></em></p>
+
+<p><code>toJson</code> がプロパティを削除する挙動を期待していた場合、手動で行う必要があります。</p>
+
+<h3>$compile</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/eec6394a342fb92fba5270eee11c83f1d895e9fb">deprecate <code>replace</code> directives</a></em></p>
+
+<p>要素を置き換える directive 定義の <code>replace</code> フラグは、Angular の次のメジャーバージョンで廃止されます。この機能は扱いにくい問題（属性をどのようにマージするか、など）があり、この機能が解決できることよりも多くの問題をもたらしています。また、Web Components では DOM にカスタム要素が存在するのが一般的です。</p>
+
+<h3>$parse</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/fa6e411da26824a5bae55f37ce7dbb859653276d">remove deprecated promise unwrapping</a></em></p>
+
+<p>promise をアンラップする機能は 1.2.0-rc.3 で既に削除されています。</p>
+
+<h3>Scope</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/82f45aee5bd84d1cc53fb2e8f645d2263cdaacbc">$broadcast and $emit should set event.currentScope to null</a></em></p>
+
+<p><code>$broadcast</code> と <code>$emit</code> は、イベントの伝播 (propagation) を終了した時点でイベントの <code>currentScope</code> プロパティを null にリセットするようになりました。<code>currentScope</code> プロパティに非同期にアクセスするコードは、<code>targetScope</code> を利用するようにしてください。</p>
+
+<h3>jqLite</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/d71dbb1ae50f174680533492ce4c7db3ff74df00">stop patching individual jQuery methods</a></em></p>
+
+<p>jQuery の <code>detach()</code> メソッドは <code>$destroy</code> イベントをトリガーしなくなりました。要素に付けた Angular データを破棄したい場合は <code>remove()</code> を利用してください。</p>
+
+<h3>$http</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/ad4336f9359a073e272930f8f9bcd36587a8648f">remove deprecated responseInterceptors functionality</a></em></p>
+
+<p>これまでは response interceptor を以下のようにも登録できました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// register the interceptor as a service</span>
+</span><span class='line'><span class="nx">$provide</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;myHttpInterceptor&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$q</span><span class="p">,</span> <span class="nx">dependency1</span><span class="p">,</span> <span class="nx">dependency2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">promise</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">promise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// do something on success</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// do something on error</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">canRecover</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">responseOrNewPromise</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">$q</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">responseInterceptors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;myHttpInterceptor&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>v1.1.4（4ae46814）で導入された API では以下のようになります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$provide</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;myHttpInterceptor&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$q</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">response</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// do something on success</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">responseError</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// do something on error</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">canRecover</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">responseOrNewPromise</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">$q</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;myHttpInterceptor&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この API の詳細は <a href="https://docs.angularjs.org/api/ng/service/$http#interceptors">interceptors</a> で確認してください。</p>
+
+<h3>injector</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/c0b4e2db9cbc8bc3164cedc4646145d3ab72536e">invoke config blocks for module after all providers</a></em></p>
+
+<p>config ブロックは provider 登録の前に呼び出されていたため動作を制御可能でしたが、常に config よりも前に provider 登録されるようになったために動作を制御できなくなりました。</p>
+
+<p>例：</p>
+
+<p>以前は、以下のようなコードが動作していました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="p">[])</span>
+</span><span class='line'><span class="p">.</span><span class="nx">provider</span><span class="p">(</span><span class="s1">&#39;$rootProvider&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">$get</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="p">.</span><span class="nx">config</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$rootProvider</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$rootProvider</span><span class="p">.</span><span class="nx">dependentMode</span> <span class="o">=</span> <span class="s2">&quot;B&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="p">.</span><span class="nx">provider</span><span class="p">(</span><span class="s1">&#39;$dependentProvider&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$rootProvider</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">$rootProvider</span><span class="p">.</span><span class="nx">dependentMode</span> <span class="o">===</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">$get</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// Special mode!</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">$get</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// something else</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>$rootProvider</code> と <code>$dependentProvider</code> の間にある config ブロックがアプリケーションの動作を変更できていましたが、これは今では 1 つのモジュール内では実現できなくなりました。</p>
+
+<h3>ngModelOptions</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/adfc322b04a58158fb9697e5b99aab9ca63c80bb">move debounce and updateOn logic into NgModelController</a></em></p>
+
+<p>このコミットは <code>NgModelController</code> の API を変更しています。</p>
+
+<ul>
+<li><code>$setViewValue(value)</code> &ndash; このメソッドは <code>$viewValue</code> を変更しますが、これまでとは異なり、<code>$modelValue</code> の変更をすぐにはコミットしなくなり、関連する <code>ngModelOptions</code> directive で指定されたトリガーによってコミットされるようになりました。<code>ngModelOptions</code> に <code>debounce</code> で遅延させるトリガーが指定されている場合には、変更のコミットはさらに延期されます。</li>
+<li><code>$cancelUpdate()</code> &ndash; <code>$rollbackViewValue()</code> に名前が変更されましたが、同じ機能のままで、<code>$viewValue</code> の値を <code>$lastCommittedViewValue</code> に戻し、ペンディング中の debounce されている更新と、input への再 render の処理をキャンセルします。</li>
+</ul>
+
+
+<p><code>$cancelUpdate()</code> を利用しているコードは、以下の例に従って移行してください。</p>
+
+<p>前：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">resetWithCancel</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">27</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">myForm</span><span class="p">.</span><span class="nx">myInput1</span><span class="p">.</span><span class="nx">$cancelUpdate</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">myValue</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>後：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">resetWithCancel</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">27</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">myForm</span><span class="p">.</span><span class="nx">myInput1</span><span class="p">.</span><span class="nx">$rollbackViewValue</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">myValue</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>$interpolate</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/88c2193c71954b9e7e7e4bdf636a2b168d36300d">split .parts into .expressions and .separators</a></em></p>
+
+<p><code>$interpolate</code> に返される function は <code>.parts</code> 配列を持たなくなりました。</p>
+
+<p>代わりに、2 つの配列を持つようになります。</p>
+
+<ul>
+<li><code>.expressions</code> &ndash; interpolate されるテキストの expression 配列。</li>
+<li><code>.separators</code> &ndash; interpolation 間を区切る文字列の配列で、この配列はマージしやすくするために、<strong>常に</strong> <code>.expressions</code> 配列より 1 アイテム長くなっています。</li>
+</ul>
+
+
+<h3>$animate</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/1cb8584e8490ecdb1b410a8846c4478c6c2c0e53">insert elements at the start of the parent container instead of at the end</a></em></p>
+
+<p><code>$animate</code> は、親コンテナの最後の要素とする after パラメータをデフォルトとしなくなり、after が指定されていない場合には新しい要素を最初の子要素として挿入するようになりました。</p>
+
+<p>既存のコードを更新する場合には、<code>$animate.enter()</code> または <code>$animate.move()</code> のすべてのインスタンスを</p>
+
+<p><code>$animate.enter(element, parent);</code></p>
+
+<p>から</p>
+
+<p><code>$animate.enter(element, parent, angular.element(parent[0].lastChild));</code></p>
+
+<p>に変更してください。</p>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/1bebe36aa938890d61188762ed618b1b5e193634">make CSS blocking optional for class-based animations</a></em></p>
+
+<p>トランジションを利用する（class-add や class-remove のような）セットアップ CSS class ベースのアニメーションコードは、スタイルがすぐに適用されるように空の transition 値を与えなければなりません。つまり、アニメーションのコードがセットアップ class で定義されているスタイルを適用し、その CSS class で <code>transition:0s none</code> の値が存在しない限りは即座に適用されません。この状況はトランジションがベース CSS クラスに存在し、アニメーションが開始されているケースのことです。</p>
+
+<p>前：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.animated.my-class-add</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span><span class="m">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">transition</span><span class="o">:</span><span class="m">0.5s</span> <span class="n">linear</span> <span class="n">all</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.animated.my-class-add.my-class-add-active</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span><span class="m">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>後：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.animated.my-class-add</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transition</span><span class="o">:</span><span class="m">0s</span> <span class="n">linear</span> <span class="n">all</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span><span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.animated.my-class-add.my-class-add-active</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transition</span><span class="o">:</span><span class="m">0.5s</span> <span class="n">linear</span> <span class="n">all</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span><span class="m">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>詳細は ngAnimate のドキュメントで確認してください。</p>
+
+<h3>$compile</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/299b220f5e05e1d4e26bfd58d0b2fd7329ca76b1">add support for $observer deregistration</a></em></p>
+
+<p><code>attr.$observe</code> の呼び出しはオブザーバー function ではなく、登録解除の function を返すようになりました。以下の例に従ってコードを移行してください。</p>
+
+<p>前：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;directiveName&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">elm</span><span class="p">,</span> <span class="nx">attr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">observer</span> <span class="o">=</span> <span class="nx">attr</span><span class="p">.</span><span class="nx">$observe</span><span class="p">(</span><span class="s1">&#39;someAttr&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>後：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;directiveName&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">elm</span><span class="p">,</span> <span class="nx">attr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">observer</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">attr</span><span class="p">.</span><span class="nx">$observe</span><span class="p">(</span><span class="s1">&#39;someAttr&#39;</span><span class="p">,</span> <span class="nx">observer</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>$httpBackend</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/6680b7b97c0326a80bdccaf0a35031e4af641e0e">don&rsquo;t error when JSONP callback called with no parameter</a></em></p>
+
+<p>空のレスポンスに対する JSONP の動作が変更されました。以前は JSONP レスポンスが空の場合にはエラーとみなされていましたが、適切にイベントをリスンするようになりました。</p>
+
+<h3>build</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/eaa1d00b24008f590b95ad099241b4003688cdda">remove IE8 target from all test configs</a></em></p>
+
+<p>IE 8 はサポートされなくなりました。</p>
+
+<h3>input</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/46bd6dc88de252886d75426efc2ce8107a5134e9">support types date, time, datetime-local, month, week</a></em></p>
+
+<p>type が date、time、datetime-local、month、week の input では、モデルとして常に <code>Date</code> オブジェクトが必須となりました。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS 1.3.0 リリース]]></title>
@@ -1527,95 +1997,6 @@
 
 
 <p>この例だと、第３引数（context）に<code>log</code>を渡していて、この<code>log</code>が iterator の中での context <code>this</code>となる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJSのminify対策がngminでラクになる]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin/"/>
-    <updated>2013-12-03T11:15:48+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>AngularJS の minify 対策、めんどくさい</h2>
-
-<p>AngularJS の JavaScript コードを minify するには、function の引数でインジェクト（DI）する各 services の名前を、文字列として重複させて記述する必要がある。</p>
-
-<p>これって、めっちゃめんどくさい。あほらしすぎる。</p>
-
-<h2>ngmin</h2>
-
-<p>そこで <a href="https://github.com/btford/ngmin">ngmin</a> を使う。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g ngmin</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ngmin somefile.js somefile.annotate.js</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以下のコードが、</p>
-
-<figure class='code'><figcaption><span>somefile.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[])</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;TodoCtrl&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$timeout</span><span class="p">,</span> <span class="nx">Projects</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// comments</span>
-</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">createTask</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">task</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">&quot;New Task&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'>  <span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ngmin 後は、こうなる。</p>
-
-<figure class='code'><figcaption><span>somefile.annotate.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[]).</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;TodoCtrl&#39;</span><span class="p">,</span> <span class="p">[</span>
-</span><span class='line'>  <span class="s1">&#39;$scope&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s1">&#39;$timeout&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s1">&#39;Projects&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$timeout</span><span class="p">,</span> <span class="nx">Projects</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">createTask</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">task</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;New Task&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">]);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!-- more -->
-
-
-<p>function の引数に記述している DI する services の名前が、自動的に文字列としても列挙されるので、これで minify 対策がラクになる！</p>
-
-<p>その他、空行・コメント行削除、シングルクオート置換も実施される。</p>
-
-<p><a href="https://github.com/btford/ngmin">ngmin</a> は <a href="http://gruntjs.com/">Grunt</a> タスク（<a href="https://github.com/btford/grunt-ngmin">grunt-ngmin</a>）としても利用可能で自動化できる！</p>
-
-<blockquote><p>Life is too short to declare the names of dependencies!</p></blockquote>
-
 ]]></content>
   </entry>
   

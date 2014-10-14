@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2014/10/14 AngularJS AngularJS 1.3.0 リリース AngularJS 1.3.0 がリリースされました！ ということで、公式ブログの記事『AngularJS 1.3.0 &ndash; superluminal-nudge』を日本語訳しておきました。 &hellip;">
+	<meta name="description" content="2014/10/15 AngularJS AngularJS: Migrating From 1.2 to 1.3 日本語訳 AngularJS 1.3.0 がリリースされたので、移行ガイド (Migrating from 1.2 to 1.3) のほうも日本語訳しておきました。 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,6 +112,64 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-15T08:24:48+09:00" data-updated="true" itemprop="datePublished">2014/10/15</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/10/15/migrating-from-1.2-to-1.3-in-Japanese/" itemprop="url">AngularJS: Migrating From 1.2 to 1.3 日本語訳</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="http://angularjsninja.com/blog/2014/10/14/angularjs-1.3.0-released/">AngularJS 1.3.0 がリリース</a>されたので、移行ガイド (<a href="https://docs.angularjs.org/guide/migration#migrating-from-1-2-to-1-3">Migrating from 1.2 to 1.3</a>) のほうも日本語訳しておきました。</p>
+
+<hr />
+
+<h2>Migrating from 1.2 to 1.3</h2>
+
+<h3>$parse</h3>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/77ada4c82d6b8fc6d977c26f3cdb48c2f5fbe5a5">prevent invocation of Function&rsquo;s bind, call and apply</a></em></p>
+
+<p>angular 式の中では function の <code>.bind</code> <code>.call</code> <code>.apply</code> を呼び出せなくなりました。既存 function の振る舞いを予測できない形で変更させないようにするためです。</p>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/6081f20769e64a800ee8075c168412b21f026d99">forbid <code>__proto__</code> properties in angular expressions</a></em></p>
+
+<p>angular 式の中では (deprecated) <code>__proto__</code> プロパティは動作しなくなりました。</p>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/48fa3aadd546036c7e69f71046f659ab1de244c6">forbid <code>__{define,lookup}{Getter,Setter}__</code> properties</a></em></p>
+
+<p>angular 式の中では <code>__{define,lookup}{Getter,Setter}__</code> を利用できなくなりました。必要な場合は、危険でなくなるようにラップ／バインドして scope オブジェクトを通して利用してください。</p>
+
+<p><em><a href="https://github.com/angular/angular.js/commit/528be29d1662122a34e204dd607e1c0bd9c16bbc">forbid referencing Object in angular expressions</a></em></p>
+
+<p>angular 式の中では <code>Object</code> を利用できなくなりました。<code>Object.keys</code> が必要な場合は scope でアクセスできるようにしてください。</p>
+
+
+		
+		<a href="/blog/2014/10/15/migrating-from-1.2-to-1.3-in-Japanese/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -583,55 +641,6 @@
 
 		
 		<a href="/blog/2014/02/03/angularjs-event-on-enter/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-18T12:49:50+09:00" data-updated="true" itemprop="datePublished">2014/01/18</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/ng-conf/'>ng-conf</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2014/01/18/ng-conf-2014/" itemprop="url">Angular カンファレンス（ng-conf 2014）Jan. 17 動画まとめ</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>ng-conf 2014 &ndash; The World’s First Angular Conference in Salt Lake City, Utah</h2>
-
-<p>Angular カンファレンス <a href="http://ng-conf.org">ng-conf 2014</a> 最終日（Friday, January 17）の動画まとめです。</p>
-
-<p>YouTube の <a href="http://www.youtube.com/user/ngconfvideos">ng-conf 2014 チャンネル</a> だけでなく、公式サイトの<a href="http://angularjs.org">トップページ</a>にも動画が表示されるようになっていますが、このエントリーでは最終日のスケジュールどおりに並べています。</p>
-
-<h3>Angular === Community (Keynote)</h3>
-
-<iframe width="560" height="315" src="//www.youtube.com/embed/h-SQvre_6qU" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Igor Minar</p>
-
-
-		
-		<a href="/blog/2014/01/18/ng-conf-2014/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
