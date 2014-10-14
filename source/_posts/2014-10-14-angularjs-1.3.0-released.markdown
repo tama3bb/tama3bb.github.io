@@ -1,0 +1,40 @@
+---
+layout: post
+title: "AngularJS 1.3.0 リリース"
+date: 2014-10-14 12:44:47 +0900
+comments: true
+categories: AngularJS
+---
+
+AngularJS 1.3.0 がリリースされました！
+
+ということで、公式ブログの記事『[AngularJS 1.3.0 - superluminal-nudge](http://angularjs.blogspot.jp/2014/10/angularjs-130-superluminal-nudge.html)』を日本語訳しておきました。
+
+---
+
+## AngularJS 1.3.0 - superluminal-nudge
+
+8 か月にわたり、2,000 を超えるコミット、19 のベータと 6 のリリースキャンディデートを経て、遂に AngularJS 1.3.0 superluminal-nudge をリリースしました！
+
+このリリースには、注目すべき機能が多く含まれています。
+
+* [One-time bindings](https://docs.angularjs.org/guide/expression#one-time-binding) - `::` を付けることによって、内挿 (interpolate) が 1 度となり、それ以降は監視 (watch) されなくなる。
+* [ngAria](https://docs.angularjs.org/api/ngAria) - デフォルトで（アクセシビリティに関して）アクセシブルなカスタムコンポーネントを実装するための新しいモジュール
+* [ngMessages](https://docs.angularjs.org/api/ngMessages) - フォームの妥当性に対するフィードバック（メッセージ）を実装しやすくする新しいディレクティブ 
+* [ngModelOptions](https://docs.angularjs.org/api/ng/directive/ngModelOptions) - バインドされたモデルの振る舞いをカスタマイズしやすくするディレクティブ。例：debounce （モデル更新のタイミング制御）、getter-setter スタイルのモデル、blur 時のモデル更新など。 
+* [Strict DI](https://docs.angularjs.org/error/$injector/strictdi) - 簡略した DI シンタックスを利用していて minify できないコードを見つけることができるオプション 
+
+<!-- more -->
+
+このリリースには、400 を超えるバグフィックスに、1,000 近いドキュメントの改善が含まれています。また、[custom form controls](https://docs.angularjs.org/api/ng/type/ngModel.NgModelController) や [animations](https://docs.angularjs.org/api/ngAnimate/service/$animate) まわりの API を、明確で使いやすいように改善しています。
+
+1.3.0 は大幅に性能が改善しています。メモリ消費量を抑え、DOM 操作の速度を高め、Angular アプリケーションの全体的な応答速度を改善しています。詳細については、GitHub の [benchmarks in the AngularJS source code](https://github.com/angular/angular.js/tree/master/benchmarks) で確認していただけます。
+
+[Changelog on Github](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#130-superluminal-nudge-2014-10-13) では、変更点すべてのリストを確認できます。
+
+多くの要望により、AngularJS は公式に npm でパッケージを公開しました。`npm install angular` で AngularJS 1.3.0 を取得できます。これにより、フロントエンド Web 開発のすばらしいツール類を利用しやすくなると期待しています。
+
+Angular 1.2 を利用されている場合は、[corresponding section of the migration docs](https://docs.angularjs.org/guide/migration#migrating-from-1-2-to-1-3) を参照し、breaking changes について意識しておいてください。そして、[昨年 12 月にご案内していた](/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/)ように、AngularJS 1.3.0 は IE 8 をサポートしていません。これにより、IE 8 のサポートを続けていては可能でなかった大幅な改善と性能向上を実現しています。IE 8 のサポートを必要とするアプリケーションを開発していく場合には、ほぼすべての non-breaking fixes が含まれている最新の 1.2.x ブランチをご利用ください。
+
+新しいバージョンの Angular をぜひ試していただき、もし不具合を発見された場合には [GitHub で submit issues](https://github.com/angular/angular.js/issues) してください。
+
