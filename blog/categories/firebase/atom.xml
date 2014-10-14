@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Firebase | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/firebase/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-10-11T02:05:59+09:00</updated>
+  <updated>2014-10-14T12:44:59+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -122,7 +122,7 @@ angularFire(ref, $scope, 'items');
 <p>``` html</p>
 
 <ul ng-controller="MyCtrl">
-  <li ng-repeat="item in items">: </li>
+  <li ng-repeat="item in items">{{item.name}}: {{item.desc}}</li>
 </ul>
 
 

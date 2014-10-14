@@ -4,7 +4,7 @@
   <title><![CDATA[Category: directive | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/directive/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-10-11T02:05:59+09:00</updated>
+  <updated>2014-10-14T12:44:59+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -60,14 +60,14 @@
 
 <p><code>ng-if</code> あるいは、<code>ng-show</code>や<code>ng-hide</code>を使うときに、string 値の有無で表示判定を記述することもある。</p>
 
-<p>
+<p>{% raw %}
 ``` html</p>
 
 <p ng-if="model.value">{{model.label}}</p>
 
 
 <p>```
-</p>
+{% endraw %}</p>
 
 <p>そんなとき、<code>model.value</code>の値が<code>'0'</code>だったらどうなるか。</p>
 
@@ -109,14 +109,14 @@ value = !(v == 'f' || v == '0' || v == 'false' || v == 'no' || v == 'n' || v == 
 
 <p>ということで、文字列の有無で判定させたいだけってときは<code>!!</code>を付けときましょう。boolean とか object の場合でも<code>!!</code>付ける方針にしとくのがラクでいいかな。</p>
 
-<p>
+<p>{% raw %}
 ``` html</p>
 
 <p ng-if="!!model.value">{{model.label}}</p>
 
 
 <p>```
-</p>
+{% endraw %}</p>
 ]]></content>
   </entry>
   
@@ -150,7 +150,7 @@ $scope.newComment = '';
 <input type="text" ng-model="newComment" ng-keydown="handleKeydown($event)"></p>
 
 <p><ul>
-  <li ng-repeat="comment in comments"></li>
+  <li ng-repeat="comment in comments">{{comment}}</li>
 <ul>
 ```</p>
 
@@ -417,13 +417,13 @@ link: function(scope, iElement, iAttrs) {
 
 
 <p><code>
-
+{% raw %}
 </code> html
 <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">
   {{alert.msg}}
 </alert>
 ```
-</p>
+{% endraw %}</p>
 
 <!-- more -->
 
@@ -447,7 +447,7 @@ link: function(scope, iElement, iAttrs) {
 
 <p><code>replace: true</code> を指定することによって、directive を指定した要素自体を置き換えることができるので、directive がコンパイルされた結果は以下のようなコードとなる。</p>
 
-<p>
+<p>{% raw %}
 ``` html</p>
 
 <div ng-class="type && 'alert-' + type" class="alert ng-scope" close="closeAlert($index)" type="alert.type" ng-repeat="alert in alerts">
@@ -457,7 +457,7 @@ link: function(scope, iElement, iAttrs) {
 
 
 <p>```
-</p>
+{% endraw %}</p>
 
 <p><code>replace: true</code> の場合、 directive を指定した要素にある属性は、テンプレート側のルート要素にコピーされる。なので、<code>ng-repeat="alert in alerts"</code>や<code>type="alert.type"</code>、<code>close="closeAlert($index)"</code>も有効となる。</p>
 
@@ -472,9 +472,9 @@ transclude: true // directive 要素の内容（内側）をテンプレート�
 transclude: 'element' // directive 要素ごとテンプレートで利用
 </code></p>
 
-<p>テンプレート側に ng-transclude を指定した要素の内側に append できる。上記サンプルコードの例では、<code>{{alert.msg}}</code>が<code>&lt;div ng-transclude&gt;</code>の内側に append される。</p>
+<p>テンプレート側に ng-transclude を指定した要素の内側に append できる。上記サンプルコードの例では、{% raw %}<code>{{alert.msg}}</code>{% endraw %}が<code>&lt;div ng-transclude&gt;</code>の内側に append される。</p>
 
-<p>上記コード例では、<code>alert</code>directive の内側部分<code>{{alert.msg}}</code>が、<code>ng-transclude</code>に append されていることがわかる（<code>alert.msg: 'Another alert!'</code>という前提）。</p>
+<p>上記コード例では、<code>alert</code>directive の内側部分{% raw %}<code>{{alert.msg}}</code>{% endraw %}が、<code>ng-transclude</code>に append されていることがわかる（<code>alert.msg: 'Another alert!'</code>という前提）。</p>
 
 <h2>scope</h2>
 

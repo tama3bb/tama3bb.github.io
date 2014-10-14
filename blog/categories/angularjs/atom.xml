@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: AngularJS, | AngularJS Ninja]]></title>
+  <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-10-11T02:05:59+09:00</updated>
+  <updated>2014-10-14T12:44:59+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -14,9 +14,52 @@
 
   
   <entry>
+    <title type="html"><![CDATA[AngularJS 1.3.0 リリース]]></title>
+    <link href="http://angularjsninja.com/blog/2014/10/14/angularjs-1.3.0-released/"/>
+    <updated>2014-10-14T12:44:47+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/10/14/angularjs-1.3.0-released</id>
+    <content type="html"><![CDATA[<p>AngularJS 1.3.0 がリリースされました！</p>
+
+<p>ということで、公式ブログの記事『<a href="http://angularjs.blogspot.jp/2014/10/angularjs-130-superluminal-nudge.html">AngularJS 1.3.0 &ndash; superluminal-nudge</a>』を日本語訳しておきました。</p>
+
+<hr />
+
+<h2>AngularJS 1.3.0 &ndash; superluminal-nudge</h2>
+
+<p>8 か月にわたり、2,000 を超えるコミット、19 のベータと 6 のリリースキャンディデートを経て、遂に AngularJS 1.3.0 superluminal-nudge をリリースしました！</p>
+
+<p>このリリースには、注目すべき機能が多く含まれています。</p>
+
+<ul>
+<li><a href="https://docs.angularjs.org/guide/expression#one-time-binding">One-time bindings</a> &ndash; <code>::</code> を付けることによって、内挿 (interpolate) が 1 度となり、それ以降は監視 (watch) されなくなる。</li>
+<li><a href="https://docs.angularjs.org/api/ngAria">ngAria</a> &ndash; デフォルトで（アクセシビリティに関して）アクセシブルなカスタムコンポーネントを実装するための新しいモジュール</li>
+<li><a href="https://docs.angularjs.org/api/ngMessages">ngMessages</a> &ndash; フォームの妥当性に対するフィードバック（メッセージ）を実装しやすくする新しいディレクティブ</li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngModelOptions">ngModelOptions</a> &ndash; バインドされたモデルの振る舞いをカスタマイズしやすくするディレクティブ。例：debounce （モデル更新のタイミング制御）、getter-setter スタイルのモデル、blur 時のモデル更新など。</li>
+<li><a href="https://docs.angularjs.org/error/$injector/strictdi">Strict DI</a> &ndash; 簡略した DI シンタックスを利用していて minify できないコードを見つけることができるオプション</li>
+</ul>
+
+
+<!-- more -->
+
+
+<p>このリリースには、400 を超えるバグフィックスに、1,000 近いドキュメントの改善が含まれています。また、<a href="https://docs.angularjs.org/api/ng/type/ngModel.NgModelController">custom form controls</a> や <a href="https://docs.angularjs.org/api/ngAnimate/service/$animate">animations</a> まわりの API を、明確で使いやすいように改善しています。</p>
+
+<p>1.3.0 は大幅に性能が改善しています。メモリ消費量を抑え、DOM 操作の速度を高め、Angular アプリケーションの全体的な応答速度を改善しています。詳細については、GitHub の <a href="https://github.com/angular/angular.js/tree/master/benchmarks">benchmarks in the AngularJS source code</a> で確認していただけます。</p>
+
+<p><a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md#130-superluminal-nudge-2014-10-13">Changelog on Github</a> では、変更点すべてのリストを確認できます。</p>
+
+<p>多くの要望により、AngularJS は公式に npm でパッケージを公開しました。<code>npm install angular</code> で AngularJS 1.3.0 を取得できます。これにより、フロントエンド Web 開発のすばらしいツール類を利用しやすくなると期待しています。</p>
+
+<p>Angular 1.2 を利用されている場合は、<a href="https://docs.angularjs.org/guide/migration#migrating-from-1-2-to-1-3">corresponding section of the migration docs</a> を参照し、breaking changes について意識しておいてください。そして、<a href="/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/">昨年 12 月にご案内していた</a>ように、AngularJS 1.3.0 は IE 8 をサポートしていません。これにより、IE 8 のサポートを続けていては可能でなかった大幅な改善と性能向上を実現しています。IE 8 のサポートを必要とするアプリケーションを開発していく場合には、ほぼすべての non-breaking fixes が含まれている最新の 1.2.x ブランチをご利用ください。</p>
+
+<p>新しいバージョンの Angular をぜひ試していただき、もし不具合を発見された場合には <a href="https://github.com/angular/angular.js/issues">GitHub で submit issues</a> してください。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[期間限定の対面企画]]></title>
     <link href="http://angularjsninja.com/blog/2014/10/11/angularjs-in-person/"/>
-    <updated>2014-10-11T01:38:08+09:00</updated>
+    <updated>2014-10-11T02:08:08+09:00</updated>
     <id>http://angularjsninja.com/blog/2014/10/11/angularjs-in-person</id>
     <content type="html"><![CDATA[<p>「AngularJS のこと対面で教えてよ！」というリクエストにお応えします。</p>
 
@@ -64,6 +107,86 @@
 <h3>キャンセル方法</h3>
 
 <p>もともと梅田で晩に用事がある日ですので、当日の 16 時までにご連絡いただければドタキャンでも構いません。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[【動画】Yeoman で AngularJS アプリケーションを作ろう！]]></title>
+    <link href="http://angularjsninja.com/blog/2014/09/02/video-angularjs-app-with-yeoman/"/>
+    <updated>2014-09-02T16:58:19+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/09/02/video-angularjs-app-with-yeoman</id>
+    <content type="html"><![CDATA[<p>Yeoman のサイトにある <a href="http://yeoman.io/codelab.html">Tutorial (codelab)</a> をスクリーンキャストしてみました。</p>
+
+<iframe width="853" height="480" src="http://angularjsninja.com//www.youtube.com/embed/uv_ALCiCA6E?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+<p><a href="https://github.com/yeoman/generator-angular">generator-angular</a> で AngularJS 用のコードを生成し、そこから TODO アプリケーションに変更していく流れをデモしてます。</p>
+
+<p>Yeoman がどんなものか試してみたかった方や、眺めてるだけで試した気になれる方にオススメです！</p>
+
+<!-- more -->
+
+
+<p>スクリーンキャストで学習するのが好きなので、自分でもスクリーンキャストをやってみようという「はじめて」の試みなので、わかりにくいところが多々あるかと思います。お気付きのところがありましたらご指摘ください。今後のスクリーンキャストにて改善していきますので！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS styleguide 日本語訳]]></title>
+    <link href="http://angularjsninja.com/blog/2014/07/29/angularjs-styleguide-in-Japanese/"/>
+    <updated>2014-07-29T08:22:55+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/07/29/angularjs-styleguide-in-Japanese</id>
+    <content type="html"><![CDATA[<p><a href="https://twitter.com/toddmotto">@toddmotto</a> さんが AngularJS styleguide を GitHub に上げてました。</p>
+
+<blockquote class="twitter-tweet" data-cards="hidden" lang="ja"><p>Open sourced my opinionated AngularJS styleguide on GitHub: <a href="https://t.co/g2BPwkUXuS">https://t.co/g2BPwkUXuS</a> <a href="https://twitter.com/hashtag/angular?src=hash">#angular</a> <a href="https://twitter.com/hashtag/javascript?src=hash">#javascript</a></p>&mdash; Todd Motto (@toddmotto) <a href="https://twitter.com/toddmotto/statuses/493406283887050753">2014, 7月 27</a></blockquote>
+
+
+<script async src="http://angularjsninja.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<h3>AngularJS styleguide 日本語訳</h3>
+
+<p>この AngularJS styleguide を Fork し、『<a href="https://github.com/tama3bb/angularjs-styleguide">AngularJS スタイルガイド</a>』として日本語に訳しておきました。</p>
+
+<h3>JavaScript Style Guide</h3>
+
+<p>なお、JavaScript のスタイルガイドについては、Airbnb の <a href="https://github.com/airbnb/javascript">JavaScript Style Guide</a> がお気に入りです。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS Ionic Firebase で作るモバイルチャットアプリ]]></title>
+    <link href="http://angularjsninja.com/blog/2014/02/17/angularjs-ionic-firebase/"/>
+    <updated>2014-02-17T02:15:39+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/02/17/angularjs-ionic-firebase</id>
+    <content type="html"><![CDATA[<p>この週末、オリンピックを見ながら日本人が出てくるまでヒマだったりしたので、ふとモバイルチャットでも作ってみるかと思い立ってダラダラとやってみました。</p>
+
+<p>数時間しかかけてないので「ザ・未完成」なデキですが、サクッとリアルタイムなモバイルチャットアプリケーションを作れてしまうのは、なんともラクチンで楽しい。</p>
+
+<h2>利用した技術</h2>
+
+<ul>
+<li><a href="http://angularjs.org/">AngularJS</a></li>
+<li><a href="http://ionicframework.com/">Ionic</a></li>
+<li><a href="https://www.firebase.com/">Firebase</a></li>
+</ul>
+
+
+<p>Ionic についてはこれまでにブログで、書いてないや…。Firebase については<a href="/blog/2013/09/01/angularfire-realtime-chat-app/">ずいぶん前に</a>。</p>
+
+<!-- more -->
+
+
+<h2>モバイルチャットアプリ</h2>
+
+<p>リアルタイム処理は Firebase まかせ。見た目は Ionic ベースで少し CSS をいじった程度。認証はとりあえず付けなかったので、サムネイルには AngularJS Ninja のをずっと出しちゃってます。</p>
+
+<p>iPhone や Android から、以下のアドレスを表示して試していただくのがオススメです。</p>
+
+<p><a href="http://ionic-fire.firebaseapp.com/">http://ionic-fire.firebaseapp.com/</a></p>
+
+<iframe src="http://ionic-fire.firebaseapp.com/" height="568" width="320" frameborder="0" style="border: 3px double #aaa;"></iframe>
+
 ]]></content>
   </entry>
   
