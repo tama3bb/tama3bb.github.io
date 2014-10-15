@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2014/01/18 AngularJS, ng-conf Angular カンファレンス（ng-conf 2014）Jan. 17 動画まとめ ng-conf 2014 &ndash; The World’s First Angular Conference in Salt Lake City &hellip;">
+	<meta name="description" content="2014/02/03 AngularJS, directive AngularJS で Enter キーを検出するコード テキストボックスなどで、Enter キーによるイベント処理を記述するコード例をいくつか。 $event オブジェクト ng-keydownなどの directive &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,6 +112,80 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-03T18:28:23+09:00" data-updated="true" itemprop="datePublished">2014/02/03</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/02/03/angularjs-event-on-enter/" itemprop="url">AngularJS で Enter キーを検出するコード</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<p>テキストボックスなどで、Enter キーによるイベント処理を記述するコード例をいくつか。</p>
+
+<h2>$event オブジェクト</h2>
+
+<p><code>ng-keydown</code>などの directive を利用する際には、<code>$event</code>でイベントオブジェクトを利用。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">comments</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">handleKeydown</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">which</span> <span class="o">!==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">comments</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">newComment</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">newComment</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;newComment&quot;</span> <span class="na">ng-keydown=</span><span class="s">&quot;handleKeydown($event)&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">&quot;comment in comments&quot;</span><span class="nt">&gt;</span><span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+
+		
+		<a href="/blog/2014/02/03/angularjs-event-on-enter/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -593,78 +667,6 @@
 
 		
 		<a href="/blog/2013/12/08/angularjs-nganimate/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-06T13:55:45+09:00" data-updated="true" itemprop="datePublished">2013/12/06</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/global-apis/'>global APIs</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/12/06/angular-foreach/" itemprop="url">ObjectでもArrayでも回せるangular.forEach</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>angular.forEach</h2>
-
-<p>AngularJS 標準の <a href="http://docs.angularjs.org/api/ng#function">Global API</a> から、<a href="http://docs.angularjs.org/api/angular.forEach">angular.forEach</a> の紹介。</p>
-
-<p>angular.forEach は、Object でも Array でも回してくれる。</p>
-
-<h2>angular.forEach(Object, Function)</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;ninja&#39;</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="nx">weapons</span><span class="o">:</span> <span class="p">[</span> <span class="p">...,</span> <span class="p">...</span> <span class="p">]</span> <span class="p">};</span>
-</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// ...</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>オブジェクトを回す場合の Iterator function の引数は value, key の順。</p>
-
-<h2>angular.forEach(Array, Function)</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">records</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span> <span class="p">];</span>
-</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">records</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">record</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// ...</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>配列を回す場合の Iterator function は第１引数が配列の中身で、第２引数が配列インデックスとなる。</p>
-
-
-		
-		<a href="/blog/2013/12/06/angular-foreach/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

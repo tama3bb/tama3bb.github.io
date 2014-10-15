@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-10-15T08:42:19+09:00</updated>
+  <updated>2014-10-16T08:44:40+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.3 新機能 ワンタイムバインディング]]></title>
+    <link href="http://angularjsninja.com/blog/2014/10/16/angularjs-1.3-one-time-binding/"/>
+    <updated>2014-10-16T08:40:32+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/10/16/angularjs-1.3-one-time-binding</id>
+    <content type="html"><![CDATA[<p><a href="/blog/2014/10/14/angularjs-1.3.0-released/">AngularJS 1.3.0</a> で導入された新機能から、ワンタイムバインディング (<a href="https://docs.angularjs.org/guide/expression#one-time-binding">One-time binding</a>) について取り上げます。</p>
+
+<h2>One-time binding</h2>
+
+<p>値が変わることのないデータまでも双方向データバインドされて、digest loop のたびに繰り返し変更監視されることで性能が劣化しやすかった大規模な AngularJS アプリケーションでの問題を解消できます。</p>
+
+<p>1 回で使い捨てするデータバインドを定義できるようになり、監視 (watch) 対象を減らして digest loop を高速化し、アプリケーションの表示や操作の応答速度を高められる機能です。</p>
+
+<p>One-time binding を指定すると、undefined のままである間は監視対象となり続け、digest loop の結果 undefined でなくなった時点で監視対象から外れます。null となった場合でも監視対象から外れます。</p>
+
+<h4>使い方</h4>
+
+<p><code>::</code> を付けるだけです。</p>
+
+<!-- more -->
+
+
+<p>
+``` javascript
+// {{ &hellip; }} の例
+{{::user.name}}</p>
+
+<p>// 属性の例</p>
+
+<p><div ng-bind="::user.name"></p>
+
+<p>// ng-repeat の例
+<li ng-repeat="result in ::results">{{::result.title}}</li>
+```
+</p>
+
+<p>ng-repeat への指定は配列に対して有効であって、配列に格納されているオブジェクトのプロパティ個々に対しては、それぞれで必要に応じて <code></code> などと one-time binding を指定することになります。</p>
+
+<h2>Bindonce</h2>
+
+<p>「そもそもこういう性能改善系の機能こそ JavaScript の実行速度が遅い IE 8 でこそ必要なのに、AngularJS 1.3 では IE 8 サポートがドロップされたし…。IE 8 をサポートしなきゃいけない自分には AngularJS 1.3 リリースなんかで盛り上がれやしないよ！」</p>
+
+<p>とお嘆きのあなたには、<a href="https://github.com/Pasvaz/bindonce">Bindonce</a> です！</p>
+
+<p>しばらく IE 8 をサポートし続けていくのであれば、この Bindonce の導入を検討しましょう。AngularJS 1.3.0 の新機能 One-time binding と同じように性能を改善できます。</p>
+
+<h4>使い方</h4>
+
+<p><code>bindonce.js</code> (<code>bindonce.min.js</code>) ファイルを読み込み、<code>angular.module('app', ['pasvaz.bindonce'])</code> というように <code>'pasvaz.bindonce'</code> を依存モジュールとして定義し、以下のようにコードを記述して使います。</p>
+
+<p>``` javascript
+<ul>
+  <li bindonce ng-repeat="person in Persons"></p>
+
+<pre><code>&lt;a bo-href="'#/people/' + person.id"&gt;&lt;img bo-src="person.imageUrl"&gt;&lt;/a&gt;
+&lt;a bo-href="'#/people/' + person.id" bo-text="person.name"&gt;&lt;/a&gt;
+&lt;p bo-class="{'cycled':person.generated}" bo-html="person.description"&gt;&lt;/p&gt;
+</code></pre>
+
+<p>  </li>
+</ul>
+<code>``
+</code>bindonce<code>とか、</code>bo-*` で始まる directive に注目してください。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS: Migrating from 1.2 to 1.3 日本語訳]]></title>
@@ -518,29 +584,6 @@ directive(&lsquo;directiveName&rsquo;, function() {
 
 
 <p>スクリーンキャストで学習するのが好きなので、自分でもスクリーンキャストをやってみようという「はじめて」の試みなので、わかりにくいところが多々あるかと思います。お気付きのところがありましたらご指摘ください。今後のスクリーンキャストにて改善していきますので！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS styleguide 日本語訳]]></title>
-    <link href="http://angularjsninja.com/blog/2014/07/29/angularjs-styleguide-in-Japanese/"/>
-    <updated>2014-07-29T08:22:55+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/07/29/angularjs-styleguide-in-Japanese</id>
-    <content type="html"><![CDATA[<p><a href="https://twitter.com/toddmotto">@toddmotto</a> さんが AngularJS styleguide を GitHub に上げてました。</p>
-
-<blockquote class="twitter-tweet" data-cards="hidden" lang="ja"><p>Open sourced my opinionated AngularJS styleguide on GitHub: <a href="https://t.co/g2BPwkUXuS">https://t.co/g2BPwkUXuS</a> <a href="https://twitter.com/hashtag/angular?src=hash">#angular</a> <a href="https://twitter.com/hashtag/javascript?src=hash">#javascript</a></p>&mdash; Todd Motto (@toddmotto) <a href="https://twitter.com/toddmotto/statuses/493406283887050753">2014, 7月 27</a></blockquote>
-
-
-<script async src="http://angularjsninja.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<h3>AngularJS styleguide 日本語訳</h3>
-
-<p>この AngularJS styleguide を Fork し、『<a href="https://github.com/tama3bb/angularjs-styleguide">AngularJS スタイルガイド</a>』として日本語に訳しておきました。</p>
-
-<h3>JavaScript Style Guide</h3>
-
-<p>なお、JavaScript のスタイルガイドについては、Airbnb の <a href="https://github.com/airbnb/javascript">JavaScript Style Guide</a> がお気に入りです。</p>
 ]]></content>
   </entry>
   
