@@ -4,7 +4,7 @@
   <title><![CDATA[Category: directive | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/directive/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-10-16T08:44:40+09:00</updated>
+  <updated>2014-10-17T18:55:59+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS 1.3 新機能 ngModelOptions]]></title>
+    <link href="http://angularjsninja.com/blog/2014/10/17/angularjs-1.3-ngmodeloptions/"/>
+    <updated>2014-10-17T18:42:38+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/10/17/angularjs-1.3-ngmodeloptions</id>
+    <content type="html"><![CDATA[<p><a href="/blog/2014/10/14/angularjs-1.3.0-released/">AngularJS 1.3.0</a> で導入された新機能から、ng-model でのモデル更新を調整できる directive の <a href="https://docs.angularjs.org/api/ng/directive/ngModelOptions">ngModelOptions</a> について取り上げます。</p>
+
+<h2>ngModelOptions</h2>
+
+<p>すぐに覚えて使ってみるべきオプションは、<code>updateOn</code> と <code>debounce</code> ですね。</p>
+
+<h3>updateOn</h3>
+
+<p><code>updateOn</code> は、input などの UI に対するどのイベントの場合にモデルを更新するかを指定できます。</p>
+
+<p>``` javascript
+&lt;input type=&ldquo;text&rdquo; name=&ldquo;userName&rdquo;</p>
+
+<pre><code>ng-model="user.name"
+ng-model-options="{ updateOn: 'blur' }"&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>これで、blur（フォーカスが外れる）イベントまでは、この input で入力値を変更してもモデルに反映されなくなります。blur イベントではじめてモデル更新されます。</p>
+
+<h3>debounce</h3>
+
+<p><code>debounce</code> は、モデルの更新を待機しておく時間を、ミリ秒単位で指定できます。</p>
+
+<p>``` javascript
+&lt;input type=&ldquo;text&rdquo; name=&ldquo;userName&rdquo;</p>
+
+<pre><code>ng-model="user.name"
+ng-model-options="{ debounce: 1000 }"&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>これで、変更から 1 秒（1,000 ミリ秒）経過後にモデルが更新されるようになります。変更から 1 秒経過するまでに別の変更があった場合には、待機中の更新処理は破棄されます。</p>
+
+<!-- more -->
+
+
+<h3>複数オプションの指定</h3>
+
+<p>ngModelOptions は、以下のように複数のオプションを一度に指定できます。この指定は、モデル更新を 500 ミリ秒遅延させるが、blur イベントのみすぐに更新という意味になります。</p>
+
+<p><code>javascript
+ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }"
+</code></p>
+
+<h3>使用上の注意</h3>
+
+<p>ngModelOptions で <code>updateOn</code> や <code>debounce</code> を利用すると、input フィールドの入力値と、実際のモデルの値が異なっている状態が増えます。そのため、モデルのほうを変更するときには、関係する input フィールドに対して <code>$rollbackViewValue</code> を呼び出すことで、モデルの値と一致させ、遅延されている更新処理をキャンセルさせます。</p>
+
+<p><code>$rollbackViewValue</code> function は、userForm.userName.$rollbackViewValue() のように参照して呼び出せます。</p>
+
+<h3>submit イベントで更新完了</h3>
+
+<p>待機中の更新処理は、<code>submit</code> イベントによって即座に実行されます。<code>ngClick</code> イベントはモデル更新前となるので、更新後のモデルにアクセスしたい場合には &lsquo;ngSubmit&rsquo; を利用します。</p>
+
+<h3>ngModelOptions は子孫要素にも適用</h3>
+
+<p>ngModelOptions は、input 要素に直接指定するだけでなく、祖先要素となる <code>form</code> などに指定することもできます。</p>
+
+<h3>その他のオプション</h3>
+
+<ul>
+<li><code>allowInvalid</code></li>
+</ul>
+
+
+<p>invalid なモデル値を許容するか、undefined（デフォルト動作）にするかを boolean で指定。</p>
+
+<ul>
+<li><code>getterSetter</code></li>
+</ul>
+
+
+<p>getters/setters として <code>ngModel</code> に function をバインドするかを boolean で指定。</p>
+
+<ul>
+<li><code>timezone</code></li>
+</ul>
+
+
+<p><code>&lt;input type="date"&gt;</code> <code>&lt;input type="time"&gt;</code> の Date インスタンスを読み書きするときに利用するタイムゾーンを指定する。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[非活性（ng-disabled）にしてもaタグのボタンだとng-click動くので注意]]></title>
@@ -372,146 +463,6 @@ Error: [$compile:ctreq] Controller 'ngModel', required by directive 'input', can
 <h2>これでもうカスタム directive を書ける</h2>
 
 <p>この４回目で<code>controller</code>と<code>require</code>を使って、複数の directive でコンポーネントを構成することについての理解も進んだので、どんどん directive を活用していこう！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その３）]]></title>
-    <link href="http://angularjsninja.com/blog/2013/11/27/angularjs-custom-directives/"/>
-    <updated>2013-11-27T12:02:43+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/11/27/angularjs-custom-directives</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>replace, transclude, scope</h2>
-
-<p><a href="/blog/2013/11/20/angularjs-custom-directives/">前々回</a>、<a href="/blog/2013/11/22/angularjs-custom-directives/">前回</a>に引き続き、今回もカスタム directive について。</p>
-
-<p>今回のサンプルコードは、UI Bootstrap の <a href="https://github.com/angular-ui/bootstrap/tree/master/src/alert">Alert</a> からで、<code>replace</code> <code>transclude</code> <code>scope</code>オプションについて見ていく。</p>
-
-<p>``` javascript alert.js
-angular.module(&ldquo;ui.bootstrap.alert&rdquo;, []).directive(&lsquo;alert&rsquo;, function() {
-  return {</p>
-
-<pre><code>restrict:'EA',
-templateUrl:'template/alert/alert.html',
-transclude:true,
-replace:true,
-scope: {
-  type: '=',
-  close: '&amp;'
-},
-link: function(scope, iElement, iAttrs) {
-  scope.closeable = "close" in iAttrs;
-}
-</code></pre>
-
-<p>  };
-});
-<code>
-</code> html template/alert/alert.html</p>
-
-<div class="alert" ng-class="type && 'alert-' + type">
-    <button ng-show="closeable" type="button" class="close" ng-click="close()">&times;</button>
-    <div ng-transclude></div>
-</div>
-
-
-<p><code>
-
-</code> html
-<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">
-  {{alert.msg}}
-</alert>
-```
-</p>
-
-<!-- more -->
-
-
-<h2>replace</h2>
-
-<p><code>template</code>または<code>templateUrl</code>で指定された HTML のフラグメントは、デフォルトでは directive を指定した要素の内側に append される。</p>
-
-<p>``` html
-<alert ...>
-  <div class='alert' ...></p>
-
-<pre><code>...
-</code></pre>
-
-<p>  </div>
-</alert>
-```</p>
-
-<p>このコード例のように、directive を要素として指定できるよう<code>restrict</code>に<code>'E'</code>を含めるときには、HTML として不適当な要素名が記述されることになるため、<code>replace: true</code>を指定する前提で directive を設計しよう。</p>
-
-<p><code>replace: true</code> を指定することによって、directive を指定した要素自体を置き換えることができるので、directive がコンパイルされた結果は以下のようなコードとなる。</p>
-
-<p>
-``` html</p>
-
-<div ng-class="type && 'alert-' + type" class="alert ng-scope" close="closeAlert($index)" type="alert.type" ng-repeat="alert in alerts">
-    <button ng-click="close()" class="close" type="button" ng-show="closeable">×</button>
-    <div ng-transclude=""><span class="ng-scope ng-binding">Another alert!</span></div>
-</div>
-
-
-<p>```
-</p>
-
-<p><code>replace: true</code> の場合、 directive を指定した要素にある属性は、テンプレート側のルート要素にコピーされる。なので、<code>ng-repeat="alert in alerts"</code>や<code>type="alert.type"</code>、<code>close="closeAlert($index)"</code>も有効となる。</p>
-
-<p>両方に class 属性があるケースでは、両方の class 属性値をいい感じにマージしてくれる。</p>
-
-<h2>transclude</h2>
-
-<p><code>transclude</code>には、<code>true</code>または<code>'element'</code>を指定でき、directive とした要素の内容を、テンプレートの一部として利用できる。</p>
-
-<p><code>javascript
-transclude: true // directive 要素の内容（内側）をテンプレートで利用
-transclude: 'element' // directive 要素ごとテンプレートで利用
-</code></p>
-
-<p>テンプレート側に ng-transclude を指定した要素の内側に append できる。上記サンプルコードの例では、<code>{{alert.msg}}</code>が<code>&lt;div ng-transclude&gt;</code>の内側に append される。</p>
-
-<p>上記コード例では、<code>alert</code>directive の内側部分<code>{{alert.msg}}</code>が、<code>ng-transclude</code>に append されていることがわかる（<code>alert.msg: 'Another alert!'</code>という前提）。</p>
-
-<h2>scope</h2>
-
-<p>scope には、以下の３種類の指定方法がある。</p>
-
-<p><code>javascript
-scope: false // directive が利用される場所での scope を利用（デフォルト）
-scope: true // directive が利用される場所での scope を継承する、新たな scope を生成
-scope: {...} // directive が利用される場所での scope を継承しない、独立した新たな scope を生成
-</code></p>
-
-<p><code>scope: true</code>が指定されている代表的な directive は<code>ng-controller</code>で、ご存知のとおり<code>ng-controller</code>を利用すると scope を継承する新たな scope が生成される。これにより、親の scope にあるデータや function を利用したり、オーバーライドしたりできるようになる。</p>
-
-<p>一方で、コンポーネントとして再利用可能な directive を設計するには、directive を利用する場所での scope による影響を受けない分離・独立した scope を生成したい。</p>
-
-<p><code>javascript
-scope: {
-  name: '@', // interpolate（値、string）
-  info: '=', // data bind
-  cancel: '&amp;' // expression（function）
-}
-</code>
-このように、<code>scope</code>にオブジェクトを記述することで、この directive が利用されるたびに<code>name</code> <code>info</code> <code>cancel</code>のみ存在する新たな scope が生成される。</p>
-
-<p>なお、directive を利用する側と、テンプレート側とで異なる名前を使いたいときは、以下のように記述することができる。
-<code>javascript
-scope: {
-  customerInfo: '=info'
-}
-</code>
-こうすることで、テンプレート内では<code>customerInfo</code>を、directive を利用する要素での属性名には<code>info</code>を利用できるようになる。</p>
-
-<h2>４回目へ向けて</h2>
-
-<p>この３回目で、再利用のための directive を記述する方法が理解できた。もう Directive なんてこわくない！</p>
-
-<p>なんだけど、<a href="/blog/2013/11/29/angularjs-custom-directives/">４回目</a>でも引き続き、<code>controller</code> <code>require</code>といった directive のプロパティを扱う。</p>
 ]]></content>
   </entry>
   

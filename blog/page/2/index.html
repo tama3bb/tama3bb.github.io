@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2014/02/03 AngularJS, directive AngularJS で Enter キーを検出するコード テキストボックスなどで、Enter キーによるイベント処理を記述するコード例をいくつか。 $event オブジェクト ng-keydownなどの directive &hellip;">
+	<meta name="description" content="2014/02/04 AngularJS, service AngularJS で HTTP ヘッダを設定するには HTTP Headers を設定 AngularJS による HTTP リクエストについては、$httpProvider.defaults.headersオブジェクトで HTTP &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,6 +112,62 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-04T16:08:51+09:00" data-updated="true" itemprop="datePublished">2014/02/04</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/service/'>service</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/02/04/angularjs-http-headers/" itemprop="url">AngularJS で HTTP ヘッダを設定するには</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>HTTP Headers を設定</h2>
+
+<p>AngularJS による HTTP リクエストについては、<code>$httpProvider.defaults.headers</code>オブジェクトで HTTP ヘッダ情報を設定できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">common</span><span class="p">.</span><span class="nx">Authorization</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以下のように、get だけ、post だけに適用することも。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">get</span><span class="p">[</span><span class="s1">&#39;Authorization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">post</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;Authorization&#39;</span> <span class="o">:</span> <span class="s1">&#39;...&#39;</span> <span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>（複数の書き方を例示するために、わざと違った書き方にしてます）</p>
+
+
+		
+		<a href="/blog/2014/02/04/angularjs-http-headers/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -601,72 +657,6 @@
 
 		
 		<a href="/blog/2013/12/10/angularjs-expressions-forgiving/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-08T00:20:54+09:00" data-updated="true" itemprop="datePublished">2013/12/08</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/service/'>service</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/12/08/angularjs-nganimate/" itemprop="url">AngularJSでちゃちゃっとアニメーションを試す</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>AngularJS 1.2.4</h2>
-
-<p>AngularJS 1.2.4 がリリースされ、$animate 関連の <a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md#1.2.4">Bug Fixes</a> が入り ng-include をネストした ng-repeat でアニメーションが効かない問題も解消されたので、アニメーションをちゃちゃっと試す方法を紹介。</p>
-
-<h2>angular-animate.js</h2>
-
-<p>HTML に angular と angular-animate の js ファイルを記述する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;angular.min.js&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;angular-animate.min.js&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>ngAnimate モジュール</h2>
-
-<p>依存モジュールとして <code>ngAnimate</code> を記述する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;ngAnimate&#39;</span> <span class="p">])</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>CSS 定義</h2>
-
-<p>これだけでもうゴール間近で、あとはどんなアニメーションを適用するのかを考えて定義するだけ。</p>
-
-<p>アニメーションを CSS で定義する方法と JavaScript で記述する方法があり、ここではちゃちゃっと試すのが簡単な CSS を例示する。</p>
-
-
-		
-		<a href="/blog/2013/12/08/angularjs-nganimate/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2013/12/06 AngularJS, global APIs ObjectでもArrayでも回せるangular.forEach angular.forEach AngularJS 標準の Global API から、angular.forEach の紹介。 angular.forEach &hellip;">
+	<meta name="description" content="2013/12/08 AngularJS, service AngularJSでちゃちゃっとアニメーションを試す AngularJS 1.2.4 AngularJS 1.2.4 がリリースされ、$animate 関連の Bug Fixes が入り ng-include をネストした ng- &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,6 +112,72 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-08T00:20:54+09:00" data-updated="true" itemprop="datePublished">2013/12/08</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/service/'>service</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/08/angularjs-nganimate/" itemprop="url">AngularJSでちゃちゃっとアニメーションを試す</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>AngularJS 1.2.4</h2>
+
+<p>AngularJS 1.2.4 がリリースされ、$animate 関連の <a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md#1.2.4">Bug Fixes</a> が入り ng-include をネストした ng-repeat でアニメーションが効かない問題も解消されたので、アニメーションをちゃちゃっと試す方法を紹介。</p>
+
+<h2>angular-animate.js</h2>
+
+<p>HTML に angular と angular-animate の js ファイルを記述する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;angular.min.js&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;angular-animate.min.js&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ngAnimate モジュール</h2>
+
+<p>依存モジュールとして <code>ngAnimate</code> を記述する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;ngAnimate&#39;</span> <span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>CSS 定義</h2>
+
+<p>これだけでもうゴール間近で、あとはどんなアニメーションを適用するのかを考えて定義するだけ。</p>
+
+<p>アニメーションを CSS で定義する方法と JavaScript で記述する方法があり、ここではちゃちゃっと試すのが簡単な CSS を例示する。</p>
+
+
+		
+		<a href="/blog/2013/12/08/angularjs-nganimate/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -920,68 +986,6 @@ angular.module('Ninja', ['ui.bootstrap'])
 
 		
 		<a href="/blog/2013/11/12/angularjs-ngclass/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-09T10:14:00+09:00" data-updated="true" itemprop="datePublished">2013/11/09</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/11/09/angularjs-1.2.0-timely-delivery/" itemprop="url">AngularJS 1.2.0 リリース！</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<p>待望の AngularJS 1.2.0 リリースがキター！！</p>
-
-<p>まだ把握してない内容もあるんだけど、取り急ぎ公式ブログの<a href="http://blog.angularjs.org/2013/11/angularjs-120-timely-delivery.html">内容</a>を（一部省略して）日本語に訳しときます。</p>
-
-<hr />
-
-<h2>AngularJS 1.2.0: timely-delivery</h2>
-
-<p>1.2.0-rc3 で見つかった多くの問題を修正し、前回の安定版リリースからいくつもの新しい機能を導入している。</p>
-
-<p>前回の安定版リリースからの注目すべき変更点：</p>
-
-<ul>
-<li><a href="http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html">アニメーションとトランジション</a></li>
-<li><a href="http://kensheedlo.com/2013/08/15/error-message-minification-with-minerr.html">エラーメッセージ</a>（error minification を含む）</li>
-<li><a href="http://docs.angularjs.org/api/ng.$sce">厳密なコンテキストのエスケーピング</a></li>
-<li><a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ng-repeat で重複を防ぐトラッキング機能</a></li>
-<li><a href="http://egghead.io/lessons/angularjs-experimental-controller-as-syntax">テンプレート内で controller インスタンスにアクセスするための構文</a></li>
-<li><a href="https://github.com/angular/angular.js/pull/3699">Promise A+ に準拠</a></li>
-<li><a href="http://docs.angularjs.org/api/ngRoute">ngRoute を独自モジュールに分離</a></li>
-</ul>
-
-
-<p>リリースの詳細は、<a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md">changelog</a> を参照。</p>
-
-<p>移行ガイドは <a href="http://docs.angularjs.org/guide/migration">our guides</a> を参照。</p>
-
-		
-		
 	</div>
 
 </article>
