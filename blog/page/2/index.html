@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2014/02/04 AngularJS, service AngularJS で HTTP ヘッダを設定するには HTTP Headers を設定 AngularJS による HTTP リクエストについては、$httpProvider.defaults.headersオブジェクトで HTTP &hellip;">
+	<meta name="description" content="2014/02/05 AngularJS, directive AngularJSのng-ifで文字列を使うなら !! を付けよう &lsquo;0&rsquo; が表示されない… ng-if あるいは、ng-showやng-hideを使うときに、string &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,6 +112,55 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-05T17:44:16+09:00" data-updated="true" itemprop="datePublished">2014/02/05</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/02/05/ngif-string-caveat/" itemprop="url">AngularJSのng-ifで文字列を使うなら !! を付けよう</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<hr />
+
+<h2>&lsquo;0&rsquo; が表示されない…</h2>
+
+<p><code>ng-if</code> あるいは、<code>ng-show</code>や<code>ng-hide</code>を使うときに、string 値の有無で表示判定を記述することもある。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;p</span> <span class="na">ng-if=</span><span class="s">&quot;model.value&quot;</span><span class="nt">&gt;</span>{{model.label}}<span class="nt">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そんなとき、<code>model.value</code>の値が<code>'0'</code>だったらどうなるか。</p>
+
+<p>なんと、表示されない…。</p>
+
+
+		
+		<a href="/blog/2014/02/05/ngif-string-caveat/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -615,48 +664,6 @@
 
 		
 		<a href="/blog/2013/12/13/angularjs-watch/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-10T02:09:47+09:00" data-updated="true" itemprop="datePublished">2013/12/10</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/12/10/angularjs-expressions-forgiving/" itemprop="url">AngularJSのHTMLバインド {{expression}} ではundefinedを気にしない</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>Forgiving</h2>
-
-<p><a href="http://docs.angularjs.org/guide/expression">AngularJS: Expressions</a> ページで <a href="http://docs.angularjs.org/guide/expression#property-evaluation_forgiving">Forgiving</a> として説明されているように、HTML（テンプレート）で記述する AngularJS のバインド部分（<code>{{ result.title.value }}</code> や<code>ng-if=“result.tags.length”</code>）では、result、title、tags が、undefined や null でないかや object かどうかということを考慮したコードにしなくていい。</p>
-
-<p>result が通信してサーバから取得するデータであれば、レスポンスが返るまでの間 result は undefined の状態になるけど、だからと言って<code>{{ ((result || {}).title || {}).c }}</code>とか、<code>result &amp;&amp; result.title &amp;&amp; result.title.value</code>のようにコーディングしなくていい。</p>
-
-
-		
-		<a href="/blog/2013/12/10/angularjs-expressions-forgiving/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
