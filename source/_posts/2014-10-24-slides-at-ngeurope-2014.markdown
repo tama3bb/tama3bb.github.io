@@ -44,7 +44,7 @@ Oliver Dore - [Responsive Takes Flight: Building The First Responsive Airline We
 
 Miško Hevery - [Keynote](https://docs.google.com/presentation/d/1hr2IM-8G-0RzpB-WY8pLHvxqNggKPzUO0KvEv1IKPws/mobilepresent?slide=id.g3e58cc2be_3300)
 
-Igor Minar & Tobias Bosch - Angular 2.0 Core
+Igor Minar & Tobias Bosch - [Angular 2.0 Core](https://docs.google.com/presentation/d/1XQP0_NTzCUcFweauLlkZpbbhNVYbYy156oD--KLmXsk/edit#slide=id.p)
 
 Zack Brown - [Famous Angular](http://thomasstreet.com/ngeurope/)
 
