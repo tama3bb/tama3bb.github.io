@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ng-europe | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/ng-europe/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-10-25T09:55:11+09:00</updated>
+  <updated>2014-10-25T15:52:50+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -44,7 +44,7 @@
 
 <p>Julie Ralph &amp; Chirayu Krishnappa &ndash; Protractor and the Testability API</p>
 
-<p>Rob Eisenberg &ndash; The new Router for AngularJS</p>
+<p>Rob Eisenberg &ndash; <a href="http://www.slideshare.net/RobEisenberg/ngeurope-the-new-router">The new Router for AngularJS</a></p>
 
 <p>Pawel Kozlowski &ndash; <a href="https://github.com/pkozlowski-opensource/ng-europe-2014">ui-bootstrap</a></p>
 
