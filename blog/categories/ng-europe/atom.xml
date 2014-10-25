@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ng-europe | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/ng-europe/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-10-25T15:52:50+09:00</updated>
+  <updated>2014-10-25T17:36:16+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -40,7 +40,7 @@
 
 <p>Thomas Burleson &amp; Max Lynch &ndash; Material Design</p>
 
-<p>Pete Bacon Darwin &ndash; Dgeni &ndash; Documentation generation on steroids</p>
+<p>Pete Bacon Darwin &ndash; <a href="https://docs.google.com/presentation/d/10ROq66kEpcB8eEgSYxmzUB82Ydt2oS2kaO-sNodEMoY/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.p">Dgeni &ndash; Documentation generation on steroids</a></p>
 
 <p>Julie Ralph &amp; Chirayu Krishnappa &ndash; Protractor and the Testability API</p>
 
