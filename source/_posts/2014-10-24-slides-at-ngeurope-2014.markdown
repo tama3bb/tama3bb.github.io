@@ -28,7 +28,7 @@ Julien Bouquillon - [Using AngularJS and Phonegap to build hybrid mobile applica
 
 Thomas Burleson & Max Lynch - Material Design
 
-Pete Bacon Darwin - Dgeni - Documentation generation on steroids
+Pete Bacon Darwin - [Dgeni - Documentation generation on steroids](https://docs.google.com/presentation/d/10ROq66kEpcB8eEgSYxmzUB82Ydt2oS2kaO-sNodEMoY/pub?start=false&loop=false&delayms=3000&slide=id.p)
 
 Julie Ralph & Chirayu Krishnappa - Protractor and the Testability API
 
