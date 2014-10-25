@@ -32,7 +32,7 @@ Pete Bacon Darwin - Dgeni - Documentation generation on steroids
 
 Julie Ralph & Chirayu Krishnappa - Protractor and the Testability API
 
-Rob Eisenberg - The new Router for AngularJS
+Rob Eisenberg - [The new Router for AngularJS](http://www.slideshare.net/RobEisenberg/ngeurope-the-new-router)
 
 Pawel Kozlowski - [ui-bootstrap](https://github.com/pkozlowski-opensource/ng-europe-2014)
 
