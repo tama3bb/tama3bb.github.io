@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-10-24T10:07:18+09:00</updated>
+  <updated>2014-10-25T09:44:01+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -28,7 +28,7 @@
 
 <p>Igor Minar &amp; Brad Green &ndash; <a href="https://docs.google.com/presentation/d/1-M5U0B6JI2JKU2ibVmU-xKkR7a88Uz1ZN0pc2lEuGzE/edit#slide=id.p">Keynote</a></p>
 
-<p>Jeff Cross &amp; Brian Ford &ndash; Angular 1.3</p>
+<p>Jeff Cross &amp; Brian Ford &ndash; <a href="https://drive.google.com/file/d/0Bw6GBXhPGkUGcEVuQlFMQklnUTA/view">Angular 1.3</a></p>
 
 <p>Andrew Joslin &ndash; Ionic Framework</p>
 
@@ -46,19 +46,19 @@
 
 <p>Rob Eisenberg &ndash; The new Router for AngularJS</p>
 
-<p>Pawel Kozlowski &ndash; ui-bootstrap</p>
+<p>Pawel Kozlowski &ndash; <a href="https://github.com/pkozlowski-opensource/ng-europe-2014">ui-bootstrap</a></p>
 
-<p>Matthieu Lux &ndash; Angular from scratch</p>
+<p>Matthieu Lux &ndash; <a href="https://github.com/Swiip/angular-from-scratch">Angular from scratch</a></p>
 
 <p>Oliver Dore &ndash; <a href="http://www.slideshare.net/workandco/vx-ng-europe">Responsive Takes Flight: Building The First Responsive Airline Website</a></p>
 
 <h3>WEDNESDAY OCTOBER 23rd</h3>
 
-<p>Miško Hevery &ndash; Keynote</p>
+<p>Miško Hevery &ndash; <a href="https://docs.google.com/presentation/d/1hr2IM-8G-0RzpB-WY8pLHvxqNggKPzUO0KvEv1IKPws/mobilepresent?slide=id.g3e58cc2be_3300">Keynote</a></p>
 
 <p>Igor Minar &amp; Tobias Bosch &ndash; Angular 2.0 Core</p>
 
-<p>Zack Brown &ndash; Famous Angular</p>
+<p>Zack Brown &ndash; <a href="http://thomasstreet.com/ngeurope/">Famous Angular</a></p>
 
 <p>Douglas Duteil &ndash; <a href="https://docs.google.com/presentation/d/1W-0qR2LDmdeAv_3uGC1w6HyB-8Zc6ANwx1WM5wJrsx0/edit#slide=id.g4e26e863f_179">Yet another way to animate in Angular</a></p>
 
