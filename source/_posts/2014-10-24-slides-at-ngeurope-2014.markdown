@@ -16,7 +16,7 @@ categories: [AngularJS, ng-europe]
 
 Igor Minar & Brad Green - [Keynote](https://docs.google.com/presentation/d/1-M5U0B6JI2JKU2ibVmU-xKkR7a88Uz1ZN0pc2lEuGzE/edit#slide=id.p)
 
-Jeff Cross & Brian Ford - Angular 1.3
+Jeff Cross & Brian Ford - [Angular 1.3](https://drive.google.com/file/d/0Bw6GBXhPGkUGcEVuQlFMQklnUTA/view)
 
 Andrew Joslin - Ionic Framework
 
@@ -34,19 +34,19 @@ Julie Ralph & Chirayu Krishnappa - Protractor and the Testability API
 
 Rob Eisenberg - The new Router for AngularJS
 
-Pawel Kozlowski - ui-bootstrap
+Pawel Kozlowski - [ui-bootstrap](https://github.com/pkozlowski-opensource/ng-europe-2014)
 
-Matthieu Lux - Angular from scratch
+Matthieu Lux - [Angular from scratch](https://github.com/Swiip/angular-from-scratch)
 
 Oliver Dore - [Responsive Takes Flight: Building The First Responsive Airline Website](http://www.slideshare.net/workandco/vx-ng-europe)
 
 ### WEDNESDAY OCTOBER 23rd
 
-Miško Hevery - Keynote
+Miško Hevery - [Keynote](https://docs.google.com/presentation/d/1hr2IM-8G-0RzpB-WY8pLHvxqNggKPzUO0KvEv1IKPws/mobilepresent?slide=id.g3e58cc2be_3300)
 
 Igor Minar & Tobias Bosch - Angular 2.0 Core
 
-Zack Brown - Famous Angular
+Zack Brown - [Famous Angular](http://thomasstreet.com/ngeurope/)
 
 Douglas Duteil - [Yet another way to animate in Angular](https://docs.google.com/presentation/d/1W-0qR2LDmdeAv_3uGC1w6HyB-8Zc6ANwx1WM5wJrsx0/edit#slide=id.g4e26e863f_179)
 
