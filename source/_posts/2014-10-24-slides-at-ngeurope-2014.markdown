@@ -20,21 +20,21 @@ Jeff Cross & Brian Ford - [Angular 1.3](https://drive.google.com/file/d/0Bw6GBXh
 
 Andrew Joslin - Ionic Framework
 
-Victor Berchet & Rado Kirov - AngularDart under the hood
+Victor Berchet & Rado Kirov - [AngularDart under the hood](https://docs.google.com/presentation/d/1qKoCrd7YgwsRPT8z2e8ahsY-JZkP6-cXPfbDSLz_HgQ/pub?start=false&loop=false&delayms=3000&slide=id.p)
 
-Vojta Jína - Can We Learn from Architects?
+Vojta Jína - [Can We Learn from Architects?](https://dl.dropboxusercontent.com/u/36607830/talks/2014-can-we-learn-from%20architects.pdf)
 
 Julien Bouquillon - [Using AngularJS and Phonegap to build hybrid mobile applications](http://blog.revolunet.com/ngeurope-angular-cordova/#1)
 
-Thomas Burleson & Max Lynch - Material Design
+Thomas Burleson & Max Lynch - [Material Design](http://angular-material.slides.com/tburleson/introducing-angular-material-design)
 
 Pete Bacon Darwin - [Dgeni - Documentation generation on steroids](https://docs.google.com/presentation/d/10ROq66kEpcB8eEgSYxmzUB82Ydt2oS2kaO-sNodEMoY/pub?start=false&loop=false&delayms=3000&slide=id.p)
 
-Julie Ralph & Chirayu Krishnappa - Protractor and the Testability API
+Julie Ralph & Chirayu Krishnappa - [Protractor and the Testability API](https://docs.google.com/presentation/d/1ITWsMDGd6ArrP6KbGRLLzS9f9NMnyqozIdjtaj0Ek2c/edit#slide=id.p)
 
 Rob Eisenberg - [The new Router for AngularJS](http://www.slideshare.net/RobEisenberg/ngeurope-the-new-router)
 
-Pawel Kozlowski - [ui-bootstrap](https://github.com/pkozlowski-opensource/ng-europe-2014)
+Pawel Kozlowski - [ui-bootstrap](http://pkozlowski-opensource.github.io/ng-europe-2014/presentation/)
 
 Matthieu Lux - [Angular from scratch](https://github.com/Swiip/angular-from-scratch)
 
@@ -56,7 +56,7 @@ Erik Arvidsson & Vojta Jína - [ES6 in Angular 2.0](http://arv.github.io/ngeurop
 
 Matias Niemelä - Animations (sequencer, web animations)
 
-Lukas Ruebbelke - Be a Real Time Cage Dragon with AngularJS and Firebase
+Lukas Ruebbelke - [Be a Real Time Cage Dragon with AngularJS and Firebase](http://onehungrymind.com/slides/realtime-cage-dragon-with-firebase-angularjs-google.pdf)
 
 Carmen Popoviciu & Pascal Precht - [“Don’t stop thinking about tomorrow” - AngularJS and Web Components](http://slidedeck.io/PascalPrecht/dont-stop-thinking-about-tomorrow)
 
