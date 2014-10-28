@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-10-28T13:20:02+09:00</updated>
+  <updated>2014-10-28T16:14:56+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[（日本語訳）ng-europe, Angular 1.3, and beyond]]></title>
+    <link href="http://angularjsninja.com/blog/2014/10/28/ngeurope-angular1.3-and-beyond-in-japanese/"/>
+    <updated>2014-10-28T16:12:47+09:00</updated>
+    <id>http://angularjsninja.com/blog/2014/10/28/ngeurope-angular1.3-and-beyond-in-japanese</id>
+    <content type="html"><![CDATA[<p>AngularJS 公式ブログの記事 <a href="http://angularjs.blogspot.jp/2014/10/ng-europe-angular-13-and-beyond.html">ng-europe, Angular 1.3, and beyond</a> を日本語訳しておきました。</p>
+
+<hr />
+
+<p>先週、パリで開催した <a href="http://ngeurope.org">ng-europe</a> において、Angular の過去、現在、そして未来について発表しました。このブログポストでは、重要なポイントとお知らせについてまとめています。</p>
+
+<h2>Angular 1.3</h2>
+
+<p>リリースしたばかりの新しい AngularJS 1.3 では、AngularJS 1.2 には無かった多くの機能と改善が含まれています。</p>
+
+<ul>
+<li>パフォーマンス：DOM 操作や digest など多くの処理が 3 &ndash; 4 倍高速化し、アプリケーションが軽快に動作します。</li>
+<li>フォーム：シンプルな API となり、フォームバリデーションのコードを短く記述できます。</li>
+<li>ARIA サポート：<a href="https://docs.angularjs.org/api/ngAria">ngAria</a> により、スクリーンリーダーなどの支援ソフトウェアをサポートする適切な ARIA 属性を追加・削除できます。</li>
+<li>Material Design：ユーザインターフェイスデザインとインタラクションのための <a href="http://www.google.com/design/spec/material-design/introduction.html">Google&rsquo;s specification</a> をほぼ完全に機能するよう実装しています。詳しくは <a href="https://material.angularjs.org">material.angularjs.org</a> で。</li>
+</ul>
+
+
+<p>Web アプリケーションを実装しているなら、このバージョンを使ってください。Angular 1.x で構築された Google の 1,600 を超えるアプリケーションで、長期間にわたってこのバージョンを最上位としてサポートしていくことをコミットしています。</p>
+
+<p>Angular 1.x で予定していた新機能と breaking changes については、一部の例外を除いて 2.0 に先送りし、新しい設計をベースに取り組んでいきます。PRs（プルリクエスト）のレビューと issues への返答を続けてはいますが、1.x については、機能よりも安定性、セキュリティ、性能をより重視していきます。</p>
+
+<p>Angular 1.2 をお使いであれば、コードを 1.3 に移行する方法について <a href="https://docs.angularjs.org/guide/migration">migration instructions</a>（<a href="http://angularjsninja.com/blog/2014/10/15/migrating-from-1.2-to-1.3-in-Japanese/">日本語</a>）を確認してください。</p>
+
+<!-- more -->
+
+
+<h2>From 1.3 to 2.0: Angular&rsquo;s Next Step</h2>
+
+<p>1 月に開催した <a href="http://ng-conf.org">ng-conf</a> の <a href="https://www.youtube.com/watch?v=r1A1VR0ibIQ">keynote</a> で、Angular 2 の計画について発表しました。それ以降の数か月にわたり、Angular にとっての次の進化となるステップについてブレインストーミングを繰り返してきました。3 月には<a href="http://angularjs.blogspot.jp/2014/03/angular-20.html">デザインドキュメントで考えを発表</a>し、フィードバックから Angular がどう使われ、どう使いたいと考えられているかを確認し、様々なアプローチ、プロトタイプ、ベンチマーク、デザインを繰り返し、ベストを求めてきました。</p>
+
+<p>先週の <a href="http://ngeurope.org">ng-europe</a> の場で、このリサーチとプロトタイプによる Angular 2.0 のビジョンについて発表し、Angular が本物の Angular（DI、HTML ベースのテンプレート、ディレクティブ、テスタビリティ）となることを見ていただけたと思います。一方で、Angular を近年の Web プラットフォームのシフト（web components や module system など）に適用させ、Angular を著しく高速化して使いやすくするためには、1.x からの段階的なステップでは実現できず、それに伴うデザイン変更が生じることも見ていただきました。</p>
+
+<p>具体的な変更点：</p>
+
+<ul>
+<li>Angular 1.x の controllers と templates を包含する統一されたコンポーネントモデルにより、概念 (concepts) と定型 (boilerplate) を減らして再利用性を高める。</li>
+<li>scope の概念を見直してシンプルでわかりやすくし、コンポーネント間の責任分担を改善。</li>
+<li>モジュール化されたモバイルファーストなデザインで、エンタープライズレベルのデスクトップアプリケーションのニーズまでスケール。 &ndash; 世界人口の 50 % を超える人々が、デスクトップではなくモバイルでインターネットに接続しており、モバイル向けのアプリケーションを開発しやすくしたいと考えています。一方で、エンタープライズ分野ではデスクトップ Web アプリケーションの重要性も残り続けます。</li>
+<li>Web Components サポート。1.x での Web プラットフォームについての前提はもはや有効ではなく、対応させるために Angular を変更していきます。</li>
+<li>ES6 (with easy transpilation to ES5) で構築。つまり、現在のブラウザで未来の JavaScript のコードを書き始めることができます。あるいは、ES5 で Angular 2 アプリケーションを実装することもできます。</li>
+<li><a href="https://docs.google.com/presentation/d/1hr2IM-8G-0RzpB-WY8pLHvxqNggKPzUO0KvEv1IKPws/edit#slide=id.p">AtScript を導入</a>。TypeScript シンタックスと ES6 を拡張し、実行時の型とアノテーションを追加することで、大きなチームが大規模なアプリケーションを構築し、ドキュメント化することを支援します。ES6 と同じように、アプリケーションの構築に AtScript は必須ではありません。</li>
+<li>Angular は jqLite や DOM ラッパーに依存しない。DOM は 2009 年以来大幅に改善しており、AngularJS がラッパーに依存する必要はなく、ラッパーを無くすことでパフォーマンスも向上します。必要であればディレクティブに jQuery や他の DOM ライブラリを使うこともできます。</li>
+</ul>
+
+
+<p>これらのアイデアの多くは、Angular 開発者との<a href="https://drive.google.com/#folders/0B7Ovm8bUYiUDR29iSkEyMk5pVUk">ディスカッション</a>によるもので、ディスカッションに加わってくださった開発者の方々にあらためて感謝します！ 安定と性能を重視した <a href="http://angularjs.blogspot.jp/2014/10/angularjs-130-superluminal-nudge.html">AngularJS 1.3 をリリース</a>（<a href="http://angularjsninja.com/blog/2014/10/14/angularjs-1.3.0-released/">日本語</a>）した今、Angular 2.0 の構築に向けて進んでいきます。</p>
+
+<h2>What does this mean for me?</h2>
+
+<p>Angular コミュニティこそが、Angular を素晴らしいものにしています。2.0 の計画を早期に共有することで、コンセプトから実際のコードにしていくためのディスカッションに、多くの方々が参加していただけるようにしています。開発者の方々からの協力を必要としており、考えをお伺いできることを楽しみにしています。GitHub で issues を発行していただくか、Twitter (<a href="https://twitter.com/bradlygreen">Brad</a>, <a href="https://twitter.com/IgorMinar">Igor</a>, <a href="https://twitter.com/briantford">Brian</a>, <a href="https://twitter.com/jeffbcross">Jeff</a>) や <a href="https://plus.google.com/+AngularJS/posts">Google+</a> でご連絡ください。ミートアップにお越しいただいたり、<a href="https://drive.google.com/#folders/0BxgtL8yFJbacMEZDc2NtWS1VZ1k">ミーティングノート</a>のフォロー・コメントもお願いします。</p>
+
+<h2>When can I use Angular 2.0?</h2>
+
+<p>現在の実験的な状態にある Angular 2.0 であれば、<a href="http://github.com/angular/angular">GitHub</a> と<a href="https://drive.google.com/#folders/0BxgtL8yFJbacMEZDc2NtWS1VZ1k">ミーティングノート</a>でフォローしていただけます。2.0 のコードで何かを構築するには早すぎ、プロジェクトはまだ本当に初期の段階です。まだリリース日を発表できるような状態ではありませんが、初期のバージョンを少しでも早くリリースできるよう進めています。</p>
+
+<h2>How can I learn more about Angular 2.0?</h2>
+
+<p>まだ非常に初期の段階ですが、まず ng-europe (<a href="https://twitter.com/ngEurope/status/525966523496955904">when they are available</a>) のビデオを見ていただくことから始められるのが一番です。特に、2 日間それぞれの Keynote と、Angular 2 Core のセッションです。</p>
+
+<p>時間を掛けて、より深い内容を見ていただけるなら、すべての<a href="https://drive.google.com/#folders/0B7Ovm8bUYiUDR29iSkEyMk5pVUk">デザインドキュメントとリサーチ</a>に目を通してみてください。</p>
+
+<p>コードは GitHub の <a href="https://github.com/angular/angular">angular/angular</a> リポジトリにありますが、まだ初期の段階であり、数か月のうちに続々と増えていくことになります。</p>
+
+<p>最後に、パートナーによって公開されているリソースについても確認してください。ES6 と Angular 2.0 についての <a href="http://blogs.msdn.com/b/typescript/archive/2014/10/22/typescript-and-the-road-to-2-0.aspx">TypeScript のブログ記事</a>や、<a href="https://github.com/google/traceur-compiler">Traceur</a>、<a href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts">EcmaScript 6</a>、<a href="http://webcomponents.org/">Web Components</a> です。</p>
+
+<h2>What about Migrating from 1.3 to 2.0?</h2>
+
+<p>Angular 2 のゴールは、既存 API との後方互換性に縛られることなく、Web アプリケーションを構築するための最高のツールセットにすることです。Angular 2 の最初のバージョンに合わせて、Angular 1 ベースのアプリケーションからの移行パスについての作業を始めます。</p>
+
+<p>Angular で Web アプリケーションを実装するために、たくさんの時間を投資して学習してくださっていることを知っています。核となる概念のほとんどを維持していきますので、Angular 2 においても同じ知識を活かして短期間で熟練していただけます。</p>
+
+<h2>What&rsquo;s next?</h2>
+
+<p>ng-europe は Angular コミュニティにとって素晴らしいイベントでした。プレゼンテーションやデモは素晴らしく、またそれ以上に、通路などで交わされたすべてのインフォーマルな会話が大切なものでした。そして今、発表したアイデアをリアルなものとしていくために、<a href="https://github.com/angular/angular/">ご参加ください</a>。2.0 が開発中の間は、Angular 1.3 で素晴らしいアプリケーションを構築してください。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS カンファレンス（ng-europe 2014）のスライドまとめ]]></title>
@@ -1737,163 +1820,6 @@
 <h2>1.3（ベータ）リリースはいつ頃か</h2>
 
 <p>1.3 の最初のベータバージョンが 1 月で、その後 1 〜 2 週間間隔でリリース。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS のデータバインドを支える $watch]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/13/angularjs-watch/"/>
-    <updated>2013-12-13T18:43:39+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/13/angularjs-watch</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>$watch</h2>
-
-<p>AngularJS の強力なデータバインドを支える仕組みのうち、まず <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watch">$watch</a> について取り上げる。</p>
-
-<p>$watch を使えば、監視（Observe）したいオブジェクトやプロパティが変化したときに実行する処理（リスナー）を容易に記述できる。</p>
-
-<p>$watch を利用する場所は scope のある directive や controller で、ng-model や ng-bind のようなデータバインドする directive を独自に実装する場合や、モデルの変更に応じて処理をバインドする場合などに使用できる。</p>
-
-<h2>$digest サイクル</h2>
-
-<p>$watch による変更検知処理は、ポーリング的（一定間隔で頻繁）に実施されるのではなく、以下のイベントが生じたときに $digest サイクル（または $digest ループ）と呼ばれる処理が実行され、その中で実行される。</p>
-
-<table>
-<thead>
-<tr>
-<th>イベント </th>
-<th> 概要</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ナビゲーション </td>
-<td> ブラウザの location 変更時</td>
-</tr>
-<tr>
-<td>ネットワーク </td>
-<td> $http, $resource レスポンス受信時</td>
-</tr>
-<tr>
-<td>DOM イベント </td>
-<td> ng-click, ng-mouseover などの実行時</td>
-</tr>
-<tr>
-<td>タイマー </td>
-<td> $timeout によるタイマー処理の実行時</td>
-</tr>
-</tbody>
-</table>
-
-
-<!-- more -->
-
-
-<h2>構文</h2>
-
-<p><code>$watch(watchExpression, listener, objectEquality)</code></p>
-
-<h3>watchExpression</h3>
-
-<p>監視したいオブジェクトや値（を返す function）を第 1 引数に指定する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="nx">$location</span><span class="p">.</span><span class="nx">path</span><span class="p">();</span>
-</span><span class='line'><span class="p">},</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// $location の path が変わった時</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>scope にあるオブジェクトや値であれば、文字列で指定できる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// scope の name が変わった時</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>listener</h3>
-
-<p>watchExpression で監視しているオブジェクトや値が変化したときに実行するリスナー function を第 2 引数に指定する。</p>
-
-<p>変更後の値だけでなく、変更前の値を参照することもできる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newVal</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// newVal: 変更後の値: &#39;Hanzo&#39;</span>
-</span><span class='line'>  <span class="c1">// oldVal: 変更前の値: &#39;unknown&#39;</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Hanzo&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>なお、このリスナー function についても、scope に定義があれば文字列で指定できる。</p>
-
-<h3>objectEquality</h3>
-
-<p>ここまでのコード例では、すべて $watch の対象となる watchExpression が文字列であったため、変更が常に検知される。</p>
-
-<p>watchExpression がオブジェクトの場合には注意が必要で、この第 3 引数を省略（または false を指定）している場合は reference（同じオブジェクトを参照しているか）で比較されることとなり、オブジェクトのプロパティ値が変わろうと配列の中身が変わろうと、変化したとは扱われない。</p>
-
-<p>このオブジェクト id での比較のほうが高速に処理されるが、どうしてもオブジェクトをプロパティごとに比較したい場合には、第 3 引数 objectEquality に true を指定する。性能の点では不利になるが、オブジェクトや配列の中身が変更されたかを検知できるようになる。</p>
-
-<p>なお、性能だけでなく、新旧比較のためにオブジェクトや配列全体のコピー（angular.copy）を保持することになり、メモリ消費の点でも不利になる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;male&#39;</span>
-</span><span class='line'>  <span class="err">…</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newVal</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// newVal: user オブジェクト</span>
-</span><span class='line'>  <span class="c1">// オブジェクトの参照が変わった時、または オブジェクトのいずれかのプロパティが変わった時</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">newVal</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// オブジェクトの場合は undefined チェックを</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">},</span> <span class="kc">true</span><span class="p">);</span>  <span class="c1">// 性能、メモリ消費の点からできるだけ true を指定しない方法を検討すべき</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>単にオブジェクトが持つ特定のプロパティを監視したいだけであれば、以下のように記述しよう。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;user.name&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newVal</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// newVal: user オブジェクト</span>
-</span><span class='line'>  <span class="c1">// オブジェクトの name プロパティが変わった時</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

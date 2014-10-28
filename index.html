@@ -9,7 +9,7 @@
 	<meta name="author" content="Akihito Tamagawa">
 
 	
-	<meta name="description" content="2014/10/24 AngularJS, ng-europe AngularJS カンファレンス（ng-europe 2014）のスライドまとめ Slides at ng-europe 2014 10/22 〜 10/23 に、パリ（フランス）で AngularJS のカンファレンス ng- &hellip;">
+	<meta name="description" content="2014/10/28 AngularJS, ng-europe （日本語訳）ng-europe, Angular 1.3, and Beyond AngularJS 公式ブログの記事 ng-europe, Angular 1.3, and beyond を日本語訳しておきました。 先週、 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,6 +112,64 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-28T16:12:47+09:00" data-updated="true" itemprop="datePublished">2014/10/28</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/ng-europe/'>ng-europe</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/10/28/ngeurope-angular1.3-and-beyond-in-japanese/" itemprop="url">（日本語訳）ng-europe, Angular 1.3, and Beyond</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>AngularJS 公式ブログの記事 <a href="http://angularjs.blogspot.jp/2014/10/ng-europe-angular-13-and-beyond.html">ng-europe, Angular 1.3, and beyond</a> を日本語訳しておきました。</p>
+
+<hr />
+
+<p>先週、パリで開催した <a href="http://ngeurope.org">ng-europe</a> において、Angular の過去、現在、そして未来について発表しました。このブログポストでは、重要なポイントとお知らせについてまとめています。</p>
+
+<h2>Angular 1.3</h2>
+
+<p>リリースしたばかりの新しい AngularJS 1.3 では、AngularJS 1.2 には無かった多くの機能と改善が含まれています。</p>
+
+<ul>
+<li>パフォーマンス：DOM 操作や digest など多くの処理が 3 &ndash; 4 倍高速化し、アプリケーションが軽快に動作します。</li>
+<li>フォーム：シンプルな API となり、フォームバリデーションのコードを短く記述できます。</li>
+<li>ARIA サポート：<a href="https://docs.angularjs.org/api/ngAria">ngAria</a> により、スクリーンリーダーなどの支援ソフトウェアをサポートする適切な ARIA 属性を追加・削除できます。</li>
+<li>Material Design：ユーザインターフェイスデザインとインタラクションのための <a href="http://www.google.com/design/spec/material-design/introduction.html">Google&rsquo;s specification</a> をほぼ完全に機能するよう実装しています。詳しくは <a href="https://material.angularjs.org">material.angularjs.org</a> で。</li>
+</ul>
+
+
+<p>Web アプリケーションを実装しているなら、このバージョンを使ってください。Angular 1.x で構築された Google の 1,600 を超えるアプリケーションで、長期間にわたってこのバージョンを最上位としてサポートしていくことをコミットしています。</p>
+
+<p>Angular 1.x で予定していた新機能と breaking changes については、一部の例外を除いて 2.0 に先送りし、新しい設計をベースに取り組んでいきます。PRs（プルリクエスト）のレビューと issues への返答を続けてはいますが、1.x については、機能よりも安定性、セキュリティ、性能をより重視していきます。</p>
+
+<p>Angular 1.2 をお使いであれば、コードを 1.3 に移行する方法について <a href="https://docs.angularjs.org/guide/migration">migration instructions</a>（<a href="http://angularjsninja.com/blog/2014/10/15/migrating-from-1.2-to-1.3-in-Japanese/">日本語</a>）を確認してください。</p>
+
+
+		
+		<a href="/blog/2014/10/28/ngeurope-angular1.3-and-beyond-in-japanese/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -630,55 +688,6 @@
 
 		
 		<a href="/blog/2014/02/17/angularjs-ionic-firebase/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-06T15:29:21+09:00" data-updated="true" itemprop="datePublished">2014/02/06</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/directive/'>directive</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2014/02/06/anchor-with-ngdisabled-caveat/" itemprop="url">非活性（ng-disabled）にしてもaタグのボタンだとng-click動くので注意</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<hr />
-
-<h2>Bootstrap のボタン</h2>
-
-<p><a href="http://getbootstrap.com">Bootstrap</a> ベースのボタンに<code>ng-click</code>を記述する（form を submit しない）コードは、主に以下の 2 通りある。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;handleClick()&quot;</span><span class="nt">&gt;</span>Done<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;handleClick()&quot;</span><span class="nt">&gt;</span>Done<span class="nt">&lt;/a&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>どちらでも見た目は同じになるし、イベント処理は<code>ng-click</code>がやってくれるし、<code>&lt;a&gt;</code>のほうがコードは短くなるしって感じで、どっちも一緒なんだし<code>&lt;a&gt;</code>にしとこってノリでやってると、<code>disabled</code> のワナにハマるかも。</p>
-
-
-		
-		<a href="/blog/2014/02/06/anchor-with-ngdisabled-caveat/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

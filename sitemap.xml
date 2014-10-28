@@ -243,8 +243,14 @@
         <lastmod>2014-10-28T10:48:31+09:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://angularjsninja.com/blog/2014/10/28/ngeurope-angular1.3-and-beyond-in-japanese/
+        </loc>
+        <lastmod>2014-10-28T16:14:52+09:00</lastmod>
+    </url>
+    <url>
         <loc>http://angularjsninja.com/blog/archives/</loc>
-        <lastmod>2014-10-28T13:19:48+09:00</lastmod>
+        <lastmod>2014-10-28T16:14:52+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/blog/categories/</loc>
@@ -252,7 +258,7 @@
     </url>
     <url>
         <loc>http://angularjsninja.com/</loc>
-        <lastmod>2014-10-28T13:19:48+09:00</lastmod>
+        <lastmod>2014-10-28T16:14:52+09:00</lastmod>
     </url>
     <url>
         <loc>http://angularjsninja.com/robots.txt</loc>
