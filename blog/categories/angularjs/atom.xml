@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-10-25T17:36:16+09:00</updated>
+  <updated>2014-10-28T10:51:55+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -32,21 +32,21 @@
 
 <p>Andrew Joslin &ndash; Ionic Framework</p>
 
-<p>Victor Berchet &amp; Rado Kirov &ndash; AngularDart under the hood</p>
+<p>Victor Berchet &amp; Rado Kirov &ndash; <a href="https://docs.google.com/presentation/d/1qKoCrd7YgwsRPT8z2e8ahsY-JZkP6-cXPfbDSLz_HgQ/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.p">AngularDart under the hood</a></p>
 
-<p>Vojta Jína &ndash; Can We Learn from Architects?</p>
+<p>Vojta Jína &ndash; <a href="https://dl.dropboxusercontent.com/u/36607830/talks/2014-can-we-learn-from%20architects.pdf">Can We Learn from Architects?</a></p>
 
 <p>Julien Bouquillon &ndash; <a href="http://blog.revolunet.com/ngeurope-angular-cordova/#1">Using AngularJS and Phonegap to build hybrid mobile applications</a></p>
 
-<p>Thomas Burleson &amp; Max Lynch &ndash; Material Design</p>
+<p>Thomas Burleson &amp; Max Lynch &ndash; <a href="http://angular-material.slides.com/tburleson/introducing-angular-material-design">Material Design</a></p>
 
 <p>Pete Bacon Darwin &ndash; <a href="https://docs.google.com/presentation/d/10ROq66kEpcB8eEgSYxmzUB82Ydt2oS2kaO-sNodEMoY/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.p">Dgeni &ndash; Documentation generation on steroids</a></p>
 
-<p>Julie Ralph &amp; Chirayu Krishnappa &ndash; Protractor and the Testability API</p>
+<p>Julie Ralph &amp; Chirayu Krishnappa &ndash; <a href="https://docs.google.com/presentation/d/1ITWsMDGd6ArrP6KbGRLLzS9f9NMnyqozIdjtaj0Ek2c/edit#slide=id.p">Protractor and the Testability API</a></p>
 
 <p>Rob Eisenberg &ndash; <a href="http://www.slideshare.net/RobEisenberg/ngeurope-the-new-router">The new Router for AngularJS</a></p>
 
-<p>Pawel Kozlowski &ndash; <a href="https://github.com/pkozlowski-opensource/ng-europe-2014">ui-bootstrap</a></p>
+<p>Pawel Kozlowski &ndash; <a href="http://pkozlowski-opensource.github.io/ng-europe-2014/presentation/">ui-bootstrap</a></p>
 
 <p>Matthieu Lux &ndash; <a href="https://github.com/Swiip/angular-from-scratch">Angular from scratch</a></p>
 
@@ -68,7 +68,7 @@
 
 <p>Matias Niemelä &ndash; Animations (sequencer, web animations)</p>
 
-<p>Lukas Ruebbelke &ndash; Be a Real Time Cage Dragon with AngularJS and Firebase</p>
+<p>Lukas Ruebbelke &ndash; <a href="http://onehungrymind.com/slides/realtime-cage-dragon-with-firebase-angularjs-google.pdf">Be a Real Time Cage Dragon with AngularJS and Firebase</a></p>
 
 <p>Carmen Popoviciu &amp; Pascal Precht &ndash; <a href="http://slidedeck.io/PascalPrecht/dont-stop-thinking-about-tomorrow">“Don’t stop thinking about tomorrow” &ndash; AngularJS and Web Components</a></p>
 
