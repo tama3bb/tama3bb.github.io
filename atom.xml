@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2014-12-16T12:13:31+09:00</updated>
+  <updated>2015-01-15T19:25:59+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -482,7 +482,7 @@
 
 <p><em><a href="https://github.com/angular/angular.js/commit/bdfc9c02d021e08babfbc966a007c71b4946d69d">drop the toBoolean function</a></em></p>
 
-<p><code>f</code> <code>0</code> <code>false</code> <code>no</code> <code>n</code> <code>[]</code> は falsy として扱われず、JavaScript の falsy 値である <code>false</code> <code>null</code> <code>undefined</code> <code>NaN</code> <code>0</code> <code>""</code> のみ falsy として扱われるようになりました。</p>
+<p><code>'f'</code> <code>'0'</code> <code>'false'</code> <code>'no'</code> <code>'n'</code> <code>'[]'</code> は falsy として扱われず、JavaScript の falsy 値である <code>false</code> <code>null</code> <code>undefined</code> <code>NaN</code> <code>0</code> <code>""</code> のみ falsy として扱われるようになりました。</p>
 
 <h3>$compile</h3>
 
