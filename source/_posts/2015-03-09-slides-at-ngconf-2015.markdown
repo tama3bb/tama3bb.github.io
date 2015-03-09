@@ -18,7 +18,7 @@ Angular カンファレンス [ng-conf 2015](http://www.ng-conf.org) が 3/5 〜
 [State of Angular 1](https://docs.google.com/presentation/d/1_3JH2nlubaktyaKzWo7ikBP2QWzaK1w7IEfLDH_x3lU/edit#slide=id.p)
 -- Pawel Kozlowski & Lucas Galfaso
 
-The New Router
+[The New Router](https://docs.google.com/presentation/d/1UtlOESedCKC1bHnx0F0w8LzFzVh4BOMr9g6GfCSR-Lw/edit#slide=id.p)
 -- Brian Ford
 
 Prototyping with Angular? YES!!
