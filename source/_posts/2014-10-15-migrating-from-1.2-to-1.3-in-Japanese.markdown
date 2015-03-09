@@ -47,7 +47,7 @@ angular 式の中では `Object` を利用できなくなりました。`Object.
 
 *[drop the toBoolean function](https://github.com/angular/angular.js/commit/bdfc9c02d021e08babfbc966a007c71b4946d69d)*
 
-`f` `0` `false` `no` `n` `[]` は falsy として扱われず、JavaScript の falsy 値である `false` `null` `undefined` `NaN` `0` `""` のみ falsy として扱われるようになりました。
+`'f'` `'0'` `'false'` `'no'` `'n'` `'[]'` は falsy として扱われず、JavaScript の falsy 値である `false` `null` `undefined` `NaN` `0` `""` のみ falsy として扱われるようになりました。
 
 ### $compile
 
