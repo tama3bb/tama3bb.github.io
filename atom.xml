@@ -4,7 +4,7 @@
   <title><![CDATA[AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2015-01-15T19:25:59+09:00</updated>
+  <updated>2015-03-09T12:10:56+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2015）のスライドまとめ]]></title>
+    <link href="http://angularjsninja.com/blog/2015/03/09/slides-at-ngconf-2015/"/>
+    <updated>2015-03-09T12:10:46+09:00</updated>
+    <id>http://angularjsninja.com/blog/2015/03/09/slides-at-ngconf-2015</id>
+    <content type="html"><![CDATA[<p>Angular カンファレンス <a href="http://www.ng-conf.org">ng-conf 2015</a> が 3/5 〜 3/6 に開催されていました。</p>
+
+<p>スライドを捕捉でき次第、リンクを追加していきます。動画は <a href="https://www.youtube.com/channel/UCm9iiIfgmVODUJxINecHQkA">YouTube</a> のほうで視聴できます。</p>
+
+<h2>Thursday</h2>
+
+<p><a href="https://docs.google.com/presentation/d/1d03YJ1gKhMZkV-87m9lsS_gnXASVDdSfYvuvzHIro6g/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.p">Day 1 Keynote</a>
+&mdash; Brad Green &amp; Igor Minar</p>
+
+<p><a href="https://docs.google.com/presentation/d/1_3JH2nlubaktyaKzWo7ikBP2QWzaK1w7IEfLDH_x3lU/edit#slide=id.p">State of Angular 1</a>
+&mdash; Pawel Kozlowski &amp; Lucas Galfaso</p>
+
+<p>The New Router
+&mdash; Brian Ford</p>
+
+<p>Prototyping with Angular? YES!!
+&mdash; Kelly Knight &amp; Dirk Ginader</p>
+
+<p>Fast from the Start
+&mdash; Jeff Cross</p>
+
+<p><a href="https://docs.google.com/presentation/d/1SZ05jFRF9Rfsrn39z5-vdyLbY37XZGEgQfZ1uIOaEEo/pub?start=false&amp;loop=false#slide=id.g6326acee8_1314">Creating Container Components in Web Components and Angular</a>
+&mdash; Kara Erickson &amp; Rachael L Moore</p>
+
+<p><a href="http://zizzamia.github.io/building-high-performance-measurable-directives/">#ngTasty</a>
+&mdash; Leonardo Zizzamia</p>
+
+<p>TypeScript and ES6
+&mdash; Dan Wahlin &amp; Andrew Connell</p>
+
+<p>Community Building How-To: Make More Angular Devs Now
+&mdash; Judy Tuan</p>
+
+<p>ng-wat?
+&mdash; Shai Reznik</p>
+
+<p><a href="https://docs.google.com/presentation/d/1V8sRYKiEfXtD0fNYKHUQPAni70IpZxrRKuX0V4UHDD4/view#slide=id.p">Accessibility Testing Made Easy</a>
+&mdash; Julie Ralph</p>
+
+<p>Why Realtime Matters
+&mdash; James Tamplin</p>
+
+<p><a href="http://slides.com/kentcdodds/ng-model-options-in-5-minutes#/">ng-model-options in 5 minutes</a>
+&mdash; Kent C. Dodds</p>
+
+<p>How to Teach Angular to your Kids
+&mdash; Katya Eames</p>
+
+<p><a href="http://slides.com/bahmutov/run-digest-cycle-in-web-worker#/">Run digest cycle in web worker</a>
+&mdash; Dr. Gleb Bahmutov PhD.</p>
+
+<p>$asqwatch is real
+&mdash; William Scott Moss</p>
+
+<p><a href="http://adamdbradley.github.io/ionic-present/#/">Ionic + Angular: Superpowers for Mobile App Development</a>
+&mdash; Adam Bradley</p>
+
+<p>Angular Behind The Scenes
+&mdash; Rodric Haddad</p>
+
+<h2>Friday</h2>
+
+<p><a href="https://docs.google.com/presentation/d/1XoizA8Dm_S3SU1jYPERmgWVIbqjGOXolpF3Jm2b8xKA/edit#slide=id.p">Angular 2</a>
+&mdash; Miško Hevery &amp; Rado Kirov</p>
+
+<p>Binding to the Cloud with Falcor
+&mdash; Jafar Husain</p>
+
+<p>TypeScript and Angular 2.0
+&mdash; Jonathan Turner</p>
+
+<p>What&rsquo;s new in ngAnimate
+&mdash; Matias Niemelä</p>
+
+<p>Building Platforms with Angular
+&mdash; Jen Bourey</p>
+
+<p><a href="http://mgonto.github.io/reactive-all-the-things-talk/#1">Reactive all the things</a>
+&mdash; Ben Lesh &amp; Martin Gontovnikas</p>
+
+<p><a href="http://mzgol.github.io/slides/ng-1-meets-ng-2/#/">Angular 1 meets Angular 2</a>
+&mdash; Michał Gołębiowski</p>
+
+<p>Digging into Angular Style Guide Decisions
+&mdash; John Papa</p>
+
+<p><a href="https://pascalprecht.github.io/slides/better-i18n-for-your-angular-apps/#/">Better i18n for your Angular apps</a>
+&mdash; Chirayu Krishnappa &amp; Pascal Precht</p>
+
+<p>Badges? We don&rsquo;t need no stinkin&#8217; badges!
+&mdash; Lukas Ruebbelke &amp; Geoff Goodman</p>
+
+<p>Build an Angular Material App
+&mdash; Thomas Burleson &amp; Naomi Black</p>
+
+<p><a href="http://bit.ly/1Md6f8W">Angular + React = Speed</a>
+&mdash; Dave Smith</p>
+
+<p>Change Detection Reinvented
+&mdash; Victor Savkin</p>
+
+<p>(Super)Power Management
+&mdash; Igor Minar</p>
+
+<p>Angular Team Panel/QA
+&mdash; Googlers</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Angular 1.4.0 は 2015 年の春にリリース]]></title>
@@ -1709,161 +1823,6 @@
 <p>この本は、AngularJS のサンプルアプリケーション実装として GitHub で 2,274 スター（2013/12/20 現在）も付いている <a href="https://github.com/angular-app/angular-app">angular-app</a> の実装についてのパターンや技術を詳細に解説していて、実際に動作させることもできる CRUD アプリケーションで、AngularJS のフォルダ構成や modules の使い方、テスト、REST バックエンドとの接続、ナビゲーション、セキュリティ（authentication、authorization）などのベストプラクティスを学ぶことができる。</p>
 
 <p>AngularJS やるぜって衆の年末年始は、コレで決まりだ！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[$watchと$watchの中間的な位置付けの$watchCollection]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/17/angularjs-watchcollection/"/>
-    <updated>2013-12-17T00:01:26+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/17/angularjs-watchcollection</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>$watchCollection</h2>
-
-<p><a href="http://angularjsninja.com/blog/2013/12/13/angularjs-watch/">AngularJSのデータバインドを支える$watch</a> で見たように、$watch ではオブジェクトの参照を監視するか、またはオブジェクトの中身まですべて監視（deep watch）するかを切り替えることができる。</p>
-
-<p>その 2 種類の $watch の中間に位置付けられる <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watchcollection">$watchCollection</a> というのもあり、1 階層分だけを監視（shallow watch）してくれる。</p>
-
-<h2>配列の場合</h2>
-
-<p>配列の場合に $watch、$watchCollection、および $watch (deep watch) がそれぞれどのように異なるのかを見ていく。</p>
-
-<!-- more -->
-
-
-<h3>$watch</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">results</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{...},</span> <span class="p">{...},</span> <span class="p">...</span> <span class="p">];</span>
-</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{...});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>$watch の場合、参照が変更されたときだけリスナーが動作する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>  <span class="c1">// 動かない</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({...});</span>  <span class="c1">// 動かない</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span> <span class="o">=</span> <span class="p">[...];</span>  <span class="c1">// 動く</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>$watchCollection</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">results</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{...},</span> <span class="p">{...},</span> <span class="p">...</span> <span class="p">];</span>
-</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watchCollection</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{...});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>$watchCollection の場合、監視している配列に追加、削除などをした場合にも動作する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>  <span class="c1">// 動かない</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({...});</span>  <span class="c1">// 動く</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span> <span class="o">=</span> <span class="p">[...];</span>  <span class="c1">// 動く</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>$watch（deep watch）</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">results</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{...},</span> <span class="p">{...},</span> <span class="p">...</span> <span class="p">];</span>
-</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{...},</span> <span class="kc">true</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>$watch (deep watch) の場合、なにかしらあれば動作する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>  <span class="c1">// 動く</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({...});</span>  <span class="c1">// 動く</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">results</span> <span class="o">=</span> <span class="p">[...];</span>  <span class="c1">// 動く</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>普通のオブジェクトの場合</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">images</span><span class="o">:</span> <span class="p">[...]</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watchCollection</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{...});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>普通のオブジェクトを対象とした $watchCollection の動作は、監視しているオブジェクトのプロパティ値の変更や、プロパティの追加・削除でも動作する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">user</span><span class="p">.</span><span class="nx">images</span><span class="p">.</span><span class="nx">push</span><span class="p">(...);</span>  <span class="c1">// 動かない</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;known&#39;</span><span class="p">;</span>  <span class="c1">// 動く</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">user</span><span class="p">.</span><span class="nx">newProperty</span> <span class="o">=</span> <span class="s1">&#39;new prop!&#39;</span><span class="p">;</span>  <span class="c1">// 動く</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">user</span> <span class="o">=</span> <span class="p">{...};</span>  <span class="c1">// 動く</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

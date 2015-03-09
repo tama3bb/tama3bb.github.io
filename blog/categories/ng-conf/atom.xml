@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ng-conf | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/ng-conf/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2015-01-15T19:25:59+09:00</updated>
+  <updated>2015-03-09T12:10:56+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2015）のスライドまとめ]]></title>
+    <link href="http://angularjsninja.com/blog/2015/03/09/slides-at-ngconf-2015/"/>
+    <updated>2015-03-09T12:10:46+09:00</updated>
+    <id>http://angularjsninja.com/blog/2015/03/09/slides-at-ngconf-2015</id>
+    <content type="html"><![CDATA[<p>Angular カンファレンス <a href="http://www.ng-conf.org">ng-conf 2015</a> が 3/5 〜 3/6 に開催されていました。</p>
+
+<p>スライドを捕捉でき次第、リンクを追加していきます。動画は <a href="https://www.youtube.com/channel/UCm9iiIfgmVODUJxINecHQkA">YouTube</a> のほうで視聴できます。</p>
+
+<h2>Thursday</h2>
+
+<p><a href="https://docs.google.com/presentation/d/1d03YJ1gKhMZkV-87m9lsS_gnXASVDdSfYvuvzHIro6g/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.p">Day 1 Keynote</a>
+&mdash; Brad Green &amp; Igor Minar</p>
+
+<p><a href="https://docs.google.com/presentation/d/1_3JH2nlubaktyaKzWo7ikBP2QWzaK1w7IEfLDH_x3lU/edit#slide=id.p">State of Angular 1</a>
+&mdash; Pawel Kozlowski &amp; Lucas Galfaso</p>
+
+<p>The New Router
+&mdash; Brian Ford</p>
+
+<p>Prototyping with Angular? YES!!
+&mdash; Kelly Knight &amp; Dirk Ginader</p>
+
+<p>Fast from the Start
+&mdash; Jeff Cross</p>
+
+<p><a href="https://docs.google.com/presentation/d/1SZ05jFRF9Rfsrn39z5-vdyLbY37XZGEgQfZ1uIOaEEo/pub?start=false&amp;loop=false#slide=id.g6326acee8_1314">Creating Container Components in Web Components and Angular</a>
+&mdash; Kara Erickson &amp; Rachael L Moore</p>
+
+<p><a href="http://zizzamia.github.io/building-high-performance-measurable-directives/">#ngTasty</a>
+&mdash; Leonardo Zizzamia</p>
+
+<p>TypeScript and ES6
+&mdash; Dan Wahlin &amp; Andrew Connell</p>
+
+<p>Community Building How-To: Make More Angular Devs Now
+&mdash; Judy Tuan</p>
+
+<p>ng-wat?
+&mdash; Shai Reznik</p>
+
+<p><a href="https://docs.google.com/presentation/d/1V8sRYKiEfXtD0fNYKHUQPAni70IpZxrRKuX0V4UHDD4/view#slide=id.p">Accessibility Testing Made Easy</a>
+&mdash; Julie Ralph</p>
+
+<p>Why Realtime Matters
+&mdash; James Tamplin</p>
+
+<p><a href="http://slides.com/kentcdodds/ng-model-options-in-5-minutes#/">ng-model-options in 5 minutes</a>
+&mdash; Kent C. Dodds</p>
+
+<p>How to Teach Angular to your Kids
+&mdash; Katya Eames</p>
+
+<p><a href="http://slides.com/bahmutov/run-digest-cycle-in-web-worker#/">Run digest cycle in web worker</a>
+&mdash; Dr. Gleb Bahmutov PhD.</p>
+
+<p>$asqwatch is real
+&mdash; William Scott Moss</p>
+
+<p><a href="http://adamdbradley.github.io/ionic-present/#/">Ionic + Angular: Superpowers for Mobile App Development</a>
+&mdash; Adam Bradley</p>
+
+<p>Angular Behind The Scenes
+&mdash; Rodric Haddad</p>
+
+<h2>Friday</h2>
+
+<p><a href="https://docs.google.com/presentation/d/1XoizA8Dm_S3SU1jYPERmgWVIbqjGOXolpF3Jm2b8xKA/edit#slide=id.p">Angular 2</a>
+&mdash; Miško Hevery &amp; Rado Kirov</p>
+
+<p>Binding to the Cloud with Falcor
+&mdash; Jafar Husain</p>
+
+<p>TypeScript and Angular 2.0
+&mdash; Jonathan Turner</p>
+
+<p>What&rsquo;s new in ngAnimate
+&mdash; Matias Niemelä</p>
+
+<p>Building Platforms with Angular
+&mdash; Jen Bourey</p>
+
+<p><a href="http://mgonto.github.io/reactive-all-the-things-talk/#1">Reactive all the things</a>
+&mdash; Ben Lesh &amp; Martin Gontovnikas</p>
+
+<p><a href="http://mzgol.github.io/slides/ng-1-meets-ng-2/#/">Angular 1 meets Angular 2</a>
+&mdash; Michał Gołębiowski</p>
+
+<p>Digging into Angular Style Guide Decisions
+&mdash; John Papa</p>
+
+<p><a href="https://pascalprecht.github.io/slides/better-i18n-for-your-angular-apps/#/">Better i18n for your Angular apps</a>
+&mdash; Chirayu Krishnappa &amp; Pascal Precht</p>
+
+<p>Badges? We don&rsquo;t need no stinkin' badges!
+&mdash; Lukas Ruebbelke &amp; Geoff Goodman</p>
+
+<p>Build an Angular Material App
+&mdash; Thomas Burleson &amp; Naomi Black</p>
+
+<p><a href="http://bit.ly/1Md6f8W">Angular + React = Speed</a>
+&mdash; Dave Smith</p>
+
+<p>Change Detection Reinvented
+&mdash; Victor Savkin</p>
+
+<p>(Super)Power Management
+&mdash; Igor Minar</p>
+
+<p>Angular Team Panel/QA
+&mdash; Googlers</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Angular カンファレンス（ng-conf 2014）Jan. 17 動画まとめ]]></title>
