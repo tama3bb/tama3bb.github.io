@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | AngularJS Ninja]]></title>
   <link href="http://angularjsninja.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://angularjsninja.com/"/>
-  <updated>2015-03-09T16:12:04+09:00</updated>
+  <updated>2015-03-11T13:30:01+09:00</updated>
   <id>http://angularjsninja.com/</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
@@ -33,10 +33,10 @@
 <p><a href="https://docs.google.com/presentation/d/1UtlOESedCKC1bHnx0F0w8LzFzVh4BOMr9g6GfCSR-Lw/edit#slide=id.p">The New Router</a>
 &mdash; Brian Ford</p>
 
-<p>Prototyping with Angular? YES!!
+<p><a href="https://docs.google.com/presentation/d/1NUkSRbc3MtuDCCy0PgVYitjFaGxEoE5ozwyq5QujXy4/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g7a1e9ddbe_068">Prototyping with Angular? YES!!</a>
 &mdash; Kelly Knight &amp; Dirk Ginader</p>
 
-<p>Fast from the Start
+<p><a href="https://docs.google.com/presentation/d/1kN0k67_dqcuTNkCwvltkrzn_QxrN5ktibAKDfd2FAjQ/edit?usp=sharing">Fast from the Start</a>
 &mdash; Jeff Cross</p>
 
 <p><a href="https://docs.google.com/presentation/d/1SZ05jFRF9Rfsrn39z5-vdyLbY37XZGEgQfZ1uIOaEEo/pub?start=false&amp;loop=false#slide=id.g6326acee8_1314">Creating Container Components in Web Components and Angular</a>
@@ -48,10 +48,10 @@
 <p>TypeScript and ES6
 &mdash; Dan Wahlin &amp; Andrew Connell</p>
 
-<p>Community Building How-To: Make More Angular Devs Now
+<p><a href="https://presentate.com/judytuna/talks/angular-and-community">Make more Angular devs now! Community-building how-to</a>
 &mdash; Judy Tuan</p>
 
-<p>ng-wat?
+<p><a href="https://docs.google.com/presentation/d/1QeCGTQhyCbKakXG5ZtorhvqtBPjOl2sAori5Zn_LqVk/edit#slide=id.g7a9960ce0_030">ng-wat</a>
 &mdash; Shai Reznik</p>
 
 <p><a href="https://docs.google.com/presentation/d/1V8sRYKiEfXtD0fNYKHUQPAni70IpZxrRKuX0V4UHDD4/view#slide=id.p">Accessibility Testing Made Easy</a>
@@ -75,7 +75,7 @@
 <p><a href="http://adamdbradley.github.io/ionic-present/#/">Ionic + Angular: Superpowers for Mobile App Development</a>
 &mdash; Adam Bradley</p>
 
-<p>Angular Behind The Scenes
+<p><a href="https://drive.google.com/file/d/0B8xFJE4iy3aXUGZXSEhEQURfNFk/view">Angular Behind The Scenes</a>
 &mdash; Rodric Haddad</p>
 
 <h2>Friday</h2>
@@ -89,7 +89,7 @@
 <p>TypeScript and Angular 2.0
 &mdash; Jonathan Turner</p>
 
-<p>What&rsquo;s new in ngAnimate
+<p><a href="http://slides.yearofmoo.com/ng-conf-2015/index.html?now123#/0/0/">What&rsquo;s new in ngAnimate</a>
 &mdash; Matias Niemelä</p>
 
 <p>Building Platforms with Angular
@@ -107,19 +107,19 @@
 <p><a href="https://pascalprecht.github.io/slides/better-i18n-for-your-angular-apps/#/">Better i18n for your Angular apps</a>
 &mdash; Chirayu Krishnappa &amp; Pascal Precht</p>
 
-<p>Badges? We don&rsquo;t need no stinkin' badges!
+<p><a href="http://www.slideshare.net/simpul/badges-we-dont-need-no-stinkin-badges-45618638">Badges? We don&rsquo;t need no stinkin' badges!</a>
 &mdash; Lukas Ruebbelke &amp; Geoff Goodman</p>
 
-<p>Build an Angular Material App
+<p><a href="https://docs.google.com/presentation/d/1ur3bCJrV1e57kJQdasfdAtjNJX2nDRUJ5c587PkaIFw/edit#slide=id.p">Build a Material App</a>
 &mdash; Thomas Burleson &amp; Naomi Black</p>
 
 <p><a href="http://bit.ly/1Md6f8W">Angular + React = Speed</a>
 &mdash; Dave Smith</p>
 
-<p>Change Detection Reinvented
+<p><a href="https://docs.google.com/presentation/d/12Y7FD_HJDCYSgj3Bvcd8FXH9y6UI9VfV5tsXPDiW2DE/edit#slide=id.g7a0f6ac65_2_0">Change Detection Reinvented</a>
 &mdash; Victor Savkin</p>
 
-<p>(Super)Power Management
+<p><a href="https://docs.google.com/presentation/d/1T7OxS3thM0-DyZnpfvjxXd-NytvSFVRTc5vQZui5QYc/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.g8c9a1b604_2_18">(super)Power Management</a>
 &mdash; Igor Minar</p>
 
 <p>Angular Team Panel/QA
