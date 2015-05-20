@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: offline | AngularJS Ninja]]></title>
-  <link href="http://angularjsninja.com/blog/categories/offline/atom.xml" rel="self"/>
-  <link href="http://angularjsninja.com/"/>
-  <updated>2015-05-20T13:55:55+09:00</updated>
-  <id>http://angularjsninja.com/</id>
+  <title><![CDATA[Category: offline | AngularJS Ninja Blog]]></title>
+  <link href="http://angularjsninja.com//blog/categories/offline/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com//"/>
+  <updated>2015-05-20T20:08:07+09:00</updated>
+  <id>http://angularjsninja.com//</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
     <email><![CDATA[tama3bb@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[期間限定の対面企画]]></title>
-    <link href="http://angularjsninja.com/blog/2014/10/11/angularjs-in-person/"/>
+    <link href="http://angularjsninja.com//blog/2014/10/11/angularjs-in-person/"/>
     <updated>2014-10-11T02:08:08+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/10/11/angularjs-in-person</id>
+    <id>http://angularjsninja.com//blog/2014/10/11/angularjs-in-person</id>
     <content type="html"><![CDATA[<p>「AngularJS のこと対面で教えてよ！」というリクエストにお応えします。</p>
 
 <p>ご希望あれば Twitter で <a href="https://twitter.com/tama3bb">@tama3bb</a> までご連絡ください。各日とも先着 1 名です。</p>

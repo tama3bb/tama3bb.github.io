@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: jQuery | AngularJS Ninja]]></title>
-  <link href="http://angularjsninja.com/blog/categories/jquery/atom.xml" rel="self"/>
-  <link href="http://angularjsninja.com/"/>
-  <updated>2015-05-20T13:55:55+09:00</updated>
-  <id>http://angularjsninja.com/</id>
+  <title><![CDATA[Category: jQuery | AngularJS Ninja Blog]]></title>
+  <link href="http://angularjsninja.com//blog/categories/jquery/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com//"/>
+  <updated>2015-05-20T20:08:07+09:00</updated>
+  <id>http://angularjsninja.com//</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
     <email><![CDATA[tama3bb@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[jQuery と AngularJS]]></title>
-    <link href="http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs/"/>
+    <link href="http://angularjsninja.com//blog/2013/10/05/jquery-to-angularjs/"/>
     <updated>2013-10-05T20:32:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs</id>
+    <id>http://angularjsninja.com//blog/2013/10/05/jquery-to-angularjs</id>
     <content type="html"><![CDATA[<hr />
 
 <h2>jQuery と AngularJS は併用できるのか？</h2>
@@ -53,9 +53,9 @@
   
   <entry>
     <title type="html"><![CDATA[AngularJS と jQuery]]></title>
-    <link href="http://angularjsninja.com/blog/2013/10/05/angularjs-to-jquery/"/>
+    <link href="http://angularjsninja.com//blog/2013/10/05/angularjs-to-jquery/"/>
     <updated>2013-10-05T20:32:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/10/05/angularjs-to-jquery</id>
+    <id>http://angularjsninja.com//blog/2013/10/05/angularjs-to-jquery</id>
     <content type="html"><![CDATA[<hr />
 
 <p>AngularJS と jQuery は併用できるのか？</p>
@@ -91,9 +91,9 @@
   
   <entry>
     <title type="html"><![CDATA[なぜ AngularJS を採用したのか]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/03/why-angularjs/"/>
+    <link href="http://angularjsninja.com//blog/2013/09/03/why-angularjs/"/>
     <updated>2013-09-03T18:15:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/03/why-angularjs</id>
+    <id>http://angularjsninja.com//blog/2013/09/03/why-angularjs</id>
     <content type="html"><![CDATA[<hr />
 
 <p>今回は、AngularJS を採用した理由について軽くまとめておく。</p>

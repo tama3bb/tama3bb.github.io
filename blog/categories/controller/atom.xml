@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: controller | AngularJS Ninja]]></title>
-  <link href="http://angularjsninja.com/blog/categories/controller/atom.xml" rel="self"/>
-  <link href="http://angularjsninja.com/"/>
-  <updated>2015-05-20T13:55:55+09:00</updated>
-  <id>http://angularjsninja.com/</id>
+  <title><![CDATA[Category: controller | AngularJS Ninja Blog]]></title>
+  <link href="http://angularjsninja.com//blog/categories/controller/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com//"/>
+  <updated>2015-05-20T20:08:07+09:00</updated>
+  <id>http://angularjsninja.com//</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
     <email><![CDATA[tama3bb@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AngularJS で Web API を呼び出すコードをまとめる]]></title>
-    <link href="http://angularjsninja.com/blog/2013/08/29/angularjs-web-api-call/"/>
+    <link href="http://angularjsninja.com//blog/2013/08/29/angularjs-web-api-call/"/>
     <updated>2013-08-29T08:42:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/08/29/angularjs-web-api-call</id>
+    <id>http://angularjsninja.com//blog/2013/08/29/angularjs-web-api-call</id>
     <content type="html"><![CDATA[<hr />
 
 <p>AngularJS で Web API を呼び出す $http などを利用するコードを、各 controller に散らして実装してしまわずに、どこかに集約しておきたいぞって場合の話。</p>

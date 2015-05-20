@@ -1,275 +1,275 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/08/26/angularjs-ninja-scroll/</loc>
+        <loc>http://angularjsninja.com//blog/2013/08/26/angularjs-ninja-scroll/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/08/27/ngshow-nghide-ngswitch/</loc>
+        <loc>http://angularjsninja.com//blog/2013/08/27/ngshow-nghide-ngswitch/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/08/28/how-to-declare-models/</loc>
+        <loc>http://angularjsninja.com//blog/2013/08/28/how-to-declare-models/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/08/29/angularjs-web-api-call/</loc>
+        <loc>http://angularjsninja.com//blog/2013/08/29/angularjs-web-api-call/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure/</loc>
+        <loc>http://angularjsninja.com//blog/2013/08/30/angularjs-project-structure/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs/</loc>
+        <loc>http://angularjsninja.com//blog/2013/08/31/yeoman-generator-for-angularjs/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/09/01/angularfire-realtime-chat-app/</loc>
+        <loc>http://angularjsninja.com//blog/2013/09/01/angularfire-realtime-chat-app/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/09/02/angularjs-basics-ngapp-ngmodel/</loc>
+        <loc>http://angularjsninja.com//blog/2013/09/02/angularjs-basics-ngapp-ngmodel/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/09/03/why-angularjs/</loc>
+        <loc>http://angularjsninja.com//blog/2013/09/03/why-angularjs/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/09/04/angularjs-ng-bind-html/</loc>
+        <loc>http://angularjsninja.com//blog/2013/09/04/angularjs-ng-bind-html/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/09/05/angularjs-i18n/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://angularjsninja.com/blog/2013/09/06/ngview-does-not-work-at-initial-route/
-        </loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/09/07/learning-angularjs/</loc>
+        <loc>http://angularjsninja.com//blog/2013/09/05/angularjs-i18n/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
         <loc>
-            http://angularjsninja.com/blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/
+            http://angularjsninja.com//blog/2013/09/06/ngview-does-not-work-at-initial-route/
         </loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/09/09/hexcolortool/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/09/10/angularjs-stickers/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/09/11/angularjs-ie-compatibility/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/09/12/ng-conf-2014/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/09/13/angular-localstorage/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/10/05/angularjs-to-jquery/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/10/05/jquery-to-angularjs/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/10/26/angularjs-1.2.0-rc3-promises/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/11/08/angularjs-nglist/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/11/09/angularjs-filter/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/11/09/angularjs-1.2.0-timely-delivery/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/11/12/angularjs-ngclass/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/11/16/angularjs-ngif-proliferation/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/11/19/angularjs-nginclude/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/11/20/angularjs-custom-directives/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/11/22/angularjs-custom-directives/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/11/27/angularjs-custom-directives/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/11/29/angularjs-custom-directives/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/12/06/angular-foreach/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/12/08/angularjs-nganimate/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/12/10/angularjs-expressions-forgiving/</loc>
-        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
-    </url>
-    <url>
-        <loc>http://angularjsninja.com/blog/2013/12/13/angularjs-watch/</loc>
+        <loc>http://angularjsninja.com//blog/2013/09/07/learning-angularjs/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
         <loc>
-            http://angularjsninja.com/blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/
+            http://angularjsninja.com//blog/2013/09/08/angularjs-1.2-ngrepeatstart-ngrepeatend/
         </loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/12/17/angularjs-watchcollection/</loc>
+        <loc>http://angularjsninja.com//blog/2013/09/09/hexcolortool/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/09/10/angularjs-stickers/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/09/11/angularjs-ie-compatibility/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/09/12/ng-conf-2014/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/09/13/angular-localstorage/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/09/25/twitter-bootstrap-modal-draggable/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/10/05/angularjs-to-jquery/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/10/05/jquery-to-angularjs/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/10/26/angularjs-1.2.0-rc3-promises/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/11/08/angularjs-nglist/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/11/09/angularjs-filter/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/11/09/angularjs-1.2.0-timely-delivery/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/11/12/angularjs-ngclass/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/11/16/angularjs-ngif-proliferation/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/11/19/angularjs-nginclude/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/11/20/angularjs-custom-directives/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/11/22/angularjs-custom-directives/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/11/27/angularjs-custom-directives/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/11/29/angularjs-custom-directives/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/12/03/angularjs-ngmin/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/12/06/angular-foreach/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/12/08/angularjs-nganimate/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/12/10/angularjs-expressions-forgiving/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2013/12/13/angularjs-watch/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
         <loc>
-            http://angularjsninja.com/blog/2013/12/20/mastering-web-application-development-with-angularjs/
+            http://angularjsninja.com//blog/2013/12/15/angularjs-1.3-discontinues-support-for-ie8/
         </loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2013/12/27/angularjs-apply/</loc>
+        <loc>http://angularjsninja.com//blog/2013/12/17/angularjs-watchcollection/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/01/17/ng-conf-2014/</loc>
+        <loc>
+            http://angularjsninja.com//blog/2013/12/20/mastering-web-application-development-with-angularjs/
+        </loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/01/18/ng-conf-2014/</loc>
+        <loc>http://angularjsninja.com//blog/2013/12/27/angularjs-apply/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/02/03/angularjs-event-on-enter/</loc>
+        <loc>http://angularjsninja.com//blog/2014/01/17/ng-conf-2014/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/02/04/angularjs-http-headers/</loc>
+        <loc>http://angularjsninja.com//blog/2014/01/18/ng-conf-2014/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/02/05/ngif-string-caveat/</loc>
+        <loc>http://angularjsninja.com//blog/2014/02/03/angularjs-event-on-enter/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/02/06/anchor-with-ngdisabled-caveat/</loc>
+        <loc>http://angularjsninja.com//blog/2014/02/04/angularjs-http-headers/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/02/17/angularjs-ionic-firebase/</loc>
+        <loc>http://angularjsninja.com//blog/2014/02/05/ngif-string-caveat/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/07/29/angularjs-styleguide-in-Japanese/</loc>
+        <loc>http://angularjsninja.com//blog/2014/02/06/anchor-with-ngdisabled-caveat/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/09/02/video-angularjs-app-with-yeoman/</loc>
+        <loc>http://angularjsninja.com//blog/2014/02/17/angularjs-ionic-firebase/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2014/07/29/angularjs-styleguide-in-Japanese/</loc>
+        <lastmod>2014-07-29T08:42:02+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://angularjsninja.com//blog/2014/09/02/video-angularjs-app-with-yeoman/</loc>
         <lastmod>2014-09-02T17:08:34+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/10/11/angularjs-in-person/</loc>
+        <loc>http://angularjsninja.com//blog/2014/10/11/angularjs-in-person/</loc>
         <lastmod>2014-10-28T13:19:48+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/10/14/angularjs-1.3.0-released/</loc>
+        <loc>http://angularjsninja.com//blog/2014/10/14/angularjs-1.3.0-released/</loc>
         <lastmod>2014-10-14T12:44:59+09:00</lastmod>
     </url>
     <url>
         <loc>
-            http://angularjsninja.com/blog/2014/10/15/migrating-from-1.2-to-1.3-in-Japanese/
+            http://angularjsninja.com//blog/2014/10/15/migrating-from-1.2-to-1.3-in-Japanese/
         </loc>
         <lastmod>2015-01-15T19:25:18+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/10/16/angularjs-1.3-one-time-binding/</loc>
+        <loc>http://angularjsninja.com//blog/2014/10/16/angularjs-1.3-one-time-binding/</loc>
         <lastmod>2014-10-16T08:44:36+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/10/17/angularjs-1.3-ngmodeloptions/</loc>
+        <loc>http://angularjsninja.com//blog/2014/10/17/angularjs-1.3-ngmodeloptions/</loc>
         <lastmod>2014-10-17T19:00:36+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/10/24/slides-at-ngeurope-2014/</loc>
+        <loc>http://angularjsninja.com//blog/2014/10/24/slides-at-ngeurope-2014/</loc>
         <lastmod>2015-05-20T13:54:12+09:00</lastmod>
     </url>
     <url>
         <loc>
-            http://angularjsninja.com/blog/2014/10/28/ngeurope-angular1.3-and-beyond-in-japanese/
+            http://angularjsninja.com//blog/2014/10/28/ngeurope-angular1.3-and-beyond-in-japanese/
         </loc>
         <lastmod>2014-10-28T16:14:52+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2014/12/16/planning-angular-1.4/</loc>
+        <loc>http://angularjsninja.com//blog/2014/12/16/planning-angular-1.4/</loc>
         <lastmod>2015-05-20T13:55:55+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/2015/03/09/slides-at-ngconf-2015/</loc>
+        <loc>http://angularjsninja.com//blog/2015/03/09/slides-at-ngconf-2015/</loc>
         <lastmod>2015-05-20T13:53:48+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/archives/</loc>
+        <loc>http://angularjsninja.com//blog/archives/</loc>
         <lastmod>2015-05-20T13:55:55+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/blog/categories/</loc>
+        <loc>http://angularjsninja.com//blog/categories/</loc>
         <lastmod>2014-07-29T08:42:02+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/</loc>
+        <loc>http://angularjsninja.com//</loc>
         <lastmod>2015-05-20T13:55:55+09:00</lastmod>
     </url>
     <url>
-        <loc>http://angularjsninja.com/robots.txt</loc>
+        <loc>http://angularjsninja.com//robots.txt</loc>
         <lastmod>2014-07-29T02:15:09+09:00</lastmod>
     </url>
 </urlset>

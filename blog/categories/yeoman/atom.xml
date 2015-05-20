@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Yeoman | AngularJS Ninja]]></title>
-  <link href="http://angularjsninja.com/blog/categories/yeoman/atom.xml" rel="self"/>
-  <link href="http://angularjsninja.com/"/>
-  <updated>2015-05-20T13:55:55+09:00</updated>
-  <id>http://angularjsninja.com/</id>
+  <title><![CDATA[Category: Yeoman | AngularJS Ninja Blog]]></title>
+  <link href="http://angularjsninja.com//blog/categories/yeoman/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com//"/>
+  <updated>2015-05-20T20:08:07+09:00</updated>
+  <id>http://angularjsninja.com//</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
     <email><![CDATA[tama3bb@gmail.com]]></email>
@@ -15,12 +15,12 @@
   
   <entry>
     <title type="html"><![CDATA[【動画】Yeoman で AngularJS アプリケーションを作ろう！]]></title>
-    <link href="http://angularjsninja.com/blog/2014/09/02/video-angularjs-app-with-yeoman/"/>
+    <link href="http://angularjsninja.com//blog/2014/09/02/video-angularjs-app-with-yeoman/"/>
     <updated>2014-09-02T16:58:19+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/09/02/video-angularjs-app-with-yeoman</id>
+    <id>http://angularjsninja.com//blog/2014/09/02/video-angularjs-app-with-yeoman</id>
     <content type="html"><![CDATA[<p>Yeoman のサイトにある <a href="http://yeoman.io/codelab.html">Tutorial (codelab)</a> をスクリーンキャストしてみました。</p>
 
-<iframe width="853" height="480" src="http://angularjsninja.com//www.youtube.com/embed/uv_ALCiCA6E?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="853" height="480" src="http://angularjsninja.com///www.youtube.com/embed/uv_ALCiCA6E?rel=0" frameborder="0" allowfullscreen></iframe>
 
 
 <p><a href="https://github.com/yeoman/generator-angular">generator-angular</a> で AngularJS 用のコードを生成し、そこから TODO アプリケーションに変更していく流れをデモしてます。</p>
@@ -36,9 +36,9 @@
   
   <entry>
     <title type="html"><![CDATA[Yeoman generator for AngularJS]]></title>
-    <link href="http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs/"/>
+    <link href="http://angularjsninja.com//blog/2013/08/31/yeoman-generator-for-angularjs/"/>
     <updated>2013-08-31T00:25:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/08/31/yeoman-generator-for-angularjs</id>
+    <id>http://angularjsninja.com//blog/2013/08/31/yeoman-generator-for-angularjs</id>
     <content type="html"><![CDATA[<hr />
 
 <p><img src="https://github-camo.global.ssl.fastly.net/10c0f69d03b7ac184d77e8aaba4358a2d4791823/687474703a2f2f79656f6d616e2e696f2f6d656469612f79656f6d616e2d6d617374686561642e706e67" alt="Yeoman" /></p>
@@ -159,9 +159,9 @@ app/scripts/
   
   <entry>
     <title type="html"><![CDATA[AngularJS のプロジェクト構成をどうするか]]></title>
-    <link href="http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure/"/>
+    <link href="http://angularjsninja.com//blog/2013/08/30/angularjs-project-structure/"/>
     <updated>2013-08-30T20:00:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/08/30/angularjs-project-structure</id>
+    <id>http://angularjsninja.com//blog/2013/08/30/angularjs-project-structure</id>
     <content type="html"><![CDATA[<hr />
 
 <h2>AngularJS のプロジェクト構成ってどうするのがいいんだ？</h2>
@@ -204,7 +204,7 @@ app
 
 <p><code>html index.html
   &lt;!-- In production use:
-  &lt;script src="http://angularjsninja.com//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"&gt;&lt;/script&gt;
+  &lt;script src="http://angularjsninja.com///ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"&gt;&lt;/script&gt;
   --&gt;
   &lt;script src="lib/angular/angular.js"&gt;&lt;/script&gt;
   &lt;script src="js/app.js"&gt;&lt;/script&gt;

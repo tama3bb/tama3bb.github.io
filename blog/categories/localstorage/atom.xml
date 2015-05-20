@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: localStorage | AngularJS Ninja]]></title>
-  <link href="http://angularjsninja.com/blog/categories/localstorage/atom.xml" rel="self"/>
-  <link href="http://angularjsninja.com/"/>
-  <updated>2015-05-20T13:55:55+09:00</updated>
-  <id>http://angularjsninja.com/</id>
+  <title><![CDATA[Category: localStorage | AngularJS Ninja Blog]]></title>
+  <link href="http://angularjsninja.com//blog/categories/localstorage/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com//"/>
+  <updated>2015-05-20T20:08:07+09:00</updated>
+  <id>http://angularjsninja.com//</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
     <email><![CDATA[tama3bb@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AngularJS の localStorage モジュール angularLocalStorage]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/13/angular-localstorage/"/>
+    <link href="http://angularjsninja.com//blog/2013/09/13/angular-localstorage/"/>
     <updated>2013-09-13T23:38:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/13/angular-localstorage</id>
+    <id>http://angularjsninja.com//blog/2013/09/13/angular-localstorage</id>
     <content type="html"><![CDATA[<hr />
 
 <p>AngularJS アプリケーションで localStorage を使うときに便利なモジュールの紹介。</p>

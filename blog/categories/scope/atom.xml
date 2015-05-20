@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: scope | AngularJS Ninja]]></title>
-  <link href="http://angularjsninja.com/blog/categories/scope/atom.xml" rel="self"/>
-  <link href="http://angularjsninja.com/"/>
-  <updated>2015-05-20T13:55:55+09:00</updated>
-  <id>http://angularjsninja.com/</id>
+  <title><![CDATA[Category: scope | AngularJS Ninja Blog]]></title>
+  <link href="http://angularjsninja.com//blog/categories/scope/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com//"/>
+  <updated>2015-05-20T20:08:07+09:00</updated>
+  <id>http://angularjsninja.com//</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
     <email><![CDATA[tama3bb@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AngularJS のデータバインドを支える $apply]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/27/angularjs-apply/"/>
+    <link href="http://angularjsninja.com//blog/2013/12/27/angularjs-apply/"/>
     <updated>2013-12-27T16:19:50+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/27/angularjs-apply</id>
+    <id>http://angularjsninja.com//blog/2013/12/27/angularjs-apply</id>
     <content type="html"><![CDATA[<hr />
 
 <h2>データバインドが効かない？！</h2>
@@ -115,9 +115,9 @@ setInterval(function() {
   
   <entry>
     <title type="html"><![CDATA[$watchと$watchの中間的な位置付けの$watchCollection]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/17/angularjs-watchcollection/"/>
+    <link href="http://angularjsninja.com//blog/2013/12/17/angularjs-watchcollection/"/>
     <updated>2013-12-17T00:01:26+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/17/angularjs-watchcollection</id>
+    <id>http://angularjsninja.com//blog/2013/12/17/angularjs-watchcollection</id>
     <content type="html"><![CDATA[<hr />
 
 <h2>$watchCollection</h2>
@@ -228,9 +228,9 @@ user = {...};  // 動く
   
   <entry>
     <title type="html"><![CDATA[AngularJS のデータバインドを支える $watch]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/13/angularjs-watch/"/>
+    <link href="http://angularjsninja.com//blog/2013/12/13/angularjs-watch/"/>
     <updated>2013-12-13T18:43:39+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/13/angularjs-watch</id>
+    <id>http://angularjsninja.com//blog/2013/12/13/angularjs-watch</id>
     <content type="html"><![CDATA[<hr />
 
 <h2>$watch</h2>

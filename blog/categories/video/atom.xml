@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Video | AngularJS Ninja]]></title>
-  <link href="http://angularjsninja.com/blog/categories/video/atom.xml" rel="self"/>
-  <link href="http://angularjsninja.com/"/>
-  <updated>2015-05-20T13:55:55+09:00</updated>
-  <id>http://angularjsninja.com/</id>
+  <title><![CDATA[Category: Video | AngularJS Ninja Blog]]></title>
+  <link href="http://angularjsninja.com//blog/categories/video/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com//"/>
+  <updated>2015-05-20T20:08:07+09:00</updated>
+  <id>http://angularjsninja.com//</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
     <email><![CDATA[tama3bb@gmail.com]]></email>
@@ -15,12 +15,12 @@
   
   <entry>
     <title type="html"><![CDATA[【動画】Yeoman で AngularJS アプリケーションを作ろう！]]></title>
-    <link href="http://angularjsninja.com/blog/2014/09/02/video-angularjs-app-with-yeoman/"/>
+    <link href="http://angularjsninja.com//blog/2014/09/02/video-angularjs-app-with-yeoman/"/>
     <updated>2014-09-02T16:58:19+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/09/02/video-angularjs-app-with-yeoman</id>
+    <id>http://angularjsninja.com//blog/2014/09/02/video-angularjs-app-with-yeoman</id>
     <content type="html"><![CDATA[<p>Yeoman のサイトにある <a href="http://yeoman.io/codelab.html">Tutorial (codelab)</a> をスクリーンキャストしてみました。</p>
 
-<iframe width="853" height="480" src="http://angularjsninja.com//www.youtube.com/embed/uv_ALCiCA6E?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="853" height="480" src="http://angularjsninja.com///www.youtube.com/embed/uv_ALCiCA6E?rel=0" frameborder="0" allowfullscreen></iframe>
 
 
 <p><a href="https://github.com/yeoman/generator-angular">generator-angular</a> で AngularJS 用のコードを生成し、そこから TODO アプリケーションに変更していく流れをデモしてます。</p>

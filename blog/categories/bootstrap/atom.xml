@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Bootstrap | AngularJS Ninja]]></title>
-  <link href="http://angularjsninja.com/blog/categories/bootstrap/atom.xml" rel="self"/>
-  <link href="http://angularjsninja.com/"/>
-  <updated>2015-05-20T13:55:55+09:00</updated>
-  <id>http://angularjsninja.com/</id>
+  <title><![CDATA[Category: Bootstrap | AngularJS Ninja Blog]]></title>
+  <link href="http://angularjsninja.com//blog/categories/bootstrap/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com//"/>
+  <updated>2015-05-20T20:08:07+09:00</updated>
+  <id>http://angularjsninja.com//</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
     <email><![CDATA[tama3bb@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AngularJS 1.2.0-rc2 で Typeahead が動かない]]></title>
-    <link href="http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/"/>
+    <link href="http://angularjsninja.com//blog/2013/10/19/angularjs-1.2.0-rc2-typeahead/"/>
     <updated>2013-10-19T17:42:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/10/19/angularjs-1.2.0-rc2-typeahead</id>
+    <id>http://angularjsninja.com//blog/2013/10/19/angularjs-1.2.0-rc2-typeahead</id>
     <content type="html"><![CDATA[<hr />
 
 <h2>AngularJS で UI Bootstrap の Typeahead が動かない</h2>
@@ -34,9 +34,9 @@
   
   <entry>
     <title type="html"><![CDATA[Twitter Bootstrap のモーダルをドラッグで動かしたいときは]]></title>
-    <link href="http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable/"/>
+    <link href="http://angularjsninja.com//blog/2013/09/25/twitter-bootstrap-modal-draggable/"/>
     <updated>2013-09-25T21:57:00+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/09/25/twitter-bootstrap-modal-draggable</id>
+    <id>http://angularjsninja.com//blog/2013/09/25/twitter-bootstrap-modal-draggable</id>
     <content type="html"><![CDATA[<hr />
 
 <p>みんな大好き <a href="http://getbootstrap.com/2.3.2/">Twitter Bootstrap</a> の話。CSS フレームワークの枠を超え、フロントエンド開発のキングというか、デファクトですね。</p>

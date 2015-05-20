@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: DI | AngularJS Ninja]]></title>
-  <link href="http://angularjsninja.com/blog/categories/di/atom.xml" rel="self"/>
-  <link href="http://angularjsninja.com/"/>
-  <updated>2015-05-20T13:55:55+09:00</updated>
-  <id>http://angularjsninja.com/</id>
+  <title><![CDATA[Category: DI | AngularJS Ninja Blog]]></title>
+  <link href="http://angularjsninja.com//blog/categories/di/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com//"/>
+  <updated>2015-05-20T20:08:07+09:00</updated>
+  <id>http://angularjsninja.com//</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
     <email><![CDATA[tama3bb@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AngularJSのminify対策がngminでラクになる]]></title>
-    <link href="http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin/"/>
+    <link href="http://angularjsninja.com//blog/2013/12/03/angularjs-ngmin/"/>
     <updated>2013-12-03T11:15:48+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/12/03/angularjs-ngmin</id>
+    <id>http://angularjsninja.com//blog/2013/12/03/angularjs-ngmin</id>
     <content type="html"><![CDATA[<hr />
 
 <h2>AngularJS の minify 対策、めんどくさい</h2>
@@ -80,9 +80,7 @@ angular.module(&lsquo;app&rsquo;, []).controller(&lsquo;TodoCtrl&rsquo;, [
 
 <p><a href="https://github.com/btford/ngmin">ngmin</a> は <a href="http://gruntjs.com/">Grunt</a> タスク（<a href="https://github.com/btford/grunt-ngmin">grunt-ngmin</a>）としても利用可能で自動化できる！</p>
 
-<p>{% blockquote %}
-Life is too short to declare the names of dependencies!
-{% endblockquote %}</p>
+<p><blockquote><p>Life is too short to declare the names of dependencies!</p></blockquote></p>
 ]]></content>
   </entry>
   

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: directive | AngularJS Ninja]]></title>
-  <link href="http://angularjsninja.com/blog/categories/directive/atom.xml" rel="self"/>
-  <link href="http://angularjsninja.com/"/>
-  <updated>2015-05-20T13:55:55+09:00</updated>
-  <id>http://angularjsninja.com/</id>
+  <title><![CDATA[Category: directive | AngularJS Ninja Blog]]></title>
+  <link href="http://angularjsninja.com//blog/categories/directive/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com//"/>
+  <updated>2015-05-20T20:08:07+09:00</updated>
+  <id>http://angularjsninja.com//</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
     <email><![CDATA[tama3bb@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AngularJS 1.3 新機能 ngModelOptions]]></title>
-    <link href="http://angularjsninja.com/blog/2014/10/17/angularjs-1.3-ngmodeloptions/"/>
+    <link href="http://angularjsninja.com//blog/2014/10/17/angularjs-1.3-ngmodeloptions/"/>
     <updated>2014-10-17T18:57:38+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/10/17/angularjs-1.3-ngmodeloptions</id>
+    <id>http://angularjsninja.com//blog/2014/10/17/angularjs-1.3-ngmodeloptions</id>
     <content type="html"><![CDATA[<p><a href="/blog/2014/10/14/angularjs-1.3.0-released/">AngularJS 1.3.0</a> で導入された新機能から、ng-model でのモデル更新を調整できる directive の <a href="https://docs.angularjs.org/api/ng/directive/ngModelOptions">ngModelOptions</a> について取り上げます。</p>
 
 <h2>ngModelOptions</h2>
@@ -106,9 +106,9 @@ ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur':
   
   <entry>
     <title type="html"><![CDATA[非活性（ng-disabled）にしてもaタグのボタンだとng-click動くので注意]]></title>
-    <link href="http://angularjsninja.com/blog/2014/02/06/anchor-with-ngdisabled-caveat/"/>
+    <link href="http://angularjsninja.com//blog/2014/02/06/anchor-with-ngdisabled-caveat/"/>
     <updated>2014-02-06T15:29:21+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/02/06/anchor-with-ngdisabled-caveat</id>
+    <id>http://angularjsninja.com//blog/2014/02/06/anchor-with-ngdisabled-caveat</id>
     <content type="html"><![CDATA[<hr />
 
 <h2>Bootstrap のボタン</h2>
@@ -142,23 +142,23 @@ ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur':
   
   <entry>
     <title type="html"><![CDATA[AngularJSのng-ifで文字列を使うなら !! を付けよう]]></title>
-    <link href="http://angularjsninja.com/blog/2014/02/05/ngif-string-caveat/"/>
+    <link href="http://angularjsninja.com//blog/2014/02/05/ngif-string-caveat/"/>
     <updated>2014-02-05T17:44:16+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/02/05/ngif-string-caveat</id>
+    <id>http://angularjsninja.com//blog/2014/02/05/ngif-string-caveat</id>
     <content type="html"><![CDATA[<hr />
 
 <h2>&lsquo;0&rsquo; が表示されない…</h2>
 
 <p><code>ng-if</code> あるいは、<code>ng-show</code>や<code>ng-hide</code>を使うときに、string 値の有無で表示判定を記述することもある。</p>
 
-<p>{% raw %}
+<p>
 ``` html</p>
 
 <p ng-if="model.value">{{model.label}}</p>
 
 
 <p>```
-{% endraw %}</p>
+</p>
 
 <p>そんなとき、<code>model.value</code>の値が<code>'0'</code>だったらどうなるか。</p>
 
@@ -200,22 +200,22 @@ value = !(v == 'f' || v == '0' || v == 'false' || v == 'no' || v == 'n' || v == 
 
 <p>ということで、文字列の有無で判定させたいだけってときは<code>!!</code>を付けときましょう。boolean とか object の場合でも<code>!!</code>付ける方針にしとくのがラクでいいかな。</p>
 
-<p>{% raw %}
+<p>
 ``` html</p>
 
 <p ng-if="!!model.value">{{model.label}}</p>
 
 
 <p>```
-{% endraw %}</p>
+</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS で Enter キーを検出するコード]]></title>
-    <link href="http://angularjsninja.com/blog/2014/02/03/angularjs-event-on-enter/"/>
+    <link href="http://angularjsninja.com//blog/2014/02/03/angularjs-event-on-enter/"/>
     <updated>2014-02-03T18:28:23+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/02/03/angularjs-event-on-enter</id>
+    <id>http://angularjsninja.com//blog/2014/02/03/angularjs-event-on-enter</id>
     <content type="html"><![CDATA[<hr />
 
 <p>テキストボックスなどで、Enter キーによるイベント処理を記述するコード例をいくつか。</p>
@@ -241,7 +241,7 @@ $scope.newComment = '';
 <input type="text" ng-model="newComment" ng-keydown="handleKeydown($event)"></p>
 
 <p><ul>
-  <li ng-repeat="comment in comments">{{comment}}</li>
+  <li ng-repeat="comment in comments"></li>
 <ul>
 ```</p>
 
@@ -290,9 +290,9 @@ link: function(scope, element, attrs, modelCtrl) {
   
   <entry>
     <title type="html"><![CDATA[AngularJS Directive なんてこわくない（その４）]]></title>
-    <link href="http://angularjsninja.com/blog/2013/11/29/angularjs-custom-directives/"/>
+    <link href="http://angularjsninja.com//blog/2013/11/29/angularjs-custom-directives/"/>
     <updated>2013-11-29T15:33:32+09:00</updated>
-    <id>http://angularjsninja.com/blog/2013/11/29/angularjs-custom-directives</id>
+    <id>http://angularjsninja.com//blog/2013/11/29/angularjs-custom-directives</id>
     <content type="html"><![CDATA[<hr />
 
 <h2>controller, require</h2>

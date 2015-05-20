@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ionic | AngularJS Ninja]]></title>
-  <link href="http://angularjsninja.com/blog/categories/ionic/atom.xml" rel="self"/>
-  <link href="http://angularjsninja.com/"/>
-  <updated>2015-05-20T13:55:55+09:00</updated>
-  <id>http://angularjsninja.com/</id>
+  <title><![CDATA[Category: Ionic | AngularJS Ninja Blog]]></title>
+  <link href="http://angularjsninja.com//blog/categories/ionic/atom.xml" rel="self"/>
+  <link href="http://angularjsninja.com//"/>
+  <updated>2015-05-20T20:08:07+09:00</updated>
+  <id>http://angularjsninja.com//</id>
   <author>
     <name><![CDATA[Akihito Tamagawa]]></name>
     <email><![CDATA[tama3bb@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AngularJS Ionic Firebase で作るモバイルチャットアプリ]]></title>
-    <link href="http://angularjsninja.com/blog/2014/02/17/angularjs-ionic-firebase/"/>
+    <link href="http://angularjsninja.com//blog/2014/02/17/angularjs-ionic-firebase/"/>
     <updated>2014-02-17T02:15:39+09:00</updated>
-    <id>http://angularjsninja.com/blog/2014/02/17/angularjs-ionic-firebase</id>
+    <id>http://angularjsninja.com//blog/2014/02/17/angularjs-ionic-firebase</id>
     <content type="html"><![CDATA[<p>この週末、オリンピックを見ながら日本人が出てくるまでヒマだったりしたので、ふとモバイルチャットでも作ってみるかと思い立ってダラダラとやってみました。</p>
 
 <p>数時間しかかけてないので「ザ・未完成」なデキですが、サクッとリアルタイムなモバイルチャットアプリケーションを作れてしまうのは、なんともラクチンで楽しい。</p>

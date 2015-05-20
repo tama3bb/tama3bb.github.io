@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://angularjsninja.com/sitemap.xml 
+Sitemap: http://angularjsninja.com//sitemap.xml 
